@@ -4652,28 +4652,19 @@
 	    'use strict';
 
 	    var WorkspaceController = __webpack_require__(8),
-	        ExclusiveFeatureController = __webpack_require__(25),
-	        StickerRewardController = __webpack_require__(27),
-	        CustomerStickerController = __webpack_require__(30),
-	        CrowdSourcingController = __webpack_require__(32),
-	        FaqDetailsController = __webpack_require__(34),
-	        StickerPackViewController = __webpack_require__(36),
-	        CoolDownController = __webpack_require__(38),
-	        StateController = __webpack_require__(39),
-	        SubscriptionController = __webpack_require__(41),
-	        UpgradeController = __webpack_require__(43),
+	        HomescreenController = __webpack_require__(9),
 
 
-	        Router = __webpack_require__(45),
+	        Router = __webpack_require__(10),
 	        utils = __webpack_require__(4),
-	        profileModel = __webpack_require__(9),
-	        rewardsModel = __webpack_require__(11),
-	        activityModel = __webpack_require__(15),
-	        mysteryBoxModel = __webpack_require__(17),
-	        cacheProvider = __webpack_require__(10),
-	        expHandlerAB = __webpack_require__(46),
-	        TxService = __webpack_require__(13),
-	        NinjaService = __webpack_require__(14),
+	        profileModel = __webpack_require__(12),
+	        rewardsModel = __webpack_require__(13),
+	        activityModel = __webpack_require__(17),
+	        mysteryBoxModel = __webpack_require__(19),
+	        cacheProvider = __webpack_require__(11),
+	        expHandlerAB = __webpack_require__(26),
+	        TxService = __webpack_require__(15),
+	        NinjaService = __webpack_require__(16),
 	        Constants = __webpack_require__(5);
 
 	    // Full Screen Loader
@@ -4746,18 +4737,10 @@
 	        this.router = new Router();
 	        // Profile Controller
 	        this.workspaceController = new WorkspaceController();
+	        this.homescreenController = new HomescreenController();
 
-	        //Rewards Controller
-	        this.exclusiveFeatureController = new ExclusiveFeatureController();
-	        this.stickerRewardController = new StickerRewardController();
-	        this.customerStickerController = new CustomerStickerController();
-	        this.crowdSourcingController = new CrowdSourcingController();
-	        this.faqDetailsController = new FaqDetailsController();
-	        this.stickerPackViewController = new StickerPackViewController();
-	        this.coolDownController = new CoolDownController();
-	        this.stateController = new StateController();
-	        this.subscriptionController = new SubscriptionController();
-	        this.upgradeController = new UpgradeController();
+
+
 
 	        // Communication Controller
 	        this.TxService = new TxService();
@@ -4857,7 +4840,7 @@
 
 	        checkAndDownloadBot: function(botname, invokeMode) {
 
-	            console.log("checking bot",botname,invokeMode);
+	            console.log("checking bot", botname, invokeMode);
 
 	            var that = this;
 
@@ -4869,16 +4852,15 @@
 	                    //app start
 	                    console.log(Constants);
 	                    if (invokeMode == Constants.INVOKE_MODE_APP_START) {
-	                        if (response == "false"){
+	                        if (response == "false") {
 	                            console.log("Downloading CS microapp for the first time");
 	                            that.downloadBot(botname.replace(/\+/g, ''));
 	                        }
 	                    } else if (invokeMode == Constants.INVOKE_MODE_THREE_DOT) {
-	                        if (response == 'false'){
+	                        if (response == 'false') {
 	                            console.log("Downloading again");
 	                            that.checkAndDownloadBot(botname, invokeMode);
-	                        }
-	                        else{
+	                        } else {
 	                            console.log("cs microapp found");
 	                            that.openExistingBot(botname);
 	                        }
@@ -5052,82 +5034,20 @@
 	                self.backPressTrigger();
 	            });
 
-	            // Ninja Home Screen Router :: Three Tabs (Rewards/Activity/Mystery Box)
+
+
+	            // Ninja ftue
 	            this.router.route('/', function(data) {
 	                self.container.innerHTML = '';
 	                self.workspaceController.render(self.container, self, data);
 	                utils.toggleBackNavigation(false);
 	            });
 
-	            // Exclusive Features :: Friend Emojis + GIF Sharing 
-	            this.router.route('/exclusiveFeature', function(data) {
+
+	            // Ninja Home screen
+	            this.router.route('/home', function(data) {
 	                self.container.innerHTML = '';
-	                self.exclusiveFeatureController.render(self.container, self, data);
-	                utils.toggleBackNavigation(true);
-	            });
-
-	            // Sticker Features :: Early Access + Exclusive Stickers + Animated Sticker Incorporate Here 
-	            this.router.route('/stickerReward', function(data) {
-	                self.container.innerHTML = '';
-	                self.stickerRewardController.render(self.container, self, data);
-	                utils.toggleBackNavigation(true);
-	            });
-
-	            this.router.route('/stickerPackView', function(data) {
-	                self.container.innerHTML = '';
-	                self.stickerPackViewController.render(self.container, self, data);
-	                utils.toggleBackNavigation(true);
-	            });
-
-
-
-	            // Custom Sticker Controller 
-	            this.router.route('/customSticker', function(data) {
-	                self.container.innerHTML = '';
-	                self.customerStickerController.render(self.container, self, data);
-	                utils.toggleBackNavigation(true);
-	            });
-
-	            // Crowd Sourcing Reward Controller
-	            this.router.route('/ugc', function(data) {
-	                self.container.innerHTML = '';
-	                self.crowdSourcingController.render(self.container, self, data);
-	                utils.toggleBackNavigation(true);
-	            });
-
-	            // FAQ All Rewards Controller 
-	            this.router.route('/rewardFaq', function(data) {
-	                self.container.innerHTML = '';
-	                self.faqDetailsController.render(self.container, self, data);
-	                utils.toggleBackNavigation(true);
-	            });
-
-	            // FAQ All Rewards Controller 
-	            this.router.route('/coolDown', function(data) {
-	                self.container.innerHTML = '';
-	                self.coolDownController.render(self.container, self, data);
-	                utils.toggleBackNavigation(true);
-	            });
-
-
-	            // FAQ All Rewards Controller 
-	            this.router.route('/userState', function(data) {
-	                self.container.innerHTML = '';
-	                self.stateController.render(self.container, self, data);
-	                utils.toggleBackNavigation(false);
-	            });
-
-	            // FAQ All Rewards Controller 
-	            this.router.route('/subscribe', function(data) {
-	                self.container.innerHTML = '';
-	                self.subscriptionController.render(self.container, self, data);
-	                utils.toggleBackNavigation(false);
-	            });
-
-	            // FAQ All Rewards Controller 
-	            this.router.route('/upgrade', function(data) {
-	                self.container.innerHTML = '';
-	                self.upgradeController.render(self.container, self, data);
+	                self.homescreenController.render(self.container, self, data);
 	                utils.toggleBackNavigation(false);
 	            });
 
@@ -5136,84 +5056,12 @@
 	            var subscriptionCompleted = cacheProvider.getFromCritical('subscriptionCompleted');
 	            var ftueCompleted = cacheProvider.getFromCritical('ftueCompleted');
 
-	            // If user is already subscribed
 	            if (subscriptionCompleted) {
-	                if (ftueCompleted) {
-	                    console.log("This is and old user :: Fetching Profile battery and streak for the user");
+	                self.router.navigateTo('/');
+	            } else {
+	                self.router.navigateTo('/home');
+	            }
 
-	                    // Check If Block True Or False
-	                    if (platformSdk.appData.block === 'true') {
-
-	                        console.log('User has blocked the Application');
-	                        events.publish('app/block', {
-	                            show: true
-	                        });
-	                    }
-
-	                    this.NinjaService.getNinjaProfile(function(res) {
-	                        console.log(res.data);
-
-	                        //Check for older version
-	                        if (utils.upgradeRequired(res.data.hike_version, platformSdk.appData.appVersion)) {
-
-	                            self.router.navigateTo('/upgrade');
-
-	                        } else if (res.data.status == 'inactive' || res.data.status == 'locked') {
-
-	                            self.router.navigateTo('/userState', res.data);
-	                            console.log("User state  is " + res.data.status);
-
-	                        } else {
-
-	                            // Get Everything From the cache :: Activity data :: Mystery Box Data :: Rewards Data
-	                            self.router.navigateTo('/');
-	                            profileModel.updateNinjaData(res.data, self);
-	                            activityModel.fetchNinjaActivity('lifetime');
-	                            //mysteryBoxModel.getMysteryBoxDetails(self);
-	                        }
-	                    }, this);
-	                }
-	                // Show FTUE To the User
-	                else {
-	                    // STUB TO REMOVE
-
-	                    var data = {};
-
-	                    this.ninjaRewardsData = { 'rewards': [], 'rewards_hash': '' };
-	                    this.ninjaProfileData = { "battery": 0, "rewards_hash": "", "status": "active", "streak": 0, "name": '' };
-	                    this.ninjaActivityData = { "chatThemes": { "rec": 0, "sent": 0 }, "files": { "rec": 0, "sent": 0 }, "messages": { "rec": 0, "sent": 0 }, "statusUpdates": { "count": 0 }, "stickers": { "rec": 0, "sent": 0 } };
-
-	                    // STUB TO REMOVE
-
-	                    data.ninjaRewardsCollection = this.ninjaRewardsData;
-	                    data.ninjaProfileData = this.ninjaProfileData;
-	                    data.ninjaActivityData = this.ninjaActivityData;
-
-	                    this.NinjaService.getNinjaProfile(function(res) {
-	                        console.log(res.data);
-
-	                         if (utils.upgradeRequired(res.data.hike_version, platformSdk.appData.appVersion)) {
-	                                cacheProvider.setInCritical('ftueCompleted', true);
-	                                App.router.navigateTo('/upgrade');
-	                        }
-	                        else if (res.data.status == 'inactive' || res.data.status == 'locked') {
-	                            cacheProvider.setInCritical('ftueCompleted', false);
-	                            self.router.navigateTo('/userState', res.data);
-	                            console.log("User state  is " + res.data.status);
-
-	                        } else {
-	                            // Get Everything From the cache :: Activity data :: Mystery Box Data :: Rewards Data
-	                            cacheProvider.setInCritical('ftueCompleted', true);
-	                            self.router.navigateTo('/', data);
-	                            profileModel.updateNinjaData(res.data, self);
-	                            activityModel.fetchNinjaActivity('lifetime');
-	                            //mysteryBoxModel.getMysteryBoxDetails(self);
-	                        }
-	                    }, this);
-	                }
-
-	            } else
-	                self.router.navigateTo('/subscribe');
 
 
 
@@ -5233,154 +5081,231 @@
 
 	    var utils = __webpack_require__(4),
 	        Constants = __webpack_require__(5),
-	        profileModel = __webpack_require__(9),
-	        rewardsModel = __webpack_require__(11),
-	        activityModel = __webpack_require__(15),
-	        mysteryBoxModel = __webpack_require__(17),
-	        cacheProvider = __webpack_require__(10),
 
-	        WorkspaceController = function(options) {
-	            this.template = __webpack_require__(24);
+	        FtueController = function(options) {
+	            //this.template = require('raw!../../templates/userState.html');
 	        };
 
-	    WorkspaceController.prototype.bind = function(App, data) {
+	    FtueController.prototype.bind = function(App, data) {
 
-	        //Swipe
-	        function Swipe( t,n ) {'use strict';function e() {h = E.children,w = Array( h.length ),m = t.getBoundingClientRect().width || t.offsetWidth,E.style.width = h.length * m + 'px';for ( var n = h.length; n--; ) {var e = h[n];e.style.width = m + 'px',e.setAttribute( 'data-index', n ),f.transitions && ( e.style.left = n * -m + 'px',a( n, b > n ? -m : n > b ? m : 0, 0 ) )}f.transitions || ( E.style.left = b * -m + 'px' ),t.style.visibility = 'visible'}function i() {b ? r( b - 1 ) : n.continuous && r( h.length - 1 )}function o() {h.length - 1 > b ? r( b + 1 ) : n.continuous && r( 0 )}function r( t,e ) {if ( b != t ) {if ( f.transitions ) {for ( var i = Math.abs( b - t ) - 1,o = Math.abs( b - t ) / ( b - t ); i--; )a( ( t > b ? t : b ) - i - 1, m * o, 0 );a( b, m * o, e || T ),a( t, 0, e || T )}else d( b * -m, t * -m, e || T );b = t,v( n.callback && n.callback( b, h[b] ) )}}function a( t,n,e ) {s( t, n, e ),w[t] = n}function s( t,n,e ) {var i = h[t],o = i && i.style;o && ( o.webkitTransitionDuration = o.MozTransitionDuration = o.msTransitionDuration = o.OTransitionDuration = o.transitionDuration = e + 'ms',o.webkitTransform = 'translate(' + n + 'px,0)' + 'translateZ(0)',o.msTransform = o.MozTransform = o.OTransform = 'translateX(' + n + 'px)' )}function d( t,e,i ) {if ( ! i )return E.style.left = e + 'px',void 0;var o = +new Date,r = setInterval(function() {var a = +new Date - o;return a > i ? ( E.style.left = e + 'px',y && c(),n.transitionEnd && n.transitionEnd.call( event, b, h[b] ),clearInterval( r ),void 0 ) : ( E.style.left = ( e - t ) * ( Math.floor( 100 * ( a / i ) ) / 100 ) + t + 'px',void 0 )}, 4 )}function c() {p = setTimeout( o, y )}function u() {y = 0,clearTimeout( p )}var l = function() {},v = function( t ) {setTimeout( t || l, 0 )},f = { addEventListener:!! window.addEventListener,touch:'ontouchstart'in window || window.DocumentTouch && document instanceof DocumentTouch,transitions:function( t ) {var n = ['transformProperty','WebkitTransform','MozTransform','OTransform','msTransform'];for ( var e in n )if ( void 0 !== t.style[n[e]] )return ! 0;return ! 1}( document.createElement( 'swipe' ) ) };if ( t ) {var h,w,m,E = t.children[0];n = n || {};var p,x,b = parseInt( n.startSlide, 10 ) || 0,T = n.speed || 300,y = n.auto || 0,L = {},g = {},k = { handleEvent:function( t ) {switch ( t.type ){case'touchstart':this.start( t );break;case'touchmove':this.move( t );break;case'touchend':v( this.end( t ) );break;case'webkitTransitionEnd':case'msTransitionEnd':case'oTransitionEnd':case'otransitionend':case'transitionend':v( this.transitionEnd( t ) );break;case'resize':v( e.call() )}n.stopPropagation && t.stopPropagation()},start:function( t ) {var n = t.touches[0];L = { x:n.pageX,y:n.pageY,time:+new Date },x = void 0,g = {},E.addEventListener( 'touchmove', this, ! 1 ),E.addEventListener( 'touchend', this, ! 1 )},move:function( t ) {if ( ! ( t.touches.length > 1 || t.scale && 1 !== t.scale ) ) {n.disableScroll && t.preventDefault();var e = t.touches[0];g = { x:e.pageX - L.x,y:e.pageY - L.y },x === void 0 && ( x = !! ( x || Math.abs( g.x ) < Math.abs( g.y ) ) ),x || ( t.preventDefault(),u(),g.x = g.x / ( ! b && g.x > 0 || b == h.length - 1 && 0 > g.x ? Math.abs( g.x ) / m + 1 : 1 ),s( b - 1, g.x + w[b - 1], 0 ),s( b, g.x + w[b], 0 ),s( b + 1, g.x + w[b + 1], 0 ) )}},end:function() {var t = +new Date - L.time,e = 250 > Number( t ) && Math.abs( g.x ) > 20 || Math.abs( g.x ) > m / 2,i = ! b && g.x > 0 || b == h.length - 1 && 0 > g.x,o = 0 > g.x;x || ( e && ! i ? ( o ? ( a( b - 1, -m, 0 ),a( b, w[b] - m, T ),a( b + 1, w[b + 1] - m, T ),b += 1 ) : ( a( b + 1, m, 0 ),a( b, w[b] + m, T ),a( b - 1, w[b - 1] + m, T ),b += -1 ),n.callback && n.callback( b, h[b] ) ) : ( a( b - 1, -m, T ),a( b, 0, T ),a( b + 1, m, T ) ) ),E.removeEventListener( 'touchmove', k, ! 1 ),E.removeEventListener( 'touchend', k, ! 1 )},transitionEnd:function( t ) {parseInt( t.target.getAttribute( 'data-index' ), 10 ) == b && ( y && c(),n.transitionEnd && n.transitionEnd.call( t, b, h[b] ) )} };return e(),y && c(),f.addEventListener ? ( f.touch && E.addEventListener( 'touchstart', k, ! 1 ),f.transitions && ( E.addEventListener( 'webkitTransitionEnd', k, ! 1 ),E.addEventListener( 'msTransitionEnd', k, ! 1 ),E.addEventListener( 'oTransitionEnd', k, ! 1 ),E.addEventListener( 'otransitionend', k, ! 1 ),E.addEventListener( 'transitionend', k, ! 1 ) ),window.addEventListener( 'resize', k, ! 1 ) ) : window.onresize = function() {e()},{ setup:function() {e()},slide:function( t,n ) {r( t, n )},prev:function() {u(),i()},next:function() {u(),o()},getPos:function() {return b},kill:function() {u(),E.style.width = 'auto',E.style.left = 0;for ( var t = h.length; t--; ) {var n = h[t];n.style.width = '100%',n.style.left = 0,f.transitions && s( t, 0, 0 )}f.addEventListener ? ( E.removeEventListener( 'touchstart', k, ! 1 ),E.removeEventListener( 'webkitTransitionEnd', k, ! 1 ),E.removeEventListener( 'msTransitionEnd', k, ! 1 ),E.removeEventListener( 'oTransitionEnd', k, ! 1 ),E.removeEventListener( 'otransitionend', k, ! 1 ),E.removeEventListener( 'transitionend', k, ! 1 ),window.removeEventListener( 'resize', k, ! 1 ) ) : window.onresize = null} }}}( window.jQuery || window.Zepto ) && function( t ) {t.fn.Swipe = function( n ) {return this.each(function() {t( this ).data( 'Swipe', new Swipe( t( this )[0],n ) )})}}( window.jQuery || window.Zepto );
 
-	        var workspace = this;
-	        var allRewards = document.getElementsByClassName('rewardRow');
-	        var containers = document.getElementsByClassName('tab-data');
-	        var bullets = document.getElementsByClassName('comp__tab');
-
-	        function defineNinjaHomeScreenTabs() {
-
-	            containers[0].style.height = window.innerHeight + 'px';
-	            containers[1].style.height = window.innerHeight + 'px';
-	            containers[2].style.height = window.innerHeight + 'px';
-
-	            window.slider =
-	                new Swipe(document.getElementById('sliderTabs'), {
-	                    continuous: false,
-	                    disableScroll: false,
-	                    stopPropagation: false,
-	                    callback: function(pos) {
-
-	                        var i = bullets.length;
-	                        while (i--) {
-	                            bullets[i].className = ' comp__tab';
-	                        }
-	                        bullets[pos].className = 'comp__tab selected';
-	                        document.getElementById("sliderTabs").style.height = containers[pos].offsetHeight + "px";
-
-	                    }
-
-	                });
-
-	            document.getElementById("sliderTabs").style.height = containers[0].offsetHeight + "px";
-
-	            bullets[0].className = 'comp__tab selected';
-	            bullets[1].className = 'comp__tab ';
-	            bullets[2].className = 'comp__tab ';
-
-	            if (bullets.length) {
-	                console.log(bullets);
-	                for (var i = 0; i < bullets.length; i++) {
-	                    bullets[i].addEventListener("click", function(event) {
-	                        event.preventDefault();
-	                        var parent = this.parentNode;
-	                        var index = Array.prototype.indexOf.call(parent.children, this);
-	                        slider.slide(index);
-	                    });
-	                }
-	            }
-	        }
-	        var elem = document.getElementsByClassName('rewardRow')
-	        for (var i = 0; i < elem.length; i++) {
-	            var H = window.getComputedStyle(elem[i]).height;
-	            elem[i].querySelector('.rewardIcon').style.height = H;
-	            if(elem[i].querySelector('.rewardStreakWrapper'))
-	                elem[i].querySelector('.rewardStreakWrapper').style.lineHeight = H;
-	        }
-
-	        var ninjaIcon = document.getElementsByClassName('ninjaProfileIcon')[0];
-
-	        if (data && data.ninjaProfileData && data.ninjaProfileData.dp) {
-	            ninjaIcon.style.backgroundImage = "url('file:///" + data.ninjaProfileData.dp + "')";
-	            rewardsModel.updateNinjaRewardsIcons(data.ninjaRewardsCollection.rewards);
-	        } else if(data && data.ninjaProfileData && (data.ninjaProfileData.dp == "")) {
-	            ninjaIcon.style.backgroundImage = "url('file:///" + data.ninjaProfileData.dp + "')";
-	            rewardsModel.updateNinjaRewardsIcons(data.ninjaRewardsCollection.rewards);
-	        } else {
-	            console.log("Set a default dp");
-	        }
-
-	        // Run everything Here
-	        defineNinjaHomeScreenTabs();
-	        rewardsModel.updateNinjaRewardsLinks(App);
-	        mysteryBoxModel.getMysteryBoxDetails(App);
 
 	    };
 
-	    WorkspaceController.prototype.render = function(ctr, App, data) {
+	    FtueController.prototype.render = function(ctr, App, data) {
 
-	        if (!data) {
-	            console.log("Taking up data from the helper data");
-	            // Get all three tabs data from the helper data as of now
-
-	            this.ninjaRewardsData = cacheProvider.getFromCritical('ninjaRewards');
-	            this.ninjaProfileData = cacheProvider.getFromCritical('ninjaProfileData');
-	            this.ninjaActivityData = cacheProvider.getFromCritical('ninjaStats');
-
-	            // STUB TO REMOVE
-
-	            // this.ninjaRewardsData = [{"title":"Early Access Stickers","stitle":"Get all the hike stickers before everyone else","icon":"https://s3-ap-southeast-1.amazonaws.com/hike-giscassets/3rd-sticker.png","state":"unlocked","id":1,"streak":0,"type":"sticker_reward"},{"title":"Friends Emoji","stitle":"See how deepy connected you are with your friends","icon":"https://s3-ap-southeast-1.amazonaws.com/hike-giscassets/3rd-sticker.png","state":"unlocked","id":2,"streak":20,"type":"exclusive_feature"},{"title":"Express GIF","stitle":"Express yourself with GIFs, like no one else can","icon":"https://s3-ap-southeast-1.amazonaws.com/hike-giscassets/3rd-sticker.png","state":"locked","id":3,"streak":40,"type":"exclusive_feature"},{"title":"Submit Content","stitle":"Submit hike content and get recognition","icon":"https://s3-ap-southeast-1.amazonaws.com/hike-giscassets/3rd-sticker.png","state":"locked","id":5,"streak":60,"type":"user_generated_content"},{"title":"My Sticker","stitle":"Have an exclusive sticker made just for you","icon":"https://s3-ap-southeast-1.amazonaws.com/hike-giscassets/3rd-sticker.png","state":"locked","id":6,"streak":80,"type":"custom_sticker"}];
-	            // this.ninjaProfileData = {"battery":7,"rewards_hash":"be96dc8c0a876b08c8076b03acdee0db4","status":"active","streak":0,"name":'Hemank Sabharwal'};
-	            // this.ninjaActivityData = {"chatThemes":{"rec":0,"sent":0},"files":{"rec":55,"sent":39},"messages":{"rec":203,"sent":87},"statusUpdates":{"count":0},"stickers":{"rec":33,"sent":7}};
-
-	            // STUB TO REMOVE
-
-
-	        } else {
-	            console.log("Data arrived :: Use this directly");  
-	            console.log("WORKSPACE ARRIVED",data);    
-	            this.ninjaRewardsData = data.ninjaRewardsCollection;
-	            this.ninjaProfileData = data.ninjaProfileData;
-	            this.ninjaActivityData = data.ninjaActivityData;
-	     
-	        }
-
-	        this.el = document.createElement('div');
-	        this.el.className = 'workSpaceContainer animation_fadein noselect';
-
-
-	        this.el.innerHTML = Mustache.render(this.template, {
-	            ninjaRewardsCollection: (typeof this.ninjaRewardsData === 'undefined'? {} : this.ninjaRewardsData.rewards),
-	            ninjaActivityData: this.ninjaActivityData,
-	            ninjaProfileData: this.ninjaProfileData,
-	            lockedGreyout : cacheProvider.getFromCritical('lockedGreyout')
-	        });
-
-	        ctr.appendChild(this.el);
+	        var that = this;
+	        that.el = document.createElement('div');
+	        that.el.className = 'ftueController animation_fadein noselect';
+	        that.el.innerHTML = Mustache.render(unescape(that.template), { stateData: data });
+	        ctr.appendChild(that.el);
 	        events.publish('update.loader', { show: false });
-	        this.bind(App, data);
+	        that.bind(App, data);
+	    };
+
+	    FtueController.prototype.destroy = function() {
 
 	    };
 
-
-
-
-	    WorkspaceController.prototype.destroy = function() {
-
-	    };
-
-	    module.exports = WorkspaceController;
+	    module.exports = FtueController;
 
 	})(window, platformSdk, platformSdk.events);
 
-
 /***/ },
 /* 9 */
+/***/ function(module, exports, __webpack_require__) {
+
+	(function(W, platformSdk, events) {
+	    'use strict';
+
+	    var utils = __webpack_require__(4),
+	        Constants = __webpack_require__(5),
+
+	        HomescreenController = function(options) {
+	            //this.template = require('raw!../../templates/userState.html');
+	        };
+
+	    HomescreenController.prototype.bind = function(App, data) {
+
+
+
+	    };
+
+	    HomescreenController.prototype.render = function(ctr, App, data) {
+
+	        var that = this;
+	        that.el = document.createElement('div');
+	        that.el.className = 'ftueController animation_fadein noselect';
+	        that.el.innerHTML = Mustache.render(unescape(that.template), { stateData: data });
+	        ctr.appendChild(that.el);
+	        events.publish('update.loader', { show: false });
+	        that.bind(App, data);
+	    };
+
+	    HomescreenController.prototype.destroy = function() {
+
+	    };
+
+	    module.exports = HomescreenController;
+
+	})(window, platformSdk, platformSdk.events);
+
+/***/ },
+/* 10 */
+/***/ function(module, exports, __webpack_require__) {
+
+	(function (W, events) {
+	    'use strict';
+
+	   var cacheProvider = __webpack_require__(11);
+	   
+	    var Router = function () {
+	        this.routes = {};
+	        this.history = [];
+	        this.prevData = null;
+
+	        this.getCache();
+	    };
+
+	    var _routerCache = {};
+
+	    var unload = function () {
+	        // ToDo: Redundant code
+	        events.publish('app.store.set', {
+	            key: '_routerCache',
+	            value: _routerCache
+	        });
+	    };
+
+	    // window.onbeforeunload = unload;
+
+	    Router.prototype.getCache = function () {
+	        events.publish('app.store.get', {
+	            key: '_routerCache',
+	            ctx: this,
+	            cb: function (r) {
+	                if (r.status === 1) {
+	                    this.history = r.results.history || [];
+	                }
+	            }
+	        });
+	    };
+
+	    Router.prototype.route = function (route, callback) {
+	        this.routes[route] = callback;
+	    };
+
+	    Router.prototype.navigateTo = function (route, data) {
+
+	        var historyTop = this.history[this.history.length - 1];
+
+	        if (historyTop && historyTop.route === route) {
+	            if (data.subPath !== undefined && (data.subPath === historyTop.data.subPath)) {
+	                return;
+	            } else {
+	                // Navigate to sub path. Don't push into History. Replace top item with this one.
+	                this.history[this.history.length - 1] = {
+	                    route: route,
+	                    data: data
+	                };
+	            }
+	        } else {
+	            this.history.push({
+	                route: route,
+	                data: data
+	            });
+	        }
+
+	        this.routes[route](data);
+
+	        _routerCache['route'] = route;
+	        _routerCache['cache'] = data;
+	        _routerCache['history'] = this.history;
+
+	        unload();
+
+	    };
+
+	    Router.prototype.back = function () {
+	        var history = this.history,
+	            historyItem;
+
+	        if (history.length !== 1) {
+	            history.pop();
+	        }
+
+	        historyItem = history[history.length - 1];
+
+	        if(historyItem.route == '/' && !historyItem.data ){
+	            historyItem.data = {
+	                ninjaRewardsCollection: cacheProvider.getFromCritical('ninjaRewards'),
+	                ninjaActivityData: cacheProvider.getFromCritical('ninjaStats'),
+	                ninjaProfileData: cacheProvider.getFromCritical('ninjaProfileData')
+	            };
+	        }
+
+	        this.routes[historyItem.route](historyItem.data);
+	    };
+
+	    module.exports = Router;
+	})(window, platformSdk.events);
+
+/***/ },
+/* 11 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/**
+	 * Created by hemanksabharwal on 17/05/15.
+	 */
+
+	(function () {
+	    'use strict';
+
+	    var platformSdk = __webpack_require__(3),
+	        utils = __webpack_require__(4),
+
+	        CacheProvider = function () {},
+
+	        EMPTY_OBJ_READ_ONLY = {};
+
+	    CacheProvider.prototype = {
+	        // Get From Cache Hike Android
+	        get: function (options) {
+	            return platformSdk.nativeReq({
+	                ctx: options.ctx,
+	                success: options.success,
+	                fn: 'getFromCache',
+	                data: options.key
+	            });    
+	        },
+
+	        // Cache Set 
+	        set: function (key, val) {
+	            platformSdk.bridge.putInCache(key, (val));    
+	        },
+
+	        // Critical Cache is Microapp - Helper Data
+	        getFromCritical: function (key) {
+	            var helperData = platformSdk.appData.helperData || EMPTY_OBJ_READ_ONLY;
+
+	            return helperData[key];
+	        },
+
+	        // Sets in helper data which does not get erased upon clearing app data.
+	        setInCritical: function (key, value) {
+	            var helperData = platformSdk.appData.helperData || {};
+
+	            helperData[key] = value;
+	            platformSdk.updateHelperData(helperData);
+	        },
+
+	    };
+
+	    module.exports = new CacheProvider();
+	})();
+
+/***/ },
+/* 12 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -5392,10 +5317,10 @@
 
 	    var platformSdk = __webpack_require__(3),
 	        utils = __webpack_require__(4),
-	        cacheProvider = __webpack_require__(10),
-	        rewardsModel = __webpack_require__(11),
-	        TxService = __webpack_require__(13),
-	        NinjaService = __webpack_require__(14),
+	        cacheProvider = __webpack_require__(11),
+	        rewardsModel = __webpack_require__(13),
+	        TxService = __webpack_require__(15),
+	        NinjaService = __webpack_require__(16),
 
 	        ProfileModel = function() {
 	            this.TxService = new TxService();
@@ -5580,61 +5505,7 @@
 
 
 /***/ },
-/* 10 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/**
-	 * Created by hemanksabharwal on 17/05/15.
-	 */
-
-	(function () {
-	    'use strict';
-
-	    var platformSdk = __webpack_require__(3),
-	        utils = __webpack_require__(4),
-
-	        CacheProvider = function () {},
-
-	        EMPTY_OBJ_READ_ONLY = {};
-
-	    CacheProvider.prototype = {
-	        // Get From Cache Hike Android
-	        get: function (options) {
-	            return platformSdk.nativeReq({
-	                ctx: options.ctx,
-	                success: options.success,
-	                fn: 'getFromCache',
-	                data: options.key
-	            });    
-	        },
-
-	        // Cache Set 
-	        set: function (key, val) {
-	            platformSdk.bridge.putInCache(key, (val));    
-	        },
-
-	        // Critical Cache is Microapp - Helper Data
-	        getFromCritical: function (key) {
-	            var helperData = platformSdk.appData.helperData || EMPTY_OBJ_READ_ONLY;
-
-	            return helperData[key];
-	        },
-
-	        // Sets in helper data which does not get erased upon clearing app data.
-	        setInCritical: function (key, value) {
-	            var helperData = platformSdk.appData.helperData || {};
-
-	            helperData[key] = value;
-	            platformSdk.updateHelperData(helperData);
-	        },
-
-	    };
-
-	    module.exports = new CacheProvider();
-	})();
-
-/***/ },
-/* 11 */
+/* 13 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -5646,7 +5517,7 @@
 
 	    var platformSdk = __webpack_require__(3),
 	        utils = __webpack_require__(4),
-	        cacheProvider = __webpack_require__(10), 
+	        cacheProvider = __webpack_require__(11), 
 	        Constants = __webpack_require__(5),
 
 	        RewardsModel = function() {},
@@ -5756,7 +5627,7 @@
 	            ninjaRewardsListOld.innerHTML = '';
 
 	            // Re Render The Reward Template Only From External HTML
-	            this.template = __webpack_require__(12);
+	            this.template = __webpack_require__(14);
 
 	            // To remove later for adhoc
 
@@ -5786,13 +5657,13 @@
 	})();
 
 /***/ },
-/* 12 */
+/* 14 */
 /***/ function(module, exports) {
 
 	module.exports = "{{#ninjaRewardsCollection}}\n<li class=\"rewardRow\" data-rewardId=\"{{id}}\" data-state=\"{{state}}\" data-rewardtype=\"{{type}}\">\n    <div class=\"rewardIcon\"></div>\n    <div class=\"rewardDetails\">\n        <p class=\"rewardHeading    {{^state}}{{#lockedGreyout}}rewardHeadingLocked{{/lockedGreyout}}{{/state}}\">{{title}}</p>\n        <p class=\"rewardSubheading {{^state}}{{#lockedGreyout}}rewardSubheadingLocked{{/lockedGreyout}}{{/state}}\">{{stitle}}</p>\n    </div>\n    {{#streak}}\n    <div class=\"rewardStreakWrapper\">\n        <div class=\"rewardStreakIcon\"></div>\n        <div class=\"rewardStreakValue\">{{streak}}</div>\n    </div>\n    {{/streak}}\n</li>\n{{/ninjaRewardsCollection}}"
 
 /***/ },
-/* 13 */
+/* 15 */
 /***/ function(module, exports, __webpack_require__) {
 
 	(function(W, platformSdk, events) {
@@ -5942,14 +5813,14 @@
 	})(window, platformSdk, platformSdk.events);
 
 /***/ },
-/* 14 */
+/* 16 */
 /***/ function(module, exports, __webpack_require__) {
 
 	(function(W, platformSdk, events) {
 	    'use strict';
 
 	    var utils = __webpack_require__(4);
-	    var cacheProvider = __webpack_require__(10);
+	    var cacheProvider = __webpack_require__(11);
 	    var Constants = __webpack_require__(5);
 	    var checkTimeout = null;
 
@@ -6119,7 +5990,7 @@
 	})(window, platformSdk, platformSdk.events);
 
 /***/ },
-/* 15 */
+/* 17 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -6131,9 +6002,9 @@
 
 	    var platformSdk = __webpack_require__(3),
 	        utils = __webpack_require__(4),
-	        cacheProvider = __webpack_require__(10),
-	        TxService = __webpack_require__(13),
-	        NinjaService = __webpack_require__(14),
+	        cacheProvider = __webpack_require__(11),
+	        TxService = __webpack_require__(15),
+	        NinjaService = __webpack_require__(16),
 
 	        ActivityModel = function() {
 	            this.TxService = new TxService();
@@ -6212,7 +6083,7 @@
 	            statsWrapper.innerHTML = '';
 
 	            // Re Render The Reward Template Only From External HTML
-	            this.template = __webpack_require__(16);
+	            this.template = __webpack_require__(18);
 	            statsWrapper.innerHTML = Mustache.render(this.template, {
 	                ninjaActivityData: activityData
 	            });
@@ -6225,13 +6096,13 @@
 
 
 /***/ },
-/* 16 */
+/* 18 */
 /***/ function(module, exports) {
 
 	module.exports = "{{#ninjaActivityData}}\n<div class=\"statTypeContainer\">\n    <div class=\"statHeading\">Messaging</div>\n    <div class=\"statBoxWrapper statBoxFloatLeft\">\n        <div class=\"statValue messagesR\">{{ninjaActivityData.messages.rec}}</div>\n        <div class=\"statText\">Messages Received</div>\n    </div>\n    <div class=\"statBoxWrapper statBoxFloatRight\">\n        <div class=\"statValue messagesS\">{{ninjaActivityData.messages.sent}}</div>\n        <div class=\"statText\">Messages Sent</div>\n    </div>\n    <div class=\"statBoxWrapper statBoxFloatLeft\">\n        <div class=\"statValue stickersR\">{{ninjaActivityData.stickers.rec}}</div>\n        <div class=\"statText\">Stickers Received</div>\n    </div>\n    <div class=\"statBoxWrapper statBoxFloatRight\">\n        <div class=\"statValue stickersS\">{{ninjaActivityData.stickers.sent}}</div>\n        <div class=\"statText\">Stickers Sent</div>\n    </div>\n    <div class=\"statBoxWrapper statBoxFloatLeft\">\n        <div class=\"statValue chatThemesR\">{{ninjaActivityData.chatThemes.rec}}</div>\n        <div class=\"statText\">Chat Themes Received</div>\n    </div>\n    <div class=\"statBoxWrapper statBoxFloatRight\">\n        <div class=\"statValue chatThemesS\">{{ninjaActivityData.chatThemes.sent}}</div>\n        <div class=\"statText\">Chat Themes Sent</div>\n    </div>\n    <div class=\"statBoxWrapper statBoxFloatLeft\">\n        <div class=\"statValue filesR\">{{ninjaActivityData.files.rec}}</div>\n        <div class=\"statText\">Files Received</div>\n    </div>\n    <div class=\"statBoxWrapper statBoxFloatRight\">\n        <div class=\"statValue filesS\">{{ninjaActivityData.files.sent}}</div>\n        <div class=\"statText\">Files Sent</div>\n    </div>\n</div>\n<div class=\"statTypeContainer\">\n    <div class=\"statHeading\">Timeline</div>\n    <div class=\"statBoxWrapper statBoxFloatLeft\">\n        <div class=\"statValue statusUpdateCount\">{{ninjaActivityData.statusUpdates.count}}</div>\n        <div class=\"statText\">Status Updates Posted</div>\n    </div>\n</div>\n{{/ninjaActivityData}}\n"
 
 /***/ },
-/* 17 */
+/* 19 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -6243,11 +6114,11 @@
 
 	    var platformSdk = __webpack_require__( 3 ),
 	        utils = __webpack_require__( 4 ),
-	        cacheProvider = __webpack_require__( 10 ),
-	        profileModel = __webpack_require__( 9 ),
-	        rewardsModel = __webpack_require__( 11 ),
-	        TxService = __webpack_require__( 13 ),
-	        NinjaService = __webpack_require__( 14 ),
+	        cacheProvider = __webpack_require__( 11 ),
+	        profileModel = __webpack_require__( 12 ),
+	        rewardsModel = __webpack_require__( 13 ),
+	        TxService = __webpack_require__( 15 ),
+	        NinjaService = __webpack_require__( 16 ),
 
 	        MysteryBoxModel = function() {
 	            this.TxService = new TxService();
@@ -6318,7 +6189,7 @@
 
 	            if ( rewardData.value == 'HIGH' ) {
 	                console.log( 'Bumper Anmation' );
-	                that.template = __webpack_require__( 18 );
+	                that.template = __webpack_require__( 20 );
 	                mysteryBoxContainer.innerHTML = Mustache.render( that.template, {
 	                    mysterBoxReward: rewardData
 	                });
@@ -6343,14 +6214,14 @@
 
 	            } else if ( rewardData.value == 'LOW' ) {
 	                console.log( 'Low animation :: Figure Out design' );
-	                that.template = __webpack_require__( 19 );
+	                that.template = __webpack_require__( 21 );
 	                mysteryBoxContainer.innerHTML = Mustache.render( that.template, {
 	                    mysterBoxReward: rewardData
 	                });
 
 	                var mysteryRewardActionLow = document.getElementsByClassName( 'mysteryRewardAction' )[0];
 	                mysteryRewardActionLow.addEventListener( 'click', function() {
-	                    that.template = __webpack_require__( 20 );
+	                    that.template = __webpack_require__( 22 );
 	                    mysteryBoxContainer.innerHTML = Mustache.render( that.template, {});
 	                    that.defineCooldown( cooldownTime, App );
 	                });
@@ -6362,14 +6233,14 @@
 
 	            } else if ( rewardData.value == 'MED' ) {
 	                console.log( 'Low animation :: Figure Out Design' );
-	                that.template = __webpack_require__( 19 );
+	                that.template = __webpack_require__( 21 );
 	                mysteryBoxContainer.innerHTML = Mustache.render( that.template, {
 	                    mysterBoxReward: rewardData
 	                });
 
 	                var mysteryRewardActionMed = document.getElementsByClassName( 'mysteryRewardAction' )[0];
 	                mysteryRewardActionMed.addEventListener( 'click', function() {
-	                    that.template = __webpack_require__( 20 );
+	                    that.template = __webpack_require__( 22 );
 	                    mysteryBoxContainer.innerHTML = Mustache.render( that.template, {});
 	                    that.defineCooldown( cooldownTime, App );
 	                });
@@ -6556,13 +6427,13 @@
 	            if ( mysteryBoxData.mstatus == 'inactive' ) {
 
 	                // Re Render The Reward Template Only From External HTML
-	                that.template = __webpack_require__( 21 );
+	                that.template = __webpack_require__( 23 );
 	                mysteryBoxContainer.innerHTML = Mustache.render( that.template, {
 	                    streakToUnlock: mysteryBoxData.streak_unlock
 	                });
 	            } else if ( mysteryBoxData.mstatus == 'active' ) {
 
-	                that.template = __webpack_require__( 22 );
+	                that.template = __webpack_require__( 24 );
 	                mysteryBoxContainer.innerHTML = Mustache.render( that.template, {
 	                    previousWinner: mysteryBoxData.yesterday_winner,
 	                    showMysteryBoxHistoryButton: showMysteryBoxHistoryButton
@@ -6576,7 +6447,7 @@
 
 	                console.log( mysteryBoxData );
 
-	                that.template = __webpack_require__( 20 );
+	                that.template = __webpack_require__( 22 );
 	                mysteryBoxContainer.innerHTML = Mustache.render( that.template, {
 	                    showMysteryBoxHistoryButton: showMysteryBoxHistoryButton
 	                });
@@ -6593,7 +6464,7 @@
 	                mHistoryButton.addEventListener( 'click', function() {
 	                    console.log( 'Opening your Mystery Box History' );
 
-	                    that.template = __webpack_require__( 23 );
+	                    that.template = __webpack_require__( 25 );
 	                    mysteryBoxContainer.innerHTML = Mustache.render( that.template, {
 	                        mysteryBoxHistory: mysteryBoxData.history
 	                    });
@@ -6619,1573 +6490,43 @@
 
 
 /***/ },
-/* 18 */
+/* 20 */
 /***/ function(module, exports) {
 
 	module.exports = "{{#mysterBoxReward}}\n\t<div class=\"mysteryBoxIcon\"></div>\n\t<div class=\"mysteryBoxMessageSpin\">Congrats! You’ve unlocked the grand prize - {{title}}. Get your gift now.</div>\n\t<div class=\"actionContainer align-center\">\n\t\t<div data-rid=\"{{tid}}\" data-rewardtype=\"{{type}}\" class=\"mysteryRewardBumperAction align-center\">Claim</div>\n\t</div>\n{{/mysterBoxReward}}\n"
 
 /***/ },
-/* 19 */
+/* 21 */
 /***/ function(module, exports) {
 
 	module.exports = "{{#mysterBoxReward}}\n\t<div class=\"mysteryBoxIcon align-center\"></div>\n\t<div class=\"mysteryBoxMessageSpin align-center\">{{title}}</div>\n\t<div class=\"actionContainer align-center\">\n\t\t<div data-id=\"{{id}}\" class=\"mysteryRewardAction align-center\">Got It</div>\n\t</div>\n{{/mysterBoxReward}}"
 
 /***/ },
-/* 20 */
+/* 22 */
 /***/ function(module, exports) {
 
 	module.exports = "<div class=\"mysteryBoxIcon align-center\"></div>\n<div class=\"mysteryBoxCounter align-center\">\n    <div id=\"clockdiv\">\n        <div>\n            <span class=\"days\"></span>\n            <div class=\"smalltext\">Days</div>\n        </div>\n        <div>\n            <span class=\"hours\"></span>\n            <div class=\"smalltext\">Hrs</div>\n        </div>\n        <div>\n            <span class=\"minutes\"></span>\n            <div class=\"smalltext\">Mins</div>\n        </div>\n        <div>\n            <span class=\"seconds\"></span>\n            <div class=\"smalltext\">Secs</div>\n        </div>\n    </div>\n</div>\n<div class=\"mysteryBoxMessage align-center\">Remaining For your Next Spin</div>\n\n{{#showMysteryBoxHistoryButton}}\n<div class=\"mysteryBoxHistory align-center\">My History</div>\n{{/showMysteryBoxHistoryButton}}\n"
 
 /***/ },
-/* 21 */
+/* 23 */
 /***/ function(module, exports) {
 
 	module.exports = "<div class=\"mysteryBoxMessage align-center\">You will be able to unlock the mystery box only after {{streakToUnlock}} days of streak</div>\n"
 
 /***/ },
-/* 22 */
+/* 24 */
 /***/ function(module, exports) {
 
 	module.exports = "<div id=\"spin\" class=\"spin\">SPIN</div>\n<div id=\"result\" class=\"result\"></div>\n<div class=\"mysteryBoxMessageSpin\">Spin the wheel to unlock the surprise. Only one Ninja per day wins the grand prize.</div>\n<div class=\"wheel-wrapper\">\n  <div class=\"needle\"></div>\n  <div id=\"wheel\" class=\"wheel\">\n    <div class=\"cutter\">\n      <div class=\"slicer\">\n        <div class=\"part\" data-slice=\"8\" data-reward=\"\"><div class=\"mBoxRewardIcon\"></div></div>\n      </div>\n    </div>\n    <div class=\"cutter\">\n      <div class=\"slicer\">\n        <div class=\"part\" data-slice=\"7\" data-reward=\"\"><div class=\"mBoxRewardIcon\"></div></div>\n      </div>\n    </div>\n    <div class=\"cutter\">\n      <div class=\"slicer\">\n        <div class=\"part\" data-slice=\"6\" data-reward=\"\"><div class=\"mBoxRewardIcon\"></div></div>\n      </div>\n    </div>\n    <div class=\"cutter\">\n      <div class=\"slicer\">\n        <div class=\"part\" data-slice=\"5\" data-reward=\"\"><div class=\"mBoxRewardIcon\"></div></div>\n      </div>\n    </div>\n    <div class=\"cutter\">\n      <div class=\"slicer\">\n        <div class=\"part\" data-slice=\"4\" data-reward=\"\"><div class=\"mBoxRewardIcon\"></div></div>\n      </div>\n    </div>\n    <div class=\"cutter\">\n      <div class=\"slicer\">\n        <div class=\"part\" data-slice=\"3\" data-reward=\"\"><div class=\"mBoxRewardIcon\"></div></div>\n      </div>\n    </div>\n    <div class=\"cutter\">\n      <div class=\"slicer\">\n        <div class=\"part\" data-slice=\"2\" data-reward=\"\"><div class=\"mBoxRewardIcon\"></div></div>\n      </div>\n    </div>\n    <div class=\"cutter\">\n      <div class=\"slicer\">\n        <div class=\"part\" data-slice=\"1\" data-reward=\"\"><div class=\"mBoxRewardIcon\"></div></div>\n      </div>\n    </div>\n  </div>\n</div>\n\n{{#previousWinner}}\n  <div class=\"previousWinnerRow align-center\">\n    <p class=\"previousWinnerHeading\">Yesterday's Grand Prize Winner</p>\n    <div class=\"winnerWrapper\">\n      <div class=\"winnerIcon\"></div>\n      <div class=\"winnerName\">{{previousWinner.name}}</div>  \n    </div>\n  </div>\n{{/previousWinner}}\n\n{{#showMysteryBoxHistoryButton}}\n<div class=\"mysteryBoxHistory  align-center\">My History</div>\n{{/showMysteryBoxHistoryButton}}"
 
 /***/ },
-/* 23 */
+/* 25 */
 /***/ function(module, exports) {
 
 	module.exports = "<div class=\"mysteryBoxHistoryContainer\">\n    {{#mysteryBoxHistory}}\n    <li class=\"bumperRow\" data-rid=\"{{id}}\" data-url=\"{{url}}\" data-state=\"{{state}}\" data-rewardtype=\"{{type}}\">\n        <div class=\"bumperRowIcon\"></div>\n        <div class=\"bumperRowDetails\">\n            <p class=\"bumperRowHeading\">{{title}}</p>\n            <p class=\"bumperRowSubHeading\">{{stitle}}</p>\n        </div>\n    </li>\n    {{/mysteryBoxHistory}}\n</div>"
 
 /***/ },
-/* 24 */
-/***/ function(module, exports) {
-
-	module.exports = "<!-- Ninja Container and Background -->\n<div class=\"ninjaHomeWrapper\">\n    <div id=\"animate-area\" class=\"topIllustration animate-area\"></div>\n    <div class=\"bottomIllustration\"></div>\n    <!-- Ninja Profile Home Page -->\n    <div class=\"ninjaProfileContainer align-center\">\n        <!-- Ninja Profile -->\n        <div class=\"ninjaProfileWrapper\">\n            <div class=\"ninjaPhotoContainer\">\n                <div class=\"ninjaStreak\">\n                    <div class=\"ninjaStreakIcon\"></div>\n                    <div class=\"ninjaStreakValue\">{{ninjaProfileData.streak}}</div>\n                </div>\n                <div id=\"ninjaIcon\" class=\"ninjaProfileIcon\"></div>\n                <div class=\"ninjaBattery\">\n                    <div class=\"ninjaBatteryIcon\"></div>\n                    <div class=\"ninjaBatteryValue\">{{ninjaProfileData.battery}}</div>\n                </div>\n            </div>\n            <div class=\"ninjaName\">{{ninjaProfileData.name}}</div>\n        </div>\n    </div>\n    <div id=\"content\" class=\"container\">\n        <div class=\"view list-view\">\n            <div class=\"commonDv\">\n                <div class=\"containerTabs\">\n                    <div class=\"comp__tabs clearfix\">\n                        <a class=\"comp__tab\" data-id=\"rewards\">\n                            <div class=\"tabIconRewards\"></div>REWARDS</a>\n                        <a class=\"comp__tab\" data-id=\"activity\">\n                            <div class=\"tabIconStats\"></div>STATS</a>\n                        <a class=\"comp__tab \" data-id=\"gifts\">\n                            <div class=\"tabIconLuckyBox\"></div>LUCKY BOX</a>\n                    </div>\n                    <div class=\"comp__data\">\n                        <div id=\"sliderTabs\" class=\"swipe\">\n                            <div class=\"swipe-wrap\">\n                                <div class=\"tab-data videos_data tab-rewards\" data-id=\"rewards\">\n                                    <div class=\"rewardsContainer\">\n                                        {{#ninjaRewardsCollection}}\n                                        <li class=\"rewardRow\" data-rewardId=\"{{id}}\" data-state=\"{{state}}\" data-rewardtype=\"{{type}}\">\n                                            <div class=\"rewardIcon\"></div>\n                                            <div class=\"rewardDetails\">\n                                                <p class=\"rewardHeading    {{^state}}{{#lockedGreyout}}rewardHeadingLocked{{/lockedGreyout}}{{/state}}\">{{title}}</p>\n                                                <p class=\"rewardSubheading {{^state}}{{#lockedGreyout}}rewardSubheadingLocked{{/lockedGreyout}}{{/state}}\">{{stitle}}</p>\n                                            </div>\n                                            {{#streak}}\n                                            <div class=\"rewardStreakWrapper\">\n                                                <div class=\"rewardStreakIcon\"></div>\n                                                <div class=\"rewardStreakValue\">{{streak}}</div>\n                                            </div>\n                                            {{/streak}}\n                                        </li>\n                                        {{/ninjaRewardsCollection}}\n                                    </div>\n                                </div>\n                                <div class=\"news_data tab-data tab-activity\" data-id=\"activity\">\n                                    <div class=\"activityContainer\">\n                                        <!-- <div class=\"settingsWrapper clearfix\">\n                                            <div class=\"statTimePeriod selectedTime\">\n                                                <div class=\"optionOne selectedTime\">Lifetime</div>\n                                            </div>\n                                            <div class=\"statTimePeriod twoSideMargin\">\n                                                <div class=\"optionTwo \">Last month</div>\n                                            </div>\n                                            <div class=\"statTimePeriod\">\n                                                <div class=\"optionThree\">Last week</div>\n                                            </div>\n                                        </div>\n                                        <hr noshade class=\"seperator\">\n                                        <div class=\"leaderboardWrapper\">\n                                            <div class=\"leaderboardHeading\">Top Ninjas</div>\n                                            <div class=\"topNinjas\">\n                                         -->\n                                        <!-- Add the left right scrollable list here -->\n                                        <!-- <ul class=\"topList\">\n                                                    <li class=\"listRow\">\n                                                        <div class=\"userIcon\"></div>\n                                                        <div class=\"userName\">Hemank</div>\n                                                    </li>\n                                                    <li class=\"listRow\">\n                                                        <div class=\"userIcon\"></div>\n                                                        <div class=\"userName\">Deepak</div>\n                                                    </li>\n                                                    <li class=\"listRow\">\n                                                        <div class=\"userIcon\"></div>\n                                                        <div class=\"userName\">Pathik</div>\n                                                    </li>\n                                                    <li class=\"listRow\">\n                                                        <div class=\"userIcon\"></div>\n                                                        <div class=\"userName\">Srikant</div>\n                                                    </li>\n                                                    <li class=\"listRow\">\n                                                        <div class=\"userIcon\"></div>\n                                                        <div class=\"userName\">Patley</div>\n                                                    </li>\n                                                    <li class=\"listRow\">\n                                                        <div class=\"userIcon\"></div>\n                                                        <div class=\"userName\">Jagpreet</div>\n                                                    </li>\n                                                    <li class=\"listRow\">\n                                                        <div class=\"userIcon\"></div>\n                                                        <div class=\"userName\">Hemank</div>\n                                                    </li>\n                                                </ul>\n                                            </div>\n                                        </div>\n                                        <hr noshade class=\"seperator\"> -->\n                                        <div class=\"statsWrapper\">\n                                            {{#ninjaActivityData}}\n                                            <div class=\"statTypeContainer\">\n                                                <div class=\"statHeading\">Messaging</div>\n                                                <div class=\"statBoxWrapper statBoxFloatLeft\">\n                                                    <div class=\"statValue messagesR\">{{ninjaActivityData.messages.rec}}</div>\n                                                    <div class=\"statText\">Messages Received</div>\n                                                </div>\n                                                <div class=\"statBoxWrapper statBoxFloatRight\">\n                                                    <div class=\"statValue messagesS\">{{ninjaActivityData.messages.sent}}</div>\n                                                    <div class=\"statText\">Messages Sent</div>\n                                                </div>\n                                                <div class=\"statBoxWrapper statBoxFloatLeft\">\n                                                    <div class=\"statValue stickersR\">{{ninjaActivityData.stickers.rec}}</div>\n                                                    <div class=\"statText\">Stickers Received</div>\n                                                </div>\n                                                <div class=\"statBoxWrapper statBoxFloatRight\">\n                                                    <div class=\"statValue stickersS\">{{ninjaActivityData.stickers.sent}}</div>\n                                                    <div class=\"statText\">Stickers Sent</div>\n                                                </div>\n                                                <div class=\"statBoxWrapper statBoxFloatLeft\">\n                                                    <div class=\"statValue chatThemesR\">{{ninjaActivityData.chatThemes.rec}}</div>\n                                                    <div class=\"statText\">Chat Themes Received</div>\n                                                </div>\n                                                <div class=\"statBoxWrapper statBoxFloatRight\">\n                                                    <div class=\"statValue chatThemesS\">{{ninjaActivityData.chatThemes.sent}}</div>\n                                                    <div class=\"statText\">Chat Themes Sent</div>\n                                                </div>\n                                                <div class=\"statBoxWrapper statBoxFloatLeft\">\n                                                    <div class=\"statValue filesR\">{{ninjaActivityData.files.rec}}</div>\n                                                    <div class=\"statText\">Files Received</div>\n                                                </div>\n                                                <div class=\"statBoxWrapper statBoxFloatRight\">\n                                                    <div class=\"statValue filesS\">{{ninjaActivityData.files.sent}}</div>\n                                                    <div class=\"statText\">Files Sent</div>\n                                                </div>\n                                            </div>\n                                            <div class=\"statTypeContainer\">\n                                                <div class=\"statHeading\">Timeline</div>\n                                                <div class=\"statBoxWrapper statBoxFloatLeft\">\n                                                    <div class=\"statValue statusUpdateCount\">{{ninjaActivityData.statusUpdates.count}}</div>\n                                                    <div class=\"statText\">Status Updates Posted</div>\n                                                </div>\n                                            </div>\n                                            {{/ninjaActivityData}}\n                                        </div>\n                                    </div>\n                                </div>\n                                <div class=\"fixtures_data tab-data tab-mysterybox\" data-id=\"gifts\">\n                                    <div class=\"mysteryBoxContainer\">\n                                    </div>\n                                </div>\n                            </div>\n                        </div>\n                    </div>\n                </div>\n            </div>\n        </div>\n        <div class=\"view details-view\">\n        </div>\n    </div>\n</div>"
-
-/***/ },
-/* 25 */
-/***/ function(module, exports, __webpack_require__) {
-
-	(function(W, platformSdk, events) {
-	    'use strict';
-
-	    var utils = __webpack_require__(4),
-	        Constants = __webpack_require__(5),
-
-	        ExclusiveFeatureController = function(options) {
-	            this.template = __webpack_require__(26);
-	        };
-
-	    ExclusiveFeatureController.prototype.bind = function(App, data) {
-
-	        var ftue = this;
-
-	        var headerIcon = document.getElementsByClassName('featureImage')[0];
-	        var featureEnableButton = document.getElementsByClassName('featureEnableButton')[0];
-	        var featureRetryButton = document.getElementsByClassName('featureRetryButton')[0];
-	        var featureProgress = document.getElementsByClassName('featureProgress')[0];
-	        var progressBar = document.getElementsByClassName('progressBar')[0];
-
-	        if (data.rewardDetails.hicon) {
-	            headerIcon.style.backgroundImage = 'url(\'' + data.rewardDetails.hicon + '\')';
-	        } else {
-	            console.log("Set a default header Icon");
-	        }
-
-	        if(data.rewardDetails.sanctioned){
-	            console.log("Reward has been redeemed");
-	            featureEnableButton.classList.add('hideClass');
-	            featureRetryButton.classList.remove('hideClass');
-	        }else{
-	            console.log("Reward has not been redeemed");
-	        }
-
-	        // Check the reward status here and set button enable or retry once redeemed or unlocked
-
-	        // FAQ URL CLICK EVENT
-	        featureEnableButton.addEventListener('click', function(ev) {
-	            console.log("Enabling The Exclusive Feature For You");
-
-	            var dataToSend = {};
-	            dataToSend.rid = data.rewardId;
-	            dataToSend.enable  = true;
-
-	            // Reward Details API :: Send Reward Id As well
-	            App.NinjaService.getExclusiveFeature(dataToSend, function(res) {
-
-	                // Show Toast if Success
-	                console.log(res);
-	                utils.showToast('The feature will be enabled shortly.');
-
-	                featureRetryButton.classList.remove('hideClass');
-	                featureEnableButton.classList.add('hideClass');
-
-	                // Routing to the specific Router
-	                //App.router.navigateTo(rewardRouter, res.data);
-	            }, this);
-	        });
-
-	        featureRetryButton.addEventListener('click', function(ev) {
-	            console.log("Enabling The Exclusive Feature For You");
-
-	            var dataToSend = {};
-	            dataToSend.rid = data.rewardId;
-	            dataToSend.enable  = true;
-
-	            // Reward Details API :: Send Reward Id As well
-	            App.NinjaService.getExclusiveFeature(dataToSend, function(res) {
-
-	                // Show Toast if Success
-	                console.log(res);
-	                utils.showToast('We have sent you the feature once again!');
-
-	            }, this);
-	        });
-
-
-
-	    };
-	    ExclusiveFeatureController.prototype.render = function(ctr, App, data) {
-
-	        console.log(data);
-
-	        var that = this;
-	        that.el = document.createElement('div');
-	        that.el.className = 'exclusiveFeatureContainer animation_fadein noselect';
-
-	        that.el.innerHTML = Mustache.render(that.template, {
-	            featureText: data.rewardDetails.desc
-	        });
-
-	        ctr.appendChild(that.el);
-	        events.publish('update.loader', { show: false });
-	        that.bind(App, data);
-	    };
-
-	    ExclusiveFeatureController.prototype.destroy = function() {
-
-	    };
-
-	    module.exports = ExclusiveFeatureController;
-
-	})(window, platformSdk, platformSdk.events);
-
-
-/***/ },
 /* 26 */
-/***/ function(module, exports) {
-
-	module.exports = "<div id=\"animate-area\" class=\"topIllustration animate-area\"></div>\n<div class=\"bottomIllustration\"></div>\n<div class=\"exclusiveFeatureWrapper align-center\">\n\t<div class=\"featureImage\"></div>\n\t<div class=\"featureText\">{{featureText}}</div>\n\t<div class=\"featureCta\">\n\t\t<div class=\"featureEnableButton\">Enable</div>\n\t\t<div class=\"featureProgress hideClass\">\n\t\t\t<div class=\"meter\">\n  \t\t\t\t<span class=\"progressBar\" style=\"width: 0%\"></span>\n\t\t\t</div>\n\t\t\t<div class=\"progressText\">Enabling ...</div>\n\t\t</div>\n\t\t<div class=\"featureRetryButton hideClass\">Retry</div>\n\t\t<div class=\"featureDisableButton hideClass\">Disable</div>\n\t</div>\n\t<div class=\"faqButtton\">FAQs</div>\n</div>"
-
-/***/ },
-/* 27 */
-/***/ function(module, exports, __webpack_require__) {
-
-	(function(W, platformSdk, events) {
-	    'use strict';
-
-	    var utils = __webpack_require__(4),
-	        Constants = __webpack_require__(5),
-
-	        StickerRewardController = function(options) {
-	            this.template = __webpack_require__(28);
-	        };
-
-	    StickerRewardController.prototype.bind = function(App, data) {
-
-	        var that = this;
-
-	        console.log(data);
-
-	        if (data.rewardDetails.cooldown) {
-	            var stickerRewardList = document.getElementsByClassName('stickerRewardList')[0];
-
-	            console.log("Removing THE",stickerRewardList);
-	            stickerRewardList.innerHTML = '';
-
-	            that.template = __webpack_require__(29);
-	            stickerRewardList.innerHTML = Mustache.render(this.template, {});
-
-	            console.log("DATAAA IS", data.rewardDetails);
-
-	            that.defineCooldown(App,data.rewardDetails.cooldown,data.rewardId,data.rewardRouter);
-	       
-	        }
-
-	        // Sticker packs data here
-	        var stickerPacks = data.rewardDetails.packs;
-	        var stickerDownloadRow = document.getElementsByClassName('stickerDownloadRow');
-	        var stickerRewardHeaderImage = document.getElementsByClassName('stickerRewardHeaderImage')[0];
-	        stickerRewardHeaderImage.style.backgroundImage = 'url(\'' + data.rewardDetails.hicon + '\')';
-
-	        that.assignStickerCatImages(stickerPacks, stickerDownloadRow);
-
-	        for (var i = 0; i < stickerDownloadRow.length; i++) {
-	            stickerDownloadRow[i].addEventListener('click', function(ev) {
-
-	                var stickerState = this.getAttribute('data-status');
-	                var catId = this.getAttribute('data-catId');
-	                var rewardId = this.getAttribute('data-rewardid');
-	                var stickerDetails = that.getStickerDetails(catId, stickerPacks);
-
-	                App.router.navigateTo('/stickerPackView', { "stickerDetails": stickerDetails, "rewardId": rewardId, "rewardRouter": data.rewardRouter });                
-
-	                // if (stickerState == '1') {
-	                //     utils.showToast('You have already downloaded this sticker pack');
-	                // } else {
-	                //     console.log('Fetching sticker pack');
-	                //     // Going to Sticker Pack View
-	                //     App.router.navigateTo('/stickerPackView', { "stickerDetails": stickerDetails, "rewardId": rewardId, "rewardRouter": data.rewardRouter });
-	                // }
-	            });
-	        }
-
-	    };
-
-	    StickerRewardController.prototype.getStickerDetails = function(catId, stickerPacks) {
-
-
-	        for (var i = 0; i < stickerPacks.length; i++) {
-	            if (catId == stickerPacks[i].catId) {
-	                return stickerPacks[i];
-	            } else {
-	                console.log("Sticker Pack not found");
-	            }
-	        }
-
-	    };
-
-
-	    StickerRewardController.prototype.assignStickerCatImages = function(packs, rows) {
-
-	        var stickerCatUrl = 'http://54.169.82.65:5016/v1/stickerpack/';
-
-	        for (var i = 0; i < rows.length; i++) {
-	            var icon = rows[i].getElementsByClassName('stickerPackIcon')[0];
-	            console.log(icon);
-	            icon.style.backgroundImage = 'url(\'' + stickerCatUrl + packs[i].catId + '/preview' + '\')';
-
-	        }
-
-	    };
-
-	    StickerRewardController.prototype.defineCooldown = function(App, timeleft,rId, rewardRouter) {
-
-	            function getTimeRemaining(timeRemaining) {
-	                var t = timeRemaining;
-	                var seconds = Math.floor((t / 1000) % 60);
-	                var minutes = Math.floor((t / 1000 / 60) % 60);
-	                var hours = Math.floor((t / (1000 * 60 * 60)) % 24);
-	                var days = Math.floor(t / (1000 * 60 * 60 * 24));
-	                return {
-	                    'total': t,
-	                    'days': days,
-	                    'hours': hours,
-	                    'minutes': minutes,
-	                    'seconds': seconds
-	                };
-	            }
-
-	            function initializeClock(id, timeRemaining) {
-	                var clock = document.getElementById(id);
-	                var daysSpan = clock.querySelector('.days');
-	                var hoursSpan = clock.querySelector('.hours');
-	                var minutesSpan = clock.querySelector('.minutes');
-	                var secondsSpan = clock.querySelector('.seconds');
-
-	                function updateClock() {
-	                    var t = getTimeRemaining(timeRemaining);
-
-	                    daysSpan.innerHTML = t.days;
-	                    hoursSpan.innerHTML = ('0' + t.hours).slice(-2);
-	                    minutesSpan.innerHTML = ('0' + t.minutes).slice(-2);
-	                    secondsSpan.innerHTML = ('0' + t.seconds).slice(-2);
-
-	                    if (t.total <= 0) {
-	                        clearInterval(timeinterval);
-	                        console.log("Getting available rewards");
-
-	                        var dataSend = {};
-	                        dataSend.rewardId = rId;
-
-	                        App.NinjaService.getRewardDetails(dataSend, function(res) {
-	                            console.log(res.data);
-	                             App.router.navigateTo(rewardRouter,{ "rewardDetails": res.data , "rewardId" :rId, "rewardRouter":rewardRouter} );
-	                        });
-	                    }
-	                    timeRemaining = timeRemaining - 1000;
-	                }
-
-	                updateClock();
-	                var timeinterval = setInterval(updateClock, 1000);
-	            }
-
-	            // var d = new Date(timeleft*1000); // The 0 there is the key, which sets the date to the epoch
-
-	            // var deadline = d;
-	            initializeClock('clockdiv', timeleft * 1000);
-
-	    };
-
-
-
-	    StickerRewardController.prototype.render = function(ctr, App, data) {
-
-	        console.log("COOLDOWN is", data);
-
-	        var that = this;
-	        that.el = document.createElement('div');
-	        that.el.className = 'stickerRewardContainer ftueController animation_fadein noselect';
-
-	        that.template = __webpack_require__(28);
-
-	        that.el.innerHTML = Mustache.render(that.template, {
-	            stickerPacks: data.rewardDetails.packs,
-	            title: data.rewardDetails.title,
-	            stitle: data.rewardDetails.desc,
-	            rewardId: data.rewardId
-	        });
-
-	        //data = data.rewardDetails;
-
-	        ctr.appendChild(that.el);
-	        events.publish('update.loader', { show: false });
-	        that.bind(App, data);
-	    };
-
-	    StickerRewardController.prototype.destroy = function() {
-
-	    };
-
-	    module.exports = StickerRewardController;
-
-	})(window, platformSdk, platformSdk.events);
-
-
-/***/ },
-/* 28 */
-/***/ function(module, exports) {
-
-	module.exports = "<div id=\"animate-area\" class=\"topIllustration animate-area\"></div>\n<div class=\"bottomIllustration\"></div>\n<div class=\"stickerRewardsWrapper\">\n    <div class=\"stickerShopPageOne\">\n        <div class=\"stickerRewardHeader\">\n            <div class=\"stickerRewardHeaderImage\"></div>\n            <div class=\"stickerRewardHeadingContainer\">\n                <p class=\"stickerRewardHead\">{{title}}</p>\n                <p class=\"stickerRewardSub\">{{stitle}}</p>\n            </div>\n        </div>\n        <!-- Only If applicable -->\n        <div class=\"stickerRewardLevels\"></div>\n        \n        <div class=\"stickerRewardList\">\n            <div class=\"stickerDownloadList\">\n                <ul>\n                    {{#stickerPacks}}\n                    <li class=\"stickerDownloadRow\" data-status=\"{{downloaded}}\" data-catId=\"{{catId}}\" data-rewardid=\"{{rewardId}}\">\n                        <div class=\"stickerPackIcon\"></div>\n                        <!-- <div class=\"stickerPackIcon\"></div> -->\n                        <div class=\"stickerPackText\">\n                            <p class=\"stickerPackName\">{{name}}</p>\n                            <p class=\"stickerPackCount\">{{nos}} Stickers</p>\n                        </div>\n                        <div class=\"stickerPackStatenotdownloaded\"></div>\n                        <!-- {{#downloaded}}\n                            <div class=\"stickerPackStatedownloaded\"></div>\n                        {{/downloaded}}\n                        {{^downloaded}}\n                            <div class=\"stickerPackStatenotdownloaded\"></div>\n                        {{/downloaded}} -->\n                    </li>\n                    {{/stickerPacks}}\n                </ul>\n            </div>\n        </div>\n        <!-- <div class=\"stickerListEmptyState\">\n        </div>\n        <div class=\"stickerPackBlocked\">\n            <div class=\"stickerBlockedIllustration\"></div>\n            <div class=\"stickerBlockedText\"></div>\n        </div> -->\n    </div>\n    <!-- <div class=\"stickerDownloadPage\">\n        <div class=\"stickerCategoryIcon\"></div>\n        <div class=\"stickerIconPreview\">\n            <ul class=\"stickerPreviewList\">\n                <li class=\"stickerPreviewIcon\"></li>\n            </ul>\n        </div>\n        <div class=\"stickerDownloadButton\">Download</div>\n    </div> -->\n</div>"
-
-/***/ },
-/* 29 */
-/***/ function(module, exports) {
-
-	module.exports = "<div class=\"stickerCooldownContainer\">\n    <div class=\"stickerRewardCooldown\">\n        <div id=\"clockdiv\">\n            <div>\n                <span class=\"days\"></span>\n                <div class=\"smalltext\">Days</div>\n            </div>\n            <div>\n                <span class=\"hours\"></span>\n                <div class=\"smalltext\">Hrs</div>\n            </div>\n            <div>\n                <span class=\"minutes\"></span>\n                <div class=\"smalltext\">Mins</div>\n            </div>\n            <div>\n                <span class=\"seconds\"></span>\n                <div class=\"smalltext\">Secs</div>\n            </div>\n        </div>\n    </div>\n    <div class=\"stickerCooldownMessage\">Only one sticker pack can be redeemed within X hours, Please try again later.</div>\n</div>\n"
-
-/***/ },
-/* 30 */
-/***/ function(module, exports, __webpack_require__) {
-
-	(function( W, platformSdk, events ) {
-	    'use strict';
-
-	    var utils = __webpack_require__( 4 ),
-	        Constants = __webpack_require__( 5 ),
-	        customImageUploaded = false,
-	        uploadCustomStickerData = {},
-	        sessionId = null,
-
-	        CustomStickerController = function( options ) {
-	            this.template = __webpack_require__( 31 );
-	        };
-
-	    CustomStickerController.prototype.bind = function( App, data ) {
-
-	        var that = this;
-	        var rewardId = data.rewardId;
-	        
-	        customImageUploaded = false;
-	        uploadCustomStickerData = {};
-
-	        // All Custom Sticker Views Defined
-
-	        // Main views
-	        var customStickerUploadScreen = document.getElementsByClassName( 'customStickerUploadScreen' )[0];
-	        var customStickerFtueWrapper = document.getElementsByClassName( 'customStickerFtueWrapper' )[0];
-
-	        // Subsequent Views
-	        var customStickerSent = document.getElementsByClassName( 'customStickerSent' )[0];
-	        var customStickerStatusCheck = document.getElementsByClassName( 'customStickerStatusCheck' )[0];
-	        var customStickerReadyState = document.getElementsByClassName( 'customStickerReadyState' )[0];
-	        var customStickerRow = document.getElementsByClassName( 'customStickerRow' );
-
-	        var customStickerImage = document.getElementsByClassName( 'uploadPhotoContainer' )[0];
-
-	        //var profilePicLoader = document.getElementById('profilePicLoader');
-	        var errorMessage = document.getElementsByClassName( 'errorMessage' )[0];
-	        var customStickerTextPhrase = document.getElementById( 'customStickerTextPhrase' );
-	        var failCustomStickerTextPhrase = document.getElementById( 'failCustomStickerTextPhrase' );
-
-	        //var textLanguage = document.getElementById('textLanguage');
-	        var sendButton = document.getElementsByClassName( 'sendButton' )[0];
-	        var sendStickerAgainButton = document.getElementsByClassName( 'sendStickerAgainButton' )[0];
-
-	        // All Custom Sticker Actions
-
-	        var uploadPhoto = document.getElementsByClassName( 'uploadPhotoContainer' )[0];
-	        var customStickerButton = document.getElementsByClassName( 'customStickerButton' )[0];
-	        var customStickerFaq = document.getElementsByClassName( 'customStickerFaq' )[0];
-	        var customStickerShareAction = document.getElementsByClassName( 'customStickerShareAction' )[0];
-	        var customStickerHistory = document.getElementsByClassName( 'customStickerHistory' )[0];
-
-	        var showHistoryButton = document.getElementsByClassName( 'showHistoryButton' )[0];
-	        var uploadParent = document.getElementsByClassName( 'uploadParent' )[0];
-
-	        if ( data.rewardDetails.custom_stickers ) {
-
-	            that.defineCustomStickerHistory( data.rewardDetails.custom_stickers );
-	            if ( data.rewardDetails.custom_stickers.length > 0 ) {
-	                console.log( 'The user is not new to custom Sticker' );
-	                utils.removeClass( customStickerUploadScreen, 'hideClass' );
-	            } else {
-	                console.log( 'First Time user' );
-	                utils.removeClass( customStickerFtueWrapper, 'hideClass' );
-	            }
-	        }
-
-	        // Event Definations
-
-	        // FAQ URL CLICK EVENT
-	        customStickerFaq.addEventListener( 'click', function( ev ) {
-	            utils.openWebView( data.rewardDetails.faqUrl );
-	        });
-
-	        if ( showHistoryButton ) {
-	            showHistoryButton.addEventListener( 'click', function( ev ) {
-
-	                // Hide Upload and Show The History
-	                utils.removeClass( customStickerHistory, 'hideClass' );
-	                if ( uploadParent ) {
-	                    utils.addClass( uploadParent, 'hideClass' );
-	                } else {
-	                    utils.addClass( showHistoryButton, 'hideClass' );
-	                }
-	            });
-	        }
-
-	        // Show Upload Screen After the First Time
-	        customStickerButton.addEventListener( 'click', function( ev ) {
-	            utils.addClass( customStickerFtueWrapper, 'hideClass' );
-	            utils.removeClass( customStickerUploadScreen, 'hideClass' );
-	        });
-
-	        // Choose Sticker Image From gallery
-	        if ( customStickerImage ) {
-	            customStickerImage.addEventListener( 'click', function( ev ) {
-
-	                // utils.removeClass(errorMessage, 'hideClass');
-	                that.chooseStickerImageFromGallery( data );
-	            });
-	        }
-
-	        // Send the Data to Server
-	        if ( sendButton ) {
-	            sendButton.addEventListener( 'click', function( ev ) {
-	                that.sendCustomStickerDataToServer( rewardId );
-	            });
-	        }
-
-	        if ( sendStickerAgainButton ) {
-	            sendStickerAgainButton.addEventListener( 'click', function( ev ) {
-	                that.resendCustomStickerDataToServer( rewardId );
-	            });
-	        }
-
-	        customStickerShareAction.addEventListener( 'click', function( ev ) {
-	            var customStickerId = this.getAttribute( 'data-sid' );
-	            that.sendCustomStickerToUser( App, rewardId, customStickerId );
-	        });
-
-	        if ( data.rewardDetails.custom_stickers ) {
-	            that.defineCustomStickerClick( customStickerRow, data.rewardDetails.custom_stickers );
-
-	        }
-
-	    };
-
-	    CustomStickerController.prototype.sendCustomStickerToUser = function( App, rewardId, customStickerId ) {
-
-	        console.log( 'Sending the custom sticker to the user via packet' );
-
-	        console.log( rewardId );
-	        console.log( customStickerId );
-
-	        var data = {};
-	        data.rewardId = rewardId;
-	        data.customStickerId = customStickerId;
-
-	        // Reward Details API :: Send Reward Id As well
-	        App.NinjaService.sendCustomSticker( data, function( res ) {
-
-	            // Show Toast if Success
-	            console.log( res );
-	            utils.showToast( 'You will receive your sticker via the team hike bot shortly, start sharing.' );
-
-	            // Routing to the specific Router
-	            //App.router.navigateTo(rewardRouter, res.data);
-	        }, this );
-
-	    };
-
-	    CustomStickerController.prototype.defineCustomStickerClick = function( customStickerRow, data ) {
-
-	        var customStickerUploadScreen = document.getElementsByClassName( 'customStickerUploadScreen' )[0];
-	        var customStickerFtueWrapper = document.getElementsByClassName( 'customStickerFtueWrapper' )[0];
-	        var customStickerFailScreen = document.getElementsByClassName( 'customStickerFailScreen' )[0];
-
-	        // Subsequent Views
-	        var customStickerSent = document.getElementsByClassName( 'customStickerSent' )[0];
-	        var customStickerStatusCheck = document.getElementsByClassName( 'customStickerStatusCheck' )[0];
-	        var customStickerReadyState = document.getElementsByClassName( 'customStickerReadyState' )[0];
-	        var customStickerView = document.getElementsByClassName( 'customStickerView' )[0];
-	        var customStickerHistory = document.getElementsByClassName( 'customStickerHistory' )[0];
-
-	        var failReason = document.getElementsByClassName( 'failReason' )[0];
-
-	        for ( var i = 0; i < customStickerRow.length; i++ ) {
-	            customStickerRow[i].addEventListener( 'click', function( event ) {
-
-	                var state = this.getAttribute( 'data-status' );
-	                var sid = this.getAttribute( 'data-id' );
-	                var url = this.getAttribute( 'data-url' );
-
-	                if ( state == 'redeemed' ) {
-	                    console.log( 'Take To Success Page :: Send Image and ID There Reference' );
-	                    utils.removeClass( customStickerReadyState, 'hideClass' );
-	                    utils.addClass( customStickerUploadScreen, 'hideClass' );
-	                    utils.addClass( customStickerSent, 'hideClass' );
-	                    utils.addClass( customStickerFtueWrapper, 'hideClass' );
-	                    utils.addClass( customStickerHistory, 'hideClass' );
-
-	                    // Set Id Attribute For Reference Later
-	                    var customStickerShareAction = document.getElementsByClassName( 'customStickerShareAction' )[0];
-	                    var att = document.createAttribute( 'data-sid' );
-	                    att.value = sid;
-	                    customStickerShareAction.setAttributeNode( att );
-
-	                    // Set Background Image Of Sticker Being Set
-	                    customStickerView.style.backgroundImage = 'url(\'' + url + '\')';
-
-	                } else if ( state == 'inprogress' ) {
-	                    console.log( 'Take to status Check Page :: Send ID' );
-	                    utils.removeClass( customStickerStatusCheck, 'hideClass' );
-	                    utils.addClass( customStickerUploadScreen, 'hideClass' );
-	                    utils.addClass( customStickerSent, 'hideClass' );
-	                    utils.addClass( customStickerFtueWrapper, 'hideClass' );
-	                    utils.addClass( customStickerHistory, 'hideClass' );
-	                } else if ( state == 'failed' ) {
-
-	                    if ( sessionId ) {
-	                        sessionId = null;
-	                    }
-
-	                    utils.addClass( customStickerHistory, 'hideClass' );
-	                    var sId = this.getAttribute( 'data-id' );
-	                    var reasonFail = this.getAttribute( 'data-reason' );
-	                    sessionId = sId;
-	                    failReason.innerHTML = reasonFail;
-	                    console.log( 'Session Id is ', sessionId );
-	                    utils.removeClass( customStickerFailScreen, 'hideClass' );
-	                } else {
-	                    utils.showToast( 'some error occured please try again later' );
-	                }
-	            });
-	        }
-
-	    };
-
-	    // Reset To Default Sticker Image If Some Error Occurs While Selecting the Image :: Or uploading It
-	    CustomStickerController.prototype.setDefaultCustomStickerImage = function() {
-
-	        var uploadPhotoContainer = document.getElementsByClassName( 'uploadPhotoContainer' )[0];
-	        var uploadPhoto = document.getElementsByClassName( 'uploadPhoto' )[0];
-
-	        console.log( 'Setting the default custom sticker image' );
-	        uploadPhotoContainer.style.backgroundImage = 'none';
-	        uploadPhoto.style.display = 'block';
-	    };
-
-	    // Show Error State
-	    CustomStickerController.prototype.showErrorState = function( text ) {
-	        var errorMessage = document.getElementsByClassName( 'errorMessage' )[0];
-
-	        errorMessage.innerHTML = text;
-	        utils.removeClass( errorMessage, 'hideClass' );
-	    };
-
-	    // Check Full Form Before Sending Custom Sticker Data
-	    CustomStickerController.prototype.customStickerFormCheck = function() {
-
-	        console.log( customStickerTextPhrase.value );
-	        console.log( customImageUploaded );
-
-	        var sendForm = true;
-
-	        if ( ! customImageUploaded ) {
-	            this.showErrorState( 'Please fill all the details' );
-	            sendForm = false;
-	        }
-
-	        if( customStickerTextPhrase.value === ""){
-	            this.showErrorState( 'Please fill all the details' );
-	            sendForm = false;   
-	        }
-
-	        return sendForm;
-
-	    };
-
-	    CustomStickerController.prototype.customStickerReFormCheck = function() {
-
-	        console.log( failCustomStickerTextPhrase.value );
-	        console.log( customImageUploaded );
-
-	        var sendForm = true;
-
-	        if ( ! customImageUploaded || ! failCustomStickerTextPhrase ) {
-	            this.showErrorState( 'Please fill all the details' );
-	            sendForm = false;
-	        }
-
-	        return sendForm;
-
-	    };
-
-	    CustomStickerController.prototype.chooseStickerImageFromGallery = function( data ) {
-
-	        var that = this;
-
-	        // Image Container
-	        var customStickerImage = document.getElementsByClassName( 'uploadPhotoContainer' )[0];
-
-	        try {
-	            platformSdk.nativeReq({
-	                ctx: self,
-	                fn: 'chooseFile',
-	                success: function( fileUrl ) {
-
-	                    fileUrl = decodeURIComponent( fileUrl );
-	                    fileUrl = JSON.parse( fileUrl );
-
-	                    if ( ! fileUrl.filesize || fileUrl.filesize === 0 ) {
-
-	                        utils.showToast( 'Sorry. Your image couldn’t be updated. Could you try again with another files, please?' );
-	                        customImageUploaded = false;
-	                        that.setDefaultCustomStickerImage();
-	                        return;
-	                    }
-
-	                    // Check Max Upload Size :: To Be Decided
-	                    if ( fileUrl.filesize > 10000000 ) {
-	                        utils.showToast( 'Max file upload size is 10 Mb' );
-	                        customImageUploaded = false;
-	                        that.setDefaultCustomStickerImage();
-	                        return;
-	                    }
-
-	                    uploadCustomStickerData.filePath = fileUrl.filePath;
-
-	                    // Show Profile Picture In the Round Tab
-	                    // Hide the camera Icon
-	                    var cameraIcon = document.getElementsByClassName( 'uploadPhoto' )[0];
-	                    cameraIcon.style.display = 'none';
-
-	                    // Set the image from gallery as the container image
-	                    customStickerImage.style.backgroundImage = 'url(\'file://' + fileUrl.filePath + '\')';
-	                    console.log("setting hemank to true");
-	                    customImageUploaded = true;
-	                }
-	            });
-
-	        } catch ( err ) {
-	            events.publish( 'update.loader', { show: false });
-	            utils.showToast( 'Sorry. Your image couldn’t be updated. Could you try again with another files, please?' );
-	            that.setDefaultCustomStickerImage();
-	            customImageUploaded = false;
-	        }
-	    };
-
-	    // Send Custom sticker Data To Server
-	    CustomStickerController.prototype.resendCustomStickerDataToServer = function( rid ) {
-
-	        var that = this;
-	        var serverPath;
-
-	        var customStickerUploadScreen = document.getElementsByClassName( 'customStickerUploadScreen' )[0];
-	        var customStickerSent = document.getElementsByClassName( 'customStickerSent' )[0];
-	        var customStickerFailScreen = document.getElementsByClassName( 'customStickerFailScreen' )[0];
-
-	        var formSend = that.customStickerReFormCheck();
-
-	        if ( formSend ) {
-
-	            events.publish( 'update.loader', { show: true });
-
-	            console.log( 'All data is correct and can be sent to the user' );
-
-	            // Remove any error message class if any
-	            //utils.removeClass(errorMessage, 'hideClass');
-
-	            var data = {};
-	            data.rid = rid;
-	            data.text_phrase = failCustomStickerTextPhrase.value;
-	            serverPath = 'http://54.169.82.65:5016/v1/rewards/' + data.rid + '?sid=' + sessionId + '&t=' + data.text_phrase;
-
-	            // Add the server path here
-	            uploadCustomStickerData.uploadUrl = serverPath;
-	            uploadCustomStickerData.doCompress = true;
-
-	            try {
-	                platformSdk.nativeReq({
-	                    ctx: self,
-	                    fn: 'uploadFile',
-	                    data: platformSdk.utils.validateStringifyJson( uploadCustomStickerData ),
-	                    success: function( res ) {
-	                        try {
-	                            res = JSON.parse( decodeURIComponent( res ) );
-	                            console.log( res );
-
-	                            if ( res.stat == 'ok' ) {
-
-	                                //utils.showToast('Your Image has been updated.');
-	                                sessionId = res.data.sid;
-
-	                                // Show Sent Screen Here As below
-	                                utils.addClass( customStickerUploadScreen, 'hideClass' );
-	                                utils.addClass( customStickerFailScreen, 'hideClass' );
-	                                utils.removeClass( customStickerSent, 'hideClass' );
-	                                events.publish( 'update.loader', { show: false });
-	                                customImageUploaded = false;
-	                        
-
-	                            } else if(res.stat == 'fail'){
-	                                events.publish( 'update.loader', { show: false });
-	                                utils.showToast( res.data.reason );
-	                                that.setDefaultCustomStickerImage();
-	                                customImageUploaded = false;
-	                        
-	                            } else {
-	                                events.publish( 'update.loader', { show: false });
-	                                utils.showToast( 'Sorry. Your image couldn’t be updated. Could you try again with another files, please?' );
-	                                that.setDefaultCustomStickerImage();
-	                                customImageUploaded = false;
-	                        
-	                            }
-	                        } catch ( err ) {
-	                            events.publish( 'update.loader', { show: false });
-	                            utils.showToast( 'Sorry. Your image couldn’t be updated. Could you try again with another files, please?' );
-	                            that.setDefaultCustomStickerImage();
-	                            customImageUploaded = false;
-	                        
-	                        }
-
-	                        //Hide loader
-	                        //profilePicLoader.classList.remove('picLoader');
-	                    }
-	                });
-
-	            } catch ( err ) {
-	                events.publish( 'update.loader', { show: false });
-	                utils.showToast( 'Sorry. Your image couldn’t be updated. Could you try again with another files, please?' );
-	                            
-	                //profilePicLoader.classList.remove('picLoader');
-	                that.setDefaultCustomStickerImage();
-	            }
-	        } else {
-	            utils.showToast( 'Some information seems to be incorrect. Please check!' );
-
-	        }
-	    };
-
-	    // Send Custom sticker Data To Server
-	    CustomStickerController.prototype.sendCustomStickerDataToServer = function( rid ) {
-
-	        var that = this;
-	        var serverPath;
-
-	        var customStickerUploadScreen = document.getElementsByClassName( 'customStickerUploadScreen' )[0];
-	        var customStickerSent = document.getElementsByClassName( 'customStickerSent' )[0];
-	        var customStickerFailScreen = document.getElementsByClassName( 'customStickerFailScreen' )[0];
-
-	        var formSend = that.customStickerFormCheck();
-
-	        if ( formSend ) {
-
-	            events.publish( 'update.loader', { show: true });
-
-	            var data = {};
-	            data.rid = rid;
-	            data.text_phrase = customStickerTextPhrase.value;
-	            serverPath = 'http://54.169.82.65:5016/v1/rewards/' + data.rid + '?t=' + data.text_phrase;
-
-	            // Add the server path here
-	            uploadCustomStickerData.uploadUrl = serverPath;
-	            uploadCustomStickerData.doCompress = true;
-
-	            try {
-	                platformSdk.nativeReq({
-	                    ctx: self,
-	                    fn: 'uploadFile',
-	                    data: platformSdk.utils.validateStringifyJson( uploadCustomStickerData ),
-	                    success: function( res ) {
-	                        try {
-	                            res = JSON.parse( decodeURIComponent( res ) );
-	                            console.log( res );
-
-	                            if ( res.stat == 'ok' ) {
-
-	                                //utils.showToast('Your Image has been updated.');
-	                                sessionId = res.data.sid;
-
-	                                // Show Sent Screen Here As below
-	                                utils.addClass( customStickerUploadScreen, 'hideClass' );
-	                                utils.addClass( customStickerFailScreen, 'hideClass' );
-	                                utils.removeClass( customStickerSent, 'hideClass' );
-	                                events.publish( 'update.loader', { show: false });
-	                                customImageUploaded = false;
-
-	                            } else if(res.stat == 'fail'){
-	                                events.publish( 'update.loader', { show: false });
-	                                utils.showToast( res.data.reason );
-	                                that.setDefaultCustomStickerImage();
-	                                customImageUploaded = false;
-	                        
-	                            } else {
-	                                events.publish( 'update.loader', { show: false });
-	                                utils.showToast( 'Sorry. Your image couldn’t be updated. Could you try again with another files, please?' );
-	                                that.setDefaultCustomStickerImage();
-	                                customImageUploaded = false;
-	                        
-	                            }
-	                        } catch ( err ) {
-	                            events.publish( 'update.loader', { show: false });
-	                            utils.showToast( 'Sorry. Your image couldn’t be updated. Could you try again with another files, please?' );
-	                            that.setDefaultCustomStickerImage();
-	                            customImageUploaded = false;
-	                        
-	                        }
-
-	                        //Hide loader
-	                        //profilePicLoader.classList.remove('picLoader');
-	                    }
-	                });
-
-	            } catch ( err ) {
-	                events.publish( 'update.loader', { show: false });
-	                utils.showToast( 'Sorry. Your image couldn’t be updated. Could you try again with another files, please?' );            
-	                //profilePicLoader.classList.remove('picLoader');
-	                that.setDefaultCustomStickerImage();
-	            }
-	        } else {
-	            utils.showToast( 'Some information seems to be incorrect. Please check!' );
-
-	        }
-	    };
-
-	    CustomStickerController.prototype.defineCustomStickerHistory = function( stickers ) {
-
-	        // All Custom Sticker History
-	        var allCustomStickers = document.getElementsByClassName( 'customStickerIcon' );
-
-	        console.log( stickers );
-
-	        for ( var i = 0; i < stickers.length; i++ ) {
-	            if ( stickers[i].url ) {
-	                allCustomStickers[i].style.backgroundImage = 'url(\'' + stickers[i].url + '\')';
-	            } else {
-	                console.log( 'Sticker Icon is not present, please try a default icon' );
-	            }
-	            if ( stickers[i].ts ) {
-	                var timestamp = new Date( stickers[i].ts * 1000 );
-	                stickers[i].ts = timestamp.getDate() + '/' + ( timestamp.getMonth() + 1 ) + '/' + ( timestamp.getYear() + 1900 );
-	            } else {
-	                sticker[i].ts = 'Order date is unavailable';
-	            }
-
-	        }
-
-	    };
-
-	    CustomStickerController.prototype.convertTimeStamp = function( stickers ) {
-
-	        for ( var i = 0; i < stickers.length; i++ ) {
-	            if ( stickers[i].ts ) {
-	                var timestamp = new Date( stickers[i].ts );
-	                stickers[i].ts = timestamp.getDate() + '/' + ( timestamp.getMonth() + 1 ) + '/' + ( timestamp.getYear() + 1900 );
-	            } else {
-	                sticker[i].ts = 'Order date is unavailable';
-	            }
-	        }
-	    };
-
-	    CustomStickerController.prototype.render = function( ctr, App, data ) {
-
-	        console.log( data );
-
-	        var that = this;
-	        that.customStickersList = [];
-	        that.showCustomStickerHistoryButton = false;
-
-	        if ( data.rewardDetails.custom_stickers ) {
-	            that.customStickersList = data.rewardDetails.custom_stickers;
-	            that.convertTimeStamp( data.rewardDetails.custom_stickers );
-	        }
-
-	        if ( data.rewardDetails.custom_stickers.length > 0 ) {
-	            that.showCustomStickerHistoryButton = true;
-	        }
-
-	        console.log( that.customStickersList );
-
-	        that.el = document.createElement( 'div' );
-	        that.el.className = 'customStickerContainer centerToScreenContainer animation_fadein noselect';
-	        that.el.innerHTML = Mustache.render( that.template, {
-	            customStickersList: that.customStickersList,
-	            newStickerEligibility: data.rewardDetails.eligible,
-	            showCustomStickerHistoryButton: that.showCustomStickerHistoryButton
-	        });
-	        ctr.appendChild( that.el );
-	        events.publish( 'update.loader', { show: false });
-	        that.bind( App, data );
-	    };
-
-	    CustomStickerController.prototype.destroy = function() {
-
-	    };
-
-	    module.exports = CustomStickerController;
-
-	})( window, platformSdk, platformSdk.events );
-
-
-/***/ },
-/* 31 */
-/***/ function(module, exports) {
-
-	module.exports = "<div id=\"animate-area\" class=\"topIllustration animate-area\"></div>\n<div class=\"bottomIllustration\"></div>\n<div class=\"customStickerUploadScreen hideClass\">\n    {{#newStickerEligibility}}\n    <div class=\"uploadParent\">\n        <div class=\"uploadPhotoContainer\">\n            <div class=\"uploadPhoto\"></div>\n        </div>\n        <!-- <div id=\"profilePicLoader\"> -->\n        <div class=\"customStickerText\">\n            <!-- <select id=\"textLanguage\">\n                <option value=\"\">Select your sticker language</option>\n                <option value=\"english\">English</option>\n                <option value=\"hindi\">Hindi</option>\n                <option value=\"marathi\">Marathi</option>\n                <option value=\"malyalam\">Malyalam</option>\n            </select> -->\n        </div>\n        <input id=\"customStickerTextPhrase\" type=\"text\" placeholder=\"Type your sticker text\" id=\"stickerPhrase\" onpaste=\"return false\" required value=\"\">\n        <div class=\"errorMessage hideClass\">If any error message on this screen</div>\n        <div class=\"sendButton\">Send</div>\n        {{/newStickerEligibility}} \n\n        {{#showCustomStickerHistoryButton}}\n        <div class=\"showHistoryButton\">\n            Custom Sticker History\n        </div>\n        {{/showCustomStickerHistoryButton}}\n    \n    </div>\n    <div class=\"customStickerHistory hideClass\">\n        <ul>\n            {{#customStickersList}}\n            <li class=\"customStickerRow\" data-id=\"{{sid}}\" data-status=\"{{status}}\" data-url=\"{{url}}\" data-reason=\"{{reason}}\">\n                <div class=\"customStickerIcon\"></div>\n                <div class=\"customStickerDetails\">\n                    <p class=\"stickerPhrase\">{{phrase}}</p>\n                    <p class=\"stickerOrderDate\">Order date - {{ts}}</p>\n                </div>\n                <div class=\"statusIcon{{status}}\"></div>\n            </li>\n            {{/customStickersList}}\n        </ul>\n    </div>\n</div>\n<div class=\"customStickerWrapper centerToScreenWrapper align-center\">\n    <div class=\"customStickerFailScreen hideClass\">\n        <div class=\"failUploadParent\">\n            <p class=\"failReason\"></p>\n            <div class=\"uploadPhotoContainer\">\n                <div class=\"uploadPhoto\"></div>\n            </div>\n            <div class=\"customStickerText\">\n            </div>\n            <input id=\"failCustomStickerTextPhrase\" type=\"text\" placeholder=\"Type your sticker text\" id=\"stickerPhrase\" onpaste=\"return false\" required value=\"\">\n            <div class=\"errorMessage hideClass\">If any error message on this screen</div>\n            <div class=\"sendStickerAgainButton\">Send</div>\n        </div>\n    </div>\n    <div class=\"customStickerFtueWrapper hideClass\">\n        <div class=\"customStickerHeaderImage\"></div>\n        <div class=\"customStickerDetail\">Get your own sticker made by Hike and share it with your friends.</div>\n        <div class=\"customStickerButton\">Start</div>\n        <div class=\"customStickerFaq\">FAQs</div>\n    </div>\n    <div class=\"customStickerSent hideClass\">\n        <div class=\"successSentImage\"></div>\n        <div class=\"successSentText\">Successfully sent, you will receive this sticker within 3-4 weeks. You can come back here to check your sticker status.</div>\n        <!-- <div class=\"successSentAction\">Check Status</div> -->\n    </div>\n    <div class=\"customStickerStatusCheck hideClass\">\n        <div class=\"statusHeaderImage\"></div>\n        <div class=\"statusText\">We believe in making beautiful stickers. Your sticker will approximately take 3-4 weeks. Keep checking!</div>\n    </div>\n    <div class=\"customStickerReadyState hideClass\">\n        <div class=\"customStickerView\"></div>\n        <div class=\"customStickerShareText\">Hey Your sticker is ready and good to go, let's surprise your friends by sending it to them!</div>\n        <div class=\"customStickerShareAction\">Send</div>\n    </div>\n</div>\n</div>\n"
-
-/***/ },
-/* 32 */
-/***/ function(module, exports, __webpack_require__) {
-
-	(function( W, platformSdk, events ) {
-	    'use strict';
-
-	    var utils = __webpack_require__( 4 ),
-	        Constants = __webpack_require__( 5 ),
-
-	        CrowdSourcingController = function( options ) {
-	            this.template = __webpack_require__( 33 );
-	        };
-
-	    CrowdSourcingController.prototype.bind = function( App, data ) {
-
-	        var ftue = this;      
-	    };
-
-	    CrowdSourcingController.prototype.render = function( ctr, App, data ) {
-
-	        var that = this;
-	        that.el = document.createElement( 'div' );
-	        that.el.className = 'ftueController animation_fadein noselect';
-	        that.el.innerHTML = Mustache.render( unescape( that.template ) );
-	        ctr.appendChild( that.el );
-	        events.publish( 'update.loader', { show: false });
-	        that.bind( App, data );
-	    };
-
-	    CrowdSourcingController.prototype.destroy = function() {
-
-	    };
-
-	    module.exports = CrowdSourcingController;
-
-	})( window, platformSdk, platformSdk.events );
-
-
-/***/ },
-/* 33 */
-/***/ function(module, exports) {
-
-	module.exports = "<p> User Generated Content</p>"
-
-/***/ },
-/* 34 */
-/***/ function(module, exports, __webpack_require__) {
-
-	(function( W, platformSdk, events ) {
-	    'use strict';
-
-	    var utils = __webpack_require__( 4 ),
-	        Constants = __webpack_require__( 5 ),
-
-	        FaqDetailsController = function( options ) {
-	            this.template = __webpack_require__( 35 );
-	        };
-
-	    FaqDetailsController.prototype.bind = function( App, data ) {
-
-	        var ftue = this;      
-	    };
-
-	    FaqDetailsController.prototype.render = function( ctr, App, data ) {
-
-	        var that = this;
-	        that.el = document.createElement( 'div' );
-	        that.el.className = 'ftueController animation_fadein noselect';
-	        that.el.innerHTML = Mustache.render( unescape( that.template ) );
-	        ctr.appendChild( that.el );
-	        events.publish( 'update.loader', { show: false });
-	        that.bind( App, data );
-	    };
-
-	    FaqDetailsController.prototype.destroy = function() {
-
-	    };
-
-	    module.exports = FaqDetailsController;
-
-	})( window, platformSdk, platformSdk.events );
-
-
-/***/ },
-/* 35 */
-/***/ function(module, exports) {
-
-	module.exports = "<div class=\"faqWrapper\">\n\t<ul class=\"faqQuestions\">\n\t\t<li class=\"questionRow\">\n\t\t\t<div class=\"faqQuestion\"></div>\n\t\t\t<div class=\"faqAnswer\"></div>\n\t\t</li>\n\t</ul>\n\t<div class=\"question\"></div>\n</div>"
-
-/***/ },
-/* 36 */
-/***/ function(module, exports, __webpack_require__) {
-
-	(function(W, platformSdk, events) {
-	    'use strict';
-
-	    var utils = __webpack_require__(4),
-	        Constants = __webpack_require__(5),
-	        Config = __webpack_require__(6),
-
-	        StickerPackViewController = function(options) {
-	            this.template = __webpack_require__(37);
-	        };
-
-	    StickerPackViewController.prototype.bind = function(App, data,rId, rRouter) {
-
-	        var that = this;
-
-	        var downloadStickerPackButton = document.getElementsByClassName('downloadStickerPackButton')[0];
-	        var stickerRow = document.getElementsByClassName('stickerRow');
-	        var selectedSticker = document.getElementsByClassName('selectedSticker')[0];
-
-	        console.log(data);
-	        that.assignStickerPreviewImages(selectedSticker, data.act_stickers, stickerRow, data.catId);
-
-	        downloadStickerPackButton.addEventListener('click', function(ev) {
-	            console.log("Getting sticker pack for you");
-
-	            var dataToSend = {};
-
-	            //STUB
-	            //var data = {};
-
-	            /*data.rid = '57b56ec17e401ddfe70a9e8f';
-	            data.send = { 'catId': catId };*/
-	            //dataToSend.rid = "";
-	            dataToSend.rid = this.getAttribute('data-rewardId');
-	            dataToSend.send = { 'catId': data.catId };
-
-	            var stickerJSON = { 'catId': data.catId, 'categoryName': data.name, 'totalStickers': data.nos, 'categorySize': data.size };
-	            stickerJSON = JSON.stringify(stickerJSON);
-
-	            App.NinjaService.getStickerPack(dataToSend, function(res) {
-
-	                console.log("Inside actual function");
-	                console.log(res);
-	                if (res.stat == "ok") {
-	                    PlatformBridge.downloadStkPack(stickerJSON);
-	                    utils.showToast('You can view your sticker in the sticker palette. Start Sharing');
-
-	                    var dataToSend = {};
-	                    dataToSend.rewardId = rId;
-
-	                    App.NinjaService.getRewardDetails(dataToSend, function(res) {
-	                        console.log(res.data);
-	                        App.router.navigateTo(rRouter, { "rewardDetails": res.data, "rewardId": rId, "rewardRouter": rRouter });
-	                    }, this);
-	                } else {
-	                    utils.showToast("Sticker pack cannot be downloaded right now, please try again after some time!");
-	                }
-	                // App.router.navigateTo('/');
-	            }, this);
-
-	        });
-
-
-	    };
-
-	    StickerPackViewController.prototype.assignStickerPreviewImages = function(headerSticker, stickerList, rows, catId) {
-
-
-	        var stickerPreviewUrl = appConfig.API_URL + '/stickerpack/';
-
-	        // Header Sticker
-	        headerSticker.style.backgroundImage = 'url(\'' + stickerPreviewUrl + catId + '/preview' + '\')';
-
-	        for (var i = 0; i < rows.length; i++) {
-	            var icon = rows[i].getElementsByClassName('stickerIcon')[0];
-	            icon.style.backgroundImage = "url('" + appConfig.STICKER_PREFIX + "catId=" + catId + "&stId=" + stickerList[i] + appConfig.STICKER_SUFFIX + "')";
-	        }
-	    };
-
-	    StickerPackViewController.prototype.render = function(ctr, App, data) {
-
-	        console.log(data);
-
-	        var that = this;
-	        that.el = document.createElement('div');
-	        that.el.className = 'StickerPackViewController animation_fadein noselect';
-	        that.el.innerHTML = Mustache.render(that.template, {
-	            stickers: data.stickerDetails.act_stickers,
-	            rewardId: data.rewardId
-	        });
-
-	        var rId = data.rewardId;
-	        var rRouter = data.rewardRouter;
-	        data = data.stickerDetails;
-
-	        ctr.appendChild(that.el);
-	        events.publish('update.loader', { show: false });
-	        that.bind(App, data,rId, rRouter);
-	    };
-
-	    StickerPackViewController.prototype.destroy = function() {
-
-	    };
-
-	    module.exports = StickerPackViewController;
-
-	})(window, platformSdk, platformSdk.events);
-
-
-/***/ },
-/* 37 */
-/***/ function(module, exports) {
-
-	module.exports = "<div id=\"animate-area\" class=\"topIllustration animate-area\"></div>\n<div class=\"bottomIllustration\"></div>\n<div class=\"stickerPreviewWrapper\">\n\t<div class=\"selectedSticker\"></div>\n\t<div class=\"allStickerWrapper\">\n\t\t<ul class=\"stickerList\">\n\t\t\t{{#stickers}}\n\t\t\t\t<li class=\"stickerRow\">\n\t\t\t\t\t<div class=\"stickerIcon\"></div>\n\t\t\t\t</li>\n\t\t\t{{/stickers}}\n\t\t</ul>\n\t</div>\n</div>\n\n<div data-rewardId = \"{{rewardId}}\" class=\"downloadStickerPackButton\">Get Sticker Pack</div>"
-
-/***/ },
-/* 38 */
-/***/ function(module, exports, __webpack_require__) {
-
-	(function(W, platformSdk, events) {
-	    'use strict';
-
-	    var utils = __webpack_require__(4),
-	        Constants = __webpack_require__(5),
-
-	        CoolDownController = function(options) {
-	            //this.template = require( 'raw!../../templates/coolDown.html' );
-	        };
-
-	    CoolDownController.prototype.bind = function(App, data) {
-
-	        var ftue = this;
-	    };
-
-	    CoolDownController.prototype.render = function(ctr, App, data) {
-
-	        var that = this;
-	        that.el = document.createElement('div');
-	        that.el.className = 'ftueController animation_fadein noselect';
-	        that.el.innerHTML = Mustache.render(unescape(that.template));
-	        ctr.appendChild(that.el);
-	        events.publish('update.loader', { show: false });
-	        that.bind(App, data);
-	    };
-
-	    CoolDownController.prototype.destroy = function() {
-
-	    };
-
-	    module.exports = CoolDownController;
-
-	})(window, platformSdk, platformSdk.events);
-
-/***/ },
-/* 39 */
-/***/ function(module, exports, __webpack_require__) {
-
-	(function(W, platformSdk, events) {
-	    'use strict';
-
-	    var utils = __webpack_require__(4),
-	        Constants = __webpack_require__(5),
-
-	        StateController = function(options) {
-	            this.template = __webpack_require__(40);
-	        };
-
-	    StateController.prototype.bind = function(App, data) {
-
-	        var cta = document.getElementsByClassName('stateCta')[0];
-
-	        cta.addEventListener('click', function(event) {
-	            platformSdk.bridge.openFullPage(cta.getAttribute('data-title'), cta.getAttribute('data-link'));
-	        });
-
-
-	    };
-
-	    StateController.prototype.render = function(ctr, App, data) {
-
-	        var that = this;
-	        that.el = document.createElement('div');
-	        that.el.className = 'ftueController animation_fadein noselect';
-	        that.el.innerHTML = Mustache.render(unescape(that.template), { stateData: data });
-	        ctr.appendChild(that.el);
-	        events.publish('update.loader', { show: false });
-	        that.bind(App, data);
-	    };
-
-	    StateController.prototype.destroy = function() {
-
-	    };
-
-	    module.exports = StateController;
-
-	})(window, platformSdk, platformSdk.events);
-
-/***/ },
-/* 40 */
-/***/ function(module, exports) {
-
-	module.exports = "<div class=\"stateContainer\">\n    <div class=\"stateIcon\" style=\"background-image:url({{stateData.url}});\"> </div>\n    <div class=\"stateTitle align-center\"> {{stateData.title}}</div>\n    <div class=\"stateProgress align-center hide\" data-per=\"{{stateData.per}}\">Progress -> {{stateData.per}} </div>\n    <div class=\"stateSubtitle align-center\"> {{stateData.subtitle}}</div>\n    <div class=\"stateCta align-center\" data-link=\"{{stateData.cta.link}}\" data-title=\"{{stateData.cta.title}}\"> {{stateData.cta.text}}</div>\n</div>"
-
-/***/ },
-/* 41 */
-/***/ function(module, exports, __webpack_require__) {
-
-	(function(W, platformSdk, events) {
-	    'use strict';
-
-	    var utils = __webpack_require__(4),
-	        Constants = __webpack_require__(5),
-	        cacheProvider = __webpack_require__(10),
-	        profileModel = __webpack_require__(9),
-	        activityModel = __webpack_require__(15),
-	        
-	        
-
-	        SubscriptionController = function(options) {
-	            this.template = __webpack_require__(42);
-	        };
-
-	    SubscriptionController.prototype.bind = function(App, data) {
-
-
-	        var that = this,
-	            subscribe = document.getElementsByClassName('subscribeBtn')[0],
-	            unsubscribe = document.getElementsByClassName('unsubscribeBtn')[0],
-	            callInprogress = false,
-	            ftueCompleted = cacheProvider.getFromCritical('ftueCompleted');
-
-
-	        subscribe.addEventListener('click', function(event) {
-
-	            if (callInprogress)
-	                return;
-	            else
-	                callInprogress = false;
-
-	            App.NinjaService.subscribeHandler({}, function(res) {
-
-	                if (res.stat === 'ok') {
-
-	                    cacheProvider.setInCritical('subscriptionCompleted', true);
-	                    if (ftueCompleted) {
-	                        console.log("This is and old user :: Fetching Profile battery and streak for the user");
-
-	                        // Check If Block True Or False
-	                        if (platformSdk.appData.block === 'true') {
-
-	                            console.log('User has blocked the Application');
-	                            events.publish('app/block', {
-	                                show: true
-	                            });
-	                        }
-
-	                        App.NinjaService.getNinjaProfile(function(res) {
-	                            console.log(res.data);
-
-	                            if (utils.upgradeRequired(res.data.hike_version, platformSdk.appData.appVersion)) {
-
-	                                App.router.navigateTo('/upgrade');
-
-	                            } else if (res.data.status == 'inactive' || res.data.status == 'locked') {
-
-	                                App.router.navigateTo('/userState', res.data);
-	                                console.log("User state  is " + res.data.status);
-
-	                            } else {
-
-	                                // Get Everything From the cache :: Activity data :: Mystery Box Data :: Rewards Data
-	                                App.router.navigateTo('/');
-	                                profileModel.updateNinjaData(res.data, App);
-	                                activityModel.fetchNinjaActivity('lifetime');
-	                                //mysteryBoxModel.getMysteryBoxDetails(self);
-	                            }
-	                        }, that);
-	                    }
-	                    // Show FTUE To the User
-	                    else {
-	                        // STUB TO REMOVE
-
-	                        var data = {};
-
-	                        this.ninjaRewardsData = { 'rewards': [], 'rewards_hash': '' };
-	                        this.ninjaProfileData = { "battery": 0, "rewards_hash": "", "status": "active", "streak": 0, "name": '' };
-	                        this.ninjaActivityData = { "chatThemes": { "rec": 0, "sent": 0 }, "files": { "rec": 0, "sent": 0 }, "messages": { "rec": 0, "sent": 0 }, "statusUpdates": { "count": 0 }, "stickers": { "rec": 0, "sent": 0 } };
-
-	                        // STUB TO REMOVE
-
-	                        data.ninjaRewardsCollection = this.ninjaRewardsData;
-	                        data.ninjaProfileData = this.ninjaProfileData;
-	                        data.ninjaActivityData = this.ninjaActivityData;
-
-	                        App.NinjaService.getNinjaProfile(function(res) {
-	                            console.log(res.data);
-
-	                            if (utils.upgradeRequired(res.data.hike_version, platformSdk.appData.appVersion)) {
-	                                cacheProvider.setInCritical('ftueCompleted', true);
-	                                App.router.navigateTo('/upgrade');
-	                            }
-	                            else if (res.data.status == 'locked' || res.data.status == 'locked') {
-	                                cacheProvider.setInCritical('ftueCompleted', false);
-	                                App.router.navigateTo('/userState', res.data);
-	                                console.log("User state  is " + res.data.status);
-
-	                            } else {
-	                                // Get Everything From the cache :: Activity data :: Mystery Box Data :: Rewards Data
-	                                cacheProvider.setInCritical('ftueCompleted', true);
-	                                App.router.navigateTo('/', data);
-	                                profileModel.updateNinjaData(res.data, App);
-	                                activityModel.fetchNinjaActivity('lifetime');
-	                                //mysteryBoxModel.getMysteryBoxDetails(that);
-	                            }
-	                        }, App);
-	                    }
-
-	                } else
-	                    utils.showToast('Something went wrong while subscribing');
-
-
-	            }, that);
-
-	        });
-
-	        unsubscribe.addEventListener('click', function(event) {
-
-	            if (callInprogress)
-	                return;
-	            else
-	                callInprogress = false;
-
-	            App.NinjaService.unsubscribeHandler({}, function(res) {
-
-	                if (res.stat === 'ok')
-	                    PlatformBridge.closeWebView();
-	                else
-	                    utils.showToast('Something went wrong while unsubscribing');
-
-	            }, that);
-
-	        });
-
-	    };
-
-	    SubscriptionController.prototype.render = function(ctr, App, data) {
-
-	        var that = this;
-	        that.el = document.createElement('div');
-	        that.el.className = 'ftueController animation_fadein noselect';
-	        that.el.innerHTML = Mustache.render(unescape(that.template));
-	        ctr.appendChild(that.el);
-	        events.publish('update.loader', { show: false });
-	        that.bind(App, data);
-	    };
-
-	    SubscriptionController.prototype.destroy = function() {
-
-	    };
-
-	    module.exports = SubscriptionController;
-
-	})(window, platformSdk, platformSdk.events);
-
-/***/ },
-/* 42 */
-/***/ function(module, exports) {
-
-	module.exports = "<div class=\"stateContainer\">\n    <div class=\"stateIcon\" style=\"background-image:url(https://s16.postimg.org/re8de8j11/Bitmap.png )\"> </div>\n    <div class=\"stateTitle align-center\"> Congrats</div>\n    <div class=\"stateSubtitle align-center\"> You're one of our top users. You're chosen as a Hike Ninja</div>\n    <div class=\"stateCta align-center subscribeBtn\" style=\"padding-bottom:22px;font-size:22px\"> I'm Excited</div>\n    <div class=\"stateCta align-center unsubscribeBtn\" style='font-size:14px'> No, close this shit</div>\n</div>"
-
-/***/ },
-/* 43 */
-/***/ function(module, exports, __webpack_require__) {
-
-	(function(W, platformSdk, events) {
-	    'use strict';
-
-	    var utils = __webpack_require__(4),
-	        Constants = __webpack_require__(5),
-	        cacheProvider = __webpack_require__(10),
-
-	        UpgradeController = function(options) {
-	            this.template = __webpack_require__(44);
-	        };
-
-	    UpgradeController.prototype.bind = function(App, data) {
-
-	        var upgradeBtn = document.getElementsByClassName('upgradeBtn')[0];
-
-	        upgradeBtn.addEventListener('click', function(event) {
-	            
-	            var jsonobj = {
-	                'screen': 'openappstore',
-	                'url': 'com.bsb.hike'
-	            };
-	            PlatformBridge.openActivity(JSON.stringify(jsonobj));
-	        });
-
-	    };
-
-	    UpgradeController.prototype.render = function(ctr, App, data) {
-
-	        var that = this;
-	        that.el = document.createElement('div');
-	        that.el.className = 'ftueController animation_fadein noselect';
-	        that.el.innerHTML = Mustache.render(unescape(that.template));
-	        ctr.appendChild(that.el);
-	        events.publish('update.loader', { show: false });
-	        that.bind(App, data);
-	    };
-
-	    UpgradeController.prototype.destroy = function() {
-
-	    };
-
-	    module.exports = UpgradeController;
-
-	})(window, platformSdk, platformSdk.events);
-
-
-/***/ },
-/* 44 */
-/***/ function(module, exports) {
-
-	module.exports = "<div class=\"stateContainer\">\n    <div class=\"stateIcon\" style=\"background-image:url(https://s16.postimg.org/re8de8j11/Bitmap.png)\"> </div>\n    <div class=\"stateTitle align-center\"> Opps</div>\n    <div class=\"stateSubtitle align-center\"> You're have to upgrade app to unlock some super cool features. </div>\n    <div class=\"stateCta align-center upgradeBtn\" style='font-size:24px'> Upgrade</div>\n</div>"
-
-/***/ },
-/* 45 */
-/***/ function(module, exports, __webpack_require__) {
-
-	(function (W, events) {
-	    'use strict';
-
-	   var cacheProvider = __webpack_require__(10);
-	   
-	    var Router = function () {
-	        this.routes = {};
-	        this.history = [];
-	        this.prevData = null;
-
-	        this.getCache();
-	    };
-
-	    var _routerCache = {};
-
-	    var unload = function () {
-	        // ToDo: Redundant code
-	        events.publish('app.store.set', {
-	            key: '_routerCache',
-	            value: _routerCache
-	        });
-	    };
-
-	    // window.onbeforeunload = unload;
-
-	    Router.prototype.getCache = function () {
-	        events.publish('app.store.get', {
-	            key: '_routerCache',
-	            ctx: this,
-	            cb: function (r) {
-	                if (r.status === 1) {
-	                    this.history = r.results.history || [];
-	                }
-	            }
-	        });
-	    };
-
-	    Router.prototype.route = function (route, callback) {
-	        this.routes[route] = callback;
-	    };
-
-	    Router.prototype.navigateTo = function (route, data) {
-
-	        var historyTop = this.history[this.history.length - 1];
-
-	        if (historyTop && historyTop.route === route) {
-	            if (data.subPath !== undefined && (data.subPath === historyTop.data.subPath)) {
-	                return;
-	            } else {
-	                // Navigate to sub path. Don't push into History. Replace top item with this one.
-	                this.history[this.history.length - 1] = {
-	                    route: route,
-	                    data: data
-	                };
-	            }
-	        } else {
-	            this.history.push({
-	                route: route,
-	                data: data
-	            });
-	        }
-
-	        this.routes[route](data);
-
-	        _routerCache['route'] = route;
-	        _routerCache['cache'] = data;
-	        _routerCache['history'] = this.history;
-
-	        unload();
-
-	    };
-
-	    Router.prototype.back = function () {
-	        var history = this.history,
-	            historyItem;
-
-	        if (history.length !== 1) {
-	            history.pop();
-	        }
-
-	        historyItem = history[history.length - 1];
-
-	        if(historyItem.route == '/' && !historyItem.data ){
-	            historyItem.data = {
-	                ninjaRewardsCollection: cacheProvider.getFromCritical('ninjaRewards'),
-	                ninjaActivityData: cacheProvider.getFromCritical('ninjaStats'),
-	                ninjaProfileData: cacheProvider.getFromCritical('ninjaProfileData')
-	            };
-	        }
-
-	        this.routes[historyItem.route](historyItem.data);
-	    };
-
-	    module.exports = Router;
-	})(window, platformSdk.events);
-
-/***/ },
-/* 46 */
 /***/ function(module, exports, __webpack_require__) {
 
 	(function() {

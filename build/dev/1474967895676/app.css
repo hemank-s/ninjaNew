@@ -1,0 +1,691 @@
+/* ALL MIXIN WITH EXAMPLES */
+/* Media Query Mixin In With Example */
+/* Example
+
+
+.sidebar {
+  width: 60%;
+  float: left;
+  margin: 0 2% 0 0;
+  @include bp-small {
+    width: 100%;
+    float: none;
+    margin: 0;
+  }
+}
+
+*/
+/*
+
+ANIMATION MIXIN
+
+@include keyframes(slide-down) {
+  0% { opacity: 1; }
+  90% { opacity: 0; }
+}
+
+.element {
+  width: 100px;
+  height: 100px;
+  background: black;
+  @include animation('slide-down 5s 3');
+}
+
+*/
+/*
+
+TRANSITION MIXIN
+
+    a {
+  color: gray;
+  @include transition(color .3s ease);
+  &:hover {
+    color: black;
+  }
+}
+
+*/
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline; }
+
+/* HTML5 display-role reset for older browsers */
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+  display: block; }
+
+body {
+  line-height: 1; }
+
+ol,
+ul {
+  list-style: none; }
+
+blockquote,
+q {
+  quotes: none; }
+
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+  content: '';
+  content: none; }
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0; }
+
+input,
+textarea,
+select {
+  font-family: inherit; }
+
+body {
+  font-family: 'Roboto', sans-serif;
+  margin: 0;
+  padding: 0;
+  font-size: 14px; }
+
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 200;
+  src: url("file:///android_asset/fonts/Roboto-Thin.ttf") format("truetype"); }
+
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 300;
+  src: url("file:///android_asset/fonts/Roboto-Light.ttf") format("truetype"); }
+
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  src: url("file:///android_asset/fonts/Roboto-Regular.ttf") format("truetype"); }
+
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 500;
+  src: url("file:///android_asset/fonts/Roboto-Medium.ttf") format("truetype"); }
+
+/* All Generic Microapp Related CSS Here */
+#header {
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  height: 0px;
+  background-color: #444;
+  color: white; }
+
+#container {
+  position: fixed;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
+  top: 0px; }
+
+.inlineBlock {
+  display: inline-block; }
+
+.floatL {
+  float: left; }
+
+.floatR {
+  float: right; }
+
+a:link {
+  text-decoration: none;
+  cursor: auto; }
+
+a:visited {
+  text-decoration: none;
+  cursor: auto; }
+
+*:focus {
+  outline: none; }
+
+.clearfix:after {
+  visibility: hidden;
+  display: block;
+  font-size: 0;
+  content: " ";
+  clear: both;
+  height: 0; }
+
+.clearfix {
+  display: inline-block; }
+
+.clearfix {
+  height: 1%; }
+
+.clearfix {
+  display: block; }
+
+.align-center {
+  text-align: center; }
+
+.align-left {
+  text-align: left; }
+
+.align-right {
+  text-align: left; }
+
+.hide {
+  display: none !important; }
+
+/* Center Align a Absolute Element */
+.centerAlignAbsolute {
+  left: 0px;
+  right: 0px;
+  text-align: center;
+  margin: 0px auto; }
+
+.backgroundImageGeneric {
+  -webkit-background-size: contain;
+  -o-background-size: contain;
+  background-size: contain;
+  background-repeat: no-repeat; }
+
+.centerToScreenContainer {
+  display: table-cell;
+  vertical-align: middle;
+  width: 100%;
+  height: 100%;
+  position: fixed; }
+
+.centerToScreenWrapper {
+  position: absolute;
+  width: 100%;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%); }
+
+.centerToParent {
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%); }
+
+.centerVertical {
+  position: relative;
+  top: 35%;
+  transform: translateY(-35%); }
+
+.tapStateWhite {
+  background: #FFF !important;
+  color: #1da8e8 !important;
+  -webkit-border-radius: 4px;
+  border-radius: 4px; }
+
+.noselect {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none; }
+
+.multiLineEllipsis {
+  word-break: break-all;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box; }
+
+.ellipsis {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden; }
+
+/* Misc Loaders and Elements */
+#loader {
+  background-color: #fff;
+  display: none;
+  height: 100%;
+  overflow: hidden;
+  z-index: 100;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0; }
+
+#loader.loading {
+  display: block; }
+
+.spinner-ctr {
+  margin-top: -12.5px;
+  position: relative;
+  text-align: center;
+  top: 50%; }
+
+.spinner {
+  height: 25px;
+  width: 25px;
+  -webkit-animation: rotator 1.4s linear infinite;
+  animation: rotator 1.4s linear infinite; }
+
+@-webkit-keyframes rotator {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg); }
+  100% {
+    -webkit-transform: rotate(270deg);
+    transform: rotate(270deg); } }
+
+@keyframes rotator {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg); }
+  100% {
+    -webkit-transform: rotate(270deg);
+    transform: rotate(270deg); } }
+
+.path {
+  stroke-dasharray: 187;
+  stroke-dashoffset: 0;
+  -webkit-transform-origin: center;
+  -ms-transform-origin: center;
+  transform-origin: center;
+  -webkit-animation: dash 1.4s ease-in-out infinite, colors 5.6s ease-in-out infinite;
+  animation: dash 1.4s ease-in-out infinite, colors 5.6s ease-in-out infinite; }
+
+@-webkit-keyframes colors {
+  0% {
+    stroke: #4285F4; }
+  25% {
+    stroke: #DE3E35; }
+  50% {
+    stroke: #F7C223; }
+  75% {
+    stroke: #1B9A59; }
+  100% {
+    stroke: #4285F4; } }
+
+@keyframes colors {
+  0% {
+    stroke: #4285F4; }
+  25% {
+    stroke: #DE3E35; }
+  50% {
+    stroke: #F7C223; }
+  75% {
+    stroke: #1B9A59; }
+  100% {
+    stroke: #4285F4; } }
+
+@-webkit-keyframes dash {
+  0% {
+    stroke-dashoffset: 187; }
+  50% {
+    stroke-dashoffset: 46.75;
+    -webkit-transform: rotate(135deg);
+    transform: rotate(135deg); }
+  100% {
+    stroke-dashoffset: 187;
+    -webkit-transform: rotate(450deg);
+    transform: rotate(450deg); } }
+
+@keyframes dash {
+  0% {
+    stroke-dashoffset: 187; }
+  50% {
+    stroke-dashoffset: 46.75;
+    -webkit-transform: rotate(135deg);
+    transform: rotate(135deg); }
+  100% {
+    stroke-dashoffset: 187;
+    -webkit-transform: rotate(450deg);
+    transform: rotate(450deg); } }
+
+/* All animation Css here */
+.play {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  width: 26px;
+  height: 26px; }
+
+.play img {
+  width: 15px;
+  animation: spin 1s linear 0s infinite reverse;
+  -moz-animation: 1s linear 0s reverse none infinite spin;
+  -webkit-animation: spin 1s linear 0s infinite reverse;
+  -o-animation: spin 1s linear 0s infinite reverse;
+  -webkit-animation-play-state: running;
+  -o-animation-play-state: running;
+  -moz-animation-play-state: running;
+  animation-play-state: running; }
+
+.play img {
+  width: 26px;
+  animation: spin 1s linear 0s infinite reverse;
+  -moz-animation: 1s linear 0s reverse none infinite spin;
+  -webkit-animation: spin 1s linear 0s infinite reverse;
+  -o-animation: spin 1s linear 0s infinite reverse;
+  -webkit-animation-play-state: running;
+  -o-animation-play-state: running;
+  -moz-animation-play-state: running;
+  animation-play-state: running; }
+
+@-webkit-keyframes rotating {
+  from {
+    -webkit-transform: rotate(0deg); }
+  to {
+    -webkit-transform: rotate(360deg); } }
+
+.play img {
+  -webkit-animation: rotating 1s linear infinite; }
+
+.animation_scale_1 {
+  -ms-transform: scale(1) !important;
+  -webkit-transform: scale(1) !important;
+  transform: scale(1) !important; }
+
+.animation_fadein {
+  -webkit-animation: fadein 1s;
+  /* Safari, Chrome and Opera > 12.1 */
+  -moz-animation: fadein 1s;
+  /* Firefox < 16 */
+  -ms-animation: fadein 1s;
+  /* Internet Explorer */
+  -o-animation: fadein 1s;
+  /* Opera < 12.1 */
+  animation: fadein 1s; }
+
+@keyframes fadein {
+  from {
+    opacity: 0; }
+  to {
+    opacity: 1; } }
+
+/* Firefox < 16 */
+@-moz-keyframes fadein {
+  from {
+    opacity: 0; }
+  to {
+    opacity: 1; } }
+
+/* Safari, Chrome and Opera > 12.1 */
+@-webkit-keyframes fadein {
+  from {
+    opacity: 0; }
+  to {
+    opacity: 1; } }
+
+/* Internet Explorer */
+@-ms-keyframes fadein {
+  from {
+    opacity: 0; }
+  to {
+    opacity: 1; } }
+
+/* Opera < 12.1 */
+@-o-keyframes fadein {
+  from {
+    opacity: 0; }
+  to {
+    opacity: 1; } }
+
+.animation_fadeout {
+  -webkit-animation: fadeout 1s;
+  /* Safari, Chrome and Opera > 12.1 */
+  -moz-animation: fadeout 1s;
+  /* Firefox < 16 */
+  -ms-animation: fadeout 1s;
+  /* Internet Explorer */
+  -o-animation: fadeout 1s;
+  /* Opera < 12.1 */
+  animation: fadeout 1s; }
+
+@keyframes fadeout {
+  from {
+    opacity: 1; }
+  to {
+    opacity: 0; } }
+
+/* Firefox < 16 */
+@-moz-keyframes fadeout {
+  from {
+    opacity: 1; }
+  to {
+    opacity: 0; } }
+
+/* Safari, Chrome and Opera > 12.1 */
+@-webkit-keyframes fadeout {
+  from {
+    opacity: 1; }
+  to {
+    opacity: 0; } }
+
+/* Internet Explorer */
+@-ms-keyframes fadeout {
+  from {
+    opacity: 1; }
+  to {
+    opacity: 0; } }
+
+/* Opera < 12.1 */
+@-o-keyframes fadeout {
+  from {
+    opacity: 1; }
+  to {
+    opacity: 0; } }
+
+/* No Internet and Block Screen */
+#nointernet {
+  background-color: #242739;
+  width: 100%;
+  height: 100%;
+  color: white;
+  font-weight: 300;
+  display: none;
+  left: 0;
+  right: 0;
+  position: fixed;
+  text-align: center;
+  z-index: 101; }
+
+.exploreContainer {
+  width: 90%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%); }
+
+.exploreMatchBtn {
+  background: none;
+  border: 1px solid #fff;
+  border-radius: 4px;
+  color: #fff;
+  width: 120px;
+  padding: 15px;
+  text-transform: uppercase;
+  margin: 0px auto; }
+
+.exploreText .heading {
+  color: #FA5643;
+  font-size: 20px;
+  line-height: 24px;
+  font-weight: 400; }
+
+.exploreText .subheading {
+  color: #808080;
+  font-size: 14px;
+  line-height: 24px;
+  font-weight: 400;
+  padding-top: 3px; }
+
+.exploreText {
+  margin: 40px 20px; }
+
+.no-internet-msg .bellIcon {
+  background: url(images/nointernet.png);
+  background-size: contain;
+  background-repeat: no-repeat;
+  width: 100px;
+  height: 78px;
+  margin: 0px auto; }
+
+#nointernet.no-internet-msg {
+  display: table-cell;
+  vertical-align: middle; }
+
+.noInternetWrapper h3 {
+  color: #FA5643;
+  font-size: 21px;
+  font-weight: 400;
+  margin-top: 34px;
+  margin-bottom: 12px; }
+
+.noInternetWrapper p {
+  color: #999999;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 21px; }
+
+.noInternetWrapper,
+.blockScreenWrapper {
+  width: 90%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%); }
+
+.blockScreenWrapper h3 {
+  font-size: 24px;
+  font-weight: 500;
+  color: #fff;
+  margin-top: 32px;
+  margin-bottom: 16px; }
+
+.blockScreenWrapper p {
+  font-size: 16px;
+  font-weight: 400;
+  color: #fff;
+  line-height: 23px;
+  margin-bottom: 81px; }
+
+#blockScreen {
+  background-color: #242739;
+  width: 100%;
+  height: 100%;
+  display: none;
+  left: 0;
+  right: 0;
+  position: fixed;
+  text-align: center;
+  z-index: 101; }
+
+.block-msg .blockIcon {
+  background: url(images/block.png);
+  background-size: contain;
+  background-repeat: no-repeat;
+  width: 108px;
+  height: 108px;
+  margin: 0px auto; }
+
+#blockScreen.block-msg {
+  display: table-cell;
+  vertical-align: middle; }

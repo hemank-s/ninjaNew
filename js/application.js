@@ -1,17 +1,8 @@
 (function(W, events) {
     'use strict';
 
-    var WorkspaceController = require('./controllers/workspace'),
-        ExclusiveFeatureController = require('./controllers/ExclusiveFeatureController'),
-        StickerRewardController = require('./controllers/StickerRewardController'),
-        CustomerStickerController = require('./controllers/CustomerStickerController'),
-        CrowdSourcingController = require('./controllers/CrowdSourcingController'),
-        FaqDetailsController = require('./controllers/FaqDetailsController'),
-        StickerPackViewController = require('./controllers/StickerPackViewController'),
-        CoolDownController = require('./controllers/CoolDownController'),
-        StateController = require('./controllers/StateController'),
-        SubscriptionController = require('./controllers/SubscriptionController'),
-        UpgradeController = require('./controllers/UpgradeController'),
+    var WorkspaceController = require('./controllers/WorkspaceController'),
+        HomescreenController = require('./controllers/HomescreenController'),
 
 
         Router = require('./util/router'),
@@ -96,18 +87,10 @@
         this.router = new Router();
         // Profile Controller
         this.workspaceController = new WorkspaceController();
+        this.homescreenController = new HomescreenController();
 
-        //Rewards Controller
-        this.exclusiveFeatureController = new ExclusiveFeatureController();
-        this.stickerRewardController = new StickerRewardController();
-        this.customerStickerController = new CustomerStickerController();
-        this.crowdSourcingController = new CrowdSourcingController();
-        this.faqDetailsController = new FaqDetailsController();
-        this.stickerPackViewController = new StickerPackViewController();
-        this.coolDownController = new CoolDownController();
-        this.stateController = new StateController();
-        this.subscriptionController = new SubscriptionController();
-        this.upgradeController = new UpgradeController();
+
+
 
         // Communication Controller
         this.TxService = new TxService();
@@ -207,7 +190,7 @@
 
         checkAndDownloadBot: function(botname, invokeMode) {
 
-            console.log("checking bot",botname,invokeMode);
+            console.log("checking bot", botname, invokeMode);
 
             var that = this;
 
@@ -219,16 +202,15 @@
                     //app start
                     console.log(Constants);
                     if (invokeMode == Constants.INVOKE_MODE_APP_START) {
-                        if (response == "false"){
+                        if (response == "false") {
                             console.log("Downloading CS microapp for the first time");
                             that.downloadBot(botname.replace(/\+/g, ''));
                         }
                     } else if (invokeMode == Constants.INVOKE_MODE_THREE_DOT) {
-                        if (response == 'false'){
+                        if (response == 'false') {
                             console.log("Downloading again");
                             that.checkAndDownloadBot(botname, invokeMode);
-                        }
-                        else{
+                        } else {
                             console.log("cs microapp found");
                             that.openExistingBot(botname);
                         }
@@ -402,82 +384,20 @@
                 self.backPressTrigger();
             });
 
-            // Ninja Home Screen Router :: Three Tabs (Rewards/Activity/Mystery Box)
+
+
+            // Ninja ftue
             this.router.route('/', function(data) {
                 self.container.innerHTML = '';
                 self.workspaceController.render(self.container, self, data);
                 utils.toggleBackNavigation(false);
             });
 
-            // Exclusive Features :: Friend Emojis + GIF Sharing 
-            this.router.route('/exclusiveFeature', function(data) {
+
+            // Ninja Home screen
+            this.router.route('/home', function(data) {
                 self.container.innerHTML = '';
-                self.exclusiveFeatureController.render(self.container, self, data);
-                utils.toggleBackNavigation(true);
-            });
-
-            // Sticker Features :: Early Access + Exclusive Stickers + Animated Sticker Incorporate Here 
-            this.router.route('/stickerReward', function(data) {
-                self.container.innerHTML = '';
-                self.stickerRewardController.render(self.container, self, data);
-                utils.toggleBackNavigation(true);
-            });
-
-            this.router.route('/stickerPackView', function(data) {
-                self.container.innerHTML = '';
-                self.stickerPackViewController.render(self.container, self, data);
-                utils.toggleBackNavigation(true);
-            });
-
-
-
-            // Custom Sticker Controller 
-            this.router.route('/customSticker', function(data) {
-                self.container.innerHTML = '';
-                self.customerStickerController.render(self.container, self, data);
-                utils.toggleBackNavigation(true);
-            });
-
-            // Crowd Sourcing Reward Controller
-            this.router.route('/ugc', function(data) {
-                self.container.innerHTML = '';
-                self.crowdSourcingController.render(self.container, self, data);
-                utils.toggleBackNavigation(true);
-            });
-
-            // FAQ All Rewards Controller 
-            this.router.route('/rewardFaq', function(data) {
-                self.container.innerHTML = '';
-                self.faqDetailsController.render(self.container, self, data);
-                utils.toggleBackNavigation(true);
-            });
-
-            // FAQ All Rewards Controller 
-            this.router.route('/coolDown', function(data) {
-                self.container.innerHTML = '';
-                self.coolDownController.render(self.container, self, data);
-                utils.toggleBackNavigation(true);
-            });
-
-
-            // FAQ All Rewards Controller 
-            this.router.route('/userState', function(data) {
-                self.container.innerHTML = '';
-                self.stateController.render(self.container, self, data);
-                utils.toggleBackNavigation(false);
-            });
-
-            // FAQ All Rewards Controller 
-            this.router.route('/subscribe', function(data) {
-                self.container.innerHTML = '';
-                self.subscriptionController.render(self.container, self, data);
-                utils.toggleBackNavigation(false);
-            });
-
-            // FAQ All Rewards Controller 
-            this.router.route('/upgrade', function(data) {
-                self.container.innerHTML = '';
-                self.upgradeController.render(self.container, self, data);
+                self.homescreenController.render(self.container, self, data);
                 utils.toggleBackNavigation(false);
             });
 
@@ -486,84 +406,12 @@
             var subscriptionCompleted = cacheProvider.getFromCritical('subscriptionCompleted');
             var ftueCompleted = cacheProvider.getFromCritical('ftueCompleted');
 
-            // If user is already subscribed
             if (subscriptionCompleted) {
-                if (ftueCompleted) {
-                    console.log("This is and old user :: Fetching Profile battery and streak for the user");
+                self.router.navigateTo('/');
+            } else {
+                self.router.navigateTo('/home');
+            }
 
-                    // Check If Block True Or False
-                    if (platformSdk.appData.block === 'true') {
-
-                        console.log('User has blocked the Application');
-                        events.publish('app/block', {
-                            show: true
-                        });
-                    }
-
-                    this.NinjaService.getNinjaProfile(function(res) {
-                        console.log(res.data);
-
-                        //Check for older version
-                        if (utils.upgradeRequired(res.data.hike_version, platformSdk.appData.appVersion)) {
-
-                            self.router.navigateTo('/upgrade');
-
-                        } else if (res.data.status == 'inactive' || res.data.status == 'locked') {
-
-                            self.router.navigateTo('/userState', res.data);
-                            console.log("User state  is " + res.data.status);
-
-                        } else {
-
-                            // Get Everything From the cache :: Activity data :: Mystery Box Data :: Rewards Data
-                            self.router.navigateTo('/');
-                            profileModel.updateNinjaData(res.data, self);
-                            activityModel.fetchNinjaActivity('lifetime');
-                            //mysteryBoxModel.getMysteryBoxDetails(self);
-                        }
-                    }, this);
-                }
-                // Show FTUE To the User
-                else {
-                    // STUB TO REMOVE
-
-                    var data = {};
-
-                    this.ninjaRewardsData = { 'rewards': [], 'rewards_hash': '' };
-                    this.ninjaProfileData = { "battery": 0, "rewards_hash": "", "status": "active", "streak": 0, "name": '' };
-                    this.ninjaActivityData = { "chatThemes": { "rec": 0, "sent": 0 }, "files": { "rec": 0, "sent": 0 }, "messages": { "rec": 0, "sent": 0 }, "statusUpdates": { "count": 0 }, "stickers": { "rec": 0, "sent": 0 } };
-
-                    // STUB TO REMOVE
-
-                    data.ninjaRewardsCollection = this.ninjaRewardsData;
-                    data.ninjaProfileData = this.ninjaProfileData;
-                    data.ninjaActivityData = this.ninjaActivityData;
-
-                    this.NinjaService.getNinjaProfile(function(res) {
-                        console.log(res.data);
-
-                         if (utils.upgradeRequired(res.data.hike_version, platformSdk.appData.appVersion)) {
-                                cacheProvider.setInCritical('ftueCompleted', true);
-                                App.router.navigateTo('/upgrade');
-                        }
-                        else if (res.data.status == 'inactive' || res.data.status == 'locked') {
-                            cacheProvider.setInCritical('ftueCompleted', false);
-                            self.router.navigateTo('/userState', res.data);
-                            console.log("User state  is " + res.data.status);
-
-                        } else {
-                            // Get Everything From the cache :: Activity data :: Mystery Box Data :: Rewards Data
-                            cacheProvider.setInCritical('ftueCompleted', true);
-                            self.router.navigateTo('/', data);
-                            profileModel.updateNinjaData(res.data, self);
-                            activityModel.fetchNinjaActivity('lifetime');
-                            //mysteryBoxModel.getMysteryBoxDetails(self);
-                        }
-                    }, this);
-                }
-
-            } else
-                self.router.navigateTo('/subscribe');
 
 
 
