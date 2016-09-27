@@ -1,0 +1,44 @@
+.ftueScreen {
+    height: 100%;
+    .infoRow {
+        list-style: none;
+        margin-bottom: 30px;
+        padding-left: 20px;
+    }
+    .giftIcon {
+        background: url(images/giftIcon.png);
+    }
+    .statIcon {
+        background: url(images/statIcon.png);
+    }
+    .surpriseGiftIcon {
+        background: url(images/surpriseGiftIcon.png);
+    }
+    .moreIcon {
+        background: url(images/badgeIcon.png);
+    }
+    .infoIcon {
+        background-size: contain;
+        background-repeat: no-repeat;
+        width: 20px;
+        height: 20px;
+        display: inline-block;
+        background-position: center;
+        vertical-align: middle;
+    }
+    .infoDetails {
+        display: inline-block;
+        margin-left: 18px;
+        vertical-align: middle;
+    }
+    .infoHeading {
+        @include fontStyle(16px, 400, #3D475B, 21px);
+        padding-bottom: 3px;
+    }
+    .infoSubHeading {
+        @include fontStyle(12px, 400, rgba(61, 71, 91, 0.64), 16px);
+    }
+    .content {
+        margin-top: -20px !important;
+    }
+}

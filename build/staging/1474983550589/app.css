@@ -32,19 +32,6 @@ ANIMATION MIXIN
 }
 
 */
-/*
-
-TRANSITION MIXIN
-
-    a {
-  color: gray;
-  @include transition(color .3s ease);
-  &:hover {
-    color: black;
-  }
-}
-
-*/
 html,
 body,
 div,
@@ -689,3 +676,286 @@ a:visited {
 #blockScreen.block-msg {
   display: table-cell;
   vertical-align: middle; }
+
+.workspaceContainer {
+  background: #1D47F5;
+  background: -webkit-linear-gradient(left top, #1D47F5, #33FFE2);
+  background: -o-linear-gradient(bottom left, #1D47F5, #33FFE2);
+  background: -moz-linear-gradient(bottom left, #1D47F5, #33FFE2);
+  background: linear-gradient(to bottom left, #1D47F5, #33FFE2);
+  height: 100%;
+  width: 100%; }
+  .workspaceContainer .subscribeScreen {
+    height: 100%; }
+    .workspaceContainer .subscribeScreen .bottomSection {
+      margin-top: 100%;
+      -webkit-animation-delay: 0.4s;
+      -webkit-animation-duration: 0.7s;
+      -webkit-animation-name: slideFromBottom;
+      -webkit-animation-fill-mode: forwards;
+      /* this prevents the animation from restarting! */
+      -moz-animation-delay: 0.4s;
+      -moz-animation-duration: 0.7s;
+      -moz-animation-name: slideFromBottom;
+      -moz-animation-fill-mode: forwards;
+      /* this prevents the animation from restarting! */
+      -o-animation-delay: 0.4s;
+      -o-animation-duration: 0.7s;
+      -o-animation-name: slideFromBottom;
+      -o-animation-fill-mode: forwards;
+      /* this prevents the animation from restarting! */
+      animation-delay: 0.4s;
+      animation-duration: 0.7s;
+      animation-name: slideFromBottom;
+      animation-fill-mode: forwards;
+      /* this prevents the animation from restarting! */ }
+    .workspaceContainer .subscribeScreen .title {
+      opacity: 0;
+      -webkit-animation-delay: 0s;
+      -webkit-animation-duration: 1.7s;
+      -webkit-animation-name: fadein;
+      -webkit-animation-fill-mode: forwards;
+      /* this prevents the animation from restarting! */
+      -moz-animation-delay: 0s;
+      -moz-animation-duration: 1.7s;
+      -moz-animation-name: fadein;
+      -moz-animation-fill-mode: forwards;
+      /* this prevents the animation from restarting! */
+      -o-animation-delay: 0s;
+      -o-animation-duration: 1.7s;
+      -o-animation-name: fadein;
+      -o-animation-fill-mode: forwards;
+      /* this prevents the animation from restarting! */
+      animation-delay: 0s;
+      animation-duration: 1.7s;
+      animation-name: fadein;
+      animation-fill-mode: forwards;
+      /* this prevents the animation from restarting! */ }
+    .workspaceContainer .subscribeScreen .subtitle {
+      opacity: 0;
+      -webkit-animation-delay: 0s;
+      -webkit-animation-duration: 1.7s;
+      -webkit-animation-name: fadein;
+      -webkit-animation-fill-mode: forwards;
+      /* this prevents the animation from restarting! */
+      -moz-animation-delay: 0s;
+      -moz-animation-duration: 1.7s;
+      -moz-animation-name: fadein;
+      -moz-animation-fill-mode: forwards;
+      /* this prevents the animation from restarting! */
+      -o-animation-delay: 0s;
+      -o-animation-duration: 1.7s;
+      -o-animation-name: fadein;
+      -o-animation-fill-mode: forwards;
+      /* this prevents the animation from restarting! */
+      animation-delay: 0s;
+      animation-duration: 1.7s;
+      animation-name: fadein;
+      animation-fill-mode: forwards;
+      /* this prevents the animation from restarting! */ }
+  .workspaceContainer .crossIcon {
+    background-size: 16px 16px;
+    padding: 24px;
+    background-image: url(images/cross.png);
+    background-position: center;
+    float: right; }
+  .workspaceContainer .title {
+    padding-top: 80px;
+    font-size: 28px;
+    color: #FFFFFF;
+    line-height: 34px;
+    font-weight: 300;
+    text-align: center; }
+  .workspaceContainer .subtitle {
+    font-size: 16px;
+    color: rgba(255, 255, 255, 0.64);
+    line-height: 20px;
+    font-weight: 400;
+    text-align: center;
+    padding-top: 8px; }
+  .workspaceContainer .centreIcon {
+    height: 163px;
+    margin-top: 46px;
+    background-image: url(images/ninjaSubscribe.png);
+    background-size: 114px 163px;
+    background-position: center;
+    -webkit-animation-delay: 0s;
+    -webkit-animation-duration: 1.5s;
+    -webkit-animation-name: scaleZeroToOne;
+    -webkit-animation-fill-mode: forwards;
+    /* this prevents the animation from restarting! */
+    -moz-animation-delay: 0s;
+    -moz-animation-duration: 1.5s;
+    -moz-animation-name: scaleZeroToOne;
+    -moz-animation-fill-mode: forwards;
+    /* this prevents the animation from restarting! */
+    -o-animation-delay: 0s;
+    -o-animation-duration: 1.5s;
+    -o-animation-name: scaleZeroToOne;
+    -o-animation-fill-mode: forwards;
+    /* this prevents the animation from restarting! */
+    animation-delay: 0s;
+    animation-duration: 1.5s;
+    animation-name: scaleZeroToOne;
+    animation-fill-mode: forwards;
+    /* this prevents the animation from restarting! */ }
+  .workspaceContainer .info {
+    font-size: 14px;
+    color: rgba(61, 71, 91, 0.64);
+    line-height: 18px;
+    font-weight: 400;
+    text-align: center;
+    max-width: 80%;
+    margin-left: 10%; }
+  .workspaceContainer .cta {
+    font-size: 14px;
+    color: #17B197;
+    line-height: 20px;
+    font-weight: 500;
+    text-align: center;
+    margin-top: 48px;
+    /*transform: translate(-50%, -50%);
+        left: 50%;
+        position: absolute;
+        bottom: 45px;*/ }
+  .workspaceContainer .bottomSection {
+    height: 100%; }
+    .workspaceContainer .bottomSection .ninjaWave {
+      background-image: url(images/ninjaWave.png);
+      height: 136px;
+      margin-left: -2px;
+      background-size: 100% 100%;
+      background-position: bottom; }
+    .workspaceContainer .bottomSection .content {
+      background-color: #ffffff;
+      height: 100%;
+      margin-top: -2px; }
+
+@-webkit-keyframes slideFromBottom {
+  0% {
+    margin-top: 100%; }
+  100% {
+    margin-top: 0; } }
+
+@-moz-keyframes slideFromBottom {
+  0% {
+    margin-top: 100%; }
+  100% {
+    margin-top: 0; } }
+
+@-o-keyframes slideFromBottom {
+  0% {
+    margin-top: 100%; }
+  100% {
+    margin-top: 0; } }
+
+@keyframes slideFromBottom {
+  0% {
+    margin-top: 100%; }
+  100% {
+    margin-top: 0; } }
+
+@-webkit-keyframes scaleZeroToOne {
+  0% {
+    -ms-transform: scale(0);
+    -webkit-transform: scale(0);
+    transform: scale(0); }
+  100% {
+    -ms-transform: scale(1);
+    -webkit-transform: scale(1);
+    transform: scale(1); } }
+
+@-moz-keyframes scaleZeroToOne {
+  0% {
+    -ms-transform: scale(0);
+    -webkit-transform: scale(0);
+    transform: scale(0); }
+  100% {
+    -ms-transform: scale(1);
+    -webkit-transform: scale(1);
+    transform: scale(1); } }
+
+@-o-keyframes scaleZeroToOne {
+  0% {
+    -ms-transform: scale(0);
+    -webkit-transform: scale(0);
+    transform: scale(0); }
+  100% {
+    -ms-transform: scale(1);
+    -webkit-transform: scale(1);
+    transform: scale(1); } }
+
+@keyframes scaleZeroToOne {
+  0% {
+    -ms-transform: scale(0);
+    -webkit-transform: scale(0);
+    transform: scale(0); }
+  100% {
+    -ms-transform: scale(1);
+    -webkit-transform: scale(1);
+    transform: scale(1); } }
+
+.ftueScreen {
+  height: 100%; }
+  .ftueScreen .infoRow {
+    list-style: none;
+    margin-bottom: 30px;
+    padding-left: 20px; }
+  .ftueScreen .giftIcon {
+    background: url(images/giftIcon.png); }
+  .ftueScreen .statIcon {
+    background: url(images/statIcon.png); }
+  .ftueScreen .surpriseGiftIcon {
+    background: url(images/surpriseGiftIcon.png); }
+  .ftueScreen .moreIcon {
+    background: url(images/badgeIcon.png); }
+  .ftueScreen .infoIcon {
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 20px;
+    height: 20px;
+    display: inline-block;
+    background-position: center;
+    vertical-align: middle; }
+  .ftueScreen .infoDetails {
+    display: inline-block;
+    margin-left: 18px;
+    vertical-align: middle; }
+  .ftueScreen .infoHeading {
+    font-size: 16px;
+    color: #3D475B;
+    line-height: 21px;
+    font-weight: 400;
+    padding-bottom: 3px; }
+  .ftueScreen .infoSubHeading {
+    font-size: 12px;
+    color: rgba(61, 71, 91, 0.64);
+    line-height: 16px;
+    font-weight: 400; }
+  .ftueScreen .content {
+    margin-top: -20px !important; }
+
+/*   Screen Resolution - 120   */
+@media screen and (max-width: 320px) {
+  .infoDetails {
+    width: 200px; } }
+
+@media screen and (min-width: 321px) and (max-width: 340px) {
+  .infoDetails {
+    width: 220px; } }
+
+@media screen and (min-width: 341px) and (max-width: 360px) {
+  .infoDetails {
+    width: 240px; } }
+
+@media screen and (min-width: 361px) and (max-width: 380px) {
+  .infoDetails {
+    width: 260px; } }
+
+@media screen and (min-width: 381px) and (max-width: 400px) {
+  .infoDetails {
+    width: 280px; } }
+
+@media screen and (min-width: 401px) and (max-width: 420px) {
+  .infoDetails {
+    width: 300px; } }

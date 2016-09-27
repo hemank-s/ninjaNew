@@ -57,14 +57,11 @@ ANIMATION MIXIN
 
 */
 
-@mixin keyframes($animation-name) {
+@mixin keyframe($animation_name) {
     @-webkit-keyframes #{$animation-name} {
         @content;
     }
     @-moz-keyframes #{$animation-name} {
-        @content;
-    }
-    @-ms-keyframes #{$animation-name} {
         @content;
     }
     @-o-keyframes #{$animation-name} {
@@ -75,35 +72,27 @@ ANIMATION MIXIN
     }
 }
 
-@mixin animation($str) {
-    -webkit-animation: #{$str};
-    -moz-animation: #{$str};
-    -ms-animation: #{$str};
-    -o-animation: #{$str};
-    animation: #{$str};
-}
-
-
-/*
-
-TRANSITION MIXIN
-
-    a {
-  color: gray;
-  @include transition(color .3s ease);
-  &:hover {
-    color: black;
-  }
-}
-
-*/
-
-@mixin transition($args...) {
-    -webkit-transition: $args;
-    -moz-transition: $args;
-    -ms-transition: $args;
-    -o-transition: $args;
-    transition: $args;
+@mixin animation ($delay, $duration, $animation) {
+    -webkit-animation-delay: $delay;
+    -webkit-animation-duration: $duration;
+    -webkit-animation-name: $animation;
+    -webkit-animation-fill-mode: forwards;
+    /* this prevents the animation from restarting! */
+    -moz-animation-delay: $delay;
+    -moz-animation-duration: $duration;
+    -moz-animation-name: $animation;
+    -moz-animation-fill-mode: forwards;
+    /* this prevents the animation from restarting! */
+    -o-animation-delay: $delay;
+    -o-animation-duration: $duration;
+    -o-animation-name: $animation;
+    -o-animation-fill-mode: forwards;
+    /* this prevents the animation from restarting! */
+    animation-delay: $delay;
+    animation-duration: $duration;
+    animation-name: $animation;
+    animation-fill-mode: forwards;
+    /* this prevents the animation from restarting! */
 }
 
 @mixin fontStyle($fontSize, $fontWeight, $color, $lineHeight) {

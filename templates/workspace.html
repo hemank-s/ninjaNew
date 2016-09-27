@@ -1,170 +1,50 @@
-<!-- Ninja Container and Background -->
-<div class="ninjaHomeWrapper">
-    <div id="animate-area" class="topIllustration animate-area"></div>
-    <div class="bottomIllustration"></div>
-    <!-- Ninja Profile Home Page -->
-    <div class="ninjaProfileContainer align-center">
-        <!-- Ninja Profile -->
-        <div class="ninjaProfileWrapper">
-            <div class="ninjaPhotoContainer">
-                <div class="ninjaStreak">
-                    <div class="ninjaStreakIcon"></div>
-                    <div class="ninjaStreakValue">{{ninjaProfileData.streak}}</div>
-                </div>
-                <div id="ninjaIcon" class="ninjaProfileIcon"></div>
-                <div class="ninjaBattery">
-                    <div class="ninjaBatteryIcon"></div>
-                    <div class="ninjaBatteryValue">{{ninjaProfileData.battery}}</div>
-                </div>
-            </div>
-            <div class="ninjaName">{{ninjaProfileData.name}}</div>
+<div class="subscribeScreen">
+    <div class="crossIcon backgroundImageGeneric"> </div>
+    <div class="title"> Congratulations! </div>
+    <div class="subtitle"> You’re a Hike Ninja now </div>
+    <div class="centreIcon backgroundImageGeneric"> </div>
+    <div class="bottomSection">
+        <div class="ninjaWave backgroundImageGeneric"> </div>
+        <div class="content">
+            <div class="info"> You’ve been one of our top user. You have unlocked some really cool stuff which is exclusively for you.</div>
+            <div class="cta subscribeCta"> SHOW ME</div>
         </div>
     </div>
-    <div id="content" class="container">
-        <div class="view list-view">
-            <div class="commonDv">
-                <div class="containerTabs">
-                    <div class="comp__tabs clearfix">
-                        <a class="comp__tab" data-id="rewards">
-                            <div class="tabIconRewards"></div>REWARDS</a>
-                        <a class="comp__tab" data-id="activity">
-                            <div class="tabIconStats"></div>STATS</a>
-                        <a class="comp__tab " data-id="gifts">
-                            <div class="tabIconLuckyBox"></div>LUCKY BOX</a>
-                    </div>
-                    <div class="comp__data">
-                        <div id="sliderTabs" class="swipe">
-                            <div class="swipe-wrap">
-                                <div class="tab-data videos_data tab-rewards" data-id="rewards">
-                                    <div class="rewardsContainer">
-                                        {{#ninjaRewardsCollection}}
-                                        <li class="rewardRow" data-rewardId="{{id}}" data-state="{{state}}" data-rewardtype="{{type}}">
-                                            <div class="rewardIcon"></div>
-                                            <div class="rewardDetails">
-                                                <p class="rewardHeading    {{^state}}{{#lockedGreyout}}rewardHeadingLocked{{/lockedGreyout}}{{/state}}">{{title}}</p>
-                                                <p class="rewardSubheading {{^state}}{{#lockedGreyout}}rewardSubheadingLocked{{/lockedGreyout}}{{/state}}">{{stitle}}</p>
-                                            </div>
-                                            {{#streak}}
-                                            <div class="rewardStreakWrapper">
-                                                <div class="rewardStreakIcon"></div>
-                                                <div class="rewardStreakValue">{{streak}}</div>
-                                            </div>
-                                            {{/streak}}
-                                        </li>
-                                        {{/ninjaRewardsCollection}}
-                                    </div>
-                                </div>
-                                <div class="news_data tab-data tab-activity" data-id="activity">
-                                    <div class="activityContainer">
-                                        <!-- <div class="settingsWrapper clearfix">
-                                            <div class="statTimePeriod selectedTime">
-                                                <div class="optionOne selectedTime">Lifetime</div>
-                                            </div>
-                                            <div class="statTimePeriod twoSideMargin">
-                                                <div class="optionTwo ">Last month</div>
-                                            </div>
-                                            <div class="statTimePeriod">
-                                                <div class="optionThree">Last week</div>
-                                            </div>
-                                        </div>
-                                        <hr noshade class="seperator">
-                                        <div class="leaderboardWrapper">
-                                            <div class="leaderboardHeading">Top Ninjas</div>
-                                            <div class="topNinjas">
-                                         -->
-                                        <!-- Add the left right scrollable list here -->
-                                        <!-- <ul class="topList">
-                                                    <li class="listRow">
-                                                        <div class="userIcon"></div>
-                                                        <div class="userName">Hemank</div>
-                                                    </li>
-                                                    <li class="listRow">
-                                                        <div class="userIcon"></div>
-                                                        <div class="userName">Deepak</div>
-                                                    </li>
-                                                    <li class="listRow">
-                                                        <div class="userIcon"></div>
-                                                        <div class="userName">Pathik</div>
-                                                    </li>
-                                                    <li class="listRow">
-                                                        <div class="userIcon"></div>
-                                                        <div class="userName">Srikant</div>
-                                                    </li>
-                                                    <li class="listRow">
-                                                        <div class="userIcon"></div>
-                                                        <div class="userName">Patley</div>
-                                                    </li>
-                                                    <li class="listRow">
-                                                        <div class="userIcon"></div>
-                                                        <div class="userName">Jagpreet</div>
-                                                    </li>
-                                                    <li class="listRow">
-                                                        <div class="userIcon"></div>
-                                                        <div class="userName">Hemank</div>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                        <hr noshade class="seperator"> -->
-                                        <div class="statsWrapper">
-                                            {{#ninjaActivityData}}
-                                            <div class="statTypeContainer">
-                                                <div class="statHeading">Messaging</div>
-                                                <div class="statBoxWrapper statBoxFloatLeft">
-                                                    <div class="statValue messagesR">{{ninjaActivityData.messages.rec}}</div>
-                                                    <div class="statText">Messages Received</div>
-                                                </div>
-                                                <div class="statBoxWrapper statBoxFloatRight">
-                                                    <div class="statValue messagesS">{{ninjaActivityData.messages.sent}}</div>
-                                                    <div class="statText">Messages Sent</div>
-                                                </div>
-                                                <div class="statBoxWrapper statBoxFloatLeft">
-                                                    <div class="statValue stickersR">{{ninjaActivityData.stickers.rec}}</div>
-                                                    <div class="statText">Stickers Received</div>
-                                                </div>
-                                                <div class="statBoxWrapper statBoxFloatRight">
-                                                    <div class="statValue stickersS">{{ninjaActivityData.stickers.sent}}</div>
-                                                    <div class="statText">Stickers Sent</div>
-                                                </div>
-                                                <div class="statBoxWrapper statBoxFloatLeft">
-                                                    <div class="statValue chatThemesR">{{ninjaActivityData.chatThemes.rec}}</div>
-                                                    <div class="statText">Chat Themes Received</div>
-                                                </div>
-                                                <div class="statBoxWrapper statBoxFloatRight">
-                                                    <div class="statValue chatThemesS">{{ninjaActivityData.chatThemes.sent}}</div>
-                                                    <div class="statText">Chat Themes Sent</div>
-                                                </div>
-                                                <div class="statBoxWrapper statBoxFloatLeft">
-                                                    <div class="statValue filesR">{{ninjaActivityData.files.rec}}</div>
-                                                    <div class="statText">Files Received</div>
-                                                </div>
-                                                <div class="statBoxWrapper statBoxFloatRight">
-                                                    <div class="statValue filesS">{{ninjaActivityData.files.sent}}</div>
-                                                    <div class="statText">Files Sent</div>
-                                                </div>
-                                            </div>
-                                            <div class="statTypeContainer">
-                                                <div class="statHeading">Timeline</div>
-                                                <div class="statBoxWrapper statBoxFloatLeft">
-                                                    <div class="statValue statusUpdateCount">{{ninjaActivityData.statusUpdates.count}}</div>
-                                                    <div class="statText">Status Updates Posted</div>
-                                                </div>
-                                            </div>
-                                            {{/ninjaActivityData}}
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="fixtures_data tab-data tab-mysterybox" data-id="gifts">
-                                    <div class="mysteryBoxContainer">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+</div>
+<div class="ftueScreen hide">
+    <div class="title"> What do you get? </div>
+    <div class="bottomSection">
+        <div class="ninjaWave backgroundImageGeneric"> </div>
+        <div class="content">
+            <li class="infoRow">
+                <div class="infoIcon giftIcon"></div>
+                <div class="infoDetails">
+                    <p class="infoHeading">Cool Gifts</p>
+                    <p class="infoSubHeading">Get some really cool, exclusive content and features no one else has.</p>
                 </div>
-            </div>
-        </div>
-        <div class="view details-view">
+            </li>
+            <li class="infoRow">
+                <div class="infoIcon statIcon"></div>
+                <div class="infoDetails">
+                    <p class="infoHeading">Know your Hike Stats</p>
+                    <p class="infoSubHeading">Check out your daily Hike Stats and brag among your friends.</p>
+                </div>
+            </li>
+            <li class="infoRow">
+                <div class="infoIcon surpriseGiftIcon"></div>
+                <div class="infoDetails">
+                    <p class="infoHeading">Surprise Gifts</p>
+                    <p class="infoSubHeading">Win a surprise gift every day!</p>
+                </div>
+            </li>
+            <li class="infoRow">
+                <div class="infoIcon moreIcon"></div>
+                <div class="infoDetails">
+                    <p class="infoHeading">More</p>
+                    <p class="infoSubHeading">Get and exclusive Ninja badge which lets your profile stand out.</p>
+                </div>
+            </li>
+            <div class="cta ftueCta"> WOW! LET’S GO</div>
         </div>
     </div>
 </div>
