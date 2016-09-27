@@ -1,0 +1,16 @@
+{
+  "name": "hikeninja-frontend",
+  "version": "0.0.1",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "zepto.js": "~1.1.6",
+    "mustache.js": "~2.1.3"
+  }
+}

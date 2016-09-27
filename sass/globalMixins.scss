@@ -1,0 +1,122 @@
+/* ALL MIXIN WITH EXAMPLES */
+
+
+/* Media Query Mixin In With Example */
+
+
+/* Example
+
+
+.sidebar {
+  width: 60%;
+  float: left;
+  margin: 0 2% 0 0;
+  @include bp-small {
+    width: 100%;
+    float: none;
+    margin: 0;
+  }
+}
+
+*/
+
+@mixin bp-large {
+    @media only screen and (max-width: 60em) {
+        @content;
+    }
+}
+
+@mixin bp-medium {
+    @media only screen and (max-width: 40em) {
+        @content;
+    }
+}
+
+@mixin bp-small {
+    @media only screen and (max-width: 30em) {
+        @content;
+    }
+}
+
+
+/*
+
+ANIMATION MIXIN
+
+@include keyframes(slide-down) {
+  0% { opacity: 1; }
+  90% { opacity: 0; }
+}
+
+.element {
+  width: 100px;
+  height: 100px;
+  background: black;
+  @include animation('slide-down 5s 3');
+}
+
+*/
+
+@mixin keyframes($animation-name) {
+    @-webkit-keyframes #{$animation-name} {
+        @content;
+    }
+    @-moz-keyframes #{$animation-name} {
+        @content;
+    }
+    @-ms-keyframes #{$animation-name} {
+        @content;
+    }
+    @-o-keyframes #{$animation-name} {
+        @content;
+    }
+    @keyframes #{$animation-name} {
+        @content;
+    }
+}
+
+@mixin animation($str) {
+    -webkit-animation: #{$str};
+    -moz-animation: #{$str};
+    -ms-animation: #{$str};
+    -o-animation: #{$str};
+    animation: #{$str};
+}
+
+
+/*
+
+TRANSITION MIXIN
+
+    a {
+  color: gray;
+  @include transition(color .3s ease);
+  &:hover {
+    color: black;
+  }
+}
+
+*/
+
+@mixin transition($args...) {
+    -webkit-transition: $args;
+    -moz-transition: $args;
+    -ms-transition: $args;
+    -o-transition: $args;
+    transition: $args;
+}
+
+@mixin fontStyle($fontSize, $fontWeight, $color, $lineHeight) {
+    font-size: $fontSize;
+    color: $color;
+    line-height: $lineHeight;
+    font-weight: $fontWeight;
+}
+
+@mixin setGradient($stCol, $endCol) {
+    background: $stCol;
+    background: -webkit-linear-gradient(left top, $stCol, $endCol);
+    background: -o-linear-gradient(bottom right, $stCol, $endCol);
+    background: -moz-linear-gradient(bottom right, $stCol, $endCol);
+    background: linear-gradient(to bottom right, $stCol, $endCol);
+}

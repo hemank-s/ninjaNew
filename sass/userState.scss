@@ -1,0 +1,35 @@
+.stateContainer {
+    .stateIcon {
+        background: url('https://s16.postimg.org/re8de8j11/Bitmap.png');
+        background-size: contain;
+        background-repeat: no-repeat;
+        height: 280px;
+    }
+    .stateTitle {
+        @include fontStyle(24px,
+        300,
+        #3D475B,
+        32px);
+        margin-bottom: 20px;
+    }
+    .stateProgress {
+        margin-bottom: 24px;
+    }
+    .stateSubtitle {
+        @include fontStyle(14px,
+        400,
+        #3D475B,
+        19px);
+        opacity: 0.72;
+        margin-bottom: 42px;
+        max-width: 86%;
+        margin-left: 7%;
+    }
+    .stateCta {
+        @include fontStyle(12px,
+        300,
+        #3D475B,
+        16px);
+        opacity: 0.48;
+    }
+}

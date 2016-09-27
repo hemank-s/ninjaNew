@@ -1,0 +1,44 @@
+{{#ninjaActivityData}}
+<div class="statTypeContainer">
+    <div class="statHeading">Messaging</div>
+    <div class="statBoxWrapper statBoxFloatLeft">
+        <div class="statValue messagesR">{{ninjaActivityData.messages.rec}}</div>
+        <div class="statText">Messages Received</div>
+    </div>
+    <div class="statBoxWrapper statBoxFloatRight">
+        <div class="statValue messagesS">{{ninjaActivityData.messages.sent}}</div>
+        <div class="statText">Messages Sent</div>
+    </div>
+    <div class="statBoxWrapper statBoxFloatLeft">
+        <div class="statValue stickersR">{{ninjaActivityData.stickers.rec}}</div>
+        <div class="statText">Stickers Received</div>
+    </div>
+    <div class="statBoxWrapper statBoxFloatRight">
+        <div class="statValue stickersS">{{ninjaActivityData.stickers.sent}}</div>
+        <div class="statText">Stickers Sent</div>
+    </div>
+    <div class="statBoxWrapper statBoxFloatLeft">
+        <div class="statValue chatThemesR">{{ninjaActivityData.chatThemes.rec}}</div>
+        <div class="statText">Chat Themes Received</div>
+    </div>
+    <div class="statBoxWrapper statBoxFloatRight">
+        <div class="statValue chatThemesS">{{ninjaActivityData.chatThemes.sent}}</div>
+        <div class="statText">Chat Themes Sent</div>
+    </div>
+    <div class="statBoxWrapper statBoxFloatLeft">
+        <div class="statValue filesR">{{ninjaActivityData.files.rec}}</div>
+        <div class="statText">Files Received</div>
+    </div>
+    <div class="statBoxWrapper statBoxFloatRight">
+        <div class="statValue filesS">{{ninjaActivityData.files.sent}}</div>
+        <div class="statText">Files Sent</div>
+    </div>
+</div>
+<div class="statTypeContainer">
+    <div class="statHeading">Timeline</div>
+    <div class="statBoxWrapper statBoxFloatLeft">
+        <div class="statValue statusUpdateCount">{{ninjaActivityData.statusUpdates.count}}</div>
+        <div class="statText">Status Updates Posted</div>
+    </div>
+</div>
+{{/ninjaActivityData}}

@@ -1,0 +1,134 @@
+/* No Internet and Block Screen */
+
+#nointernet {
+    background-color: #242739;
+    width: 100%;
+    height: 100%;
+    color: white;
+    font-weight: 300;
+    display: none;
+    left: 0;
+    right: 0;
+    position: fixed;
+    text-align: center;
+    z-index: 101;
+}
+
+.exploreContainer {
+    width: 90%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+}
+
+.exploreMatchBtn {
+    background: none;
+    border: 1px solid #fff;
+    border-radius: 4px;
+    color: #fff;
+    width: 120px;
+    padding: 15px;
+    text-transform: uppercase;
+    margin: 0px auto;
+}
+
+.exploreText .heading {
+    color: #FA5643;
+    font-size: 20px;
+    line-height: 24px;
+    font-weight: 400;
+}
+
+.exploreText .subheading {
+    color: #808080;
+    font-size: 14px;
+    line-height: 24px;
+    font-weight: 400;
+    padding-top: 3px;
+}
+
+.exploreText {
+    margin: 40px 20px;
+}
+
+
+.no-internet-msg .bellIcon {
+    background: url(images/nointernet.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 100px;
+    height: 78px;
+    margin: 0px auto;
+}
+
+#nointernet.no-internet-msg {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.noInternetWrapper h3 {
+    color: #FA5643;
+    font-size: 21px;
+    font-weight: 400;
+    margin-top: 34px;
+    margin-bottom: 12px;
+}
+
+.noInternetWrapper p {
+    color: #999999;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 21px;
+}
+
+.noInternetWrapper,
+.blockScreenWrapper {
+    width: 90%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+}
+
+.blockScreenWrapper h3 {
+    font-size: 24px;
+    font-weight: 500;
+    color: #fff;
+    margin-top: 32px;
+    margin-bottom: 16px;
+}
+
+.blockScreenWrapper p {
+    font-size: 16px;
+    font-weight: 400;
+    color: #fff;
+    line-height: 23px;
+    margin-bottom: 81px;
+}
+
+#blockScreen {
+    background-color: #242739;
+    width: 100%;
+    height: 100%;
+    display: none;
+    left: 0;
+    right: 0;
+    position: fixed;
+    text-align: center;
+    z-index: 101;
+}
+
+.block-msg .blockIcon {
+    background: url(images/block.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 108px;
+    height: 108px;
+    margin: 0px auto;
+}
+
+#blockScreen.block-msg {
+    display: table-cell;
+    vertical-align: middle;
+}
