@@ -518,15 +518,15 @@ a:visited {
     opacity: 1; } }
 
 .animation_fadeout {
-  -webkit-animation: fadeout 1s;
+  -webkit-animation: fadeout 0.5s;
   /* Safari, Chrome and Opera > 12.1 */
-  -moz-animation: fadeout 1s;
+  -moz-animation: fadeout 0.5s;
   /* Firefox < 16 */
-  -ms-animation: fadeout 1s;
+  -ms-animation: fadeout 0.5s;
   /* Internet Explorer */
-  -o-animation: fadeout 1s;
+  -o-animation: fadeout 0.5s;
   /* Opera < 12.1 */
-  animation: fadeout 1s;
+  animation: fadeout 0.5s;
   -webkit-animation-fill-mode: forwards;
   animation-fill-mode: forwards; }
 
@@ -903,7 +903,7 @@ a:visited {
 
 .ftueScreen {
   height: 100%; }
-  .ftueScreen .title {
+  .ftueScreen .titleAnimFtueCls {
     -webkit-animation-delay: 0s;
     -webkit-animation-duration: 0.7s;
     -webkit-animation-name: titleAnimFtue;
@@ -926,23 +926,65 @@ a:visited {
     /* this prevents the animation from restarting! */ }
   .ftueScreen .slideFromBottomCls2 {
     -webkit-animation-delay: 0s;
-    -webkit-animation-duration: 0.7s;
+    -webkit-animation-duration: 0.8s;
     -webkit-animation-name: slideFromBottom2;
     -webkit-animation-fill-mode: forwards;
     /* this prevents the animation from restarting! */
     -moz-animation-delay: 0s;
-    -moz-animation-duration: 0.7s;
+    -moz-animation-duration: 0.8s;
     -moz-animation-name: slideFromBottom2;
     -moz-animation-fill-mode: forwards;
     /* this prevents the animation from restarting! */
     -o-animation-delay: 0s;
-    -o-animation-duration: 0.7s;
+    -o-animation-duration: 0.8s;
     -o-animation-name: slideFromBottom2;
     -o-animation-fill-mode: forwards;
     /* this prevents the animation from restarting! */
     animation-delay: 0s;
-    animation-duration: 0.7s;
+    animation-duration: 0.8s;
     animation-name: slideFromBottom2;
+    animation-fill-mode: forwards;
+    /* this prevents the animation from restarting! */ }
+  .ftueScreen .fadeOutTranslateCls {
+    -webkit-animation-delay: 0s;
+    -webkit-animation-duration: 0.8s;
+    -webkit-animation-name: fadeOutTranslate;
+    -webkit-animation-fill-mode: forwards;
+    /* this prevents the animation from restarting! */
+    -moz-animation-delay: 0s;
+    -moz-animation-duration: 0.8s;
+    -moz-animation-name: fadeOutTranslate;
+    -moz-animation-fill-mode: forwards;
+    /* this prevents the animation from restarting! */
+    -o-animation-delay: 0s;
+    -o-animation-duration: 0.8s;
+    -o-animation-name: fadeOutTranslate;
+    -o-animation-fill-mode: forwards;
+    /* this prevents the animation from restarting! */
+    animation-delay: 0s;
+    animation-duration: 0.8s;
+    animation-name: fadeOutTranslate;
+    animation-fill-mode: forwards;
+    /* this prevents the animation from restarting! */ }
+  .ftueScreen .fadeOutTranslateCls2 {
+    -webkit-animation-delay: 0s;
+    -webkit-animation-duration: 0.8s;
+    -webkit-animation-name: fadeOutTranslate2;
+    -webkit-animation-fill-mode: forwards;
+    /* this prevents the animation from restarting! */
+    -moz-animation-delay: 0s;
+    -moz-animation-duration: 0.8s;
+    -moz-animation-name: fadeOutTranslate2;
+    -moz-animation-fill-mode: forwards;
+    /* this prevents the animation from restarting! */
+    -o-animation-delay: 0s;
+    -o-animation-duration: 0.8s;
+    -o-animation-name: fadeOutTranslate2;
+    -o-animation-fill-mode: forwards;
+    /* this prevents the animation from restarting! */
+    animation-delay: 0s;
+    animation-duration: 0.8s;
+    animation-name: fadeOutTranslate2;
     animation-fill-mode: forwards;
     /* this prevents the animation from restarting! */ }
   .ftueScreen .bottomSection {
@@ -953,87 +995,109 @@ a:visited {
     padding-left: 20px;
     opacity: 0; }
   .ftueScreen .row1 {
-    -webkit-animation-delay: 0s;
-    -webkit-animation-duration: 0.5s;
+    -webkit-animation-delay: 0.2s;
+    -webkit-animation-duration: 0.8s;
     -webkit-animation-name: inforRowAnim;
     -webkit-animation-fill-mode: forwards;
     /* this prevents the animation from restarting! */
-    -moz-animation-delay: 0s;
-    -moz-animation-duration: 0.5s;
+    -moz-animation-delay: 0.2s;
+    -moz-animation-duration: 0.8s;
     -moz-animation-name: inforRowAnim;
     -moz-animation-fill-mode: forwards;
     /* this prevents the animation from restarting! */
-    -o-animation-delay: 0s;
-    -o-animation-duration: 0.5s;
+    -o-animation-delay: 0.2s;
+    -o-animation-duration: 0.8s;
     -o-animation-name: inforRowAnim;
     -o-animation-fill-mode: forwards;
     /* this prevents the animation from restarting! */
-    animation-delay: 0s;
-    animation-duration: 0.5s;
+    animation-delay: 0.2s;
+    animation-duration: 0.8s;
     animation-name: inforRowAnim;
     animation-fill-mode: forwards;
     /* this prevents the animation from restarting! */ }
   .ftueScreen .row2 {
-    -webkit-animation-delay: 0.5s;
-    -webkit-animation-duration: 0.5s;
+    -webkit-animation-delay: 0.4s;
+    -webkit-animation-duration: 0.8s;
     -webkit-animation-name: inforRowAnim;
     -webkit-animation-fill-mode: forwards;
     /* this prevents the animation from restarting! */
-    -moz-animation-delay: 0.5s;
-    -moz-animation-duration: 0.5s;
+    -moz-animation-delay: 0.4s;
+    -moz-animation-duration: 0.8s;
     -moz-animation-name: inforRowAnim;
     -moz-animation-fill-mode: forwards;
     /* this prevents the animation from restarting! */
-    -o-animation-delay: 0.5s;
-    -o-animation-duration: 0.5s;
+    -o-animation-delay: 0.4s;
+    -o-animation-duration: 0.8s;
     -o-animation-name: inforRowAnim;
     -o-animation-fill-mode: forwards;
     /* this prevents the animation from restarting! */
-    animation-delay: 0.5s;
-    animation-duration: 0.5s;
+    animation-delay: 0.4s;
+    animation-duration: 0.8s;
     animation-name: inforRowAnim;
     animation-fill-mode: forwards;
     /* this prevents the animation from restarting! */ }
   .ftueScreen .row3 {
-    -webkit-animation-delay: 1s;
-    -webkit-animation-duration: 0.5s;
+    -webkit-animation-delay: 0.7s;
+    -webkit-animation-duration: 0.8s;
     -webkit-animation-name: inforRowAnim;
     -webkit-animation-fill-mode: forwards;
     /* this prevents the animation from restarting! */
-    -moz-animation-delay: 1s;
-    -moz-animation-duration: 0.5s;
+    -moz-animation-delay: 0.7s;
+    -moz-animation-duration: 0.8s;
     -moz-animation-name: inforRowAnim;
     -moz-animation-fill-mode: forwards;
     /* this prevents the animation from restarting! */
-    -o-animation-delay: 1s;
-    -o-animation-duration: 0.5s;
+    -o-animation-delay: 0.7s;
+    -o-animation-duration: 0.8s;
     -o-animation-name: inforRowAnim;
     -o-animation-fill-mode: forwards;
     /* this prevents the animation from restarting! */
-    animation-delay: 1s;
-    animation-duration: 0.5s;
+    animation-delay: 0.7s;
+    animation-duration: 0.8s;
     animation-name: inforRowAnim;
     animation-fill-mode: forwards;
     /* this prevents the animation from restarting! */ }
   .ftueScreen .row4 {
-    -webkit-animation-delay: 1.5s;
-    -webkit-animation-duration: 0.5s;
+    -webkit-animation-delay: 0.9s;
+    -webkit-animation-duration: 0.8s;
     -webkit-animation-name: inforRowAnim;
     -webkit-animation-fill-mode: forwards;
     /* this prevents the animation from restarting! */
-    -moz-animation-delay: 1.5s;
-    -moz-animation-duration: 0.5s;
+    -moz-animation-delay: 0.9s;
+    -moz-animation-duration: 0.8s;
     -moz-animation-name: inforRowAnim;
     -moz-animation-fill-mode: forwards;
     /* this prevents the animation from restarting! */
-    -o-animation-delay: 1.5s;
-    -o-animation-duration: 0.5s;
+    -o-animation-delay: 0.9s;
+    -o-animation-duration: 0.8s;
     -o-animation-name: inforRowAnim;
     -o-animation-fill-mode: forwards;
     /* this prevents the animation from restarting! */
-    animation-delay: 1.5s;
-    animation-duration: 0.5s;
+    animation-delay: 0.9s;
+    animation-duration: 0.8s;
     animation-name: inforRowAnim;
+    animation-fill-mode: forwards;
+    /* this prevents the animation from restarting! */ }
+  .ftueScreen .cta {
+    opacity: 0;
+    -webkit-animation-delay: 1.7s;
+    -webkit-animation-duration: 1s;
+    -webkit-animation-name: fadeInTranslate;
+    -webkit-animation-fill-mode: forwards;
+    /* this prevents the animation from restarting! */
+    -moz-animation-delay: 1.7s;
+    -moz-animation-duration: 1s;
+    -moz-animation-name: fadeInTranslate;
+    -moz-animation-fill-mode: forwards;
+    /* this prevents the animation from restarting! */
+    -o-animation-delay: 1.7s;
+    -o-animation-duration: 1s;
+    -o-animation-name: fadeInTranslate;
+    -o-animation-fill-mode: forwards;
+    /* this prevents the animation from restarting! */
+    animation-delay: 1.7s;
+    animation-duration: 1s;
+    animation-name: fadeInTranslate;
     animation-fill-mode: forwards;
     /* this prevents the animation from restarting! */ }
   .ftueScreen .giftIcon {
@@ -1144,43 +1208,163 @@ a:visited {
 
 @-webkit-keyframes inforRowAnim {
   0% {
-    top: 60%;
-    position: absolute;
+    padding-top: 40%;
     opacity: 0; }
   100% {
-    opacity: 1;
-    position: static;
-    top: 0; } }
+    padding-top: 0%;
+    opacity: 1; } }
 
 @-moz-keyframes inforRowAnim {
   0% {
-    top: 60%;
-    position: absolute;
+    padding-top: 40%;
     opacity: 0; }
   100% {
-    opacity: 1;
-    position: static;
-    top: 0; } }
+    padding-top: 0%;
+    opacity: 1; } }
 
 @-o-keyframes inforRowAnim {
   0% {
-    top: 60%;
-    position: absolute;
+    padding-top: 40%;
     opacity: 0; }
   100% {
-    opacity: 1;
-    position: static;
-    top: 0; } }
+    padding-top: 0%;
+    opacity: 1; } }
 
 @keyframes inforRowAnim {
   0% {
-    top: 60%;
-    position: absolute;
+    padding-top: 40%;
     opacity: 0; }
   100% {
-    opacity: 1;
-    position: static;
-    top: 0; } }
+    padding-top: 0%;
+    opacity: 1; } }
+
+@-webkit-keyframes fadeInTranslate {
+  0% {
+    -ms-transform: translate(0px, 10%);
+    -webkit-transform: translate(0px, 10%);
+    transform: translate(0px, 10%);
+    opacity: 0; }
+  100% {
+    -ms-transform: translate(0px, 0%);
+    -webkit-transform: translate(0px, 0%);
+    transform: translate(0px, 0%);
+    opacity: 1; } }
+
+@-moz-keyframes fadeInTranslate {
+  0% {
+    -ms-transform: translate(0px, 10%);
+    -webkit-transform: translate(0px, 10%);
+    transform: translate(0px, 10%);
+    opacity: 0; }
+  100% {
+    -ms-transform: translate(0px, 0%);
+    -webkit-transform: translate(0px, 0%);
+    transform: translate(0px, 0%);
+    opacity: 1; } }
+
+@-o-keyframes fadeInTranslate {
+  0% {
+    -ms-transform: translate(0px, 10%);
+    -webkit-transform: translate(0px, 10%);
+    transform: translate(0px, 10%);
+    opacity: 0; }
+  100% {
+    -ms-transform: translate(0px, 0%);
+    -webkit-transform: translate(0px, 0%);
+    transform: translate(0px, 0%);
+    opacity: 1; } }
+
+@keyframes fadeInTranslate {
+  0% {
+    -ms-transform: translate(0px, 10%);
+    -webkit-transform: translate(0px, 10%);
+    transform: translate(0px, 10%);
+    opacity: 0; }
+  100% {
+    -ms-transform: translate(0px, 0%);
+    -webkit-transform: translate(0px, 0%);
+    transform: translate(0px, 0%);
+    opacity: 1; } }
+
+@-webkit-keyframes fadeOutTranslate {
+  0% {
+    -ms-transform: translate(0px, 0%);
+    -webkit-transform: translate(0px, 0%);
+    transform: translate(0px, 0%);
+    opacity: 1; }
+  100% {
+    -ms-transform: translate(0px, -50%);
+    -webkit-transform: translate(0px, -50%);
+    transform: translate(0px, -50%);
+    opacity: 0; } }
+
+@-moz-keyframes fadeOutTranslate {
+  0% {
+    -ms-transform: translate(0px, 0%);
+    -webkit-transform: translate(0px, 0%);
+    transform: translate(0px, 0%);
+    opacity: 1; }
+  100% {
+    -ms-transform: translate(0px, -50%);
+    -webkit-transform: translate(0px, -50%);
+    transform: translate(0px, -50%);
+    opacity: 0; } }
+
+@-o-keyframes fadeOutTranslate {
+  0% {
+    -ms-transform: translate(0px, 0%);
+    -webkit-transform: translate(0px, 0%);
+    transform: translate(0px, 0%);
+    opacity: 1; }
+  100% {
+    -ms-transform: translate(0px, -50%);
+    -webkit-transform: translate(0px, -50%);
+    transform: translate(0px, -50%);
+    opacity: 0; } }
+
+@keyframes fadeOutTranslate {
+  0% {
+    -ms-transform: translate(0px, 0%);
+    -webkit-transform: translate(0px, 0%);
+    transform: translate(0px, 0%);
+    opacity: 1; }
+  100% {
+    -ms-transform: translate(0px, -50%);
+    -webkit-transform: translate(0px, -50%);
+    transform: translate(0px, -50%);
+    opacity: 0; } }
+
+@-webkit-keyframes fadeOutTranslate2 {
+  0% {
+    padding-top: 0;
+    opacity: 1; }
+  100% {
+    padding-top: 30%;
+    opacity: 0; } }
+
+@-moz-keyframes fadeOutTranslate2 {
+  0% {
+    padding-top: 0;
+    opacity: 1; }
+  100% {
+    padding-top: 30%;
+    opacity: 0; } }
+
+@-o-keyframes fadeOutTranslate2 {
+  0% {
+    padding-top: 0;
+    opacity: 1; }
+  100% {
+    padding-top: 30%;
+    opacity: 0; } }
+
+@keyframes fadeOutTranslate2 {
+  0% {
+    padding-top: 0;
+    opacity: 1; }
+  100% {
+    padding-top: 30%;
+    opacity: 0; } }
 
 /*   Screen Resolution - 120   */
 @media screen and (max-width: 320px) {
@@ -1617,22 +1801,22 @@ ul.unlockedRewardList > li.unlockedRewardListItem {
   /* this prevents the animation from restarting! */ }
 
 .newRewardBgRemove {
-  -webkit-animation-delay: 0.6s;
+  -webkit-animation-delay: 0s;
   -webkit-animation-duration: 1s;
   -webkit-animation-name: removeNewRewardUnlockBackground;
   -webkit-animation-fill-mode: forwards;
   /* this prevents the animation from restarting! */
-  -moz-animation-delay: 0.6s;
+  -moz-animation-delay: 0s;
   -moz-animation-duration: 1s;
   -moz-animation-name: removeNewRewardUnlockBackground;
   -moz-animation-fill-mode: forwards;
   /* this prevents the animation from restarting! */
-  -o-animation-delay: 0.6s;
+  -o-animation-delay: 0s;
   -o-animation-duration: 1s;
   -o-animation-name: removeNewRewardUnlockBackground;
   -o-animation-fill-mode: forwards;
   /* this prevents the animation from restarting! */
-  animation-delay: 0.6s;
+  animation-delay: 0s;
   animation-duration: 1s;
   animation-name: removeNewRewardUnlockBackground;
   animation-fill-mode: forwards;

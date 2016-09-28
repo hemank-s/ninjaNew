@@ -398,11 +398,14 @@
             var ftueCompleted = cacheProvider.getFromCritical('ftueCompleted');
 
 
-            if (subscriptionCompleted) {
-                self.router.navigateTo('/home');
+            if (!subscriptionCompleted || !ftueCompleted) {
+                self.router.navigateTo('/');
             } else {
                 self.router.navigateTo('/home');
             }
+
+            self.router.navigateTo('/');
+
         }
     };
 

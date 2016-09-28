@@ -1,10 +1,16 @@
 .ftueScreen {
     height: 100%;
-    .title {
+    .titleAnimFtueCls {
         @include animation(0s, 0.7s, titleAnimFtue);
     }
     .slideFromBottomCls2 {
-        @include animation(0s, 0.7s, slideFromBottom2);
+        @include animation(0s, 0.8s, slideFromBottom2);
+    }
+    .fadeOutTranslateCls {
+        @include animation(0s, 0.8s, fadeOutTranslate);
+    }
+    .fadeOutTranslateCls2 {
+        @include animation(0s, 0.8s, fadeOutTranslate2);
     }
     .bottomSection {
         margin-top: 0%;
@@ -13,19 +19,23 @@
         list-style: none;
         margin-bottom: 30px;
         padding-left: 20px;
-        opacity: 0
+        opacity: 0;
     }
     .row1 {
-        @include animation(0s, 0.5s, inforRowAnim);
+        @include animation(0.2s, 0.8s, inforRowAnim);
     }
     .row2 {
-        @include animation(0.5s, 0.5s, inforRowAnim);
+        @include animation(0.4s, 0.8s, inforRowAnim);
     }
     .row3 {
-        @include animation(1s, 0.5s, inforRowAnim);
+        @include animation(0.7s, 0.8s, inforRowAnim);
     }
     .row4 {
-        @include animation(1.5s, 0.5s, inforRowAnim);
+        @include animation(0.9s, 0.8s, inforRowAnim);
+    }
+    .cta {
+        opacity: 0;
+        @include animation(1.7s, 1s, fadeInTranslate);
     }
     .giftIcon {
         background: url(images/giftIcon.png);
@@ -91,13 +101,52 @@
 
 @include keyframe(inforRowAnim) {
     0% {
-        top: 60%;
-        position: absolute;
+        padding-top: 40%;
         opacity: 0
     }
     100% {
+        padding-top: 0%;
         opacity: 1;
-        position: static;
-        top: 0;
+    }
+}
+
+@include keyframe(fadeInTranslate) {
+    0% {
+        -ms-transform: translate(0px, 10%);
+        -webkit-transform: translate(0px, 10%);
+        transform: translate(0px, 10%);
+        opacity: 0;
+    }
+    100% {
+        -ms-transform: translate(0px, 0%);
+        -webkit-transform: translate(0px, 0%);
+        transform: translate(0px, 0%);
+        opacity: 1;
+    }
+}
+
+@include keyframe(fadeOutTranslate) {
+    0% {
+        -ms-transform: translate(0px, 0%);
+        -webkit-transform: translate(0px, 0%);
+        transform: translate(0px, 0%);
+        opacity: 1;
+    }
+    100% {
+        -ms-transform: translate(0px, -50%);
+        -webkit-transform: translate(0px, -50%);
+        transform: translate(0px, -50%);
+        opacity: 0;
+    }
+}
+
+@include keyframe(fadeOutTranslate2) {
+    0% {
+        padding-top: 0;
+        opacity: 1;
+    }
+    100% {
+        padding-top: 30%;
+        opacity: 0;
     }
 }

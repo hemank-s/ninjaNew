@@ -126,15 +126,15 @@
 }
 
 .animation_fadeout {
-    -webkit-animation: fadeout 1s;
+    -webkit-animation: fadeout 0.5s;
     /* Safari, Chrome and Opera > 12.1 */
-    -moz-animation: fadeout 1s;
+    -moz-animation: fadeout 0.5s;
     /* Firefox < 16 */
-    -ms-animation: fadeout 1s;
+    -ms-animation: fadeout 0.5s;
     /* Internet Explorer */
-    -o-animation: fadeout 1s;
+    -o-animation: fadeout 0.5s;
     /* Opera < 12.1 */
-    animation: fadeout 1s;
+    animation: fadeout 0.5s;
     -webkit-animation-fill-mode: forwards;
     animation-fill-mode: forwards;
 }

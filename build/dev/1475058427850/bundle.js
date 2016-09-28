@@ -5048,11 +5048,14 @@
 	            var ftueCompleted = cacheProvider.getFromCritical('ftueCompleted');
 
 
-	            if (subscriptionCompleted) {
-	                self.router.navigateTo('/home');
+	            if (!subscriptionCompleted || !ftueCompleted) {
+	                self.router.navigateTo('/');
 	            } else {
 	                self.router.navigateTo('/home');
 	            }
+
+	            self.router.navigateTo('/');
+
 	        }
 	    };
 
@@ -5092,40 +5095,45 @@
 	        };
 
 
-	        DOMcache.cta.addEventListener('click', function() {
+	        document.addEventListener('click', function(evt) {
 
-	            if (this.getAttribute('data-screen') == "subscribe") {
+	            var target = evt.target;
 
-	                DOMcache.screenCls.classList.remove('subscribeScreen');
-	                DOMcache.screenCls.classList.add('ftueScreen');
+	            if (target.classList.contains('cta')) {
 
-	                DOMcache.title.classList.add('animation_fadeout');
-	                DOMcache.subtitle.remove();
-	                DOMcache.title.innerHTML = "What do you get?"
+	                if (target.getAttribute('data-screen') == "subscribe") {
 
-	                DOMcache.content.innerHTML = Mustache.render(unescape(that.ftueTemplate));
-	                DOMcache.bottomSection.classList.remove('slideFromBottomCls');
-	                DOMcache.bottomSection.classList.add('slideFromBottomCls2');
+	                    DOMcache.screenCls.classList.remove('subscribeScreen');
+	                    DOMcache.screenCls.classList.add('ftueScreen');
+	                    DOMcache.title.classList.add('titleAnimFtueCls');
+	                    DOMcache.title.classList.add('animation_fadeout');
+	                    DOMcache.subtitle.remove();
+	                    DOMcache.title.innerHTML = "What do you get?"
 
-	                //
+	                    DOMcache.content.innerHTML = Mustache.render(unescape(that.ftueTemplate));
+	                    DOMcache.bottomSection.classList.remove('slideFromBottomCls');
+	                    DOMcache.bottomSection.classList.add('slideFromBottomCls2');
+
+	                    DOMcache.centerIcon.classList.remove('scaleZeroToOneAnim');
+	                    DOMcache.centerIcon.classList.add('animation_fadeout');
+	                    DOMcache.info.classList.add('animation_fadeout');
+	                    DOMcache.cta.classList.add('animation_fadeout');
+
+	                } else {
+
+	                    console.log('here');
+	                    DOMcache.title.classList.remove('animation_fadeout');
+	                    DOMcache.title.classList.remove('titleAnimFtueCls');
+	                    DOMcache.title.classList.add('fadeOutTranslateCls');
+	                    DOMcache.content.classList.add('fadeOutTranslateCls2');
+	                    DOMcache.bottomSection.classList.remove('slideFromBottomCls2');
+	                    DOMcache.bottomSection.classList.add('animation_fadeout');
+	                    DOMcache.centreIcon.classList.add('animation_fadeout');
 
 
-	                DOMcache.centerIcon.classList.remove('scaleZeroToOneAnim');
-	                DOMcache.centerIcon.classList.add('animation_fadeout');
-	                DOMcache.info.classList.add('animation_fadeout');
-	                DOMcache.cta.classList.add('animation_fadeout');
-
-	            } else {
-
-	                //Perform ftue action
+	                }
 	            }
-
-
-
-
 	        });
-
-
 	    };
 
 	    WorkspaceController.prototype.render = function(ctr, App, data) {
