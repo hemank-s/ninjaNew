@@ -5,20 +5,16 @@
             <div class="streakInfoWrapper">
                 <div class="streakInfoContainer">
                     <div class="streakInfoIcon"></div>
-                    <div class="streakInfoValue">01
+                    <div class="streakInfoValue">{{ninjaProfile.streak}}
                     </div>
                     <p class="dayHeading">Days</p>
-                    <p class="dayInformation">This is the number of days you’ve been a Ninja for.
-                        <br>
-                        <br>Continue being a Ninja every day to go higher and get more awesome gifts.</p>
+                    <p class="dayInformation">This is the number of days you’ve been a Ninja for. Continue being a Ninja every day to go higher and get more awesome gifts.</p>
                 </div>
                 <hr noshade>
                 <div class="batteryInfoWarpper">
                     <div class="batteryIconContainer"></div>
                     <div class="batteryHeading">Ninja Life</div>
-                    <p class="batteryInformation">You’re going to reaming a Ninja for X more days.
-                        <br>
-                        <br>Keep loving and using hike with your best friends to be a Ninja for more days and get more awesome gifts.</p>
+                    <p class="batteryInformation">You’re going to reaming a Ninja for X more days. Keep loving and using hike with your best friends to be a Ninja for more days and get more awesome gifts.</p>
                 </div>
                 <div class="informationAction">Got It</div>
             </div>
@@ -28,10 +24,10 @@
 <!-- Full Screen Popup for days unlock -->
 <div class="rewardUnlockAnimation centerToScreenContainer">
     <div class="rewardUnlockContainer">
-        <div class="dayDef">Day 1</div>
+        <div class="dayDef">Day {{ninjaProfile.streak}}</div>
         <div class="streakValueContainer">
             <div class="rewardUnlockStreakIcon"></div>
-            <div class="rewardUnlockStreakValue">01</div>
+            <div class="rewardUnlockStreakValue">{{ninjaProfile.streak}}</div>
         </div>
     </div>
 </div>
@@ -41,7 +37,7 @@
         <div class="ninjaProfileInfo">
             <div class="streakContainer">
                 <div class="streakIcon"></div>
-                <div class="streakValue">01
+                <div class="streakValue">{{ninjaProfile.streak}}
                     <br><span class="streakDef">days</span></div>
             </div>
             <div class="ninjaDp"></div>
@@ -51,11 +47,11 @@
         <div class="ninjaWave"></div>
         <div class="ninjaRewards">
             <div class="unlockedReward hideClass">
-                <p class="unlockedRewardHeading">Unclocked Gifts</p>
+                <p class="unlockedRewardHeading">Unlocked Gifts</p>
                 <div class="unlockedRewardListContainer">
                     <ul class="unlockedRewardList">
                         {{#ninjaUnlockedRewards}}
-                        <li class="unlockedRewardListItem newRewardAppearAnimation">
+                        <li class="unlockedRewardListItem newRewardAppearAnimation upcoming{{state}}card">
                             <div class="unlockedRewardHeader">
                                 <div class="unlockedRewardIcon"></div>
                                 <div class="unlockedRewardStreak">{{streak}}</div>
@@ -64,7 +60,11 @@
                                 <p class="uRewardHeading">{{title}}</p>
                                 <p class="uRewardSubheading">{{stitle}}</p>
                             </div>
+                            {{#state}}
                             <div class="unlockedRewardAction">Get It now</div>
+                            {{/state}} {{^state}}
+                            <div class="unlockedRewardAction">Learn More</div>
+                            {{/state}}
                         </li>
                         {{/ninjaUnlockedRewards}}
                     </ul>
