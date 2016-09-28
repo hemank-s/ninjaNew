@@ -4,7 +4,6 @@
     var WorkspaceController = require('./controllers/WorkspaceController'),
         HomescreenController = require('./controllers/HomescreenController'),
 
-
         Router = require('./util/router'),
         utils = require('./util/utils'),
         profileModel = require('./models/profileModel'),
@@ -88,9 +87,6 @@
         // Profile Controller
         this.workspaceController = new WorkspaceController();
         this.homescreenController = new HomescreenController();
-
-
-
 
         // Communication Controller
         this.TxService = new TxService();
@@ -360,16 +356,6 @@
 
             self.initOverflowMenu();
 
-            /*
-
-            expHandlerAB.getVal(cacheProvider.getFromCritical('lockedRewardAB_key'), JSON.parse(cacheProvider.getFromCritical('lockedRewardAB_defaultVal')), function(response) {
-                cacheProvider.setInCritical('lockedGreyout', JSON.parse(response));
-            });
-
-            */
-
-
-
 
             utils.toggleBackNavigation(false);
             document.querySelector('.unblockButton').addEventListener('click', function() {
@@ -401,7 +387,6 @@
                 utils.toggleBackNavigation(false);
             });
 
-
             // Ninja Home screen
             this.router.route('/home', function(data) {
                 self.container.innerHTML = '';
@@ -409,24 +394,15 @@
                 utils.toggleBackNavigation(false);
             });
 
-
-
             var subscriptionCompleted = cacheProvider.getFromCritical('subscriptionCompleted');
             var ftueCompleted = cacheProvider.getFromCritical('ftueCompleted');
 
 
             if (subscriptionCompleted) {
-                self.router.navigateTo('/');
+                self.router.navigateTo('/home');
             } else {
                 self.router.navigateTo('/home');
             }
-
-            self.router.navigateTo('/');
-
-
-
-
-
         }
     };
 

@@ -1,0 +1,95 @@
+<!-- Full Screen Popup For Battery/Streak Explanation -->
+<div class="batteryStreakInfoContainer centerToScreenContainer hideClass">
+    <div class="blurScreen">
+        <div class="centerToScreenWrapper">
+            <div class="streakInfoWrapper">
+                <div class="streakInfoContainer">
+                    <div class="streakInfoIcon"></div>
+                    <div class="streakInfoValue">01
+                    </div>
+                    <p class="dayHeading">Days</p>
+                    <p class="dayInformation">This is the number of days you’ve been a Ninja for.
+                        <br><br>Continue being a Ninja every day to go higher and get more awesome gifts.</p>
+                </div>
+                <hr noshade>
+                <div class="batteryInfoWarpper">
+                    <div class="batteryIconContainer"></div>
+                    <div class="batteryHeading">Ninja Life</div>
+                    <p class="batteryInformation">You’re going to reaming a Ninja for X more days.
+                        <br><br>Keep loving and using hike with your best friends to be a Ninja for more days and get more awesome gifts.</p>
+                </div>
+                <div class="informationAction">Got It</div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Full Screen Popup for days unlock -->
+<div class="rewardUnlockAnimation centerToScreenContainer">
+        <div class="rewardUnlockContainer">
+            <div class="dayDef">Day 1</div>
+            <div class="streakValueContainer">
+                <div class="rewardUnlockStreakIcon"></div>
+                <div class="rewardUnlockStreakValue">01</div>
+            </div>
+        </div>
+</div>
+<!-- Home Screen For Ninja Micro app -->
+<div class="ninjaHomeContainer">
+    <div class="profileContainer clearfix">
+        <div class="ninjaProfileInfo">
+            <div class="streakContainer">
+                <div class="streakIcon"></div>
+                <div class="streakValue">01
+                    <br><span class="streakDef">days</span></div>
+            </div>
+            <div class="ninjaDp"></div>
+        </div>
+    </div>
+    <div class="ninjaBottomContainer">
+        <div class="ninjaWave"></div>
+        <div class="ninjaRewards">
+            <div class="unlockedReward hideClass">
+                <p class="unlockedRewardHeading">Unclocked Gifts</p>
+                <div class="unlockedRewardListContainer">
+                    <ul class="unlockedRewardList">
+                        {{#ninjaUnlockedRewards}}
+                        <li class="unlockedRewardListItem">
+                            <div class="unlockedRewardHeader">
+                                <div class="unlockedRewardIcon"></div>
+                                <div class="unlockedRewardStreak">{{streak}}</div>
+                            </div>
+                            <div class="unlockedRewardDetails">
+                                <p class="uRewardHeading">{{title}}</p>
+                                <p class="uRewardSubheading">{{stitle}}</p>
+                            </div>
+                            <div class="unlockedRewardAction">Get It now</div>
+                        </li>
+                        {{/ninjaUnlockedRewards}}
+                    </ul>
+                </div>
+            </div>
+            <div class="lockedRewards">
+                <p class="lockedRewardHeading">Upcoming Gifts</p>
+                <div class="lockedRewardListContainer">
+                    <ul class="lockedRewardList">
+                        {{#ninjaLockedRewards}}
+                        <li class="rewardRow" data-rewardId="{{id}}" data-state="{{state}}" data-rewardtype="{{type}}">
+                            <div class="rewardIcon"></div>
+                            <div class="rewardDetails">
+                                <p class="rewardHeading {{^state}}{{#lockedGreyout}}rewardHeadingLocked{{/lockedGreyout}}{{/state}}">{{title}}</p>
+                                <p class="rewardSubheading {{^state}}{{#lockedGreyout}}rewardSubheadingLocked{{/lockedGreyout}}{{/state}}">{{stitle}}</p>
+                            </div>
+                            {{#streak}}
+                            <div class="rewardStreakWrapper">
+                                <div class="rewardStreakIcon"></div>
+                                <div class="rewardStreakValue">{{streak}}</div>
+                            </div>
+                            {{/streak}}
+                        </li>
+                        {{/ninjaLockedRewards}}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

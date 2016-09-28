@@ -1,0 +1,689 @@
+.homeScreenContainer {
+    height: 100%;
+    overflow: hidden;
+    background: #1D47F5;
+    background: -webkit-linear-gradient(left top, #1D47F5, #33FFE2);
+    background: -o-linear-gradient(bottom left, #1D47F5, #33FFE2);
+    background: -moz-linear-gradient(bottom left, #1D47F5, #33FFE2);
+    background: linear-gradient(to bottom left, #1D47F5, #33FFE2);
+}
+
+.hideClass{
+    display: none !important; 
+}
+
+.rewardUnlockStreakIcon{
+    background: url(images/rewardUnlockStreak.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 32px;
+    height: 28px;  
+    display: inline-block; 
+    vertical-align: middle; 
+}
+
+.dayDef{
+    font-size: 26px;
+    color: #FFFFFF;
+    line-height: 13px;
+    font-weight: 300;
+    margin-bottom: 18px;
+    text-align: center;
+    display: block; 
+}
+
+.rewardUnlockStreakValue{
+    font-weight: 500; 
+    font-size: 48px;
+    color: #23D3DA;
+    letter-spacing: 1.5px;
+    display: inline-block;
+    vertical-align: middle; 
+}
+
+.rewardUnlockAnimation {
+    position: absolute;
+    opacity: 0; 
+    width: 100%;
+    height: 100%;
+    background: #1D47F5 ;
+   background: -webkit-linear-gradient(left top, rgba(29,71,245,0.92) , rgba(51,255,226,0.92) );
+   background: -o-linear-gradient(bottom right, rgba(29,71,245,0.92) , rgba(51,255,226,0.92) );
+   background: -moz-linear-gradient(bottom right, rgba(29,71,245,0.92) , rgba(51,255,226,0.92) );
+   background: linear-gradient(to bottom right, rgba(29,71,245,0.92) , rgba(51,255,226,0.92) );
+}
+
+.streakValueContainer{
+    text-align: center;
+    width: 164px;
+    margin: 0px auto;
+    height: 72px;  
+    background: #FFFFFF;
+    box-shadow: 0px 0px 44px 0px #4CF3D5;
+    border-radius: 100px;
+    line-height:72px;
+    border: 4px solid #7CEDF2; 
+    opacity: 0;
+    -webkit-transform: scale(0);
+    transform: scale(0);
+}
+
+.streakContainer {
+    float: left;
+}
+
+.streakIcon {
+    background: url(images/streakIcon.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 36px;
+    height: 36px;
+    display: inline-flex;
+    vertical-align: middle;
+    float: left;
+}
+
+.streakValue {
+    @include fontStyle(28px, 500, #FFFFFF, 32px);
+    display: inline-flex;
+    vertical-align: middle;
+}
+
+.ninjaDp {
+    background: url(images/ninjaDefaultDp.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 36px;
+    height: 36px;
+    float: right;
+}
+
+span.streakDef {
+    @include fontStyle(11px, 300, #FFFFFF, 13px);
+    margin-top: 15px;
+}
+
+.ninjaHomeContainer {
+    height: 100%;
+}
+
+.profileContainer {
+    padding: 30px 15px 0px 15px;
+}
+
+.ninjaBottomContainer {
+    height: 100%;
+    margin-top: 70px;
+    display: block;
+}
+
+.ninjaWave {
+    background: url(images/ninjaWave.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    width: 100%;
+    height: 60px;
+}
+
+.ninjaRewards {
+    height: 100%;
+    background-color: #FFF;
+}
+
+.unlockedRewardHeading{
+    display: inline-block;
+    margin-left: 15px;
+    font-size: 12px;
+    color: #585959;
+}
+
+
+.lockedRewardHeading {
+    display: inline-block;
+    margin-left: 15px;
+    font-size: 12px;
+    color: #585959;
+    margin-bottom: 24px;  
+}
+
+.lockedRewardListContainer{
+    margin-left: 20px;
+    margin-right: 12px;
+    height:100%;
+}
+
+.unlockedRewardIcon {
+    background: url(images/defaultRewardIcon.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 24px;
+    height: 24px;
+}
+
+.unlockedRewardStreak {
+    @include fontStyle(14px, 500, #FFFFFF, 14px);
+    float: right;
+}
+
+.unlockedRewardDetails{
+    margin: 0px 0px 28px 15px;
+}
+
+.uRewardHeading {
+    @include fontStyle(14px, 500, #FFFFFF, 17px);
+    margin-bottom:8px;
+}
+
+.uRewardSubheading {
+    @include fontStyle(12px, 400, rgba(255,255,255,0.70), 17px);
+}
+
+.unlockedRewardAction {
+    @include fontStyle(12px, 400, #FFFFFF, 14px);
+    text-transform: uppercase;
+}
+
+.unlockedRewardAction{
+    margin-left: 15px;
+      
+}
+
+li.unlockedRewardListItem:nth-child(odd) {
+    background: linear-gradient(44deg, #FA4454 0%, #F6876C 100%);
+    
+}
+li.unlockedRewardListItem:nth-child(even) {
+    background:linear-gradient(44deg, #3A7BD5 0%, #00D2FF 100%);
+}
+
+li.unlockedRewardListItem {
+    width: 272px;
+    height: 180px;
+    border-radius: 2px;
+    display: inline-block;
+    margin-right: 12px;
+}
+
+.unlockedRewardHeader{
+    display: flex;
+    justify-content: space-between;
+    margin: 24px 15px 22px 20px;
+}
+
+.unlockedRewardListContainer{
+    width: 100%; 
+}
+
+.unlockedRewardList{
+    overflow-x: scroll;
+    margin: 12px 0px 32px 15px; 
+}
+
+ul.unlockedRewardList{
+    list-style:none;
+    white-space: nowrap;
+}
+ul.unlockedRewardList > li.unlockedRewardListItem{
+    display: inline-block;
+}
+
+.rewardRow {
+    list-style: none;
+    margin-bottom: 16px;
+    padding-bottom: 16px;
+}
+
+.rewardIcon {
+    background: url(images/defaultRewardIcon.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 26px;
+    height: 26px;
+    display: inline-block;
+    background-position: center;
+    vertical-align: middle;
+}
+
+.rewardDetails {
+    display: inline-block;
+    margin-left: 18px;
+    vertical-align: middle;
+}
+
+.rewardHeading {
+    font-size: 14px;
+    color: #3D475B;
+    margin-bottom: 4px;
+    font-weight: 500;
+}
+
+.rewardHeadingLocked {
+    color: transparent !important;
+    background: #acacac !important;
+    height: 13px;
+    opacity: 0.2;
+    width: 62%;
+}
+
+.rewardSubheading {
+    font-size: 12px;
+    color: rgba(61, 71, 91, 0.64);
+    width: 120%;
+}
+
+.rewardSubheadingLocked {
+    color: transparent !important;
+    background: #acacac !important;
+    height: 9px;
+    opacity: 0.2;
+}
+
+.rewardStreakWrapper {
+    display: inline-block;
+    float: right;
+    vertical-align: middle;
+    line-height: 35px;
+}
+
+.rewardStreakIcon {
+    background: url(images/rewardStreakIcon.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 14px;
+    display: inline-block;
+    height: 12px;
+}
+
+.rewardStreakValue {
+    font-size: 14px;
+    color: rgba(61, 71, 91, 0.72);
+    font-weight: 400;
+    display: inline-block;
+}
+
+.lockedRewards{
+    height: 100%;
+    overflow: scroll;
+}
+
+.batteryStreakInfoContainer{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: #1D47F5 ;
+   background: -webkit-linear-gradient(left top, rgba(29,71,245,0.92) , rgba(51,255,226,0.92) );
+   background: -o-linear-gradient(bottom right, rgba(29,71,245,0.92) , rgba(51,255,226,0.92) );
+   background: -moz-linear-gradient(bottom right, rgba(29,71,245,0.92) , rgba(51,255,226,0.92) );
+   background: linear-gradient(to bottom right, rgba(29,71,245,0.92) , rgba(51,255,226,0.92) );
+}
+
+.batteryStreakInfoContainer hr{
+      margin-top: 32px;
+    margin-bottom: 32px;
+    border: none;
+    height: 1px;
+    background: rgba(255,255,255,0.28); 
+}
+
+.informationAction{
+    text-transform: uppercase ;
+    @include fontStyle(16px, 400, #FFFFFF, 19px);
+}
+
+
+.dayHeading{
+    @include fontStyle(16px, 500, #FFFFFF, 19px);
+    margin: 14px 0px 10px 0px;
+}
+
+.dayInformation{
+    @include fontStyle(16px, 400, #FFFFFF, 19px);
+}
+
+.batteryIconContainer{
+    background: url(images/batteryIcon.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 161px;
+    height: 24px;
+    margin-bottom:24px;
+}
+
+.batteryHeading{
+    @include fontStyle(16px, 500, #FFFFFF, 19px);
+    margin-bottom:12px;
+}
+
+.batteryInformation{
+    @include fontStyle(16px, 400, #FFFFFF, 19px);
+    margin-bottom: 24px; 
+}
+
+.streakInfoWrapper{
+    padding:0px 16px;
+}
+
+
+.batteryInfoWrapper{
+    
+}
+
+.streakInfoIcon{
+    background: url(images/streakIcon.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 36px;
+    height: 36px;
+    display: inline-flex;
+    vertical-align: middle;
+}
+
+.rewardUnlockContainer{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+
+.streakInfoValue{
+    @include fontStyle(28px, 500, #FFFFFF, 32px);
+    display: inline-flex;
+    vertical-align: middle;
+}
+
+.newRewardAnimOpacity {
+    @include animation(0.7s, 1s, ninjaNewRewardAnim);
+}
+
+.newRewardDayScale{
+    @include animation(1.7s, 0.45s, dayScaleAnim);
+}
+
+.newRewardBgRemove{
+    @include animation(0s, 1s, removeNewRewardUnlockBackground);
+}
+
+.newStreakAnimation{
+    @include animation(0s, 1s, updateNewStreakAnimation);
+}
+
+@include keyframe(ninjaNewRewardAnim) {
+    0% {
+        opacity: 0; 
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+@include keyframe(removeNewRewardUnlockBackground) {
+    0% {
+        opacity: 1;  
+    }
+    100% {
+        opacity: 0; 
+    }
+}
+
+@include keyframe(updateNewStreakAnimation) {
+    0% {
+        opacity: 1; 
+        -ms-transform: scale(1) translate(-50%, -50%);
+        -webkit-transform:  scale(1) translate(-50%, -50%);
+        transform: scale(1) translate(-50%, -50%) ;
+        top:50%;
+        left:50%;
+    }
+    100% {
+        opacity: 0;
+        -ms-transform: scale(0) translate(-50%, -50%);
+        -webkit-transform: scale(0) translate(-50%, -50%);
+        transform: scale(0) translate(-50%, -50%);
+        top:5%;
+        left:10%;
+    }
+}
+
+@include keyframe(dayScaleAnim) {
+    0% {
+        -ms-transform: scale(0);
+        -webkit-transform: scale(0);
+        transform: scale(0);
+        opacity: 0; 
+    }
+    70%{
+        -ms-transform: scale(1.12);
+        -webkit-transform: scale(1.12);
+        transform: scale(1.12);   
+        opacity: 0.7;
+    }
+    100% {
+        -ms-transform: scale(1);
+        -webkit-transform: scale(1);
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.rewardsContainer {
+    padding: 30px 0px 30px 20px;
+}
+
+
+.mysteryBoxIcon {
+    background: url(images/mysteryPack.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 108px;
+    height: 108px;
+    margin: 20px auto 24px auto;
+}
+
+#clockdiv {
+    color: #E49F5C;
+    display: inline-block;
+    font-weight: 300;
+    text-align: center;
+    font-size: 29px;
+    border: 1px solid #F0D6BD;
+    box-shadow: 0px 1px 3px 0px #FFFFFF;
+    border-radius: 10px;
+    padding: 16px 21px;
+}
+
+#clockdiv > div {
+    border-radius: 3px;
+    display: inline-block;
+}
+
+#clockdiv div > span {
+    display: inline-block;
+    margin: 0px 6px;
+}
+
+.smalltext {
+    font-weight: 400;
+    color: #3D475B;
+    font-size: 12px;
+    padding-top: 12px;
+}
+
+.mysteryBoxMessage {
+    margin: 26px auto 0px auto;
+    text-transform: uppercase;
+    color: rgba(61, 71, 91, 0.64);
+    font-size: 13px;
+    font-weight: 400;
+}
+
+// Activity Tab Contianer Here
+.activityContainer {
+    //margin-top: 24px;
+}
+
+.seperator {
+    background: rgba(0, 0, 0, 0.05);
+    height: 1px;
+    margin: 0px;
+    border: none;
+    padding: 0px;
+}
+
+.leaderboardWrapper {
+    margin: 24px 0px 38px 24px;
+}
+
+.listRow {
+    display: inline-block;
+    float: left;
+}
+
+::-webkit-scrollbar {
+    display: none;
+}
+
+.topList {
+    width: 47em;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    white-space: nowrap;
+}
+
+.topNinjas {
+    overflow-x: scroll;
+    overflow-y: hidden;
+    white-space: nowrap;
+}
+
+.leaderboardHeading {
+    color: rgba(61, 71, 91, 0.64);
+    font-size: 14px;
+    font-weight: 400;
+    margin-bottom: 20px;
+}
+
+.listRow {
+    margin-right: 32px;
+}
+
+.userName {
+    font-size: 12px;
+    color: #3D475B;
+    font-weight: 400;
+    margin-top: 6px;
+}
+
+.userIcon {
+    background: url(images/ninjaProfile.jpg);
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 48px;
+    height: 48px;
+    -webkit-border-radius: 50%;
+    border-radius: 50%;
+}
+
+.statTypeContainer {
+    padding: 24px;
+    margin-bottom: 24px;
+}
+
+.statHeading {
+    font-size: 14px;
+    color: rgba(61, 71, 91, 0.64);
+    margin-bottom: 20px;
+}
+
+.statBoxWrapper {
+    padding-left: 12px;
+    width: 40%;
+    display: inline-block;
+    margin-bottom: 28px;
+}
+
+.statBoxFloatLeft {
+    float: left;
+}
+
+.statBoxFloatRight {
+    float: right;
+}
+
+.statValue {
+    font-size: 32px;
+    color: #3D475B;
+    font-weight: 300;
+}
+
+.settingsWrapper {
+    margin-bottom: 14px;
+    text-align: center;
+}
+
+.optionOne,
+.optionTwo,
+.optionThree {
+    font-size: 12px;
+    color: #3D475B;
+    font-weight: 300;
+    display: inline-block;
+}
+
+.twoSideMargin {
+    margin-left: 8px;
+    margin-right: 8px;
+}
+
+.selectedTime {
+    background: #3D475B;
+    color: #fff;
+}
+
+.statTimePeriod {
+    display: inline-block;
+    border: 1px solid #3D475B;
+    border-radius: 20px;
+    text-align: center;
+    padding: 6px 14px;
+    width: 20%;
+}
+
+.statText {
+    font-size: 12px;
+    color: rgba(61, 71, 91, 0.40);
+    margin-top: 4px;
+}
+
+

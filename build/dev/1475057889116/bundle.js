@@ -4654,17 +4654,16 @@
 	    var WorkspaceController = __webpack_require__(8),
 	        HomescreenController = __webpack_require__(11),
 
-
-	        Router = __webpack_require__(12),
+	        Router = __webpack_require__(13),
 	        utils = __webpack_require__(4),
-	        profileModel = __webpack_require__(14),
-	        rewardsModel = __webpack_require__(15),
-	        activityModel = __webpack_require__(19),
-	        mysteryBoxModel = __webpack_require__(21),
-	        cacheProvider = __webpack_require__(13),
-	        expHandlerAB = __webpack_require__(28),
-	        TxService = __webpack_require__(17),
-	        NinjaService = __webpack_require__(18),
+	        profileModel = __webpack_require__(15),
+	        rewardsModel = __webpack_require__(16),
+	        activityModel = __webpack_require__(20),
+	        mysteryBoxModel = __webpack_require__(22),
+	        cacheProvider = __webpack_require__(14),
+	        expHandlerAB = __webpack_require__(29),
+	        TxService = __webpack_require__(18),
+	        NinjaService = __webpack_require__(19),
 	        Constants = __webpack_require__(5);
 
 	    // Full Screen Loader
@@ -4738,9 +4737,6 @@
 	        // Profile Controller
 	        this.workspaceController = new WorkspaceController();
 	        this.homescreenController = new HomescreenController();
-
-
-
 
 	        // Communication Controller
 	        this.TxService = new TxService();
@@ -5010,16 +5006,6 @@
 
 	            self.initOverflowMenu();
 
-	            /*
-
-	            expHandlerAB.getVal(cacheProvider.getFromCritical('lockedRewardAB_key'), JSON.parse(cacheProvider.getFromCritical('lockedRewardAB_defaultVal')), function(response) {
-	                cacheProvider.setInCritical('lockedGreyout', JSON.parse(response));
-	            });
-
-	            */
-
-
-
 
 	            utils.toggleBackNavigation(false);
 	            document.querySelector('.unblockButton').addEventListener('click', function() {
@@ -5051,7 +5037,6 @@
 	                utils.toggleBackNavigation(false);
 	            });
 
-
 	            // Ninja Home screen
 	            this.router.route('/home', function(data) {
 	                self.container.innerHTML = '';
@@ -5059,24 +5044,15 @@
 	                utils.toggleBackNavigation(false);
 	            });
 
-
-
 	            var subscriptionCompleted = cacheProvider.getFromCritical('subscriptionCompleted');
 	            var ftueCompleted = cacheProvider.getFromCritical('ftueCompleted');
 
 
 	            if (subscriptionCompleted) {
-	                self.router.navigateTo('/');
+	                self.router.navigateTo('/home');
 	            } else {
 	                self.router.navigateTo('/home');
 	            }
-
-	            self.router.navigateTo('/');
-
-
-
-
-
 	        }
 	    };
 
@@ -5194,24 +5170,83 @@
 	        Constants = __webpack_require__(5),
 
 	        HomescreenController = function(options) {
-	            //this.template = require('raw!../../templates/userState.html');
+	            this.template = __webpack_require__(12);
 	        };
 
 	    HomescreenController.prototype.bind = function(App, data) {
 
+	        // Unlocked Reward Container
+	        var unlockedReward = document.getElementsByClassName('unlockedReward')[0];
 
+	        // Unlocked Reward Heading
+	        var unlockedRewardHeading = document.getElementsByClassName('unlockedRewardHeading')[0];
+	        
+	        // New Reward Unlock Overlay
+	        var rewardUnlockAnimation = document.getElementsByClassName('rewardUnlockAnimation')[0];
+	        var streakValueContainer = document.getElementsByClassName('streakValueContainer')[0];
+	        var rewardUnlockContainer = document.getElementsByClassName('rewardUnlockContainer')[0];
+
+	        if(data.unlockedRewards.length > 0){
+	            console.log(data.unlockedRewards);
+	            rewardUnlockAnimation.classList.add('newRewardAnimOpacity');
+	            streakValueContainer.classList.add('newRewardDayScale');
+	        }else {
+	            console.log("No new rewards are present :: Pick first from locked and make a card");
+	            console.log(data.unlockedRewards);
+	        }
+
+	        streakValueContainer.addEventListener('click', function(event) {
+	            rewardUnlockAnimation.style.opacity = 1;
+	            rewardUnlockAnimation.classList.add('newRewardBgRemove');
+	            rewardUnlockContainer.classList.add('newStreakAnimation');
+	        });
+	    };
+
+	    HomescreenController.prototype.filterRewards = function(rewards) {
+
+	        var filteredRewards = {};
+	        filteredRewards.unlockedRewards = [];
+	        filteredRewards.lockedRewards = [];
+	        filteredRewards.redeemedRewards = [];
+	        filteredRewards.expiredRewards = [];
+
+	        // 0 -> Locked
+	        // 1-> Unlocked
+	        // 2 -> Redeemed
+	        // 3 -> Expired
+	        
+	        for (var i = 0; i < rewards.length; i++) {
+	            if(rewards[i].state === 0){
+	                filteredRewards.lockedRewards.push(rewards[i]);
+	            }else if (rewards[i].state === 1){
+	                filteredRewards.unlockedRewards.push(rewards[i]);
+	            }else if (rewards[i].state === 2){
+	                filteredRewards.redeemedRewards.push(rewards[i]); 
+	            }else if (rewards[i].state === 3){
+	                filteredRewards.expiredRewards.push(rewards[i]);
+	            }
+	        }
+
+	        return filteredRewards;
 
 	    };
 
 	    HomescreenController.prototype.render = function(ctr, App, data) {
 
 	        var that = this;
+	        var rewardsData = {};
+
+	        data = {"rewards":[{"desc":"Get the best stickers on hike way before everyone else does. You get these 2 weeks before mere mortals. You're a Ninja!","hicon":"https://s3-ap-southeast-1.amazonaws.com/hike-giscassets/nixy/secretStickerShopIllustration.png","icon":"https://s3-ap-southeast-1.amazonaws.com/hike-giscassets/nixy/early_access_sticker_icon.png","id":"57b56ec17e401ddfe70a9e8f","state":3,"stitle":"Get all the hike stickers before everyone else.","streak":1,"title":"Early Access Stickers","type":"sticker_reward","value":null},{"icon":"https://s3-ap-southeast-1.amazonaws.com/hike-giscassets/nixy/GIFSharingHeader.png","id":"57cfce41733265431b98b317","state":1,"stitle":"Get the exclusive GIF feature.","streak":15,"title":"Exclusive Gif","type":"exclusive_feature","value":null},{"failed_preview_img":"https://staging.im.hike.in/sticker?catId=mumbai&stId=023_mb_badey.png&resId=XHDPI&image=True","icon":"https://s3-ap-southeast-1.amazonaws.com/hike-giscassets/nixy/custom_sticker_icon.png","id":"57c554417332654291dc1097","state":1,"stitle":"Have an exclusive sticker made just for you","streak":7,"title":"My Sticker","type":"custom_sticker","value":null},{"desc":"Share animated stickers with your friends and get krazzy","hicon":"https://s3-ap-southeast-1.amazonaws.com/hike-giscassets/nixy/animatedStickers.png","icon":"https://s3-ap-southeast-1.amazonaws.com/hike-giscassets/nixy/animatedStickers.png","id":"58c563ce7332657fe8d3ca69","state":3,"stitle":"Experience the new animated before anyone else","streak":0,"title":"Animated Stickers","type":"exclusive_feature","value":null}],"rewards_hash":"1474970960"};
+
+	        rewardsData = that.filterRewards(data.rewards);
+	        console.log(rewardsData);
+
 	        that.el = document.createElement('div');
-	        that.el.className = 'ftueController animation_fadein noselect';
-	        that.el.innerHTML = Mustache.render(unescape(that.template), { stateData: data });
+	        that.el.className = 'homeScreenContainer animation_fadein noselect';
+	        that.el.innerHTML = Mustache.render(unescape(that.template), {ninjaUnlockedRewards:data.rewards,ninjaLockedRewards:data.rewards});
 	        ctr.appendChild(that.el);
 	        events.publish('update.loader', { show: false });
-	        that.bind(App, data);
+	        that.bind(App, rewardsData);
 	    };
 
 	    HomescreenController.prototype.destroy = function() {
@@ -5224,12 +5259,18 @@
 
 /***/ },
 /* 12 */
+/***/ function(module, exports) {
+
+	module.exports = "<!-- Full Screen Popup For Battery/Streak Explanation -->\n<div class=\"batteryStreakInfoContainer centerToScreenContainer hideClass\">\n    <div class=\"blurScreen\">\n        <div class=\"centerToScreenWrapper\">\n            <div class=\"streakInfoWrapper\">\n                <div class=\"streakInfoContainer\">\n                    <div class=\"streakInfoIcon\"></div>\n                    <div class=\"streakInfoValue\">01\n                    </div>\n                    <p class=\"dayHeading\">Days</p>\n                    <p class=\"dayInformation\">This is the number of days you’ve been a Ninja for.\n                        <br><br>Continue being a Ninja every day to go higher and get more awesome gifts.</p>\n                </div>\n                <hr noshade>\n                <div class=\"batteryInfoWarpper\">\n                    <div class=\"batteryIconContainer\"></div>\n                    <div class=\"batteryHeading\">Ninja Life</div>\n                    <p class=\"batteryInformation\">You’re going to reaming a Ninja for X more days.\n                        <br><br>Keep loving and using hike with your best friends to be a Ninja for more days and get more awesome gifts.</p>\n                </div>\n                <div class=\"informationAction\">Got It</div>\n            </div>\n        </div>\n    </div>\n</div>\n<!-- Full Screen Popup for days unlock -->\n<div class=\"rewardUnlockAnimation centerToScreenContainer\">\n        <div class=\"rewardUnlockContainer\">\n            <div class=\"dayDef\">Day 1</div>\n            <div class=\"streakValueContainer\">\n                <div class=\"rewardUnlockStreakIcon\"></div>\n                <div class=\"rewardUnlockStreakValue\">01</div>\n            </div>\n        </div>\n</div>\n<!-- Home Screen For Ninja Micro app -->\n<div class=\"ninjaHomeContainer\">\n    <div class=\"profileContainer clearfix\">\n        <div class=\"ninjaProfileInfo\">\n            <div class=\"streakContainer\">\n                <div class=\"streakIcon\"></div>\n                <div class=\"streakValue\">01\n                    <br><span class=\"streakDef\">days</span></div>\n            </div>\n            <div class=\"ninjaDp\"></div>\n        </div>\n    </div>\n    <div class=\"ninjaBottomContainer\">\n        <div class=\"ninjaWave\"></div>\n        <div class=\"ninjaRewards\">\n            <div class=\"unlockedReward hideClass\">\n                <p class=\"unlockedRewardHeading\">Unclocked Gifts</p>\n                <div class=\"unlockedRewardListContainer\">\n                    <ul class=\"unlockedRewardList\">\n                        {{#ninjaUnlockedRewards}}\n                        <li class=\"unlockedRewardListItem\">\n                            <div class=\"unlockedRewardHeader\">\n                                <div class=\"unlockedRewardIcon\"></div>\n                                <div class=\"unlockedRewardStreak\">{{streak}}</div>\n                            </div>\n                            <div class=\"unlockedRewardDetails\">\n                                <p class=\"uRewardHeading\">{{title}}</p>\n                                <p class=\"uRewardSubheading\">{{stitle}}</p>\n                            </div>\n                            <div class=\"unlockedRewardAction\">Get It now</div>\n                        </li>\n                        {{/ninjaUnlockedRewards}}\n                    </ul>\n                </div>\n            </div>\n            <div class=\"lockedRewards\">\n                <p class=\"lockedRewardHeading\">Upcoming Gifts</p>\n                <div class=\"lockedRewardListContainer\">\n                    <ul class=\"lockedRewardList\">\n                        {{#ninjaLockedRewards}}\n                        <li class=\"rewardRow\" data-rewardId=\"{{id}}\" data-state=\"{{state}}\" data-rewardtype=\"{{type}}\">\n                            <div class=\"rewardIcon\"></div>\n                            <div class=\"rewardDetails\">\n                                <p class=\"rewardHeading {{^state}}{{#lockedGreyout}}rewardHeadingLocked{{/lockedGreyout}}{{/state}}\">{{title}}</p>\n                                <p class=\"rewardSubheading {{^state}}{{#lockedGreyout}}rewardSubheadingLocked{{/lockedGreyout}}{{/state}}\">{{stitle}}</p>\n                            </div>\n                            {{#streak}}\n                            <div class=\"rewardStreakWrapper\">\n                                <div class=\"rewardStreakIcon\"></div>\n                                <div class=\"rewardStreakValue\">{{streak}}</div>\n                            </div>\n                            {{/streak}}\n                        </li>\n                        {{/ninjaLockedRewards}}\n                    </ul>\n                </div>\n            </div>\n        </div>\n    </div>\n</div>\n"
+
+/***/ },
+/* 13 */
 /***/ function(module, exports, __webpack_require__) {
 
 	(function (W, events) {
 	    'use strict';
 
-	   var cacheProvider = __webpack_require__(13);
+	   var cacheProvider = __webpack_require__(14);
 	   
 	    var Router = function () {
 	        this.routes = {};
@@ -5323,7 +5364,7 @@
 	})(window, platformSdk.events);
 
 /***/ },
-/* 13 */
+/* 14 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -5377,7 +5418,7 @@
 	})();
 
 /***/ },
-/* 14 */
+/* 15 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -5389,10 +5430,10 @@
 
 	    var platformSdk = __webpack_require__(3),
 	        utils = __webpack_require__(4),
-	        cacheProvider = __webpack_require__(13),
-	        rewardsModel = __webpack_require__(15),
-	        TxService = __webpack_require__(17),
-	        NinjaService = __webpack_require__(18),
+	        cacheProvider = __webpack_require__(14),
+	        rewardsModel = __webpack_require__(16),
+	        TxService = __webpack_require__(18),
+	        NinjaService = __webpack_require__(19),
 
 	        ProfileModel = function() {
 	            this.TxService = new TxService();
@@ -5577,7 +5618,7 @@
 
 
 /***/ },
-/* 15 */
+/* 16 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -5589,7 +5630,7 @@
 
 	    var platformSdk = __webpack_require__(3),
 	        utils = __webpack_require__(4),
-	        cacheProvider = __webpack_require__(13), 
+	        cacheProvider = __webpack_require__(14), 
 	        Constants = __webpack_require__(5),
 
 	        RewardsModel = function() {},
@@ -5699,7 +5740,7 @@
 	            ninjaRewardsListOld.innerHTML = '';
 
 	            // Re Render The Reward Template Only From External HTML
-	            this.template = __webpack_require__(16);
+	            this.template = __webpack_require__(17);
 
 	            // To remove later for adhoc
 
@@ -5729,13 +5770,13 @@
 	})();
 
 /***/ },
-/* 16 */
+/* 17 */
 /***/ function(module, exports) {
 
 	module.exports = "{{#ninjaRewardsCollection}}\n<li class=\"rewardRow\" data-rewardId=\"{{id}}\" data-state=\"{{state}}\" data-rewardtype=\"{{type}}\">\n    <div class=\"rewardIcon\"></div>\n    <div class=\"rewardDetails\">\n        <p class=\"rewardHeading    {{^state}}{{#lockedGreyout}}rewardHeadingLocked{{/lockedGreyout}}{{/state}}\">{{title}}</p>\n        <p class=\"rewardSubheading {{^state}}{{#lockedGreyout}}rewardSubheadingLocked{{/lockedGreyout}}{{/state}}\">{{stitle}}</p>\n    </div>\n    {{#streak}}\n    <div class=\"rewardStreakWrapper\">\n        <div class=\"rewardStreakIcon\"></div>\n        <div class=\"rewardStreakValue\">{{streak}}</div>\n    </div>\n    {{/streak}}\n</li>\n{{/ninjaRewardsCollection}}"
 
 /***/ },
-/* 17 */
+/* 18 */
 /***/ function(module, exports, __webpack_require__) {
 
 	(function(W, platformSdk, events) {
@@ -5885,14 +5926,14 @@
 	})(window, platformSdk, platformSdk.events);
 
 /***/ },
-/* 18 */
+/* 19 */
 /***/ function(module, exports, __webpack_require__) {
 
 	(function(W, platformSdk, events) {
 	    'use strict';
 
 	    var utils = __webpack_require__(4);
-	    var cacheProvider = __webpack_require__(13);
+	    var cacheProvider = __webpack_require__(14);
 	    var Constants = __webpack_require__(5);
 	    var checkTimeout = null;
 
@@ -6062,7 +6103,7 @@
 	})(window, platformSdk, platformSdk.events);
 
 /***/ },
-/* 19 */
+/* 20 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -6074,9 +6115,9 @@
 
 	    var platformSdk = __webpack_require__(3),
 	        utils = __webpack_require__(4),
-	        cacheProvider = __webpack_require__(13),
-	        TxService = __webpack_require__(17),
-	        NinjaService = __webpack_require__(18),
+	        cacheProvider = __webpack_require__(14),
+	        TxService = __webpack_require__(18),
+	        NinjaService = __webpack_require__(19),
 
 	        ActivityModel = function() {
 	            this.TxService = new TxService();
@@ -6155,7 +6196,7 @@
 	            statsWrapper.innerHTML = '';
 
 	            // Re Render The Reward Template Only From External HTML
-	            this.template = __webpack_require__(20);
+	            this.template = __webpack_require__(21);
 	            statsWrapper.innerHTML = Mustache.render(this.template, {
 	                ninjaActivityData: activityData
 	            });
@@ -6168,13 +6209,13 @@
 
 
 /***/ },
-/* 20 */
+/* 21 */
 /***/ function(module, exports) {
 
 	module.exports = "{{#ninjaActivityData}}\n<div class=\"statTypeContainer\">\n    <div class=\"statHeading\">Messaging</div>\n    <div class=\"statBoxWrapper statBoxFloatLeft\">\n        <div class=\"statValue messagesR\">{{ninjaActivityData.messages.rec}}</div>\n        <div class=\"statText\">Messages Received</div>\n    </div>\n    <div class=\"statBoxWrapper statBoxFloatRight\">\n        <div class=\"statValue messagesS\">{{ninjaActivityData.messages.sent}}</div>\n        <div class=\"statText\">Messages Sent</div>\n    </div>\n    <div class=\"statBoxWrapper statBoxFloatLeft\">\n        <div class=\"statValue stickersR\">{{ninjaActivityData.stickers.rec}}</div>\n        <div class=\"statText\">Stickers Received</div>\n    </div>\n    <div class=\"statBoxWrapper statBoxFloatRight\">\n        <div class=\"statValue stickersS\">{{ninjaActivityData.stickers.sent}}</div>\n        <div class=\"statText\">Stickers Sent</div>\n    </div>\n    <div class=\"statBoxWrapper statBoxFloatLeft\">\n        <div class=\"statValue chatThemesR\">{{ninjaActivityData.chatThemes.rec}}</div>\n        <div class=\"statText\">Chat Themes Received</div>\n    </div>\n    <div class=\"statBoxWrapper statBoxFloatRight\">\n        <div class=\"statValue chatThemesS\">{{ninjaActivityData.chatThemes.sent}}</div>\n        <div class=\"statText\">Chat Themes Sent</div>\n    </div>\n    <div class=\"statBoxWrapper statBoxFloatLeft\">\n        <div class=\"statValue filesR\">{{ninjaActivityData.files.rec}}</div>\n        <div class=\"statText\">Files Received</div>\n    </div>\n    <div class=\"statBoxWrapper statBoxFloatRight\">\n        <div class=\"statValue filesS\">{{ninjaActivityData.files.sent}}</div>\n        <div class=\"statText\">Files Sent</div>\n    </div>\n</div>\n<div class=\"statTypeContainer\">\n    <div class=\"statHeading\">Timeline</div>\n    <div class=\"statBoxWrapper statBoxFloatLeft\">\n        <div class=\"statValue statusUpdateCount\">{{ninjaActivityData.statusUpdates.count}}</div>\n        <div class=\"statText\">Status Updates Posted</div>\n    </div>\n</div>\n{{/ninjaActivityData}}\n"
 
 /***/ },
-/* 21 */
+/* 22 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -6186,11 +6227,11 @@
 
 	    var platformSdk = __webpack_require__( 3 ),
 	        utils = __webpack_require__( 4 ),
-	        cacheProvider = __webpack_require__( 13 ),
-	        profileModel = __webpack_require__( 14 ),
-	        rewardsModel = __webpack_require__( 15 ),
-	        TxService = __webpack_require__( 17 ),
-	        NinjaService = __webpack_require__( 18 ),
+	        cacheProvider = __webpack_require__( 14 ),
+	        profileModel = __webpack_require__( 15 ),
+	        rewardsModel = __webpack_require__( 16 ),
+	        TxService = __webpack_require__( 18 ),
+	        NinjaService = __webpack_require__( 19 ),
 
 	        MysteryBoxModel = function() {
 	            this.TxService = new TxService();
@@ -6261,7 +6302,7 @@
 
 	            if ( rewardData.value == 'HIGH' ) {
 	                console.log( 'Bumper Anmation' );
-	                that.template = __webpack_require__( 22 );
+	                that.template = __webpack_require__( 23 );
 	                mysteryBoxContainer.innerHTML = Mustache.render( that.template, {
 	                    mysterBoxReward: rewardData
 	                });
@@ -6286,14 +6327,14 @@
 
 	            } else if ( rewardData.value == 'LOW' ) {
 	                console.log( 'Low animation :: Figure Out design' );
-	                that.template = __webpack_require__( 23 );
+	                that.template = __webpack_require__( 24 );
 	                mysteryBoxContainer.innerHTML = Mustache.render( that.template, {
 	                    mysterBoxReward: rewardData
 	                });
 
 	                var mysteryRewardActionLow = document.getElementsByClassName( 'mysteryRewardAction' )[0];
 	                mysteryRewardActionLow.addEventListener( 'click', function() {
-	                    that.template = __webpack_require__( 24 );
+	                    that.template = __webpack_require__( 25 );
 	                    mysteryBoxContainer.innerHTML = Mustache.render( that.template, {});
 	                    that.defineCooldown( cooldownTime, App );
 	                });
@@ -6305,14 +6346,14 @@
 
 	            } else if ( rewardData.value == 'MED' ) {
 	                console.log( 'Low animation :: Figure Out Design' );
-	                that.template = __webpack_require__( 23 );
+	                that.template = __webpack_require__( 24 );
 	                mysteryBoxContainer.innerHTML = Mustache.render( that.template, {
 	                    mysterBoxReward: rewardData
 	                });
 
 	                var mysteryRewardActionMed = document.getElementsByClassName( 'mysteryRewardAction' )[0];
 	                mysteryRewardActionMed.addEventListener( 'click', function() {
-	                    that.template = __webpack_require__( 24 );
+	                    that.template = __webpack_require__( 25 );
 	                    mysteryBoxContainer.innerHTML = Mustache.render( that.template, {});
 	                    that.defineCooldown( cooldownTime, App );
 	                });
@@ -6499,13 +6540,13 @@
 	            if ( mysteryBoxData.mstatus == 'inactive' ) {
 
 	                // Re Render The Reward Template Only From External HTML
-	                that.template = __webpack_require__( 25 );
+	                that.template = __webpack_require__( 26 );
 	                mysteryBoxContainer.innerHTML = Mustache.render( that.template, {
 	                    streakToUnlock: mysteryBoxData.streak_unlock
 	                });
 	            } else if ( mysteryBoxData.mstatus == 'active' ) {
 
-	                that.template = __webpack_require__( 26 );
+	                that.template = __webpack_require__( 27 );
 	                mysteryBoxContainer.innerHTML = Mustache.render( that.template, {
 	                    previousWinner: mysteryBoxData.yesterday_winner,
 	                    showMysteryBoxHistoryButton: showMysteryBoxHistoryButton
@@ -6519,7 +6560,7 @@
 
 	                console.log( mysteryBoxData );
 
-	                that.template = __webpack_require__( 24 );
+	                that.template = __webpack_require__( 25 );
 	                mysteryBoxContainer.innerHTML = Mustache.render( that.template, {
 	                    showMysteryBoxHistoryButton: showMysteryBoxHistoryButton
 	                });
@@ -6536,7 +6577,7 @@
 	                mHistoryButton.addEventListener( 'click', function() {
 	                    console.log( 'Opening your Mystery Box History' );
 
-	                    that.template = __webpack_require__( 27 );
+	                    that.template = __webpack_require__( 28 );
 	                    mysteryBoxContainer.innerHTML = Mustache.render( that.template, {
 	                        mysteryBoxHistory: mysteryBoxData.history
 	                    });
@@ -6562,43 +6603,43 @@
 
 
 /***/ },
-/* 22 */
+/* 23 */
 /***/ function(module, exports) {
 
 	module.exports = "{{#mysterBoxReward}}\n\t<div class=\"mysteryBoxIcon\"></div>\n\t<div class=\"mysteryBoxMessageSpin\">Congrats! You’ve unlocked the grand prize - {{title}}. Get your gift now.</div>\n\t<div class=\"actionContainer align-center\">\n\t\t<div data-rid=\"{{tid}}\" data-rewardtype=\"{{type}}\" class=\"mysteryRewardBumperAction align-center\">Claim</div>\n\t</div>\n{{/mysterBoxReward}}\n"
 
 /***/ },
-/* 23 */
+/* 24 */
 /***/ function(module, exports) {
 
 	module.exports = "{{#mysterBoxReward}}\n\t<div class=\"mysteryBoxIcon align-center\"></div>\n\t<div class=\"mysteryBoxMessageSpin align-center\">{{title}}</div>\n\t<div class=\"actionContainer align-center\">\n\t\t<div data-id=\"{{id}}\" class=\"mysteryRewardAction align-center\">Got It</div>\n\t</div>\n{{/mysterBoxReward}}"
 
 /***/ },
-/* 24 */
+/* 25 */
 /***/ function(module, exports) {
 
 	module.exports = "<div class=\"mysteryBoxIcon align-center\"></div>\n<div class=\"mysteryBoxCounter align-center\">\n    <div id=\"clockdiv\">\n        <div>\n            <span class=\"days\"></span>\n            <div class=\"smalltext\">Days</div>\n        </div>\n        <div>\n            <span class=\"hours\"></span>\n            <div class=\"smalltext\">Hrs</div>\n        </div>\n        <div>\n            <span class=\"minutes\"></span>\n            <div class=\"smalltext\">Mins</div>\n        </div>\n        <div>\n            <span class=\"seconds\"></span>\n            <div class=\"smalltext\">Secs</div>\n        </div>\n    </div>\n</div>\n<div class=\"mysteryBoxMessage align-center\">Remaining For your Next Spin</div>\n\n{{#showMysteryBoxHistoryButton}}\n<div class=\"mysteryBoxHistory align-center\">My History</div>\n{{/showMysteryBoxHistoryButton}}\n"
 
 /***/ },
-/* 25 */
+/* 26 */
 /***/ function(module, exports) {
 
 	module.exports = "<div class=\"mysteryBoxMessage align-center\">You will be able to unlock the mystery box only after {{streakToUnlock}} days of streak</div>\n"
 
 /***/ },
-/* 26 */
+/* 27 */
 /***/ function(module, exports) {
 
 	module.exports = "<div id=\"spin\" class=\"spin\">SPIN</div>\n<div id=\"result\" class=\"result\"></div>\n<div class=\"mysteryBoxMessageSpin\">Spin the wheel to unlock the surprise. Only one Ninja per day wins the grand prize.</div>\n<div class=\"wheel-wrapper\">\n  <div class=\"needle\"></div>\n  <div id=\"wheel\" class=\"wheel\">\n    <div class=\"cutter\">\n      <div class=\"slicer\">\n        <div class=\"part\" data-slice=\"8\" data-reward=\"\"><div class=\"mBoxRewardIcon\"></div></div>\n      </div>\n    </div>\n    <div class=\"cutter\">\n      <div class=\"slicer\">\n        <div class=\"part\" data-slice=\"7\" data-reward=\"\"><div class=\"mBoxRewardIcon\"></div></div>\n      </div>\n    </div>\n    <div class=\"cutter\">\n      <div class=\"slicer\">\n        <div class=\"part\" data-slice=\"6\" data-reward=\"\"><div class=\"mBoxRewardIcon\"></div></div>\n      </div>\n    </div>\n    <div class=\"cutter\">\n      <div class=\"slicer\">\n        <div class=\"part\" data-slice=\"5\" data-reward=\"\"><div class=\"mBoxRewardIcon\"></div></div>\n      </div>\n    </div>\n    <div class=\"cutter\">\n      <div class=\"slicer\">\n        <div class=\"part\" data-slice=\"4\" data-reward=\"\"><div class=\"mBoxRewardIcon\"></div></div>\n      </div>\n    </div>\n    <div class=\"cutter\">\n      <div class=\"slicer\">\n        <div class=\"part\" data-slice=\"3\" data-reward=\"\"><div class=\"mBoxRewardIcon\"></div></div>\n      </div>\n    </div>\n    <div class=\"cutter\">\n      <div class=\"slicer\">\n        <div class=\"part\" data-slice=\"2\" data-reward=\"\"><div class=\"mBoxRewardIcon\"></div></div>\n      </div>\n    </div>\n    <div class=\"cutter\">\n      <div class=\"slicer\">\n        <div class=\"part\" data-slice=\"1\" data-reward=\"\"><div class=\"mBoxRewardIcon\"></div></div>\n      </div>\n    </div>\n  </div>\n</div>\n\n{{#previousWinner}}\n  <div class=\"previousWinnerRow align-center\">\n    <p class=\"previousWinnerHeading\">Yesterday's Grand Prize Winner</p>\n    <div class=\"winnerWrapper\">\n      <div class=\"winnerIcon\"></div>\n      <div class=\"winnerName\">{{previousWinner.name}}</div>  \n    </div>\n  </div>\n{{/previousWinner}}\n\n{{#showMysteryBoxHistoryButton}}\n<div class=\"mysteryBoxHistory  align-center\">My History</div>\n{{/showMysteryBoxHistoryButton}}"
 
 /***/ },
-/* 27 */
+/* 28 */
 /***/ function(module, exports) {
 
 	module.exports = "<div class=\"mysteryBoxHistoryContainer\">\n    {{#mysteryBoxHistory}}\n    <li class=\"bumperRow\" data-rid=\"{{id}}\" data-url=\"{{url}}\" data-state=\"{{state}}\" data-rewardtype=\"{{type}}\">\n        <div class=\"bumperRowIcon\"></div>\n        <div class=\"bumperRowDetails\">\n            <p class=\"bumperRowHeading\">{{title}}</p>\n            <p class=\"bumperRowSubHeading\">{{stitle}}</p>\n        </div>\n    </li>\n    {{/mysteryBoxHistory}}\n</div>"
 
 /***/ },
-/* 28 */
+/* 29 */
 /***/ function(module, exports, __webpack_require__) {
 
 	(function() {
