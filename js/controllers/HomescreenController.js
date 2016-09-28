@@ -3,6 +3,7 @@
 
     var utils = require('../util/utils'),
         Constants = require('../../constants.js'),
+        cacheProvider = require('../util/cacheProvider'),
 
         HomescreenController = function(options) {
             this.template = require('raw!../../templates/ninjaHomeScreen.html');

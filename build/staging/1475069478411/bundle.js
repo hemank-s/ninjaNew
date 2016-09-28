@@ -4652,18 +4652,18 @@
 	    'use strict';
 
 	    var WorkspaceController = __webpack_require__(8),
-	        HomescreenController = __webpack_require__(11),
+	        HomescreenController = __webpack_require__(19),
 
-	        Router = __webpack_require__(13),
+	        Router = __webpack_require__(21),
 	        utils = __webpack_require__(4),
-	        profileModel = __webpack_require__(15),
-	        rewardsModel = __webpack_require__(16),
-	        activityModel = __webpack_require__(20),
+	        profileModel = __webpack_require__(10),
+	        rewardsModel = __webpack_require__(11),
+	        activityModel = __webpack_require__(15),
 	        mysteryBoxModel = __webpack_require__(22),
-	        cacheProvider = __webpack_require__(14),
+	        cacheProvider = __webpack_require__(9),
 	        expHandlerAB = __webpack_require__(29),
-	        TxService = __webpack_require__(18),
-	        NinjaService = __webpack_require__(19),
+	        TxService = __webpack_require__(13),
+	        NinjaService = __webpack_require__(14),
 	        Constants = __webpack_require__(5);
 
 	    // Full Screen Loader
@@ -5047,21 +5047,18 @@
 	            var subscriptionCompleted = cacheProvider.getFromCritical('subscriptionCompleted');
 	            var ftueCompleted = cacheProvider.getFromCritical('ftueCompleted');
 
-
 	            if (!subscriptionCompleted || !ftueCompleted) {
-	                self.router.navigateTo('/');
+	                self.router.navigateTo('/home');
 	            } else {
 	                self.router.navigateTo('/home');
 	            }
-
-	            self.router.navigateTo('/home');
-
 	        }
 	    };
 
 	    module.exports = Application;
 
 	})(window, platformSdk.events);
+
 
 /***/ },
 /* 8 */
@@ -5072,10 +5069,13 @@
 
 	    var utils = __webpack_require__(4),
 	        Constants = __webpack_require__(5),
+	        cacheProvider = __webpack_require__(9),
+	        profileModel = __webpack_require__(10),
+	        activityModel = __webpack_require__(15),
 
 	        WorkspaceController = function(options) {
-	            this.template = __webpack_require__(9);
-	            this.ftueTemplate = __webpack_require__(10);
+	            this.template = __webpack_require__(17);
+	            this.ftueTemplate = __webpack_require__(18);
 	        };
 
 	    WorkspaceController.prototype.bind = function(App, data) {
@@ -5103,25 +5103,48 @@
 
 	                if (target.getAttribute('data-screen') == "subscribe") {
 
-	                    DOMcache.screenCls.classList.remove('subscribeScreen');
-	                    DOMcache.screenCls.classList.add('ftueScreen');
-	                    DOMcache.title.classList.add('titleAnimFtueCls');
-	                    DOMcache.title.classList.add('animation_fadeout');
-	                    DOMcache.subtitle.remove();
-	                    DOMcache.title.innerHTML = "What do you get?"
+	                    App.NinjaService.subscribeHandler({}, function(res) {
 
-	                    DOMcache.content.innerHTML = Mustache.render(unescape(that.ftueTemplate));
-	                    DOMcache.bottomSection.classList.remove('slideFromBottomCls');
-	                    DOMcache.bottomSection.classList.add('slideFromBottomCls2');
+	                        if (res.stat === 'ok') {
 
-	                    DOMcache.centerIcon.classList.remove('scaleZeroToOneAnim');
-	                    DOMcache.centerIcon.classList.add('animation_fadeout');
-	                    DOMcache.info.classList.add('animation_fadeout');
-	                    DOMcache.cta.classList.add('animation_fadeout');
+	                            cacheProvider.setInCritical('subscriptionCompleted', true);
+
+	                            /* Animation For the FTUE Screen */
+	                            DOMcache.screenCls.classList.remove('subscribeScreen');
+	                            DOMcache.screenCls.classList.add('ftueScreen');
+	                            DOMcache.title.classList.add('titleAnimFtueCls');
+	                            DOMcache.title.classList.add('animation_fadeout');
+	                            DOMcache.subtitle.remove();
+	                            DOMcache.title.innerHTML = "What do you get?";
+	                            DOMcache.content.innerHTML = Mustache.render(unescape(that.ftueTemplate));
+	                            DOMcache.bottomSection.classList.remove('slideFromBottomCls');
+	                            DOMcache.bottomSection.classList.add('slideFromBottomCls2');
+	                            DOMcache.centerIcon.classList.remove('scaleZeroToOneAnim');
+	                            DOMcache.centerIcon.classList.add('animation_fadeout');
+	                            DOMcache.info.classList.add('animation_fadeout');
+	                            DOMcache.cta.classList.add('animation_fadeout');
+
+
+	                            /* Fetch Profile Data in Background */
+	                            App.NinjaService.getNinjaProfile(function(res) {
+	                                console.log(res.data);
+	                                cacheProvider.setInCritical('userProfileData', res.data);
+	                                if (res.data.status != 'inactive' && res.data.status != 'locked') {
+	                                    profileModel.updateNinjaData(res.data, App);
+	                                    activityModel.fetchNinjaActivity('lifetime');
+	                                }
+
+	                            }, that);
+
+
+	                        } else
+	                            utils.showToast('Something went wrong while subscribing');
+
+	                    }, that);
 
 	                } else {
 
-	                    console.log('here');
+	                    /* Animation FTUE screen dismiss */
 	                    DOMcache.title.classList.remove('animation_fadeout');
 	                    DOMcache.title.classList.remove('titleAnimFtueCls');
 	                    DOMcache.title.classList.add('fadeOutTranslateCls');
@@ -5129,9 +5152,18 @@
 	                    DOMcache.bottomSection.classList.remove('slideFromBottomCls2');
 	                    DOMcache.bottomSection.classList.add('animation_fadeout');
 	                    DOMcache.centreIcon.classList.add('animation_fadeout');
-
-
+	                    cacheProvider.setInCritical('ftueCompleted', true);
+	                    App.router.navigateTo('/home');
 	                }
+
+	            } else if (target.classList.contains('crossIcon')) {
+
+	                App.NinjaService.unsubscribeHandler({}, function(res) {
+	                    if (res.stat === 'ok')
+	                        PlatformBridge.closeWebView();
+	                    else
+	                        utils.showToast('Something went wrong while unsubscribing');
+	                }, that);
 	            }
 	        });
 	    };
@@ -5157,229 +5189,6 @@
 
 /***/ },
 /* 9 */
-/***/ function(module, exports) {
-
-	module.exports = "<div class=\"subscribeScreen screenCls\">\n    <div class=\"crossIcon backgroundImageGeneric\"> </div>\n    <div class=\"title\"> Congratulations! </div>\n    <div class=\"subtitle\"> You’re a Hike Ninja now </div>\n    <div class=\"centreIcon backgroundImageGeneric scaleZeroToOneAnim\"> </div>\n    <div class=\"bottomSection slideFromBottomCls\">\n        <div class=\"ninjaWave backgroundImageGeneric\"> </div>\n        <div class=\"content\">\n            <div class=\"info\"> You’ve been one of our top user. You have unlocked some really cool stuff which is exclusively for you.</div>\n            <div class=\"cta\" data-screen=\"subscribe\"> SHOW ME</div>\n        </div>\n    </div>\n</div>"
-
-/***/ },
-/* 10 */
-/***/ function(module, exports) {
-
-	module.exports = "<li class=\"infoRow  row1\">\n    <div class=\"infoIcon giftIcon\"></div>\n    <div class=\"infoDetails\">\n        <p class=\"infoHeading\">Cool Gifts</p>\n        <p class=\"infoSubHeading\">Get some really cool, exclusive content and features no one else has.</p>\n    </div>\n</li>\n<li class=\"infoRow row2\">\n    <div class=\"infoIcon statIcon\"></div>\n    <div class=\"infoDetails\">\n        <p class=\"infoHeading\">Know your Hike Stats</p>\n        <p class=\"infoSubHeading\">Check out your daily Hike Stats and brag among your friends.</p>\n    </div>\n</li>\n<li class=\"infoRow row3\">\n    <div class=\"infoIcon surpriseGiftIcon\"></div>\n    <div class=\"infoDetails\">\n        <p class=\"infoHeading\">Surprise Gifts</p>\n        <p class=\"infoSubHeading\">Win a surprise gift every day!</p>\n    </div>\n</li>\n<li class=\"infoRow row4\">\n    <div class=\"infoIcon moreIcon\"></div>\n    <div class=\"infoDetails\">\n        <p class=\"infoHeading\">More</p>\n        <p class=\"infoSubHeading\">Get and exclusive Ninja badge which lets your profile stand out.</p>\n    </div>\n</li>\n<div class=\"cta\" data-screen=\"ftue\"> WOW! LET’S GO</div>"
-
-/***/ },
-/* 11 */
-/***/ function(module, exports, __webpack_require__) {
-
-	(function(W, platformSdk, events) {
-	    'use strict';
-
-	    var utils = __webpack_require__(4),
-	        Constants = __webpack_require__(5),
-
-	        HomescreenController = function(options) {
-	            this.template = __webpack_require__(12);
-	        };
-
-	    HomescreenController.prototype.bind = function(App, data) {
-
-	        // Unlocked Reward Container
-	        var unlockedReward = document.getElementsByClassName('unlockedReward')[0];
-	        var lockedRewards = document.getElementsByClassName('lockedRewards')[0];
-	        var unlockedRewardListContainer = document.getElementsByClassName('unlockedRewardListContainer')[0];
-
-	        // Unlocked Reward Heading
-	        var unlockedRewardHeading = document.getElementsByClassName('unlockedRewardHeading')[0];
-	        
-	        // New Reward Unlock Overlay
-	        var rewardUnlockAnimation = document.getElementsByClassName('rewardUnlockAnimation')[0];
-	        var streakValueContainer = document.getElementsByClassName('streakValueContainer')[0];
-	        var rewardUnlockContainer = document.getElementsByClassName('rewardUnlockContainer')[0];
-
-	        if(data.unlockedRewards.length > 0){
-	            console.log(data.unlockedRewards);
-	            rewardUnlockAnimation.classList.add('newRewardAnimOpacity');
-	            streakValueContainer.classList.add('newRewardDayScale');
-	        }else {
-	            console.log("No new rewards are present :: Pick first from locked and make a card");
-	            console.log(data.unlockedRewards);
-	        }
-
-	        streakValueContainer.addEventListener('click', function(event) {
-	            rewardUnlockAnimation.style.opacity = 1;
-	            rewardUnlockAnimation.classList.add('newRewardBgRemove');
-	            rewardUnlockContainer.classList.add('newStreakAnimation');
-	            
-
-	            unlockedReward.classList.remove('hideClass');
-	            //lockedRewards.classList.add('moveLockedRewardsAnimation');
-	            unlockedRewardListContainer.classList.add('unlockedRewardListUl');
-	        });
-	    };
-
-	    HomescreenController.prototype.filterRewards = function(rewards) {
-
-	        var filteredRewards = {};
-	        filteredRewards.unlockedRewards = [];
-	        filteredRewards.lockedRewards = [];
-	        filteredRewards.redeemedRewards = [];
-	        filteredRewards.expiredRewards = [];
-
-	        // 0 -> Locked
-	        // 1-> Unlocked
-	        // 2 -> Redeemed
-	        // 3 -> Expired
-	        
-	        for (var i = 0; i < rewards.length; i++) {
-	            if(rewards[i].state === 0){
-	                filteredRewards.lockedRewards.push(rewards[i]);
-	            }else if (rewards[i].state === 1){
-	                filteredRewards.unlockedRewards.push(rewards[i]);
-	            }else if (rewards[i].state === 2){
-	                filteredRewards.redeemedRewards.push(rewards[i]); 
-	            }else if (rewards[i].state === 3){
-	                filteredRewards.expiredRewards.push(rewards[i]);
-	            }
-	        }
-
-	        return filteredRewards;
-
-	    };
-
-	    HomescreenController.prototype.render = function(ctr, App, data) {
-
-	        var that = this;
-	        var rewardsData = {};
-
-	        data = {"rewards":[{"desc":"Get the best stickers on hike way before everyone else does. You get these 2 weeks before mere mortals. You're a Ninja!","hicon":"https://s3-ap-southeast-1.amazonaws.com/hike-giscassets/nixy/secretStickerShopIllustration.png","icon":"https://s3-ap-southeast-1.amazonaws.com/hike-giscassets/nixy/early_access_sticker_icon.png","id":"57b56ec17e401ddfe70a9e8f","state":3,"stitle":"Get all the hike stickers before everyone else.","streak":1,"title":"Early Access Stickers","type":"sticker_reward","value":null},{"icon":"https://s3-ap-southeast-1.amazonaws.com/hike-giscassets/nixy/GIFSharingHeader.png","id":"57cfce41733265431b98b317","state":1,"stitle":"Get the exclusive GIF feature.","streak":15,"title":"Exclusive Gif","type":"exclusive_feature","value":null},{"failed_preview_img":"https://staging.im.hike.in/sticker?catId=mumbai&stId=023_mb_badey.png&resId=XHDPI&image=True","icon":"https://s3-ap-southeast-1.amazonaws.com/hike-giscassets/nixy/custom_sticker_icon.png","id":"57c554417332654291dc1097","state":1,"stitle":"Have an exclusive sticker made just for you","streak":7,"title":"My Sticker","type":"custom_sticker","value":null},{"desc":"Share animated stickers with your friends and get krazzy","hicon":"https://s3-ap-southeast-1.amazonaws.com/hike-giscassets/nixy/animatedStickers.png","icon":"https://s3-ap-southeast-1.amazonaws.com/hike-giscassets/nixy/animatedStickers.png","id":"58c563ce7332657fe8d3ca69","state":3,"stitle":"Experience the new animated before anyone else","streak":0,"title":"Animated Stickers","type":"exclusive_feature","value":null}],"rewards_hash":"1474970960"};
-
-	        rewardsData = that.filterRewards(data.rewards);
-	        console.log(rewardsData);
-
-	        that.el = document.createElement('div');
-	        that.el.className = 'homeScreenContainer animation_fadein noselect';
-	        that.el.innerHTML = Mustache.render(unescape(that.template), {ninjaUnlockedRewards:data.rewards,ninjaLockedRewards:data.rewards});
-	        ctr.appendChild(that.el);
-	        events.publish('update.loader', { show: false });
-	        that.bind(App, rewardsData);
-	    };
-
-	    HomescreenController.prototype.destroy = function() {
-
-	    };
-
-	    module.exports = HomescreenController;
-
-	})(window, platformSdk, platformSdk.events);
-
-/***/ },
-/* 12 */
-/***/ function(module, exports) {
-
-	module.exports = "<!-- Full Screen Popup For Battery/Streak Explanation -->\n<div class=\"batteryStreakInfoContainer centerToScreenContainer hideClass\">\n    <div class=\"blurScreen\">\n        <div class=\"centerToScreenWrapper\">\n            <div class=\"streakInfoWrapper\">\n                <div class=\"streakInfoContainer\">\n                    <div class=\"streakInfoIcon\"></div>\n                    <div class=\"streakInfoValue\">01\n                    </div>\n                    <p class=\"dayHeading\">Days</p>\n                    <p class=\"dayInformation\">This is the number of days you’ve been a Ninja for.\n                        <br><br>Continue being a Ninja every day to go higher and get more awesome gifts.</p>\n                </div>\n                <hr noshade>\n                <div class=\"batteryInfoWarpper\">\n                    <div class=\"batteryIconContainer\"></div>\n                    <div class=\"batteryHeading\">Ninja Life</div>\n                    <p class=\"batteryInformation\">You’re going to reaming a Ninja for X more days.\n                        <br><br>Keep loving and using hike with your best friends to be a Ninja for more days and get more awesome gifts.</p>\n                </div>\n                <div class=\"informationAction\">Got It</div>\n            </div>\n        </div>\n    </div>\n</div>\n<!-- Full Screen Popup for days unlock -->\n<div class=\"rewardUnlockAnimation centerToScreenContainer\">\n        <div class=\"rewardUnlockContainer\">\n            <div class=\"dayDef\">Day 1</div>\n            <div class=\"streakValueContainer\">\n                <div class=\"rewardUnlockStreakIcon\"></div>\n                <div class=\"rewardUnlockStreakValue\">01</div>\n            </div>\n        </div>\n</div>\n<!-- Home Screen For Ninja Micro app -->\n<div class=\"ninjaHomeContainer\">\n    <div class=\"profileContainer clearfix\">\n        <div class=\"ninjaProfileInfo\">\n            <div class=\"streakContainer\">\n                <div class=\"streakIcon\"></div>\n                <div class=\"streakValue\">01\n                    <br><span class=\"streakDef\">days</span></div>\n            </div>\n            <div class=\"ninjaDp\"></div>\n        </div>\n    </div>\n    <div class=\"ninjaBottomContainer\">\n        <div class=\"ninjaWave\"></div>\n        <div class=\"ninjaRewards\">\n            <div class=\"unlockedReward hideClass\">\n                <p class=\"unlockedRewardHeading\">Unclocked Gifts</p>\n                <div class=\"unlockedRewardListContainer\">\n                    <ul class=\"unlockedRewardList\">\n                        {{#ninjaUnlockedRewards}}\n                        <li class=\"unlockedRewardListItem newRewardAppearAnimation\">\n                            <div class=\"unlockedRewardHeader\">\n                                <div class=\"unlockedRewardIcon\"></div>\n                                <div class=\"unlockedRewardStreak\">{{streak}}</div>\n                            </div>\n                            <div class=\"unlockedRewardDetails\">\n                                <p class=\"uRewardHeading\">{{title}}</p>\n                                <p class=\"uRewardSubheading\">{{stitle}}</p>\n                            </div>\n                            <div class=\"unlockedRewardAction\">Get It now</div>\n                        </li>\n                        {{/ninjaUnlockedRewards}}\n                    </ul>\n                </div>\n            </div>\n            <div class=\"lockedRewards\">\n                <p class=\"lockedRewardHeading\">Upcoming Gifts</p>\n                <div class=\"lockedRewardListContainer\">\n                    <ul class=\"lockedRewardList\">\n                        {{#ninjaLockedRewards}}\n                        <li class=\"rewardRow\" data-rewardId=\"{{id}}\" data-state=\"{{state}}\" data-rewardtype=\"{{type}}\">\n                            <div class=\"rewardIcon\"></div>\n                            <div class=\"rewardDetails\">\n                                <p class=\"rewardHeading {{^state}}{{#lockedGreyout}}rewardHeadingLocked{{/lockedGreyout}}{{/state}}\">{{title}}</p>\n                                <p class=\"rewardSubheading {{^state}}{{#lockedGreyout}}rewardSubheadingLocked{{/lockedGreyout}}{{/state}}\">{{stitle}}</p>\n                            </div>\n                            {{#streak}}\n                            <div class=\"rewardStreakWrapper\">\n                                <div class=\"rewardStreakIcon\"></div>\n                                <div class=\"rewardStreakValue\">{{streak}}</div>\n                            </div>\n                            {{/streak}}\n                        </li>\n                        {{/ninjaLockedRewards}}\n                    </ul>\n                </div>\n            </div>\n        </div>\n    </div>\n</div>\n"
-
-/***/ },
-/* 13 */
-/***/ function(module, exports, __webpack_require__) {
-
-	(function (W, events) {
-	    'use strict';
-
-	   var cacheProvider = __webpack_require__(14);
-	   
-	    var Router = function () {
-	        this.routes = {};
-	        this.history = [];
-	        this.prevData = null;
-
-	        this.getCache();
-	    };
-
-	    var _routerCache = {};
-
-	    var unload = function () {
-	        // ToDo: Redundant code
-	        events.publish('app.store.set', {
-	            key: '_routerCache',
-	            value: _routerCache
-	        });
-	    };
-
-	    // window.onbeforeunload = unload;
-
-	    Router.prototype.getCache = function () {
-	        events.publish('app.store.get', {
-	            key: '_routerCache',
-	            ctx: this,
-	            cb: function (r) {
-	                if (r.status === 1) {
-	                    this.history = r.results.history || [];
-	                }
-	            }
-	        });
-	    };
-
-	    Router.prototype.route = function (route, callback) {
-	        this.routes[route] = callback;
-	    };
-
-	    Router.prototype.navigateTo = function (route, data) {
-
-	        var historyTop = this.history[this.history.length - 1];
-
-	        if (historyTop && historyTop.route === route) {
-	            if (data.subPath !== undefined && (data.subPath === historyTop.data.subPath)) {
-	                return;
-	            } else {
-	                // Navigate to sub path. Don't push into History. Replace top item with this one.
-	                this.history[this.history.length - 1] = {
-	                    route: route,
-	                    data: data
-	                };
-	            }
-	        } else {
-	            this.history.push({
-	                route: route,
-	                data: data
-	            });
-	        }
-
-	        this.routes[route](data);
-
-	        _routerCache['route'] = route;
-	        _routerCache['cache'] = data;
-	        _routerCache['history'] = this.history;
-
-	        unload();
-
-	    };
-
-	    Router.prototype.back = function () {
-	        var history = this.history,
-	            historyItem;
-
-	        if (history.length !== 1) {
-	            history.pop();
-	        }
-
-	        historyItem = history[history.length - 1];
-
-	        if(historyItem.route == '/' && !historyItem.data ){
-	            historyItem.data = {
-	                ninjaRewardsCollection: cacheProvider.getFromCritical('ninjaRewards'),
-	                ninjaActivityData: cacheProvider.getFromCritical('ninjaStats'),
-	                ninjaProfileData: cacheProvider.getFromCritical('ninjaProfileData')
-	            };
-	        }
-
-	        this.routes[historyItem.route](historyItem.data);
-	    };
-
-	    module.exports = Router;
-	})(window, platformSdk.events);
-
-/***/ },
-/* 14 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -5433,7 +5242,7 @@
 	})();
 
 /***/ },
-/* 15 */
+/* 10 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -5445,10 +5254,10 @@
 
 	    var platformSdk = __webpack_require__(3),
 	        utils = __webpack_require__(4),
-	        cacheProvider = __webpack_require__(14),
-	        rewardsModel = __webpack_require__(16),
-	        TxService = __webpack_require__(18),
-	        NinjaService = __webpack_require__(19),
+	        cacheProvider = __webpack_require__(9),
+	        rewardsModel = __webpack_require__(11),
+	        TxService = __webpack_require__(13),
+	        NinjaService = __webpack_require__(14),
 
 	        ProfileModel = function() {
 	            this.TxService = new TxService();
@@ -5633,7 +5442,7 @@
 
 
 /***/ },
-/* 16 */
+/* 11 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -5645,7 +5454,7 @@
 
 	    var platformSdk = __webpack_require__(3),
 	        utils = __webpack_require__(4),
-	        cacheProvider = __webpack_require__(14), 
+	        cacheProvider = __webpack_require__(9), 
 	        Constants = __webpack_require__(5),
 
 	        RewardsModel = function() {},
@@ -5755,7 +5564,7 @@
 	            ninjaRewardsListOld.innerHTML = '';
 
 	            // Re Render The Reward Template Only From External HTML
-	            this.template = __webpack_require__(17);
+	            this.template = __webpack_require__(12);
 
 	            // To remove later for adhoc
 
@@ -5785,13 +5594,13 @@
 	})();
 
 /***/ },
-/* 17 */
+/* 12 */
 /***/ function(module, exports) {
 
 	module.exports = "{{#ninjaRewardsCollection}}\n<li class=\"rewardRow\" data-rewardId=\"{{id}}\" data-state=\"{{state}}\" data-rewardtype=\"{{type}}\">\n    <div class=\"rewardIcon\"></div>\n    <div class=\"rewardDetails\">\n        <p class=\"rewardHeading    {{^state}}{{#lockedGreyout}}rewardHeadingLocked{{/lockedGreyout}}{{/state}}\">{{title}}</p>\n        <p class=\"rewardSubheading {{^state}}{{#lockedGreyout}}rewardSubheadingLocked{{/lockedGreyout}}{{/state}}\">{{stitle}}</p>\n    </div>\n    {{#streak}}\n    <div class=\"rewardStreakWrapper\">\n        <div class=\"rewardStreakIcon\"></div>\n        <div class=\"rewardStreakValue\">{{streak}}</div>\n    </div>\n    {{/streak}}\n</li>\n{{/ninjaRewardsCollection}}"
 
 /***/ },
-/* 18 */
+/* 13 */
 /***/ function(module, exports, __webpack_require__) {
 
 	(function(W, platformSdk, events) {
@@ -5941,14 +5750,14 @@
 	})(window, platformSdk, platformSdk.events);
 
 /***/ },
-/* 19 */
+/* 14 */
 /***/ function(module, exports, __webpack_require__) {
 
 	(function(W, platformSdk, events) {
 	    'use strict';
 
 	    var utils = __webpack_require__(4);
-	    var cacheProvider = __webpack_require__(14);
+	    var cacheProvider = __webpack_require__(9);
 	    var Constants = __webpack_require__(5);
 	    var checkTimeout = null;
 
@@ -6118,7 +5927,7 @@
 	})(window, platformSdk, platformSdk.events);
 
 /***/ },
-/* 20 */
+/* 15 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -6130,9 +5939,9 @@
 
 	    var platformSdk = __webpack_require__(3),
 	        utils = __webpack_require__(4),
-	        cacheProvider = __webpack_require__(14),
-	        TxService = __webpack_require__(18),
-	        NinjaService = __webpack_require__(19),
+	        cacheProvider = __webpack_require__(9),
+	        TxService = __webpack_require__(13),
+	        NinjaService = __webpack_require__(14),
 
 	        ActivityModel = function() {
 	            this.TxService = new TxService();
@@ -6211,7 +6020,7 @@
 	            statsWrapper.innerHTML = '';
 
 	            // Re Render The Reward Template Only From External HTML
-	            this.template = __webpack_require__(21);
+	            this.template = __webpack_require__(16);
 	            statsWrapper.innerHTML = Mustache.render(this.template, {
 	                ninjaActivityData: activityData
 	            });
@@ -6224,10 +6033,253 @@
 
 
 /***/ },
-/* 21 */
+/* 16 */
 /***/ function(module, exports) {
 
 	module.exports = "{{#ninjaActivityData}}\n<div class=\"statTypeContainer\">\n    <div class=\"statHeading\">Messaging</div>\n    <div class=\"statBoxWrapper statBoxFloatLeft\">\n        <div class=\"statValue messagesR\">{{ninjaActivityData.messages.rec}}</div>\n        <div class=\"statText\">Messages Received</div>\n    </div>\n    <div class=\"statBoxWrapper statBoxFloatRight\">\n        <div class=\"statValue messagesS\">{{ninjaActivityData.messages.sent}}</div>\n        <div class=\"statText\">Messages Sent</div>\n    </div>\n    <div class=\"statBoxWrapper statBoxFloatLeft\">\n        <div class=\"statValue stickersR\">{{ninjaActivityData.stickers.rec}}</div>\n        <div class=\"statText\">Stickers Received</div>\n    </div>\n    <div class=\"statBoxWrapper statBoxFloatRight\">\n        <div class=\"statValue stickersS\">{{ninjaActivityData.stickers.sent}}</div>\n        <div class=\"statText\">Stickers Sent</div>\n    </div>\n    <div class=\"statBoxWrapper statBoxFloatLeft\">\n        <div class=\"statValue chatThemesR\">{{ninjaActivityData.chatThemes.rec}}</div>\n        <div class=\"statText\">Chat Themes Received</div>\n    </div>\n    <div class=\"statBoxWrapper statBoxFloatRight\">\n        <div class=\"statValue chatThemesS\">{{ninjaActivityData.chatThemes.sent}}</div>\n        <div class=\"statText\">Chat Themes Sent</div>\n    </div>\n    <div class=\"statBoxWrapper statBoxFloatLeft\">\n        <div class=\"statValue filesR\">{{ninjaActivityData.files.rec}}</div>\n        <div class=\"statText\">Files Received</div>\n    </div>\n    <div class=\"statBoxWrapper statBoxFloatRight\">\n        <div class=\"statValue filesS\">{{ninjaActivityData.files.sent}}</div>\n        <div class=\"statText\">Files Sent</div>\n    </div>\n</div>\n<div class=\"statTypeContainer\">\n    <div class=\"statHeading\">Timeline</div>\n    <div class=\"statBoxWrapper statBoxFloatLeft\">\n        <div class=\"statValue statusUpdateCount\">{{ninjaActivityData.statusUpdates.count}}</div>\n        <div class=\"statText\">Status Updates Posted</div>\n    </div>\n</div>\n{{/ninjaActivityData}}\n"
+
+/***/ },
+/* 17 */
+/***/ function(module, exports) {
+
+	module.exports = "<div class=\"subscribeScreen screenCls\">\n    <div class=\"crossIcon backgroundImageGeneric\"> </div>\n    <div class=\"title\"> Congratulations! </div>\n    <div class=\"subtitle\"> You’re a Hike Ninja now </div>\n    <div class=\"centreIcon backgroundImageGeneric scaleZeroToOneAnim\"> </div>\n    <div class=\"bottomSection slideFromBottomCls\">\n        <div class=\"ninjaWave backgroundImageGeneric\"> </div>\n        <div class=\"content\">\n            <div class=\"info\"> You’ve been one of our top user. You have unlocked some really cool stuff which is exclusively for you.</div>\n            <div class=\"cta\" data-screen=\"subscribe\"> SHOW ME</div>\n        </div>\n    </div>\n</div>"
+
+/***/ },
+/* 18 */
+/***/ function(module, exports) {
+
+	module.exports = "<li class=\"infoRow  row1\">\n    <div class=\"infoIcon giftIcon\"></div>\n    <div class=\"infoDetails\">\n        <p class=\"infoHeading\">Cool Gifts</p>\n        <p class=\"infoSubHeading\">Get some really cool, exclusive content and features no one else has.</p>\n    </div>\n</li>\n<li class=\"infoRow row2\">\n    <div class=\"infoIcon statIcon\"></div>\n    <div class=\"infoDetails\">\n        <p class=\"infoHeading\">Know your Hike Stats</p>\n        <p class=\"infoSubHeading\">Check out your daily Hike Stats and brag among your friends.</p>\n    </div>\n</li>\n<li class=\"infoRow row3\">\n    <div class=\"infoIcon surpriseGiftIcon\"></div>\n    <div class=\"infoDetails\">\n        <p class=\"infoHeading\">Surprise Gifts</p>\n        <p class=\"infoSubHeading\">Win a surprise gift every day!</p>\n    </div>\n</li>\n<li class=\"infoRow row4\">\n    <div class=\"infoIcon moreIcon\"></div>\n    <div class=\"infoDetails\">\n        <p class=\"infoHeading\">More</p>\n        <p class=\"infoSubHeading\">Get and exclusive Ninja badge which lets your profile stand out.</p>\n    </div>\n</li>\n<div class=\"cta\" data-screen=\"ftue\"> WOW! LET’S GO</div>"
+
+/***/ },
+/* 19 */
+/***/ function(module, exports, __webpack_require__) {
+
+	(function(W, platformSdk, events) {
+	    'use strict';
+
+	    var utils = __webpack_require__(4),
+	        Constants = __webpack_require__(5),
+	        cacheProvider = __webpack_require__(9),
+
+	        HomescreenController = function(options) {
+	            this.template = __webpack_require__(20);
+	        };
+
+	    HomescreenController.prototype.bind = function(App, data) {
+
+	        // Unlocked Reward Container
+	        var unlockedReward = document.getElementsByClassName('unlockedReward')[0];
+	        var lockedRewards = document.getElementsByClassName('lockedRewards')[0];
+	        var unlockedRewardListContainer = document.getElementsByClassName('unlockedRewardListContainer')[0];
+
+	        // Unlocked Reward Heading
+	        var unlockedRewardHeading = document.getElementsByClassName('unlockedRewardHeading')[0];
+
+	        // New Reward Unlock Overlay
+	        var rewardUnlockAnimation = document.getElementsByClassName('rewardUnlockAnimation')[0];
+	        var streakValueContainer = document.getElementsByClassName('streakValueContainer')[0];
+	        var rewardUnlockContainer = document.getElementsByClassName('rewardUnlockContainer')[0];
+
+	        if (data.unlockedRewards.length > 0) {
+	            console.log(data.unlockedRewards);
+	            rewardUnlockAnimation.classList.add('newRewardAnimOpacity');
+	            streakValueContainer.classList.add('newRewardDayScale');
+	        } else {
+	            console.log("No new rewards are present :: Pick first from locked and make a card");
+	            console.log(data.unlockedRewards);
+	        }
+
+	        streakValueContainer.addEventListener('click', function(event) {
+	            rewardUnlockAnimation.style.opacity = 1;
+	            rewardUnlockAnimation.classList.add('newRewardBgRemove');
+	            rewardUnlockContainer.classList.add('newStreakAnimation');
+
+
+	            unlockedReward.classList.remove('hideClass');
+	            //lockedRewards.classList.add('moveLockedRewardsAnimation');
+	            unlockedRewardListContainer.classList.add('unlockedRewardListUl');
+	        });
+	    };
+
+	    HomescreenController.prototype.filterRewards = function(rewards) {
+
+	        var filteredRewards = {};
+	        filteredRewards.unlockedRewards = [];
+	        filteredRewards.lockedRewards = [];
+	        filteredRewards.redeemedRewards = [];
+	        filteredRewards.expiredRewards = [];
+
+	        // 0 -> Locked
+	        // 1-> Unlocked
+	        // 2 -> Redeemed
+	        // 3 -> Expired
+
+	        for (var i = 0; i < rewards.length; i++) {
+	            if (rewards[i].state === 0) {
+	                filteredRewards.lockedRewards.push(rewards[i]);
+	            } else if (rewards[i].state === 1) {
+	                filteredRewards.unlockedRewards.push(rewards[i]);
+	            } else if (rewards[i].state === 2) {
+	                filteredRewards.redeemedRewards.push(rewards[i]);
+	            } else if (rewards[i].state === 3) {
+	                filteredRewards.expiredRewards.push(rewards[i]);
+	            }
+	        }
+
+	        return filteredRewards;
+
+	    };
+
+	    HomescreenController.prototype.render = function(ctr, App, data) {
+
+	        var that = this;
+	        var rewardsData = {};
+
+	        var profile_data = cacheProvider.getFromCritical('userProfileData');
+	        var rewards_data = cacheProvider.getFromCritical('ninjaRewards');
+
+	        // if (utils.upgradeRequired(profile_data.data.hike_version, platformSdk.appData.appVersion)) {
+
+
+	        //     App.router.navigateTo('/upgrade');
+
+	        // } else if (profile_data.data.status == 'inactive' || profile_data.data.status == 'locked') {
+
+
+	        //     App.router.navigateTo('/userState', profile_data.data);
+
+
+	        // } else {
+	        //     rewardsData = that.filterRewards(rewards_data.rewards);
+	        // }
+
+	        data = { "rewards": [{ "desc": "Get the best stickers on hike way before everyone else does. You get these 2 weeks before mere mortals. You're a Ninja!", "hicon": "https://s3-ap-southeast-1.amazonaws.com/hike-giscassets/nixy/secretStickerShopIllustration.png", "icon": "https://s3-ap-southeast-1.amazonaws.com/hike-giscassets/nixy/early_access_sticker_icon.png", "id": "57b56ec17e401ddfe70a9e8f", "state": 3, "stitle": "Get all the hike stickers before everyone else.", "streak": 1, "title": "Early Access Stickers", "type": "sticker_reward", "value": null }, { "icon": "https://s3-ap-southeast-1.amazonaws.com/hike-giscassets/nixy/GIFSharingHeader.png", "id": "57cfce41733265431b98b317", "state": 1, "stitle": "Get the exclusive GIF feature.", "streak": 15, "title": "Exclusive Gif", "type": "exclusive_feature", "value": null }, { "failed_preview_img": "https://staging.im.hike.in/sticker?catId=mumbai&stId=023_mb_badey.png&resId=XHDPI&image=True", "icon": "https://s3-ap-southeast-1.amazonaws.com/hike-giscassets/nixy/custom_sticker_icon.png", "id": "57c554417332654291dc1097", "state": 1, "stitle": "Have an exclusive sticker made just for you", "streak": 7, "title": "My Sticker", "type": "custom_sticker", "value": null }, { "desc": "Share animated stickers with your friends and get krazzy", "hicon": "https://s3-ap-southeast-1.amazonaws.com/hike-giscassets/nixy/animatedStickers.png", "icon": "https://s3-ap-southeast-1.amazonaws.com/hike-giscassets/nixy/animatedStickers.png", "id": "58c563ce7332657fe8d3ca69", "state": 3, "stitle": "Experience the new animated before anyone else", "streak": 0, "title": "Animated Stickers", "type": "exclusive_feature", "value": null }], "rewards_hash": "1474970960" };
+
+	        rewardsData = that.filterRewards(data.rewards);
+	        console.log(rewardsData);
+
+	        that.el = document.createElement('div');
+	        that.el.className = 'homeScreenContainer animation_fadein noselect';
+	        that.el.innerHTML = Mustache.render(unescape(that.template), { ninjaUnlockedRewards: data.rewards, ninjaLockedRewards: data.rewards });
+	        ctr.appendChild(that.el);
+	        events.publish('update.loader', { show: false });
+	        that.bind(App, rewardsData);
+	    };
+
+	    HomescreenController.prototype.destroy = function() {
+
+	    };
+
+	    module.exports = HomescreenController;
+
+	})(window, platformSdk, platformSdk.events);
+
+
+/***/ },
+/* 20 */
+/***/ function(module, exports) {
+
+	module.exports = "<!-- Full Screen Popup For Battery/Streak Explanation -->\n<div class=\"batteryStreakInfoContainer centerToScreenContainer hideClass\">\n    <div class=\"blurScreen\">\n        <div class=\"centerToScreenWrapper\">\n            <div class=\"streakInfoWrapper\">\n                <div class=\"streakInfoContainer\">\n                    <div class=\"streakInfoIcon\"></div>\n                    <div class=\"streakInfoValue\">01\n                    </div>\n                    <p class=\"dayHeading\">Days</p>\n                    <p class=\"dayInformation\">This is the number of days you’ve been a Ninja for.\n                        <br><br>Continue being a Ninja every day to go higher and get more awesome gifts.</p>\n                </div>\n                <hr noshade>\n                <div class=\"batteryInfoWarpper\">\n                    <div class=\"batteryIconContainer\"></div>\n                    <div class=\"batteryHeading\">Ninja Life</div>\n                    <p class=\"batteryInformation\">You’re going to reaming a Ninja for X more days.\n                        <br><br>Keep loving and using hike with your best friends to be a Ninja for more days and get more awesome gifts.</p>\n                </div>\n                <div class=\"informationAction\">Got It</div>\n            </div>\n        </div>\n    </div>\n</div>\n<!-- Full Screen Popup for days unlock -->\n<div class=\"rewardUnlockAnimation centerToScreenContainer\">\n        <div class=\"rewardUnlockContainer\">\n            <div class=\"dayDef\">Day 1</div>\n            <div class=\"streakValueContainer\">\n                <div class=\"rewardUnlockStreakIcon\"></div>\n                <div class=\"rewardUnlockStreakValue\">01</div>\n            </div>\n        </div>\n</div>\n<!-- Home Screen For Ninja Micro app -->\n<div class=\"ninjaHomeContainer\">\n    <div class=\"profileContainer clearfix\">\n        <div class=\"ninjaProfileInfo\">\n            <div class=\"streakContainer\">\n                <div class=\"streakIcon\"></div>\n                <div class=\"streakValue\">01\n                    <br><span class=\"streakDef\">days</span></div>\n            </div>\n            <div class=\"ninjaDp\"></div>\n        </div>\n    </div>\n    <div class=\"ninjaBottomContainer\">\n        <div class=\"ninjaWave\"></div>\n        <div class=\"ninjaRewards\">\n            <div class=\"unlockedReward hideClass\">\n                <p class=\"unlockedRewardHeading\">Unclocked Gifts</p>\n                <div class=\"unlockedRewardListContainer\">\n                    <ul class=\"unlockedRewardList\">\n                        {{#ninjaUnlockedRewards}}\n                        <li class=\"unlockedRewardListItem newRewardAppearAnimation\">\n                            <div class=\"unlockedRewardHeader\">\n                                <div class=\"unlockedRewardIcon\"></div>\n                                <div class=\"unlockedRewardStreak\">{{streak}}</div>\n                            </div>\n                            <div class=\"unlockedRewardDetails\">\n                                <p class=\"uRewardHeading\">{{title}}</p>\n                                <p class=\"uRewardSubheading\">{{stitle}}</p>\n                            </div>\n                            <div class=\"unlockedRewardAction\">Get It now</div>\n                        </li>\n                        {{/ninjaUnlockedRewards}}\n                    </ul>\n                </div>\n            </div>\n            <div class=\"lockedRewards\">\n                <p class=\"lockedRewardHeading\">Upcoming Gifts</p>\n                <div class=\"lockedRewardListContainer\">\n                    <ul class=\"lockedRewardList\">\n                        {{#ninjaLockedRewards}}\n                        <li class=\"rewardRow\" data-rewardId=\"{{id}}\" data-state=\"{{state}}\" data-rewardtype=\"{{type}}\">\n                            <div class=\"rewardIcon\"></div>\n                            <div class=\"rewardDetails\">\n                                <p class=\"rewardHeading {{^state}}{{#lockedGreyout}}rewardHeadingLocked{{/lockedGreyout}}{{/state}}\">{{title}}</p>\n                                <p class=\"rewardSubheading {{^state}}{{#lockedGreyout}}rewardSubheadingLocked{{/lockedGreyout}}{{/state}}\">{{stitle}}</p>\n                            </div>\n                            {{#streak}}\n                            <div class=\"rewardStreakWrapper\">\n                                <div class=\"rewardStreakIcon\"></div>\n                                <div class=\"rewardStreakValue\">{{streak}}</div>\n                            </div>\n                            {{/streak}}\n                        </li>\n                        {{/ninjaLockedRewards}}\n                    </ul>\n                </div>\n            </div>\n        </div>\n    </div>\n</div>\n"
+
+/***/ },
+/* 21 */
+/***/ function(module, exports, __webpack_require__) {
+
+	(function (W, events) {
+	    'use strict';
+
+	   var cacheProvider = __webpack_require__(9);
+	   
+	    var Router = function () {
+	        this.routes = {};
+	        this.history = [];
+	        this.prevData = null;
+
+	        this.getCache();
+	    };
+
+	    var _routerCache = {};
+
+	    var unload = function () {
+	        // ToDo: Redundant code
+	        events.publish('app.store.set', {
+	            key: '_routerCache',
+	            value: _routerCache
+	        });
+	    };
+
+	    // window.onbeforeunload = unload;
+
+	    Router.prototype.getCache = function () {
+	        events.publish('app.store.get', {
+	            key: '_routerCache',
+	            ctx: this,
+	            cb: function (r) {
+	                if (r.status === 1) {
+	                    this.history = r.results.history || [];
+	                }
+	            }
+	        });
+	    };
+
+	    Router.prototype.route = function (route, callback) {
+	        this.routes[route] = callback;
+	    };
+
+	    Router.prototype.navigateTo = function (route, data) {
+
+	        var historyTop = this.history[this.history.length - 1];
+
+	        if (historyTop && historyTop.route === route) {
+	            if (data.subPath !== undefined && (data.subPath === historyTop.data.subPath)) {
+	                return;
+	            } else {
+	                // Navigate to sub path. Don't push into History. Replace top item with this one.
+	                this.history[this.history.length - 1] = {
+	                    route: route,
+	                    data: data
+	                };
+	            }
+	        } else {
+	            this.history.push({
+	                route: route,
+	                data: data
+	            });
+	        }
+
+	        this.routes[route](data);
+
+	        _routerCache['route'] = route;
+	        _routerCache['cache'] = data;
+	        _routerCache['history'] = this.history;
+
+	        unload();
+
+	    };
+
+	    Router.prototype.back = function () {
+	        var history = this.history,
+	            historyItem;
+
+	        if (history.length !== 1) {
+	            history.pop();
+	        }
+
+	        historyItem = history[history.length - 1];
+
+	        if(historyItem.route == '/' && !historyItem.data ){
+	            historyItem.data = {
+	                ninjaRewardsCollection: cacheProvider.getFromCritical('ninjaRewards'),
+	                ninjaActivityData: cacheProvider.getFromCritical('ninjaStats'),
+	                ninjaProfileData: cacheProvider.getFromCritical('ninjaProfileData')
+	            };
+	        }
+
+	        this.routes[historyItem.route](historyItem.data);
+	    };
+
+	    module.exports = Router;
+	})(window, platformSdk.events);
 
 /***/ },
 /* 22 */
@@ -6242,11 +6294,11 @@
 
 	    var platformSdk = __webpack_require__( 3 ),
 	        utils = __webpack_require__( 4 ),
-	        cacheProvider = __webpack_require__( 14 ),
-	        profileModel = __webpack_require__( 15 ),
-	        rewardsModel = __webpack_require__( 16 ),
-	        TxService = __webpack_require__( 18 ),
-	        NinjaService = __webpack_require__( 19 ),
+	        cacheProvider = __webpack_require__( 9 ),
+	        profileModel = __webpack_require__( 10 ),
+	        rewardsModel = __webpack_require__( 11 ),
+	        TxService = __webpack_require__( 13 ),
+	        NinjaService = __webpack_require__( 14 ),
 
 	        MysteryBoxModel = function() {
 	            this.TxService = new TxService();

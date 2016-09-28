@@ -1580,7 +1580,13 @@ li.unlockedRewardListItem {
   height: 180px;
   border-radius: 2px;
   display: inline-block;
-  margin-right: 12px; }
+  margin-right: 12px;
+  opacity: 0;
+  -webkit-transform: scale(0.8);
+  -moz-transform: scale(0.8);
+  -ms-transform: scale(0.8);
+  -o-transform: scale(0.8);
+  transform: scale(0.8); }
 
 .unlockedRewardHeader {
   display: flex;
@@ -1842,6 +1848,122 @@ ul.unlockedRewardList > li.unlockedRewardListItem {
   animation-name: updateNewStreakAnimation;
   animation-fill-mode: forwards;
   /* this prevents the animation from restarting! */ }
+
+.unlockedRewardListUl .newRewardAppearAnimation {
+  -webkit-animation-delay: 0.3s;
+  -webkit-animation-duration: 1s;
+  -webkit-animation-name: rewardBoxAnim;
+  -webkit-animation-fill-mode: forwards;
+  /* this prevents the animation from restarting! */
+  -moz-animation-delay: 0.3s;
+  -moz-animation-duration: 1s;
+  -moz-animation-name: rewardBoxAnim;
+  -moz-animation-fill-mode: forwards;
+  /* this prevents the animation from restarting! */
+  -o-animation-delay: 0.3s;
+  -o-animation-duration: 1s;
+  -o-animation-name: rewardBoxAnim;
+  -o-animation-fill-mode: forwards;
+  /* this prevents the animation from restarting! */
+  animation-delay: 0.3s;
+  animation-duration: 1s;
+  animation-name: rewardBoxAnim;
+  animation-fill-mode: forwards;
+  /* this prevents the animation from restarting! */ }
+
+.moveLockedRewardsAnimation {
+  -webkit-animation-delay: 0.2s;
+  -webkit-animation-duration: 1s;
+  -webkit-animation-name: moveLockedRewards;
+  -webkit-animation-fill-mode: forwards;
+  /* this prevents the animation from restarting! */
+  -moz-animation-delay: 0.2s;
+  -moz-animation-duration: 1s;
+  -moz-animation-name: moveLockedRewards;
+  -moz-animation-fill-mode: forwards;
+  /* this prevents the animation from restarting! */
+  -o-animation-delay: 0.2s;
+  -o-animation-duration: 1s;
+  -o-animation-name: moveLockedRewards;
+  -o-animation-fill-mode: forwards;
+  /* this prevents the animation from restarting! */
+  animation-delay: 0.2s;
+  animation-duration: 1s;
+  animation-name: moveLockedRewards;
+  animation-fill-mode: forwards;
+  /* this prevents the animation from restarting! */ }
+
+@-webkit-keyframes rewardBoxAnim {
+  0% {
+    opacity: 0;
+    -ms-transform: scale(0.8);
+    -webkit-transform: scale(0.8);
+    transform: scale(0.8); }
+  100% {
+    opacity: 1;
+    -ms-transform: scale(1);
+    -webkit-transform: scale(1);
+    transform: scale(1); } }
+
+@-moz-keyframes rewardBoxAnim {
+  0% {
+    opacity: 0;
+    -ms-transform: scale(0.8);
+    -webkit-transform: scale(0.8);
+    transform: scale(0.8); }
+  100% {
+    opacity: 1;
+    -ms-transform: scale(1);
+    -webkit-transform: scale(1);
+    transform: scale(1); } }
+
+@-o-keyframes rewardBoxAnim {
+  0% {
+    opacity: 0;
+    -ms-transform: scale(0.8);
+    -webkit-transform: scale(0.8);
+    transform: scale(0.8); }
+  100% {
+    opacity: 1;
+    -ms-transform: scale(1);
+    -webkit-transform: scale(1);
+    transform: scale(1); } }
+
+@keyframes rewardBoxAnim {
+  0% {
+    opacity: 0;
+    -ms-transform: scale(0.8);
+    -webkit-transform: scale(0.8);
+    transform: scale(0.8); }
+  100% {
+    opacity: 1;
+    -ms-transform: scale(1);
+    -webkit-transform: scale(1);
+    transform: scale(1); } }
+
+@-webkit-keyframes moveLockedRewards {
+  0% {
+    margin-top: 0%; }
+  100% {
+    margin-top: 66%; } }
+
+@-moz-keyframes moveLockedRewards {
+  0% {
+    margin-top: 0%; }
+  100% {
+    margin-top: 66%; } }
+
+@-o-keyframes moveLockedRewards {
+  0% {
+    margin-top: 0%; }
+  100% {
+    margin-top: 66%; } }
+
+@keyframes moveLockedRewards {
+  0% {
+    margin-top: 0%; }
+  100% {
+    margin-top: 66%; } }
 
 @-webkit-keyframes ninjaNewRewardAnim {
   0% {
