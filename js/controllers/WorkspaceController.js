@@ -37,13 +37,28 @@
 
                 if (target.getAttribute('data-screen') == "subscribe") {
 
-                    App.NinjaService.subscribeHandler({}, function(res) {
+                    DOMcache.screenCls.classList.remove('subscribeScreen');
+                    DOMcache.screenCls.classList.add('ftueScreen');
+                    DOMcache.title.classList.add('titleAnimFtueCls');
+                    DOMcache.title.classList.add('animation_fadeout');
+                    DOMcache.subtitle.remove();
+                    DOMcache.title.innerHTML = "What do you get?";
+                    DOMcache.content.innerHTML = Mustache.render(unescape(that.ftueTemplate));
+                    DOMcache.bottomSection.classList.remove('slideFromBottomCls');
+                    DOMcache.bottomSection.classList.add('slideFromBottomCls2');
+                    DOMcache.centerIcon.classList.remove('scaleZeroToOneAnim');
+                    DOMcache.centerIcon.classList.add('animation_fadeout');
+                    DOMcache.info.classList.add('animation_fadeout');
+                    DOMcache.cta.classList.add('animation_fadeout');
+
+
+                    /* App.NinjaService.subscribeHandler({}, function(res) {
 
                         if (res.stat === 'ok') {
 
                             cacheProvider.setInCritical('subscriptionCompleted', true);
 
-                            /* Animation For the FTUE Screen */
+                             Animation For the FTUE Screen 
                             DOMcache.screenCls.classList.remove('subscribeScreen');
                             DOMcache.screenCls.classList.add('ftueScreen');
                             DOMcache.title.classList.add('titleAnimFtueCls');
@@ -59,9 +74,9 @@
                             DOMcache.cta.classList.add('animation_fadeout');
 
 
-                            /* Fetch Profile Data in Background */
+                            //Fetch Profile Data in Background 
                             App.NinjaService.getNinjaProfile(function(res) {
-                                console.log(res.data);
+                               console.log(res.data);
                                 cacheProvider.setInCritical('userProfileData', res.data);
                                 if (res.data.status != 'inactive' && res.data.status != 'locked') {
                                     profileModel.updateNinjaData(res.data, App);
@@ -76,6 +91,8 @@
 
                     }, that);
 
+                      */
+
                 } else {
 
                     /* Animation FTUE screen dismiss */
@@ -85,7 +102,6 @@
                     DOMcache.content.classList.add('fadeOutTranslateCls2');
                     DOMcache.bottomSection.classList.remove('slideFromBottomCls2');
                     DOMcache.bottomSection.classList.add('animation_fadeout');
-                    DOMcache.centreIcon.classList.add('animation_fadeout');
                     cacheProvider.setInCritical('ftueCompleted', true);
                     App.router.navigateTo('/home');
                 }

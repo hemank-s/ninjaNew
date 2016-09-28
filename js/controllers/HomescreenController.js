@@ -37,12 +37,26 @@
             rewardUnlockAnimation.style.opacity = 1;
             rewardUnlockAnimation.classList.add('newRewardBgRemove');
             rewardUnlockContainer.classList.add('newStreakAnimation');
-
-
-            unlockedReward.classList.remove('hideClass');
-            //lockedRewards.classList.add('moveLockedRewardsAnimation');
+            lockedRewards.classList.add('moveLockedRewardsAnimation');
             unlockedRewardListContainer.classList.add('unlockedRewardListUl');
         });
+
+        lockedRewards.addEventListener('webkitAnimationEnd', function() {
+            unlockedReward.classList.remove('hideClass');
+            lockedRewards.classList.remove('moveLockedRewardsAnimation');
+
+        });
+
+        lockedRewards.addEventListener('animationend', function() {
+            unlockedReward.classList.remove('hideClass');
+            lockedRewards.classList.remove('moveLockedRewardsAnimation');
+
+        });
+
+
+
+
+
     };
 
     HomescreenController.prototype.filterRewards = function(rewards) {

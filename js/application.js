@@ -398,7 +398,7 @@
             var ftueCompleted = cacheProvider.getFromCritical('ftueCompleted');
 
             if (!subscriptionCompleted || !ftueCompleted) {
-                self.router.navigateTo('/home');
+                self.router.navigateTo('/');
             } else {
                 self.router.navigateTo('/home');
             }

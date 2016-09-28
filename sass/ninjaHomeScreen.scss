@@ -8,61 +8,62 @@
     background: linear-gradient(to bottom left, #1D47F5, #33FFE2);
 }
 
-.hideClass{
-    display: none !important; 
+.hideClass {
+    display: none !important;
 }
 
-.rewardUnlockStreakIcon{
+.rewardUnlockStreakIcon {
     background: url(images/rewardUnlockStreak.png);
     background-size: contain;
     background-repeat: no-repeat;
     width: 32px;
-    height: 28px;  
-    display: inline-block; 
-    vertical-align: middle; 
+    height: 28px;
+    display: inline-block;
+    vertical-align: middle;
 }
 
-.dayDef{
+.dayDef {
     font-size: 26px;
     color: #FFFFFF;
     line-height: 13px;
     font-weight: 300;
     margin-bottom: 18px;
     text-align: center;
-    display: block; 
+    display: block;
 }
 
-.rewardUnlockStreakValue{
-    font-weight: 500; 
+.rewardUnlockStreakValue {
+    font-weight: 500;
     font-size: 48px;
     color: #23D3DA;
     letter-spacing: 1.5px;
     display: inline-block;
-    vertical-align: middle; 
+    vertical-align: middle;
 }
 
 .rewardUnlockAnimation {
     position: absolute;
-    opacity: 0; 
+    opacity: 0;
     width: 100%;
     height: 100%;
-    background: #1D47F5 ;
-   background: -webkit-linear-gradient(left top, rgba(29,71,245,0.92) , rgba(51,255,226,0.92) );
-   background: -o-linear-gradient(bottom right, rgba(29,71,245,0.92) , rgba(51,255,226,0.92) );
-   background: -moz-linear-gradient(bottom right, rgba(29,71,245,0.92) , rgba(51,255,226,0.92) );
-   background: linear-gradient(to bottom right, rgba(29,71,245,0.92) , rgba(51,255,226,0.92) );
+    background: #1D47F5;
+    z-index: 1000;
+    background: -webkit-linear-gradient(left top, rgba(29, 71, 245, 0.92), rgba(51, 255, 226, 0.92));
+    background: -o-linear-gradient(bottom right, rgba(29, 71, 245, 0.92), rgba(51, 255, 226, 0.92));
+    background: -moz-linear-gradient(bottom right, rgba(29, 71, 245, 0.92), rgba(51, 255, 226, 0.92));
+    background: linear-gradient(to bottom right, rgba(29, 71, 245, 0.92), rgba(51, 255, 226, 0.92));
 }
 
-.streakValueContainer{
+.streakValueContainer {
     text-align: center;
     width: 164px;
     margin: 0px auto;
-    height: 72px;  
+    height: 72px;
     background: #FFFFFF;
     box-shadow: 0px 0px 44px 0px #4CF3D5;
     border-radius: 100px;
-    line-height:72px;
-    border: 4px solid #7CEDF2; 
+    line-height: 72px;
+    border: 4px solid #7CEDF2;
     opacity: 0;
     -webkit-transform: scale(0);
     transform: scale(0);
@@ -121,35 +122,36 @@ span.streakDef {
     background: url(images/ninjaWave.png);
     background-size: cover;
     background-repeat: no-repeat;
-    width: 100%;
-    height: 60px;
+    width: 101%;
+    height: 136px;
+    margin-left: -2px;
 }
 
 .ninjaRewards {
     height: 100%;
     background-color: #FFF;
+    margin-top: -20px;
 }
 
-.unlockedRewardHeading{
+.unlockedRewardHeading {
     display: inline-block;
     margin-left: 15px;
     font-size: 12px;
     color: #585959;
 }
-
 
 .lockedRewardHeading {
     display: inline-block;
     margin-left: 15px;
     font-size: 12px;
     color: #585959;
-    margin-bottom: 24px;  
+    margin-bottom: 24px;
 }
 
-.lockedRewardListContainer{
+.lockedRewardListContainer {
     margin-left: 20px;
     margin-right: 12px;
-    height:100%;
+    height: 100%;
 }
 
 .unlockedRewardIcon {
@@ -165,17 +167,17 @@ span.streakDef {
     float: right;
 }
 
-.unlockedRewardDetails{
+.unlockedRewardDetails {
     margin: 0px 0px 28px 15px;
 }
 
 .uRewardHeading {
     @include fontStyle(14px, 500, #FFFFFF, 17px);
-    margin-bottom:8px;
+    margin-bottom: 8px;
 }
 
 .uRewardSubheading {
-    @include fontStyle(12px, 400, rgba(255,255,255,0.70), 17px);
+    @include fontStyle(12px, 400, rgba(255, 255, 255, 0.70), 17px);
 }
 
 .unlockedRewardAction {
@@ -183,17 +185,16 @@ span.streakDef {
     text-transform: uppercase;
 }
 
-.unlockedRewardAction{
+.unlockedRewardAction {
     margin-left: 15px;
-      
 }
 
 li.unlockedRewardListItem:nth-child(odd) {
     background: linear-gradient(44deg, #FA4454 0%, #F6876C 100%);
-    
 }
+
 li.unlockedRewardListItem:nth-child(even) {
-    background:linear-gradient(44deg, #3A7BD5 0%, #00D2FF 100%);
+    background: linear-gradient(44deg, #3A7BD5 0%, #00D2FF 100%);
 }
 
 li.unlockedRewardListItem {
@@ -203,33 +204,34 @@ li.unlockedRewardListItem {
     display: inline-block;
     margin-right: 12px;
     opacity: 0;
-    -webkit-transform: scale(0.8); 
-     -moz-transform: scale(0.8); 
-     -ms-transform: scale(0.8); 
-     -o-transform: scale(0.8); 
-     transform: scale(0.8);
+    -webkit-transform: scale(0.8);
+    -moz-transform: scale(0.8);
+    -ms-transform: scale(0.8);
+    -o-transform: scale(0.8);
+    transform: scale(0.8);
 }
 
-.unlockedRewardHeader{
+.unlockedRewardHeader {
     display: flex;
     justify-content: space-between;
     margin: 24px 15px 22px 20px;
 }
 
-.unlockedRewardListContainer{
-    width: 100%;   
+.unlockedRewardListContainer {
+    width: 100%;
 }
 
-.unlockedRewardList{
+.unlockedRewardList {
     overflow-x: scroll;
-    margin: 12px 0px 32px 15px; 
+    margin: 12px 0px 32px 15px;
 }
 
-ul.unlockedRewardList{
-    list-style:none;
+ul.unlockedRewardList {
+    list-style: none;
     white-space: nowrap;
 }
-ul.unlockedRewardList > li.unlockedRewardListItem{
+
+ul.unlockedRewardList > li.unlockedRewardListItem {
     display: inline-block;
 }
 
@@ -307,74 +309,73 @@ ul.unlockedRewardList > li.unlockedRewardListItem{
     display: inline-block;
 }
 
-.lockedRewards{
+.lockedRewards {
     height: 100%;
     overflow: scroll;
+    -ms-transform: translate(0px, 0%);
+    -webkit-transform: translate(0px, 0%);
+    transform: translate(0px, 0%);
 }
 
-.batteryStreakInfoContainer{
+.batteryStreakInfoContainer {
     position: absolute;
     width: 100%;
     height: 100%;
-    background: #1D47F5 ;
-   background: -webkit-linear-gradient(left top, rgba(29,71,245,0.92) , rgba(51,255,226,0.92) );
-   background: -o-linear-gradient(bottom right, rgba(29,71,245,0.92) , rgba(51,255,226,0.92) );
-   background: -moz-linear-gradient(bottom right, rgba(29,71,245,0.92) , rgba(51,255,226,0.92) );
-   background: linear-gradient(to bottom right, rgba(29,71,245,0.92) , rgba(51,255,226,0.92) );
+    background: #1D47F5;
+    background: -webkit-linear-gradient(left top, rgba(29, 71, 245, 0.92), rgba(51, 255, 226, 0.92));
+    background: -o-linear-gradient(bottom right, rgba(29, 71, 245, 0.92), rgba(51, 255, 226, 0.92));
+    background: -moz-linear-gradient(bottom right, rgba(29, 71, 245, 0.92), rgba(51, 255, 226, 0.92));
+    background: linear-gradient(to bottom right, rgba(29, 71, 245, 0.92), rgba(51, 255, 226, 0.92));
 }
 
-.batteryStreakInfoContainer hr{
-      margin-top: 32px;
+.batteryStreakInfoContainer hr {
+    margin-top: 32px;
     margin-bottom: 32px;
     border: none;
     height: 1px;
-    background: rgba(255,255,255,0.28); 
+    background: rgba(255, 255, 255, 0.28);
 }
 
-.informationAction{
-    text-transform: uppercase ;
+.informationAction {
+    text-transform: uppercase;
     @include fontStyle(16px, 400, #FFFFFF, 19px);
 }
 
-
-.dayHeading{
+.dayHeading {
     @include fontStyle(16px, 500, #FFFFFF, 19px);
     margin: 14px 0px 10px 0px;
 }
 
-.dayInformation{
+.dayInformation {
     @include fontStyle(16px, 400, #FFFFFF, 19px);
 }
 
-.batteryIconContainer{
+.batteryIconContainer {
     background: url(images/batteryIcon.png);
     background-size: contain;
     background-repeat: no-repeat;
     width: 161px;
     height: 24px;
-    margin-bottom:24px;
+    margin-bottom: 24px;
 }
 
-.batteryHeading{
+.batteryHeading {
     @include fontStyle(16px, 500, #FFFFFF, 19px);
-    margin-bottom:12px;
+    margin-bottom: 12px;
 }
 
-.batteryInformation{
+.batteryInformation {
     @include fontStyle(16px, 400, #FFFFFF, 19px);
-    margin-bottom: 24px; 
+    margin-bottom: 24px;
 }
 
-.streakInfoWrapper{
-    padding:0px 16px;
+.streakInfoWrapper {
+    padding: 0px 16px;
 }
 
+.batteryInfoWrapper {}
 
-.batteryInfoWrapper{
-    
-}
-
-.streakInfoIcon{
+.streakInfoIcon {
     background: url(images/streakIcon.png);
     background-size: contain;
     background-repeat: no-repeat;
@@ -384,7 +385,7 @@ ul.unlockedRewardList > li.unlockedRewardListItem{
     vertical-align: middle;
 }
 
-.rewardUnlockContainer{
+.rewardUnlockContainer {
     position: absolute;
     top: 50%;
     left: 50%;
@@ -392,7 +393,7 @@ ul.unlockedRewardList > li.unlockedRewardListItem{
     transform: translate(-50%, -50%);
 }
 
-.streakInfoValue{
+.streakInfoValue {
     @include fontStyle(28px, 500, #FFFFFF, 32px);
     display: inline-flex;
     vertical-align: middle;
@@ -402,54 +403,57 @@ ul.unlockedRewardList > li.unlockedRewardListItem{
     @include animation(0.7s, 1s, ninjaNewRewardAnim);
 }
 
-.newRewardDayScale{
+.newRewardDayScale {
     @include animation(1.7s, 0.45s, dayScaleAnim);
 }
 
-.newRewardBgRemove{
-    @include animation(0s, 1s, removeNewRewardUnlockBackground);
+.newRewardBgRemove {
+    @include animation(0s, 0.7s, removeNewRewardUnlockBackground);
 }
 
-.newStreakAnimation{
-    @include animation(0s, 1s, updateNewStreakAnimation);
+.newStreakAnimation {
+    @include animation(0s, 0.7s, updateNewStreakAnimation);
 }
 
-.unlockedRewardListUl .newRewardAppearAnimation{
-    @include animation(0.3s, 1s, rewardBoxAnim);   
+.unlockedRewardListUl .newRewardAppearAnimation {
+    @include animation(0s, 1s, rewardBoxAnim);
 }
 
-.moveLockedRewardsAnimation{
-    @include animation(0.2s, 1s, moveLockedRewards);   
+.moveLockedRewardsAnimation {
+    @include animation(0s, 0.7s, moveLockedRewards);
 }
 
 @include keyframe(rewardBoxAnim) {
     0% {
         opacity: 0;
-        -ms-transform: scale(0.8) ;
-        -webkit-transform:  scale(0.8) ;
-        transform: scale(0.8) ;   
+        -ms-transform: scale(0.8);
+        -webkit-transform: scale(0.8);
+        transform: scale(0.8);
     }
     100% {
         opacity: 1;
-        -ms-transform: scale(1) ;
-        -webkit-transform:  scale(1) ;
-        transform: scale(1) ;
+        -ms-transform: scale(1);
+        -webkit-transform: scale(1);
+        transform: scale(1);
     }
 }
 
 @include keyframe(moveLockedRewards) {
     0% {
-        margin-top: 0%;    
+        -ms-transform: translate(0px, 0%);
+        -webkit-transform: translate(0px, 0%);
+        transform: translate(0px, 0%);
     }
     100% {
-        margin-top: 66%; 
+        -ms-transform: translate(0px, 38%);
+        -webkit-transform: translate(0px, 38%);
+        transform: translate(0px, 38%);
     }
 }
 
-
 @include keyframe(ninjaNewRewardAnim) {
     0% {
-        opacity: 0; 
+        opacity: 0;
     }
     100% {
         opacity: 1;
@@ -458,29 +462,29 @@ ul.unlockedRewardList > li.unlockedRewardListItem{
 
 @include keyframe(removeNewRewardUnlockBackground) {
     0% {
-        opacity: 1;  
+        opacity: 1;
     }
     100% {
-        opacity: 0; 
+        opacity: 0;
     }
 }
 
 @include keyframe(updateNewStreakAnimation) {
     0% {
-        opacity: 1; 
+        opacity: 1;
         -ms-transform: scale(1) translate(-50%, -50%);
-        -webkit-transform:  scale(1) translate(-50%, -50%);
-        transform: scale(1) translate(-50%, -50%) ;
-        top:50%;
-        left:50%;
+        -webkit-transform: scale(1) translate(-50%, -50%);
+        transform: scale(1) translate(-50%, -50%);
+        top: 50%;
+        left: 50%;
     }
     100% {
         opacity: 0;
         -ms-transform: scale(0) translate(-50%, -50%);
         -webkit-transform: scale(0) translate(-50%, -50%);
         transform: scale(0) translate(-50%, -50%);
-        top:5%;
-        left:10%;
+        top: 0%;
+        left: -15%;
     }
 }
 
@@ -489,12 +493,12 @@ ul.unlockedRewardList > li.unlockedRewardListItem{
         -ms-transform: scale(0);
         -webkit-transform: scale(0);
         transform: scale(0);
-        opacity: 0; 
+        opacity: 0;
     }
-    70%{
+    70% {
         -ms-transform: scale(1.12);
         -webkit-transform: scale(1.12);
-        transform: scale(1.12);   
+        transform: scale(1.12);
         opacity: 0.7;
     }
     100% {
@@ -505,41 +509,9 @@ ul.unlockedRewardList > li.unlockedRewardListItem{
     }
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 .rewardsContainer {
     padding: 30px 0px 30px 20px;
 }
-
 
 .mysteryBoxIcon {
     background: url(images/mysteryPack.png);
@@ -724,5 +696,3 @@ ul.unlockedRewardList > li.unlockedRewardListItem{
     color: rgba(61, 71, 91, 0.40);
     margin-top: 4px;
 }
-
-
