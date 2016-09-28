@@ -404,7 +404,6 @@
                 self.router.navigateTo('/home');
             }
 
-            self.router.navigateTo('/');
 
         }
     };
