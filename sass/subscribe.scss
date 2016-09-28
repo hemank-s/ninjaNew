@@ -1,16 +1,18 @@
 .workspaceContainer {
     background: #1D47F5;
     background: -webkit-linear-gradient(left top, #1D47F5, #33FFE2);
-    background: -o-linear-gradient(bottom left, #1D47F5, #33FFE2);
-    background: -moz-linear-gradient(bottom left, #1D47F5, #33FFE2);
-    background: linear-gradient(to bottom left, #1D47F5, #33FFE2);
+    background: -o-linear-gradient(bottom right, #1D47F5, #33FFE2);
+    background: -moz-linear-gradient(bottom right, #1D47F5, #33FFE2);
+    background: linear-gradient(to bottom right, #1D47F5, #33FFE2);
     height: 100%;
     width: 100%;
     .subscribeScreen {
         height: 100%;
+        .slideFromBottomCls {
+            @include animation(0.4s, 0.7s, slideFromBottom);
+        }
         .bottomSection {
             margin-top: 100%;
-            @include animation(0.4s, 0.7s, slideFromBottom);
         }
         .title {
             opacity: 0;
@@ -38,13 +40,15 @@
         text-align: center;
         padding-top: 8px;
     }
+    .scaleZeroToOneAnim {
+        @include animation(0s, 1.5s, scaleZeroToOne);
+    }
     .centreIcon {
         height: 163px;
         margin-top: 46px;
         background-image: url(images/ninjaSubscribe.png);
         background-size: 114px 163px;
         background-position: center;
-        @include animation(0s, 1.5s, scaleZeroToOne);
     }
     .info {
         @include fontStyle(14px, 400, rgba(61, 71, 91, 0.64), 18px);

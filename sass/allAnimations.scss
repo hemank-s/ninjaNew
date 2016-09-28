@@ -64,6 +64,8 @@
     -o-animation: fadein 1s;
     /* Opera < 12.1 */
     animation: fadein 1s;
+    -webkit-animation-fill-mode: forwards;
+    animation-fill-mode: forwards;
 }
 
 @keyframes fadein {
@@ -133,6 +135,8 @@
     -o-animation: fadeout 1s;
     /* Opera < 12.1 */
     animation: fadeout 1s;
+    -webkit-animation-fill-mode: forwards;
+    animation-fill-mode: forwards;
 }
 
 @keyframes fadeout {

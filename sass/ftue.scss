@@ -1,9 +1,31 @@
 .ftueScreen {
     height: 100%;
+    .title {
+        @include animation(0s, 0.7s, titleAnimFtue);
+    }
+    .slideFromBottomCls2 {
+        @include animation(0s, 0.7s, slideFromBottom2);
+    }
+    .bottomSection {
+        margin-top: 0%;
+    }
     .infoRow {
         list-style: none;
         margin-bottom: 30px;
         padding-left: 20px;
+        opacity: 0
+    }
+    .row1 {
+        @include animation(0s, 0.5s, inforRowAnim);
+    }
+    .row2 {
+        @include animation(0.5s, 0.5s, inforRowAnim);
+    }
+    .row3 {
+        @include animation(1s, 0.5s, inforRowAnim);
+    }
+    .row4 {
+        @include animation(1.5s, 0.5s, inforRowAnim);
     }
     .giftIcon {
         background: url(images/giftIcon.png);
@@ -39,6 +61,43 @@
         @include fontStyle(12px, 400, rgba(61, 71, 91, 0.64), 16px);
     }
     .content {
-        margin-top: -20px !important;
+        margin-top: -30px !important;
+    }
+}
+
+@include keyframe(slideFromBottom2) {
+    0% {
+        margin-top: 0%;
+    }
+    100% {
+        margin-top: -50%;
+    }
+}
+
+@include keyframe(titleAnimFtue) {
+    0% {
+        -ms-transform: translate(0px, 70%);
+        -webkit-transform: translate(0px, 70%);
+        transform: translate(0px, 70%);
+        opacity: 0;
+    }
+    100% {
+        -ms-transform: translate(0px, 0%);
+        -webkit-transform: translate(0px, 0%);
+        transform: translate(0px, 0%);
+        opacity: 1;
+    }
+}
+
+@include keyframe(inforRowAnim) {
+    0% {
+        top: 60%;
+        position: absolute;
+        opacity: 0
+    }
+    100% {
+        opacity: 1;
+        position: static;
+        top: 0;
     }
 }

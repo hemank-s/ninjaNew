@@ -4652,19 +4652,19 @@
 	    'use strict';
 
 	    var WorkspaceController = __webpack_require__(8),
-	        HomescreenController = __webpack_require__(10),
+	        HomescreenController = __webpack_require__(11),
 
 
-	        Router = __webpack_require__(11),
+	        Router = __webpack_require__(12),
 	        utils = __webpack_require__(4),
-	        profileModel = __webpack_require__(13),
-	        rewardsModel = __webpack_require__(14),
-	        activityModel = __webpack_require__(18),
-	        mysteryBoxModel = __webpack_require__(20),
-	        cacheProvider = __webpack_require__(12),
-	        expHandlerAB = __webpack_require__(27),
-	        TxService = __webpack_require__(16),
-	        NinjaService = __webpack_require__(17),
+	        profileModel = __webpack_require__(14),
+	        rewardsModel = __webpack_require__(15),
+	        activityModel = __webpack_require__(19),
+	        mysteryBoxModel = __webpack_require__(21),
+	        cacheProvider = __webpack_require__(13),
+	        expHandlerAB = __webpack_require__(28),
+	        TxService = __webpack_require__(17),
+	        NinjaService = __webpack_require__(18),
 	        Constants = __webpack_require__(5);
 
 	    // Full Screen Loader
@@ -5096,17 +5096,56 @@
 
 	        WorkspaceController = function(options) {
 	            this.template = __webpack_require__(9);
+	            this.ftueTemplate = __webpack_require__(10);
 	        };
 
 	    WorkspaceController.prototype.bind = function(App, data) {
 
-	        var cta = document.getElementsByClassName('subscribeCta')[0];
-	        var subscribeScreen = document.getElementsByClassName('subscribeScreen')[0];
-	        var ftueScreen = document.getElementsByClassName('ftueScreen')[0];
+	        var that = this;
 
-	        cta.addEventListener('click', function() {
-	            subscribeScreen.classList.add('hide');
-	            ftueScreen.classList.remove('hide');
+	        var DOMcache = {
+
+	            cta: document.getElementsByClassName('cta')[0],
+	            centerIcon: document.getElementsByClassName('centreIcon')[0],
+	            info: document.getElementsByClassName('info')[0],
+	            title: document.getElementsByClassName('title')[0],
+	            subtitle: document.getElementsByClassName('subtitle')[0],
+	            screenCls: document.getElementsByClassName('screenCls')[0],
+	            content: document.getElementsByClassName('content')[0],
+	            bottomSection: document.getElementsByClassName('bottomSection')[0]
+	        };
+
+
+	        DOMcache.cta.addEventListener('click', function() {
+
+	            if (this.getAttribute('data-screen') == "subscribe") {
+
+	                DOMcache.screenCls.classList.remove('subscribeScreen');
+	                DOMcache.screenCls.classList.add('ftueScreen');
+
+	                DOMcache.title.classList.add('animation_fadeout');
+	                DOMcache.subtitle.remove();
+	                DOMcache.title.innerHTML = "What do you get?"
+
+	                DOMcache.content.innerHTML = Mustache.render(unescape(that.ftueTemplate));
+	                DOMcache.bottomSection.classList.remove('slideFromBottomCls');
+	                DOMcache.bottomSection.classList.add('slideFromBottomCls2');
+
+	                //
+
+
+	                DOMcache.centerIcon.classList.remove('scaleZeroToOneAnim');
+	                DOMcache.centerIcon.classList.add('animation_fadeout');
+	                DOMcache.info.classList.add('animation_fadeout');
+	                DOMcache.cta.classList.add('animation_fadeout');
+
+	            } else {
+
+	                //Perform ftue action
+	            }
+
+
+
 
 	        });
 
@@ -5118,7 +5157,7 @@
 	        var that = this;
 	        that.el = document.createElement('div');
 	        that.el.className = 'workspaceContainer animation_fadein noselect';
-	        that.el.innerHTML = Mustache.render(unescape(that.template), { stateData: data });
+	        that.el.innerHTML = Mustache.render(unescape(that.template));
 	        ctr.appendChild(that.el);
 	        events.publish('update.loader', { show: false });
 	        that.bind(App, data);
@@ -5136,10 +5175,16 @@
 /* 9 */
 /***/ function(module, exports) {
 
-	module.exports = "<div class=\"subscribeScreen\">\n    <div class=\"crossIcon backgroundImageGeneric\"> </div>\n    <div class=\"title\"> Congratulations! </div>\n    <div class=\"subtitle\"> You’re a Hike Ninja now </div>\n    <div class=\"centreIcon backgroundImageGeneric\"> </div>\n    <div class=\"bottomSection\">\n        <div class=\"ninjaWave backgroundImageGeneric\"> </div>\n        <div class=\"content\">\n            <div class=\"info\"> You’ve been one of our top user. You have unlocked some really cool stuff which is exclusively for you.</div>\n            <div class=\"cta subscribeCta\"> SHOW ME</div>\n        </div>\n    </div>\n</div>\n<div class=\"ftueScreen hide\">\n    <div class=\"title\"> What do you get? </div>\n    <div class=\"bottomSection\">\n        <div class=\"ninjaWave backgroundImageGeneric\"> </div>\n        <div class=\"content\">\n            <li class=\"infoRow\">\n                <div class=\"infoIcon giftIcon\"></div>\n                <div class=\"infoDetails\">\n                    <p class=\"infoHeading\">Cool Gifts</p>\n                    <p class=\"infoSubHeading\">Get some really cool, exclusive content and features no one else has.</p>\n                </div>\n            </li>\n            <li class=\"infoRow\">\n                <div class=\"infoIcon statIcon\"></div>\n                <div class=\"infoDetails\">\n                    <p class=\"infoHeading\">Know your Hike Stats</p>\n                    <p class=\"infoSubHeading\">Check out your daily Hike Stats and brag among your friends.</p>\n                </div>\n            </li>\n            <li class=\"infoRow\">\n                <div class=\"infoIcon surpriseGiftIcon\"></div>\n                <div class=\"infoDetails\">\n                    <p class=\"infoHeading\">Surprise Gifts</p>\n                    <p class=\"infoSubHeading\">Win a surprise gift every day!</p>\n                </div>\n            </li>\n            <li class=\"infoRow\">\n                <div class=\"infoIcon moreIcon\"></div>\n                <div class=\"infoDetails\">\n                    <p class=\"infoHeading\">More</p>\n                    <p class=\"infoSubHeading\">Get and exclusive Ninja badge which lets your profile stand out.</p>\n                </div>\n            </li>\n            <div class=\"cta ftueCta\"> WOW! LET’S GO</div>\n        </div>\n    </div>\n</div>"
+	module.exports = "<div class=\"subscribeScreen screenCls\">\n    <div class=\"crossIcon backgroundImageGeneric\"> </div>\n    <div class=\"title\"> Congratulations! </div>\n    <div class=\"subtitle\"> You’re a Hike Ninja now </div>\n    <div class=\"centreIcon backgroundImageGeneric scaleZeroToOneAnim\"> </div>\n    <div class=\"bottomSection slideFromBottomCls\">\n        <div class=\"ninjaWave backgroundImageGeneric\"> </div>\n        <div class=\"content\">\n            <div class=\"info\"> You’ve been one of our top user. You have unlocked some really cool stuff which is exclusively for you.</div>\n            <div class=\"cta\" data-screen=\"subscribe\"> SHOW ME</div>\n        </div>\n    </div>\n</div>"
 
 /***/ },
 /* 10 */
+/***/ function(module, exports) {
+
+	module.exports = "<li class=\"infoRow  row1\">\n    <div class=\"infoIcon giftIcon\"></div>\n    <div class=\"infoDetails\">\n        <p class=\"infoHeading\">Cool Gifts</p>\n        <p class=\"infoSubHeading\">Get some really cool, exclusive content and features no one else has.</p>\n    </div>\n</li>\n<li class=\"infoRow row2\">\n    <div class=\"infoIcon statIcon\"></div>\n    <div class=\"infoDetails\">\n        <p class=\"infoHeading\">Know your Hike Stats</p>\n        <p class=\"infoSubHeading\">Check out your daily Hike Stats and brag among your friends.</p>\n    </div>\n</li>\n<li class=\"infoRow row3\">\n    <div class=\"infoIcon surpriseGiftIcon\"></div>\n    <div class=\"infoDetails\">\n        <p class=\"infoHeading\">Surprise Gifts</p>\n        <p class=\"infoSubHeading\">Win a surprise gift every day!</p>\n    </div>\n</li>\n<li class=\"infoRow row4\">\n    <div class=\"infoIcon moreIcon\"></div>\n    <div class=\"infoDetails\">\n        <p class=\"infoHeading\">More</p>\n        <p class=\"infoSubHeading\">Get and exclusive Ninja badge which lets your profile stand out.</p>\n    </div>\n</li>\n<div class=\"cta\" data-screen=\"ftue\"> WOW! LET’S GO</div>"
+
+/***/ },
+/* 11 */
 /***/ function(module, exports, __webpack_require__) {
 
 	(function(W, platformSdk, events) {
@@ -5178,13 +5223,13 @@
 	})(window, platformSdk, platformSdk.events);
 
 /***/ },
-/* 11 */
+/* 12 */
 /***/ function(module, exports, __webpack_require__) {
 
 	(function (W, events) {
 	    'use strict';
 
-	   var cacheProvider = __webpack_require__(12);
+	   var cacheProvider = __webpack_require__(13);
 	   
 	    var Router = function () {
 	        this.routes = {};
@@ -5278,7 +5323,7 @@
 	})(window, platformSdk.events);
 
 /***/ },
-/* 12 */
+/* 13 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -5332,7 +5377,7 @@
 	})();
 
 /***/ },
-/* 13 */
+/* 14 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -5344,10 +5389,10 @@
 
 	    var platformSdk = __webpack_require__(3),
 	        utils = __webpack_require__(4),
-	        cacheProvider = __webpack_require__(12),
-	        rewardsModel = __webpack_require__(14),
-	        TxService = __webpack_require__(16),
-	        NinjaService = __webpack_require__(17),
+	        cacheProvider = __webpack_require__(13),
+	        rewardsModel = __webpack_require__(15),
+	        TxService = __webpack_require__(17),
+	        NinjaService = __webpack_require__(18),
 
 	        ProfileModel = function() {
 	            this.TxService = new TxService();
@@ -5532,7 +5577,7 @@
 
 
 /***/ },
-/* 14 */
+/* 15 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -5544,7 +5589,7 @@
 
 	    var platformSdk = __webpack_require__(3),
 	        utils = __webpack_require__(4),
-	        cacheProvider = __webpack_require__(12), 
+	        cacheProvider = __webpack_require__(13), 
 	        Constants = __webpack_require__(5),
 
 	        RewardsModel = function() {},
@@ -5654,7 +5699,7 @@
 	            ninjaRewardsListOld.innerHTML = '';
 
 	            // Re Render The Reward Template Only From External HTML
-	            this.template = __webpack_require__(15);
+	            this.template = __webpack_require__(16);
 
 	            // To remove later for adhoc
 
@@ -5684,13 +5729,13 @@
 	})();
 
 /***/ },
-/* 15 */
+/* 16 */
 /***/ function(module, exports) {
 
 	module.exports = "{{#ninjaRewardsCollection}}\n<li class=\"rewardRow\" data-rewardId=\"{{id}}\" data-state=\"{{state}}\" data-rewardtype=\"{{type}}\">\n    <div class=\"rewardIcon\"></div>\n    <div class=\"rewardDetails\">\n        <p class=\"rewardHeading    {{^state}}{{#lockedGreyout}}rewardHeadingLocked{{/lockedGreyout}}{{/state}}\">{{title}}</p>\n        <p class=\"rewardSubheading {{^state}}{{#lockedGreyout}}rewardSubheadingLocked{{/lockedGreyout}}{{/state}}\">{{stitle}}</p>\n    </div>\n    {{#streak}}\n    <div class=\"rewardStreakWrapper\">\n        <div class=\"rewardStreakIcon\"></div>\n        <div class=\"rewardStreakValue\">{{streak}}</div>\n    </div>\n    {{/streak}}\n</li>\n{{/ninjaRewardsCollection}}"
 
 /***/ },
-/* 16 */
+/* 17 */
 /***/ function(module, exports, __webpack_require__) {
 
 	(function(W, platformSdk, events) {
@@ -5840,14 +5885,14 @@
 	})(window, platformSdk, platformSdk.events);
 
 /***/ },
-/* 17 */
+/* 18 */
 /***/ function(module, exports, __webpack_require__) {
 
 	(function(W, platformSdk, events) {
 	    'use strict';
 
 	    var utils = __webpack_require__(4);
-	    var cacheProvider = __webpack_require__(12);
+	    var cacheProvider = __webpack_require__(13);
 	    var Constants = __webpack_require__(5);
 	    var checkTimeout = null;
 
@@ -6017,7 +6062,7 @@
 	})(window, platformSdk, platformSdk.events);
 
 /***/ },
-/* 18 */
+/* 19 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -6029,9 +6074,9 @@
 
 	    var platformSdk = __webpack_require__(3),
 	        utils = __webpack_require__(4),
-	        cacheProvider = __webpack_require__(12),
-	        TxService = __webpack_require__(16),
-	        NinjaService = __webpack_require__(17),
+	        cacheProvider = __webpack_require__(13),
+	        TxService = __webpack_require__(17),
+	        NinjaService = __webpack_require__(18),
 
 	        ActivityModel = function() {
 	            this.TxService = new TxService();
@@ -6110,7 +6155,7 @@
 	            statsWrapper.innerHTML = '';
 
 	            // Re Render The Reward Template Only From External HTML
-	            this.template = __webpack_require__(19);
+	            this.template = __webpack_require__(20);
 	            statsWrapper.innerHTML = Mustache.render(this.template, {
 	                ninjaActivityData: activityData
 	            });
@@ -6123,13 +6168,13 @@
 
 
 /***/ },
-/* 19 */
+/* 20 */
 /***/ function(module, exports) {
 
 	module.exports = "{{#ninjaActivityData}}\n<div class=\"statTypeContainer\">\n    <div class=\"statHeading\">Messaging</div>\n    <div class=\"statBoxWrapper statBoxFloatLeft\">\n        <div class=\"statValue messagesR\">{{ninjaActivityData.messages.rec}}</div>\n        <div class=\"statText\">Messages Received</div>\n    </div>\n    <div class=\"statBoxWrapper statBoxFloatRight\">\n        <div class=\"statValue messagesS\">{{ninjaActivityData.messages.sent}}</div>\n        <div class=\"statText\">Messages Sent</div>\n    </div>\n    <div class=\"statBoxWrapper statBoxFloatLeft\">\n        <div class=\"statValue stickersR\">{{ninjaActivityData.stickers.rec}}</div>\n        <div class=\"statText\">Stickers Received</div>\n    </div>\n    <div class=\"statBoxWrapper statBoxFloatRight\">\n        <div class=\"statValue stickersS\">{{ninjaActivityData.stickers.sent}}</div>\n        <div class=\"statText\">Stickers Sent</div>\n    </div>\n    <div class=\"statBoxWrapper statBoxFloatLeft\">\n        <div class=\"statValue chatThemesR\">{{ninjaActivityData.chatThemes.rec}}</div>\n        <div class=\"statText\">Chat Themes Received</div>\n    </div>\n    <div class=\"statBoxWrapper statBoxFloatRight\">\n        <div class=\"statValue chatThemesS\">{{ninjaActivityData.chatThemes.sent}}</div>\n        <div class=\"statText\">Chat Themes Sent</div>\n    </div>\n    <div class=\"statBoxWrapper statBoxFloatLeft\">\n        <div class=\"statValue filesR\">{{ninjaActivityData.files.rec}}</div>\n        <div class=\"statText\">Files Received</div>\n    </div>\n    <div class=\"statBoxWrapper statBoxFloatRight\">\n        <div class=\"statValue filesS\">{{ninjaActivityData.files.sent}}</div>\n        <div class=\"statText\">Files Sent</div>\n    </div>\n</div>\n<div class=\"statTypeContainer\">\n    <div class=\"statHeading\">Timeline</div>\n    <div class=\"statBoxWrapper statBoxFloatLeft\">\n        <div class=\"statValue statusUpdateCount\">{{ninjaActivityData.statusUpdates.count}}</div>\n        <div class=\"statText\">Status Updates Posted</div>\n    </div>\n</div>\n{{/ninjaActivityData}}\n"
 
 /***/ },
-/* 20 */
+/* 21 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -6141,11 +6186,11 @@
 
 	    var platformSdk = __webpack_require__( 3 ),
 	        utils = __webpack_require__( 4 ),
-	        cacheProvider = __webpack_require__( 12 ),
-	        profileModel = __webpack_require__( 13 ),
-	        rewardsModel = __webpack_require__( 14 ),
-	        TxService = __webpack_require__( 16 ),
-	        NinjaService = __webpack_require__( 17 ),
+	        cacheProvider = __webpack_require__( 13 ),
+	        profileModel = __webpack_require__( 14 ),
+	        rewardsModel = __webpack_require__( 15 ),
+	        TxService = __webpack_require__( 17 ),
+	        NinjaService = __webpack_require__( 18 ),
 
 	        MysteryBoxModel = function() {
 	            this.TxService = new TxService();
@@ -6216,7 +6261,7 @@
 
 	            if ( rewardData.value == 'HIGH' ) {
 	                console.log( 'Bumper Anmation' );
-	                that.template = __webpack_require__( 21 );
+	                that.template = __webpack_require__( 22 );
 	                mysteryBoxContainer.innerHTML = Mustache.render( that.template, {
 	                    mysterBoxReward: rewardData
 	                });
@@ -6241,14 +6286,14 @@
 
 	            } else if ( rewardData.value == 'LOW' ) {
 	                console.log( 'Low animation :: Figure Out design' );
-	                that.template = __webpack_require__( 22 );
+	                that.template = __webpack_require__( 23 );
 	                mysteryBoxContainer.innerHTML = Mustache.render( that.template, {
 	                    mysterBoxReward: rewardData
 	                });
 
 	                var mysteryRewardActionLow = document.getElementsByClassName( 'mysteryRewardAction' )[0];
 	                mysteryRewardActionLow.addEventListener( 'click', function() {
-	                    that.template = __webpack_require__( 23 );
+	                    that.template = __webpack_require__( 24 );
 	                    mysteryBoxContainer.innerHTML = Mustache.render( that.template, {});
 	                    that.defineCooldown( cooldownTime, App );
 	                });
@@ -6260,14 +6305,14 @@
 
 	            } else if ( rewardData.value == 'MED' ) {
 	                console.log( 'Low animation :: Figure Out Design' );
-	                that.template = __webpack_require__( 22 );
+	                that.template = __webpack_require__( 23 );
 	                mysteryBoxContainer.innerHTML = Mustache.render( that.template, {
 	                    mysterBoxReward: rewardData
 	                });
 
 	                var mysteryRewardActionMed = document.getElementsByClassName( 'mysteryRewardAction' )[0];
 	                mysteryRewardActionMed.addEventListener( 'click', function() {
-	                    that.template = __webpack_require__( 23 );
+	                    that.template = __webpack_require__( 24 );
 	                    mysteryBoxContainer.innerHTML = Mustache.render( that.template, {});
 	                    that.defineCooldown( cooldownTime, App );
 	                });
@@ -6454,13 +6499,13 @@
 	            if ( mysteryBoxData.mstatus == 'inactive' ) {
 
 	                // Re Render The Reward Template Only From External HTML
-	                that.template = __webpack_require__( 24 );
+	                that.template = __webpack_require__( 25 );
 	                mysteryBoxContainer.innerHTML = Mustache.render( that.template, {
 	                    streakToUnlock: mysteryBoxData.streak_unlock
 	                });
 	            } else if ( mysteryBoxData.mstatus == 'active' ) {
 
-	                that.template = __webpack_require__( 25 );
+	                that.template = __webpack_require__( 26 );
 	                mysteryBoxContainer.innerHTML = Mustache.render( that.template, {
 	                    previousWinner: mysteryBoxData.yesterday_winner,
 	                    showMysteryBoxHistoryButton: showMysteryBoxHistoryButton
@@ -6474,7 +6519,7 @@
 
 	                console.log( mysteryBoxData );
 
-	                that.template = __webpack_require__( 23 );
+	                that.template = __webpack_require__( 24 );
 	                mysteryBoxContainer.innerHTML = Mustache.render( that.template, {
 	                    showMysteryBoxHistoryButton: showMysteryBoxHistoryButton
 	                });
@@ -6491,7 +6536,7 @@
 	                mHistoryButton.addEventListener( 'click', function() {
 	                    console.log( 'Opening your Mystery Box History' );
 
-	                    that.template = __webpack_require__( 26 );
+	                    that.template = __webpack_require__( 27 );
 	                    mysteryBoxContainer.innerHTML = Mustache.render( that.template, {
 	                        mysteryBoxHistory: mysteryBoxData.history
 	                    });
@@ -6517,43 +6562,43 @@
 
 
 /***/ },
-/* 21 */
+/* 22 */
 /***/ function(module, exports) {
 
 	module.exports = "{{#mysterBoxReward}}\n\t<div class=\"mysteryBoxIcon\"></div>\n\t<div class=\"mysteryBoxMessageSpin\">Congrats! You’ve unlocked the grand prize - {{title}}. Get your gift now.</div>\n\t<div class=\"actionContainer align-center\">\n\t\t<div data-rid=\"{{tid}}\" data-rewardtype=\"{{type}}\" class=\"mysteryRewardBumperAction align-center\">Claim</div>\n\t</div>\n{{/mysterBoxReward}}\n"
 
 /***/ },
-/* 22 */
+/* 23 */
 /***/ function(module, exports) {
 
 	module.exports = "{{#mysterBoxReward}}\n\t<div class=\"mysteryBoxIcon align-center\"></div>\n\t<div class=\"mysteryBoxMessageSpin align-center\">{{title}}</div>\n\t<div class=\"actionContainer align-center\">\n\t\t<div data-id=\"{{id}}\" class=\"mysteryRewardAction align-center\">Got It</div>\n\t</div>\n{{/mysterBoxReward}}"
 
 /***/ },
-/* 23 */
+/* 24 */
 /***/ function(module, exports) {
 
 	module.exports = "<div class=\"mysteryBoxIcon align-center\"></div>\n<div class=\"mysteryBoxCounter align-center\">\n    <div id=\"clockdiv\">\n        <div>\n            <span class=\"days\"></span>\n            <div class=\"smalltext\">Days</div>\n        </div>\n        <div>\n            <span class=\"hours\"></span>\n            <div class=\"smalltext\">Hrs</div>\n        </div>\n        <div>\n            <span class=\"minutes\"></span>\n            <div class=\"smalltext\">Mins</div>\n        </div>\n        <div>\n            <span class=\"seconds\"></span>\n            <div class=\"smalltext\">Secs</div>\n        </div>\n    </div>\n</div>\n<div class=\"mysteryBoxMessage align-center\">Remaining For your Next Spin</div>\n\n{{#showMysteryBoxHistoryButton}}\n<div class=\"mysteryBoxHistory align-center\">My History</div>\n{{/showMysteryBoxHistoryButton}}\n"
 
 /***/ },
-/* 24 */
+/* 25 */
 /***/ function(module, exports) {
 
 	module.exports = "<div class=\"mysteryBoxMessage align-center\">You will be able to unlock the mystery box only after {{streakToUnlock}} days of streak</div>\n"
 
 /***/ },
-/* 25 */
+/* 26 */
 /***/ function(module, exports) {
 
 	module.exports = "<div id=\"spin\" class=\"spin\">SPIN</div>\n<div id=\"result\" class=\"result\"></div>\n<div class=\"mysteryBoxMessageSpin\">Spin the wheel to unlock the surprise. Only one Ninja per day wins the grand prize.</div>\n<div class=\"wheel-wrapper\">\n  <div class=\"needle\"></div>\n  <div id=\"wheel\" class=\"wheel\">\n    <div class=\"cutter\">\n      <div class=\"slicer\">\n        <div class=\"part\" data-slice=\"8\" data-reward=\"\"><div class=\"mBoxRewardIcon\"></div></div>\n      </div>\n    </div>\n    <div class=\"cutter\">\n      <div class=\"slicer\">\n        <div class=\"part\" data-slice=\"7\" data-reward=\"\"><div class=\"mBoxRewardIcon\"></div></div>\n      </div>\n    </div>\n    <div class=\"cutter\">\n      <div class=\"slicer\">\n        <div class=\"part\" data-slice=\"6\" data-reward=\"\"><div class=\"mBoxRewardIcon\"></div></div>\n      </div>\n    </div>\n    <div class=\"cutter\">\n      <div class=\"slicer\">\n        <div class=\"part\" data-slice=\"5\" data-reward=\"\"><div class=\"mBoxRewardIcon\"></div></div>\n      </div>\n    </div>\n    <div class=\"cutter\">\n      <div class=\"slicer\">\n        <div class=\"part\" data-slice=\"4\" data-reward=\"\"><div class=\"mBoxRewardIcon\"></div></div>\n      </div>\n    </div>\n    <div class=\"cutter\">\n      <div class=\"slicer\">\n        <div class=\"part\" data-slice=\"3\" data-reward=\"\"><div class=\"mBoxRewardIcon\"></div></div>\n      </div>\n    </div>\n    <div class=\"cutter\">\n      <div class=\"slicer\">\n        <div class=\"part\" data-slice=\"2\" data-reward=\"\"><div class=\"mBoxRewardIcon\"></div></div>\n      </div>\n    </div>\n    <div class=\"cutter\">\n      <div class=\"slicer\">\n        <div class=\"part\" data-slice=\"1\" data-reward=\"\"><div class=\"mBoxRewardIcon\"></div></div>\n      </div>\n    </div>\n  </div>\n</div>\n\n{{#previousWinner}}\n  <div class=\"previousWinnerRow align-center\">\n    <p class=\"previousWinnerHeading\">Yesterday's Grand Prize Winner</p>\n    <div class=\"winnerWrapper\">\n      <div class=\"winnerIcon\"></div>\n      <div class=\"winnerName\">{{previousWinner.name}}</div>  \n    </div>\n  </div>\n{{/previousWinner}}\n\n{{#showMysteryBoxHistoryButton}}\n<div class=\"mysteryBoxHistory  align-center\">My History</div>\n{{/showMysteryBoxHistoryButton}}"
 
 /***/ },
-/* 26 */
+/* 27 */
 /***/ function(module, exports) {
 
 	module.exports = "<div class=\"mysteryBoxHistoryContainer\">\n    {{#mysteryBoxHistory}}\n    <li class=\"bumperRow\" data-rid=\"{{id}}\" data-url=\"{{url}}\" data-state=\"{{state}}\" data-rewardtype=\"{{type}}\">\n        <div class=\"bumperRowIcon\"></div>\n        <div class=\"bumperRowDetails\">\n            <p class=\"bumperRowHeading\">{{title}}</p>\n            <p class=\"bumperRowSubHeading\">{{stitle}}</p>\n        </div>\n    </li>\n    {{/mysteryBoxHistory}}\n</div>"
 
 /***/ },
-/* 27 */
+/* 28 */
 /***/ function(module, exports, __webpack_require__) {
 
 	(function() {

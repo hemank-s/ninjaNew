@@ -479,7 +479,9 @@ a:visited {
   /* Internet Explorer */
   -o-animation: fadein 1s;
   /* Opera < 12.1 */
-  animation: fadein 1s; }
+  animation: fadein 1s;
+  -webkit-animation-fill-mode: forwards;
+  animation-fill-mode: forwards; }
 
 @keyframes fadein {
   from {
@@ -524,7 +526,9 @@ a:visited {
   /* Internet Explorer */
   -o-animation: fadeout 1s;
   /* Opera < 12.1 */
-  animation: fadeout 1s; }
+  animation: fadeout 1s;
+  -webkit-animation-fill-mode: forwards;
+  animation-fill-mode: forwards; }
 
 @keyframes fadeout {
   from {
@@ -680,15 +684,14 @@ a:visited {
 .workspaceContainer {
   background: #1D47F5;
   background: -webkit-linear-gradient(left top, #1D47F5, #33FFE2);
-  background: -o-linear-gradient(bottom left, #1D47F5, #33FFE2);
-  background: -moz-linear-gradient(bottom left, #1D47F5, #33FFE2);
-  background: linear-gradient(to bottom left, #1D47F5, #33FFE2);
+  background: -o-linear-gradient(bottom right, #1D47F5, #33FFE2);
+  background: -moz-linear-gradient(bottom right, #1D47F5, #33FFE2);
+  background: linear-gradient(to bottom right, #1D47F5, #33FFE2);
   height: 100%;
   width: 100%; }
   .workspaceContainer .subscribeScreen {
     height: 100%; }
-    .workspaceContainer .subscribeScreen .bottomSection {
-      margin-top: 100%;
+    .workspaceContainer .subscribeScreen .slideFromBottomCls {
       -webkit-animation-delay: 0.4s;
       -webkit-animation-duration: 0.7s;
       -webkit-animation-name: slideFromBottom;
@@ -709,6 +712,8 @@ a:visited {
       animation-name: slideFromBottom;
       animation-fill-mode: forwards;
       /* this prevents the animation from restarting! */ }
+    .workspaceContainer .subscribeScreen .bottomSection {
+      margin-top: 100%; }
     .workspaceContainer .subscribeScreen .title {
       opacity: 0;
       -webkit-animation-delay: 0s;
@@ -773,12 +778,7 @@ a:visited {
     font-weight: 400;
     text-align: center;
     padding-top: 8px; }
-  .workspaceContainer .centreIcon {
-    height: 163px;
-    margin-top: 46px;
-    background-image: url(images/ninjaSubscribe.png);
-    background-size: 114px 163px;
-    background-position: center;
+  .workspaceContainer .scaleZeroToOneAnim {
     -webkit-animation-delay: 0s;
     -webkit-animation-duration: 1.5s;
     -webkit-animation-name: scaleZeroToOne;
@@ -799,6 +799,12 @@ a:visited {
     animation-name: scaleZeroToOne;
     animation-fill-mode: forwards;
     /* this prevents the animation from restarting! */ }
+  .workspaceContainer .centreIcon {
+    height: 163px;
+    margin-top: 46px;
+    background-image: url(images/ninjaSubscribe.png);
+    background-size: 114px 163px;
+    background-position: center; }
   .workspaceContainer .info {
     font-size: 14px;
     color: rgba(61, 71, 91, 0.64);
@@ -897,10 +903,139 @@ a:visited {
 
 .ftueScreen {
   height: 100%; }
+  .ftueScreen .title {
+    -webkit-animation-delay: 0s;
+    -webkit-animation-duration: 0.7s;
+    -webkit-animation-name: titleAnimFtue;
+    -webkit-animation-fill-mode: forwards;
+    /* this prevents the animation from restarting! */
+    -moz-animation-delay: 0s;
+    -moz-animation-duration: 0.7s;
+    -moz-animation-name: titleAnimFtue;
+    -moz-animation-fill-mode: forwards;
+    /* this prevents the animation from restarting! */
+    -o-animation-delay: 0s;
+    -o-animation-duration: 0.7s;
+    -o-animation-name: titleAnimFtue;
+    -o-animation-fill-mode: forwards;
+    /* this prevents the animation from restarting! */
+    animation-delay: 0s;
+    animation-duration: 0.7s;
+    animation-name: titleAnimFtue;
+    animation-fill-mode: forwards;
+    /* this prevents the animation from restarting! */ }
+  .ftueScreen .slideFromBottomCls2 {
+    -webkit-animation-delay: 0s;
+    -webkit-animation-duration: 0.7s;
+    -webkit-animation-name: slideFromBottom2;
+    -webkit-animation-fill-mode: forwards;
+    /* this prevents the animation from restarting! */
+    -moz-animation-delay: 0s;
+    -moz-animation-duration: 0.7s;
+    -moz-animation-name: slideFromBottom2;
+    -moz-animation-fill-mode: forwards;
+    /* this prevents the animation from restarting! */
+    -o-animation-delay: 0s;
+    -o-animation-duration: 0.7s;
+    -o-animation-name: slideFromBottom2;
+    -o-animation-fill-mode: forwards;
+    /* this prevents the animation from restarting! */
+    animation-delay: 0s;
+    animation-duration: 0.7s;
+    animation-name: slideFromBottom2;
+    animation-fill-mode: forwards;
+    /* this prevents the animation from restarting! */ }
+  .ftueScreen .bottomSection {
+    margin-top: 0%; }
   .ftueScreen .infoRow {
     list-style: none;
     margin-bottom: 30px;
-    padding-left: 20px; }
+    padding-left: 20px;
+    opacity: 0; }
+  .ftueScreen .row1 {
+    -webkit-animation-delay: 0s;
+    -webkit-animation-duration: 0.5s;
+    -webkit-animation-name: inforRowAnim;
+    -webkit-animation-fill-mode: forwards;
+    /* this prevents the animation from restarting! */
+    -moz-animation-delay: 0s;
+    -moz-animation-duration: 0.5s;
+    -moz-animation-name: inforRowAnim;
+    -moz-animation-fill-mode: forwards;
+    /* this prevents the animation from restarting! */
+    -o-animation-delay: 0s;
+    -o-animation-duration: 0.5s;
+    -o-animation-name: inforRowAnim;
+    -o-animation-fill-mode: forwards;
+    /* this prevents the animation from restarting! */
+    animation-delay: 0s;
+    animation-duration: 0.5s;
+    animation-name: inforRowAnim;
+    animation-fill-mode: forwards;
+    /* this prevents the animation from restarting! */ }
+  .ftueScreen .row2 {
+    -webkit-animation-delay: 0.5s;
+    -webkit-animation-duration: 0.5s;
+    -webkit-animation-name: inforRowAnim;
+    -webkit-animation-fill-mode: forwards;
+    /* this prevents the animation from restarting! */
+    -moz-animation-delay: 0.5s;
+    -moz-animation-duration: 0.5s;
+    -moz-animation-name: inforRowAnim;
+    -moz-animation-fill-mode: forwards;
+    /* this prevents the animation from restarting! */
+    -o-animation-delay: 0.5s;
+    -o-animation-duration: 0.5s;
+    -o-animation-name: inforRowAnim;
+    -o-animation-fill-mode: forwards;
+    /* this prevents the animation from restarting! */
+    animation-delay: 0.5s;
+    animation-duration: 0.5s;
+    animation-name: inforRowAnim;
+    animation-fill-mode: forwards;
+    /* this prevents the animation from restarting! */ }
+  .ftueScreen .row3 {
+    -webkit-animation-delay: 1s;
+    -webkit-animation-duration: 0.5s;
+    -webkit-animation-name: inforRowAnim;
+    -webkit-animation-fill-mode: forwards;
+    /* this prevents the animation from restarting! */
+    -moz-animation-delay: 1s;
+    -moz-animation-duration: 0.5s;
+    -moz-animation-name: inforRowAnim;
+    -moz-animation-fill-mode: forwards;
+    /* this prevents the animation from restarting! */
+    -o-animation-delay: 1s;
+    -o-animation-duration: 0.5s;
+    -o-animation-name: inforRowAnim;
+    -o-animation-fill-mode: forwards;
+    /* this prevents the animation from restarting! */
+    animation-delay: 1s;
+    animation-duration: 0.5s;
+    animation-name: inforRowAnim;
+    animation-fill-mode: forwards;
+    /* this prevents the animation from restarting! */ }
+  .ftueScreen .row4 {
+    -webkit-animation-delay: 1.5s;
+    -webkit-animation-duration: 0.5s;
+    -webkit-animation-name: inforRowAnim;
+    -webkit-animation-fill-mode: forwards;
+    /* this prevents the animation from restarting! */
+    -moz-animation-delay: 1.5s;
+    -moz-animation-duration: 0.5s;
+    -moz-animation-name: inforRowAnim;
+    -moz-animation-fill-mode: forwards;
+    /* this prevents the animation from restarting! */
+    -o-animation-delay: 1.5s;
+    -o-animation-duration: 0.5s;
+    -o-animation-name: inforRowAnim;
+    -o-animation-fill-mode: forwards;
+    /* this prevents the animation from restarting! */
+    animation-delay: 1.5s;
+    animation-duration: 0.5s;
+    animation-name: inforRowAnim;
+    animation-fill-mode: forwards;
+    /* this prevents the animation from restarting! */ }
   .ftueScreen .giftIcon {
     background: url(images/giftIcon.png); }
   .ftueScreen .statIcon {
@@ -933,7 +1068,119 @@ a:visited {
     line-height: 16px;
     font-weight: 400; }
   .ftueScreen .content {
-    margin-top: -20px !important; }
+    margin-top: -30px !important; }
+
+@-webkit-keyframes slideFromBottom2 {
+  0% {
+    margin-top: 0%; }
+  100% {
+    margin-top: -50%; } }
+
+@-moz-keyframes slideFromBottom2 {
+  0% {
+    margin-top: 0%; }
+  100% {
+    margin-top: -50%; } }
+
+@-o-keyframes slideFromBottom2 {
+  0% {
+    margin-top: 0%; }
+  100% {
+    margin-top: -50%; } }
+
+@keyframes slideFromBottom2 {
+  0% {
+    margin-top: 0%; }
+  100% {
+    margin-top: -50%; } }
+
+@-webkit-keyframes titleAnimFtue {
+  0% {
+    -ms-transform: translate(0px, 70%);
+    -webkit-transform: translate(0px, 70%);
+    transform: translate(0px, 70%);
+    opacity: 0; }
+  100% {
+    -ms-transform: translate(0px, 0%);
+    -webkit-transform: translate(0px, 0%);
+    transform: translate(0px, 0%);
+    opacity: 1; } }
+
+@-moz-keyframes titleAnimFtue {
+  0% {
+    -ms-transform: translate(0px, 70%);
+    -webkit-transform: translate(0px, 70%);
+    transform: translate(0px, 70%);
+    opacity: 0; }
+  100% {
+    -ms-transform: translate(0px, 0%);
+    -webkit-transform: translate(0px, 0%);
+    transform: translate(0px, 0%);
+    opacity: 1; } }
+
+@-o-keyframes titleAnimFtue {
+  0% {
+    -ms-transform: translate(0px, 70%);
+    -webkit-transform: translate(0px, 70%);
+    transform: translate(0px, 70%);
+    opacity: 0; }
+  100% {
+    -ms-transform: translate(0px, 0%);
+    -webkit-transform: translate(0px, 0%);
+    transform: translate(0px, 0%);
+    opacity: 1; } }
+
+@keyframes titleAnimFtue {
+  0% {
+    -ms-transform: translate(0px, 70%);
+    -webkit-transform: translate(0px, 70%);
+    transform: translate(0px, 70%);
+    opacity: 0; }
+  100% {
+    -ms-transform: translate(0px, 0%);
+    -webkit-transform: translate(0px, 0%);
+    transform: translate(0px, 0%);
+    opacity: 1; } }
+
+@-webkit-keyframes inforRowAnim {
+  0% {
+    top: 60%;
+    position: absolute;
+    opacity: 0; }
+  100% {
+    opacity: 1;
+    position: static;
+    top: 0; } }
+
+@-moz-keyframes inforRowAnim {
+  0% {
+    top: 60%;
+    position: absolute;
+    opacity: 0; }
+  100% {
+    opacity: 1;
+    position: static;
+    top: 0; } }
+
+@-o-keyframes inforRowAnim {
+  0% {
+    top: 60%;
+    position: absolute;
+    opacity: 0; }
+  100% {
+    opacity: 1;
+    position: static;
+    top: 0; } }
+
+@keyframes inforRowAnim {
+  0% {
+    top: 60%;
+    position: absolute;
+    opacity: 0; }
+  100% {
+    opacity: 1;
+    position: static;
+    top: 0; } }
 
 /*   Screen Resolution - 120   */
 @media screen and (max-width: 320px) {
