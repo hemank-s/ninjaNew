@@ -36,11 +36,11 @@
         that.newRewardUnlockAnimation(DOMcache);
 
         DOMcache.streakContainer.addEventListener('click', function(event) {
-            DOMcache.unlockedRewardListContainer.classList.remove('unlockedRewardListUl');
+            //DOMcache.unlockedRewardListContainer.classList.remove('unlockedRewardListUl');
             DOMcache.batteryStreakInfoContainer.classList.remove('hideClass');
         });
 
-        DOMcache.informationAction.addEventListener('click', function(event) {
+        DOMcache.batteryStreakInfoContainer.addEventListener('click', function(event) {
             DOMcache.batteryStreakInfoContainer.classList.add('hideClass');
         });
 
@@ -55,12 +55,14 @@
         DOMcache.lockedRewards.addEventListener('webkitAnimationEnd', function() {
             DOMcache.unlockedReward.classList.remove('hideClass');
             DOMcache.lockedRewards.classList.remove('moveLockedRewardsAnimation');
+            DOMcache.rewardUnlockAnimation.classList.add('hideClass');
 
         });
 
         DOMcache.lockedRewards.addEventListener('animationend', function() {
             DOMcache.unlockedReward.classList.remove('hideClass');
             DOMcache.lockedRewards.classList.remove('moveLockedRewardsAnimation');
+            DOMcache.rewardUnlockAnimation.classList.add('hideClass');
         });
     };
 

@@ -282,10 +282,10 @@
             var customStickerStatusCheck = document.getElementsByClassName('customStickerStatusCheck')[0];
             var customStickerUploadScreen = document.getElementsByClassName('customStickerUploadScreen')[0];
             var uploadParent = document.getElementsByClassName('uploadParent')[0];
+            var batteryStreakInfoContainer = document.getElementsByClassName('batteryStreakInfoContainer')[0];
 
             if (stickerCooldownElement || stickerShopElement) {
                 this.goToNinjaProfilePage();
-                return;
             } else if (customStickerHistory && !customStickerHistory.classList.contains('hideClass')) {
                 customStickerHistory.classList.add('hideClass');
                 showHistoryButton.classList.remove('hideClass');
@@ -295,21 +295,23 @@
                 if (uploadParent && uploadParent.classList.contains('hideClass')) {
                     uploadParent.classList.remove('hideClass');
                 }
-                return;
+
             } else if (customStickerReadyState && !customStickerReadyState.classList.contains('hideClass')) {
                 customStickerReadyState.classList.add('hideClass');
                 customStickerHistory.classList.remove('hideClass');
-                return;
+
             } else if (customStickerStatusCheck && !customStickerStatusCheck.classList.contains('hideClass')) {
                 customStickerStatusCheck.classList.add('hideClass');
                 customStickerHistory.classList.remove('hideClass');
                 if (customStickerUploadScreen) {
                     customStickerUploadScreen.classList.remove('hideClass');
                 }
-                return;
-            }
 
-            this.router.back();
+            } else if (!batteryStreakInfoContainer.classList.contains('hideClass'))
+                batteryStreakInfoContainer.classList.add('hideClass');
+            else
+                this.router.back();
+
         },
 
         goToNinjaProfilePage: function() {
@@ -398,7 +400,7 @@
             var ftueCompleted = cacheProvider.getFromCritical('ftueCompleted');
 
             if (!subscriptionCompleted || !ftueCompleted) {
-                self.router.navigateTo('/');
+                self.router.navigateTo('/home');
             } else {
                 self.router.navigateTo('/home');
             }
