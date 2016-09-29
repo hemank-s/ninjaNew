@@ -9,60 +9,58 @@
             this.template = require('raw!../../templates/ninjaHomeScreen.html');
         };
 
+    HomescreenController.prototype.newRewardUnlockAnimation = function(DOMcache) {
+        // Run Basic Reward Animation
+        DOMcache.rewardUnlockAnimation.classList.add('newRewardAnimOpacity');
+        DOMcache.streakValueContainer.classList.add('newRewardDayScale');
+
+    };
+
     HomescreenController.prototype.bind = function(App, data) {
 
-        // Unlocked Reward Container
-        var unlockedReward = document.getElementsByClassName('unlockedReward')[0];
-        var lockedRewards = document.getElementsByClassName('lockedRewards')[0];
-        var unlockedRewardListContainer = document.getElementsByClassName('unlockedRewardListContainer')[0];
+        var that = this;
 
-        // Unlocked Reward Heading
-        var unlockedRewardHeading = document.getElementsByClassName('unlockedRewardHeading')[0];
+        var DOMcache = {
+            unlockedReward: document.getElementsByClassName('unlockedReward')[0],
+            lockedRewards: document.getElementsByClassName('lockedRewards')[0],
+            unlockedRewardListContainer: document.getElementsByClassName('unlockedRewardListContainer')[0],
+            unlockedRewardHeading: document.getElementsByClassName('unlockedRewardHeading')[0],
+            rewardUnlockAnimation: document.getElementsByClassName('rewardUnlockAnimation')[0],
+            streakValueContainer: document.getElementsByClassName('streakValueContainer')[0],
+            rewardUnlockContainer: document.getElementsByClassName('rewardUnlockContainer')[0],
+            streakContainer: document.getElementsByClassName('streakContainer')[0],
+            batteryStreakInfoContainer: document.getElementsByClassName('batteryStreakInfoContainer')[0],
+            informationAction: document.getElementsByClassName('informationAction')[0],
+        };
 
-        // New Reward Unlock Overlay
-        var rewardUnlockAnimation = document.getElementsByClassName('rewardUnlockAnimation')[0];
-        var streakValueContainer = document.getElementsByClassName('streakValueContainer')[0];
-        var rewardUnlockContainer = document.getElementsByClassName('rewardUnlockContainer')[0];
+        that.newRewardUnlockAnimation(DOMcache);
 
-        var streakContainer = document.getElementsByClassName('streakContainer')[0];
-        var batteryStreakInfoContainer = document.getElementsByClassName('batteryStreakInfoContainer')[0];
-        var informationAction = document.getElementsByClassName('informationAction')[0];
-
-        if (data.unlockedRewards.length > 0) {
-            console.log(data.unlockedRewards);
-            rewardUnlockAnimation.classList.add('newRewardAnimOpacity');
-            streakValueContainer.classList.add('newRewardDayScale');
-        } else {
-            console.log("No new rewards are present :: Pick first from locked and make a card");
-            console.log(data.unlockedRewards);
-        }
-
-        streakContainer.addEventListener('click', function(event) {
-            unlockedRewardListContainer.classList.remove('unlockedRewardListUl');
-            batteryStreakInfoContainer.classList.remove('hideClass');
+        DOMcache.streakContainer.addEventListener('click', function(event) {
+            DOMcache.unlockedRewardListContainer.classList.remove('unlockedRewardListUl');
+            DOMcache.batteryStreakInfoContainer.classList.remove('hideClass');
         });
 
-        informationAction.addEventListener('click', function(event) {
-            batteryStreakInfoContainer.classList.add('hideClass');
+        DOMcache.informationAction.addEventListener('click', function(event) {
+            DOMcache.batteryStreakInfoContainer.classList.add('hideClass');
         });
 
-        streakValueContainer.addEventListener('click', function(event) {
-            rewardUnlockAnimation.style.opacity = 1;
-            rewardUnlockAnimation.classList.add('newRewardBgRemove');
-            rewardUnlockContainer.classList.add('newStreakAnimation');
-            lockedRewards.classList.add('moveLockedRewardsAnimation');
-            unlockedRewardListContainer.classList.add('unlockedRewardListUl');
+        DOMcache.streakValueContainer.addEventListener('click', function(event) {
+            DOMcache.rewardUnlockAnimation.style.opacity = 1;
+            DOMcache.rewardUnlockAnimation.classList.add('newRewardBgRemove');
+            DOMcache.rewardUnlockContainer.classList.add('newStreakAnimation');
+            DOMcache.lockedRewards.classList.add('moveLockedRewardsAnimation');
+            DOMcache.unlockedRewardListContainer.classList.add('unlockedRewardListUl');
         });
 
-        lockedRewards.addEventListener('webkitAnimationEnd', function() {
-            unlockedReward.classList.remove('hideClass');
-            lockedRewards.classList.remove('moveLockedRewardsAnimation');
+        DOMcache.lockedRewards.addEventListener('webkitAnimationEnd', function() {
+            DOMcache.unlockedReward.classList.remove('hideClass');
+            DOMcache.lockedRewards.classList.remove('moveLockedRewardsAnimation');
 
         });
 
-        lockedRewards.addEventListener('animationend', function() {
-            unlockedReward.classList.remove('hideClass');
-            lockedRewards.classList.remove('moveLockedRewardsAnimation');
+        DOMcache.lockedRewards.addEventListener('animationend', function() {
+            DOMcache.unlockedReward.classList.remove('hideClass');
+            DOMcache.lockedRewards.classList.remove('moveLockedRewardsAnimation');
         });
     };
 

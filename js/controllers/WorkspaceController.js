@@ -17,7 +17,6 @@
         var that = this;
 
         var DOMcache = {
-
             cta: document.getElementsByClassName('cta')[0],
             centerIcon: document.getElementsByClassName('centreIcon')[0],
             info: document.getElementsByClassName('info')[0],
@@ -28,7 +27,6 @@
             bottomSection: document.getElementsByClassName('bottomSection')[0]
         };
 
-
         document.addEventListener('click', function(evt) {
 
             var target = evt.target;
@@ -37,20 +35,7 @@
 
                 if (target.getAttribute('data-screen') == "subscribe") {
 
-                    DOMcache.screenCls.classList.remove('subscribeScreen');
-                    DOMcache.screenCls.classList.add('ftueScreen');
-                    DOMcache.title.classList.add('titleAnimFtueCls');
-                    DOMcache.title.classList.add('animation_fadeout');
-                    DOMcache.subtitle.remove();
-                    DOMcache.title.innerHTML = "What do you get?";
-                    DOMcache.content.innerHTML = Mustache.render(unescape(that.ftueTemplate));
-                    DOMcache.bottomSection.classList.remove('slideFromBottomCls');
-                    DOMcache.bottomSection.classList.add('slideFromBottomCls2');
-                    DOMcache.centerIcon.classList.remove('scaleZeroToOneAnim');
-                    DOMcache.centerIcon.classList.add('animation_fadeout');
-                    DOMcache.info.classList.add('animation_fadeout');
-                    DOMcache.cta.classList.add('animation_fadeout');
-
+                    that.subscribeScreenAnimation(DOMcache, App, that.ftueTemplate);
 
                     /* App.NinjaService.subscribeHandler({}, function(res) {
 
@@ -58,21 +43,7 @@
 
                             cacheProvider.setInCritical('subscriptionCompleted', true);
 
-                             Animation For the FTUE Screen 
-                            DOMcache.screenCls.classList.remove('subscribeScreen');
-                            DOMcache.screenCls.classList.add('ftueScreen');
-                            DOMcache.title.classList.add('titleAnimFtueCls');
-                            DOMcache.title.classList.add('animation_fadeout');
-                            DOMcache.subtitle.remove();
-                            DOMcache.title.innerHTML = "What do you get?";
-                            DOMcache.content.innerHTML = Mustache.render(unescape(that.ftueTemplate));
-                            DOMcache.bottomSection.classList.remove('slideFromBottomCls');
-                            DOMcache.bottomSection.classList.add('slideFromBottomCls2');
-                            DOMcache.centerIcon.classList.remove('scaleZeroToOneAnim');
-                            DOMcache.centerIcon.classList.add('animation_fadeout');
-                            DOMcache.info.classList.add('animation_fadeout');
-                            DOMcache.cta.classList.add('animation_fadeout');
-
+                            that.subscribeScreenAnimation(DOMcache, App, that.ftueTemplate);
 
                             //Fetch Profile Data in Background 
                             App.NinjaService.getNinjaProfile(function(res) {
@@ -96,14 +67,7 @@
                 } else {
 
                     /* Animation FTUE screen dismiss */
-                    DOMcache.title.classList.remove('animation_fadeout');
-                    DOMcache.title.classList.remove('titleAnimFtueCls');
-                    DOMcache.title.classList.add('fadeOutTranslateCls');
-                    DOMcache.content.classList.add('fadeOutTranslateCls2');
-                    DOMcache.bottomSection.classList.remove('slideFromBottomCls2');
-                    DOMcache.bottomSection.classList.add('animation_fadeout');
-                    cacheProvider.setInCritical('ftueCompleted', true);
-                    App.router.navigateTo('/home');
+                    that.ftueScreenDismissAnimation(DOMcache, App);
                 }
 
             } else if (target.classList.contains('crossIcon')) {
@@ -116,6 +80,34 @@
                 }, that);
             }
         });
+    };
+
+    WorkspaceController.prototype.subscribeScreenAnimation = function(DOMcache, App, template) {
+
+        DOMcache.screenCls.classList.remove('subscribeScreen');
+        DOMcache.screenCls.classList.add('ftueScreen');
+        DOMcache.title.classList.add('titleAnimFtueCls');
+        DOMcache.title.classList.add('animation_fadeout');
+        DOMcache.subtitle.remove();
+        DOMcache.title.innerHTML = "What do you get?";
+        DOMcache.content.innerHTML = Mustache.render(unescape(template));
+        DOMcache.bottomSection.classList.remove('slideFromBottomCls');
+        DOMcache.bottomSection.classList.add('slideFromBottomCls2');
+        DOMcache.centerIcon.classList.remove('scaleZeroToOneAnim');
+        DOMcache.centerIcon.classList.add('animation_fadeout');
+        DOMcache.info.classList.add('animation_fadeout');
+        DOMcache.cta.classList.add('animation_fadeout');
+    };
+
+    WorkspaceController.prototype.ftueScreenDismissAnimation = function(DOMcache, App) {
+        DOMcache.title.classList.remove('animation_fadeout');
+        DOMcache.title.classList.remove('titleAnimFtueCls');
+        DOMcache.title.classList.add('fadeOutTranslateCls');
+        DOMcache.content.classList.add('fadeOutTranslateCls2');
+        DOMcache.bottomSection.classList.remove('slideFromBottomCls2');
+        DOMcache.bottomSection.classList.add('animation_fadeout');
+        cacheProvider.setInCritical('ftueCompleted', true);
+        App.router.navigateTo('/home');
     };
 
     WorkspaceController.prototype.render = function(ctr, App, data) {
