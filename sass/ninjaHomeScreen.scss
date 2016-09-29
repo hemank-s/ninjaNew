@@ -189,6 +189,10 @@ span.streakDef {
     margin-left: 15px;
 }
 
+li.unlockedRewardListItem:first-child {
+    margin-left: 15px;
+}
+
 li.unlockedRewardListItem:nth-child(odd) {
     background: linear-gradient(44deg, #FA4454 0%, #F6876C 100%);
 }
@@ -223,7 +227,7 @@ li.unlockedRewardListItem {
 
 .unlockedRewardList {
     overflow-x: scroll;
-    margin: 12px 0px 32px 15px;
+    margin: 12px 0px 32px 0px;
 }
 
 ul.unlockedRewardList {

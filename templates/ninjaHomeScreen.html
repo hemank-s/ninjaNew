@@ -50,7 +50,7 @@
                 <div class="unlockedRewardListContainer">
                     <ul class="unlockedRewardList">
                         {{#ninjaUnlockedRewards}}
-                        <li class="unlockedRewardListItem newRewardAppearAnimation upcoming{{state}}card">
+                        <li class="unlockedRewardListItem newRewardAppearAnimation upcoming{{state}}card" data-rewardId="{{id}}" data-state="{{state}}" data-rewardtype="{{type}}">
                             <div class="unlockedRewardHeader">
                                 <div class="unlockedRewardIcon"></div>
                                 <div class="unlockedRewardStreak">{{streak}}</div>
@@ -74,7 +74,7 @@
                 <div class="lockedRewardListContainer">
                     <ul class="lockedRewardList">
                         {{#ninjaLockedRewards}}
-                        <li class="rewardRow" data-rewardId="{{id}}" data-state="{{state}}" data-rewardtype="{{type}}">
+                        <li class="rewardRow lockedRewardListItem" data-rewardId="{{id}}" data-state="{{state}}" data-rewardtype="{{type}}">
                             <div class="rewardIcon"></div>
                             <div class="rewardDetails">
                                 <p class="rewardHeading {{^state}}{{#lockedGreyout}}rewardHeadingLocked{{/lockedGreyout}}{{/state}}">{{title}}</p>

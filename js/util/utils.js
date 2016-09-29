@@ -1,6 +1,8 @@
 (function(W, undefined) {
     'use strict';
 
+    var cacheProvider = require('./cacheProvider.js');
+
     HTMLElement.prototype.toggleClass = function(classToken, flag) {
         var element = this;
 
@@ -179,32 +181,50 @@
 
         upgradeRequired: function(minVersion, appVersion) {
 
-           minVersion = minVersion.match(/\d/g);
-           appVersion = appVersion.match(/\d/g);
+            minVersion = minVersion.match(/\d/g);
+            appVersion = appVersion.match(/\d/g);
 
-           var minVersionLength = minVersion.length;
-           var appVersionLength = appVersion.length;
+            var minVersionLength = minVersion.length;
+            var appVersionLength = appVersion.length;
 
-           var maxLength = minVersionLength > appVersionLength ? minVersionLength : appVersionLength;
+            var maxLength = minVersionLength > appVersionLength ? minVersionLength : appVersionLength;
 
-           var appVer_part,minVer_part;
+            var appVer_part, minVer_part;
 
-           for(var i =0;i<maxLength;i++){
+            for (var i = 0; i < maxLength; i++) {
 
-              minVer_part = parseInt(minVersion[i], 10) || 0;
-              appVer_part = parseInt(appVersion[i], 10) || 0;
+                minVer_part = parseInt(minVersion[i], 10) || 0;
+                appVer_part = parseInt(appVersion[i], 10) || 0;
 
-              if(minVer_part == appVer_part){
+                if (minVer_part == appVer_part) {
                     continue;
-              }
-              else if(appVer_part > minVer_part){
-                return false;
-              }
-              else{
-                return true;
-              }
+                } else if (appVer_part > minVer_part) {
+                    return false;
+                } else {
+                    return true;
+                }
 
-           }
+            }
+
+
+        },
+
+        hashCheck: function(oldHash, newHash) {
+
+            var that = this;
+            if (oldHash && newHash) {
+                var compareHash = that.twoStringCompare(oldHash, newHash);
+                if (compareHash != 0) {
+                    cacheProvider.setInCritical('fetchRewards', true);
+                    cacheProvider.setInCritical('oldHash', newHash);
+                } else
+                    cacheProvider.setInCritical('fetchRewards', false);
+
+            } else {
+                cacheProvider.setInCritical('fetchRewards', true);
+                cacheProvider.setInCritical('oldHash', newHash);
+
+            }
 
 
         },

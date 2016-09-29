@@ -16,6 +16,22 @@
         NinjaService = require('./util/ninjaServices'),
         Constants = require('../constants.js');
 
+    // Notifications Toast
+    var toastTime = null;
+
+    var notifToast = document.getElementById('notifToast');
+    var nToastObject = events.subscribe('update.notif.toast', function(params) {
+        clearTimeout(toastTime);
+        notifToast.innerHTML = params.text;
+        if (params.show) {
+            notifToast.classList.add('slideUp');
+        } else {
+            notifToast.classList.remove('slideUp');
+        }
+        notifToast.toggleClass('nToast', params.show);
+        toastTime = setTimeout(function() { events.publish('update.notif.toast', { show: false, text: '' }); }, 2000);
+    });
+
     // Full Screen Loader
     var loader = document.getElementById('loader');
     var loadObject = events.subscribe('update.loader', function(params) {
@@ -355,9 +371,7 @@
             var self = this;
             self.$el = $(this.container);
 
-
             self.initOverflowMenu();
-
 
             utils.toggleBackNavigation(false);
             document.querySelector('.unblockButton').addEventListener('click', function() {
@@ -380,8 +394,6 @@
                 self.backPressTrigger();
             });
 
-
-
             // Ninja ftue
             this.router.route('/', function(data) {
                 self.container.innerHTML = '';
@@ -402,7 +414,16 @@
             if (!subscriptionCompleted || !ftueCompleted) {
                 self.router.navigateTo('/home');
             } else {
-                self.router.navigateTo('/home');
+                self.NinjaService.getNinjaProfile(function(res) {
+                    console.log(res.data);
+                    cacheProvider.setInCritical('userProfileData', res.data);
+                    var oldHash = cacheProvider.getFromCritical('oldHash');
+                    var newHash = res.data.rewards_hash;
+                    utils.hashCheck(oldHash, newHash);
+                    if (res.data.status != 'inactive' && res.data.status != 'locked') {
+                        profileModel.updateNinjaData(res.data, self, true);
+                    }
+                }, self);
             }
         }
     };

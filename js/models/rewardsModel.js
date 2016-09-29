@@ -7,7 +7,7 @@
 
     var platformSdk = require('../../libs/js/platformSdk_v2.0'),
         utils = require('../util/utils'),
-        cacheProvider = require('../util/cacheProvider'), 
+        cacheProvider = require('../util/cacheProvider'),
         Constants = require('../../constants.js'),
 
         RewardsModel = function() {},
@@ -41,7 +41,7 @@
             }
         },
 
-        updateNinjaRewardsIcons: function(data){
+        updateNinjaRewardsIcons: function(data) {
             var that = this;
 
             var allRewards = document.getElementsByClassName('rewardRow');
@@ -95,7 +95,7 @@
                         // Reward Details API :: Send Reward Id As well
                         App.NinjaService.getRewardDetails(data, function(res) {
                             console.log(res.data);
-                             App.router.navigateTo(rewardRouter,{ "rewardDetails": res.data , "rewardId" :rewardId, "rewardRouter":rewardRouter} );
+                            App.router.navigateTo(rewardRouter, { "rewardDetails": res.data, "rewardId": rewardId, "rewardRouter": rewardRouter });
                         }, this);
                     });
                 }
@@ -103,42 +103,36 @@
         },
 
         // Update Ninja Rewards HTML
-        updateNinjaRewards: function(rewardsData, App) {
+        updateNinjaRewards: function(rewardsData, App, existingUser) {
 
             console.log('Updating the Ninja Rewards Old By New Ninja Rewards');
             console.log(rewardsData);
 
-            // update helper data with new rewards
-
             cacheProvider.setInCritical('ninjaRewards', rewardsData);
-            console.log("helper data is", platformSdk.appData.helperData);
-
-            var ninjaRewardsListOld = document.getElementsByClassName('rewardsContainer')[0]; // Gives Existing List of Rewards in the Template
-            ninjaRewardsListOld.innerHTML = '';
-
-            // Re Render The Reward Template Only From External HTML
-            this.template = require('raw!../../templates/newRewardTemplate.html');
-
-            // To remove later for adhoc
 
             var adhocReward = cacheProvider.getFromCritical('adhocRewardForUser');
 
-            if(adhocReward){
-                for(var i = 0; i<adhocReward.length; i++){
+            if (adhocReward) {
+                for (var i = 0; i < adhocReward.length; i++) {
                     rewardsData.rewards.push(adhocReward[i]);
-                    //adhocReward.splice(i,1);
                 }
             }
-            
-            cacheProvider.setInCritical('adhocRewardForUser',adhocReward);
 
-            ninjaRewardsListOld.innerHTML = Mustache.render(this.template, {
-                ninjaRewardsCollection: (typeof rewardsData === 'undefined'? {} : rewardsData.rewards),
-                lockedGreyout : cacheProvider.getFromCritical('lockedGreyout')
-            });
+            cacheProvider.setInCritical('adhocRewardForUser', adhocReward);
 
-            this.updateNinjaRewardsLinks(App);
-            this.updateNinjaRewardsIcons(rewardsData.rewards);
+            // A/B Testing Wrap for Locked Greyed out rewards
+
+            // ninjaRewardsListOld.innerHTML = Mustache.render(this.template, {
+            //     ninjaRewardsCollection: (typeof rewardsData === 'undefined' ? {} : rewardsData.rewards),
+            //     lockedGreyout: cacheProvider.getFromCritical('lockedGreyout')
+            // });
+
+            if (existingUser) {
+                App.router.navigateTo('/home');
+            }
+
+            // this.updateNinjaRewardsLinks(App);
+            // this.updateNinjaRewardsIcons(rewardsData.rewards);
         }
 
     };

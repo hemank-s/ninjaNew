@@ -23,48 +23,36 @@
 
         // Update the Ninja Data In Helper Data and Update the New Values on the Profile Screen
 
-        checkRewardStatus: function(rewardHash, App) {
+        checkRewardStatus: function(data, App, existingUser) {
 
-            var ninjaProfileData = cacheProvider.getFromCritical('ninjaProfileData');
-            //var oldRewardsHash = ninjaProfileData.rewards_hash;
-            var compareHash = null;
+            // Adhoc Reward Check here
 
-
-            // STUB TO REMOVE
-
-            var oldRewardsHash = 'be96dc8c0a876b08c8076b03acdee0db4';
-
-            // STUB TO REMOVE
-
-
-            if (oldRewardsHash) {
-                compareHash = utils.twoStringCompare(oldRewardsHash, rewardHash);
+            if (data.adhoc_reward && data.adhoc_reward.length > 0) {
+                console.log("At least one reward is present");
+                console.log(data.adhoc_reward);
+                cacheProvider.setInCritical('adhocRewardForUser', data.adhoc_reward);
             } else {
-                console.log("No Old rewards Hash exist :: Call Rewards Anyway and store the rewards hash");
+                console.log("No adhoc reward is present");
             }
 
-            if (compareHash !== 0) {
+            var ninjaProfileData = cacheProvider.getFromCritical('userProfileData');
+            var fetchRewards = cacheProvider.getFromCritical('fetchRewards');
+
+            if (fetchRewards === true) {
                 console.log("Rewards Hash Does not match :: Fetch the New Rewards");
+                if (platformSdk.bridgeEnabled) {
+                    App.NinjaService.getNinjaRewards(function(res) {
+                        console.log("NINJA REWARDS ARE", res.data);
+                        rewardsModel.updateNinjaRewards(res.data, App, existingUser);
+                    }, this);
 
-                // Store New Rewards Hash In Helper Data
-
-                //ninjaProfileData.rewards_hash = rewardHash;
-                //cacheProvider.setInCritical('ninjaProfileData', ninjaProfileData);
-
-                // STUB TO REMOVE
-
-                // var newRewardData = [{"title":"Early Access Stickers","stitle":"Get all the hike stickers before everyone else","icon":"https://s3-ap-southeast-1.amazonaws.com/hike-giscassets/3rd-sticker.png","state":"unlocked","id":1,"streak":0,"type":"sticker_reward"},{"title":"Express GIF","stitle":"Express yourself with GIFs, like no one else can","icon":"https://s3-ap-southeast-1.amazonaws.com/hike-giscassets/3rd-sticker.png","state":"locked","id":3,"streak":35,"type":"exclusive_feature"},{"title":"Submit Content","stitle":"Submit hike content and get recognition","icon":"https://s3-ap-southeast-1.amazonaws.com/hike-giscassets/3rd-sticker.png","state":"locked","id":5,"streak":60,"type":"user_generated_content"},{"title":"My Sticker","stitle":"Have an exclusive sticker made just for you","icon":"https://s3-ap-southeast-1.amazonaws.com/hike-giscassets/3rd-sticker.png","state":"unlocked","id":6,"streak":0,"type":"custom_sticker"}];
-                // rewardsModel.updateNinjaRewards(newRewardData,App);
-
-                // STUB TO REMOVE
-
-                App.NinjaService.getNinjaRewards(function(res) {
-                    console.log("NINJA REWARDS ARE", res.data);
-                    rewardsModel.updateNinjaRewards(res.data, App);
-                }, this);
-
-
+                } else {
+                    console.log("stub needed");
+                }
             } else {
+                if (existingUser) {
+                    App.router.navigateTo('/home');
+                }
                 console.log("The rewards hash matches perfectly :: No need to update the rewards new model");
             }
         },
@@ -80,112 +68,103 @@
             }
         },
 
-
         // Check and Update Adhoc reward
         checkAndUpdateAdhocReward: function(res) {
-            console.log(res);
-            if(res.adhoc_reward && res.adhoc_reward.length > 0){
-                console.log("At least one reward is present");
-                console.log(res.adhoc_reward);
-                cacheProvider.setInCritical('adhocRewardForUser', res.adhoc_reward);
-            }else{
-                console.log("No adhoc reward is present");
-            }
+
         },
 
         // Updates the Ninja Profile Data and check For Reward Status here
 
-        updateNinjaData: function(data, App) {
-
-            // Check the Reward Page and Update Rewards if need be
-            this.checkRewardStatus(data.rewards_hash, App);
-            this.checkAndUpdateAdhocReward(data,App);
+        updateNinjaData: function(data, App, existingUser) {
 
             var ninjaProfileData = [];
             ninjaProfileData = data;
 
-            if(platformSdk.platformVersion >= 15){
+            if (platformSdk.platformVersion >= 15) {
                 console.log("Platform Verison is latest");
 
                 platformSdk.nativeReq({
-                fn: 'getUserProfile',
-                ctx: this,
-                data: "",
-                success: function(res) {
+                    fn: 'getUserProfile',
+                    ctx: this,
+                    data: "",
+                    success: function(res) {
 
-                    res = JSON.parse(decodeURIComponent(res));
-                    
-                    ninjaProfileData.name = res.name;
-                    ninjaProfileData.dp = res.fp;
+                        res = JSON.parse(decodeURIComponent(res));
 
-                    console.log("NINJA PROFILE DATA IS", ninjaProfileData);
+                        ninjaProfileData.name = res.name;
+                        ninjaProfileData.dp = res.fp;
 
-                    // UI Definition 
-                    var streakValue = document.getElementsByClassName('ninjaStreakValue')[0];
-                    var batteryValue = document.getElementsByClassName('ninjaBatteryValue')[0];
-                    var ninjaName = document.getElementsByClassName('ninjaName')[0];
-                    var ninjaIcon = document.getElementsByClassName('ninjaProfileIcon')[0];
+                        console.log("NINJA PROFILE DATA IS", ninjaProfileData);
 
-                    if(ninjaProfileData.streak){
-                        streakValue.innerHTML = ninjaProfileData.streak;    
-                    }else{
-                        streakValue.innerHTML = 0;
+                        // UI Definition 
+                        // var streakValue = document.getElementsByClassName('ninjaStreakValue')[0];
+                        // var batteryValue = document.getElementsByClassName('ninjaBatteryValue')[0];
+                        // var ninjaName = document.getElementsByClassName('ninjaName')[0];
+                        // var ninjaIcon = document.getElementsByClassName('ninjaProfileIcon')[0];
+
+                        // if (ninjaProfileData.streak) {
+                        //     streakValue.innerHTML = ninjaProfileData.streak;
+                        // } else {
+                        //     streakValue.innerHTML = 0;
+                        // }
+
+                        // if (ninjaProfileData.battery) {
+                        //     batteryValue.innerHTML = ninjaProfileData.battery;
+                        // } else {
+                        //     batteryValue.innerHTML = 0;
+                        // }
+
+                        // ninjaName.innerHTML = ninjaProfileData.name;
+
+                        // For Dp Refer the Android Client DP Path
+                        // if (ninjaProfileData.dp) {
+                        //     ninjaIcon.style.backgroundImage = "url('file:///" + ninjaProfileData.dp + "')";
+                        // } else {
+                        //     console.log("Set a default dp");
+                        // }
+
+                        cacheProvider.setInCritical('ninjaProfileData', ninjaProfileData);
+                        //var helperData = platformSdk.appData.helperData || EMPTY_OBJ_READ_ONLY;
+
+                        // Check the Reward Page and Update Rewards if need be
+                        this.checkRewardStatus(data, App, existingUser);
                     }
+                });
+            } else {
+                console.log("Platform Verison is old");
+                console.log("NINJA PROFILE DATA IS", ninjaProfileData);
 
-                    if(ninjaProfileData.battery){
-                        batteryValue.innerHTML = ninjaProfileData.battery;    
-                    }else{
-                        batteryValue.innerHTML = 0;
-                    }
-                    
-                    ninjaName.innerHTML = ninjaProfileData.name;
+                // UI Definition 
+                // var streakValue = document.getElementsByClassName('ninjaStreakValue')[0];
+                // var batteryValue = document.getElementsByClassName('ninjaBatteryValue')[0];
+                // var ninjaName = document.getElementsByClassName('ninjaName')[0];
+                // var ninjaIcon = document.getElementsByClassName('ninjaProfileIcon')[0];
 
-                    // For Dp Refer the Android Client DP Path
-                    if (ninjaProfileData.dp) {
-                        ninjaIcon.style.backgroundImage = "url('file:///" + ninjaProfileData.dp + "')";
-                    } else {
-                        console.log("Set a default dp");
-                    }
-                    cacheProvider.setInCritical('ninjaProfileData', ninjaProfileData);
-                    //var helperData = platformSdk.appData.helperData || EMPTY_OBJ_READ_ONLY;
+                // if(ninjaProfileData.streak){
+                //     streakValue.innerHTML = ninjaProfileData.streak;    
+                // }else{
+                //     streakValue.innerHTML = 0;
+                // }
 
-                }
-            });
-            }else{
-                    console.log("Platform Verison is old");
-                    console.log("NINJA PROFILE DATA IS", ninjaProfileData);
+                // if(ninjaProfileData.battery){
+                //     batteryValue.innerHTML = ninjaProfileData.battery;    
+                // }else{
+                //     batteryValue.innerHTML = 0;
+                // }
 
-                    // UI Definition 
-                    var streakValue = document.getElementsByClassName('ninjaStreakValue')[0];
-                    var batteryValue = document.getElementsByClassName('ninjaBatteryValue')[0];
-                    var ninjaName = document.getElementsByClassName('ninjaName')[0];
-                    var ninjaIcon = document.getElementsByClassName('ninjaProfileIcon')[0];
+                // ninjaName.innerHTML = ninjaProfileData.name;
 
-                    if(ninjaProfileData.streak){
-                        streakValue.innerHTML = ninjaProfileData.streak;    
-                    }else{
-                        streakValue.innerHTML = 0;
-                    }
-
-                    if(ninjaProfileData.battery){
-                        batteryValue.innerHTML = ninjaProfileData.battery;    
-                    }else{
-                        batteryValue.innerHTML = 0;
-                    }
-                    
-                    ninjaName.innerHTML = ninjaProfileData.name;
-
-                    // For Dp Refer the Android Client DP Path
-                    if (ninjaProfileData.dp) {
-                        ninjaIcon.style.backgroundImage = "url('file:///" + ninjaProfileData.dp + "')";
-                    } else {
-                        console.log("Set a default dp");
-                    }
-                    cacheProvider.setInCritical('ninjaProfileData', ninjaProfileData);
-                    //var helperData = platformSdk.appData.helperData || EMPTY_OBJ_READ_ONLY;
-
+                // For Dp Refer the Android Client DP Path
+                // if (ninjaProfileData.dp) {
+                //     ninjaIcon.style.backgroundImage = "url('file:///" + ninjaProfileData.dp + "')";
+                // } else {
+                //     console.log("Set a default dp");
+                // }
+                cacheProvider.setInCritical('ninjaProfileData', ninjaProfileData);
+                // Check the Reward Page and Update Rewards if need be
+                this.checkRewardStatus(data, App, existingUser);
             }
-            
+
         },
 
     };

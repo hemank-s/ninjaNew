@@ -35,9 +35,12 @@
 
                 if (target.getAttribute('data-screen') == "subscribe") {
 
-                    that.subscribeScreenAnimation(DOMcache, App, that.ftueTemplate);
+                    if (platformSdk.bridgeEnable) {
 
-                    /* App.NinjaService.subscribeHandler({}, function(res) {
+                    } else {
+                        that.subscribeScreenAnimation(DOMcache, App, that.ftueTemplate);
+                    }
+                    App.NinjaService.subscribeHandler({}, function(res) {
 
                         if (res.stat === 'ok') {
 
@@ -47,23 +50,21 @@
 
                             //Fetch Profile Data in Background 
                             App.NinjaService.getNinjaProfile(function(res) {
-                               console.log(res.data);
+                                console.log(res.data);
                                 cacheProvider.setInCritical('userProfileData', res.data);
+
+                                var oldHash = cacheProvider.getFromCritical('oldHash');
+                                var newHash = res.data.rewards_hash;
+                                utils.hashCheck(oldHash, newHash);
+
                                 if (res.data.status != 'inactive' && res.data.status != 'locked') {
-                                    profileModel.updateNinjaData(res.data, App);
-                                    activityModel.fetchNinjaActivity('lifetime');
+                                    profileModel.updateNinjaData(res.data, App, false);
                                 }
 
                             }, that);
-
-
                         } else
                             utils.showToast('Something went wrong while subscribing');
-
                     }, that);
-
-                      */
-
                 } else {
 
                     /* Animation FTUE screen dismiss */
