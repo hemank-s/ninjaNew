@@ -107,7 +107,10 @@
         DOMcache.bottomSection.classList.remove('slideFromBottomCls2');
         DOMcache.bottomSection.classList.add('animation_fadeout');
         cacheProvider.setInCritical('ftueCompleted', true);
-        App.router.navigateTo('/home');
+        window.setTimeout(function() {
+            App.router.navigateTo('/home');
+        }, 300)
+
     };
 
     WorkspaceController.prototype.render = function(ctr, App, data) {
