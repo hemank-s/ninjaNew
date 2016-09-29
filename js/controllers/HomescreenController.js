@@ -108,16 +108,9 @@
         var rewards_data = cacheProvider.getFromCritical('ninjaRewards');
 
         // if (utils.upgradeRequired(profile_data.data.hike_version, platformSdk.appData.appVersion)) {
-
-
         //     App.router.navigateTo('/upgrade');
-
         // } else if (profile_data.data.status == 'inactive' || profile_data.data.status == 'locked') {
-
-
         //     App.router.navigateTo('/userState', profile_data.data);
-
-
         // } else {
         //     rewardsData = that.filterRewards(rewards_data.rewards);
         // }
