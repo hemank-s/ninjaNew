@@ -3,6 +3,7 @@
 
     var WorkspaceController = require('./controllers/WorkspaceController'),
         HomescreenController = require('./controllers/HomescreenController'),
+        MysteryBoxController = require('./controllers/MysteryBoxController'),
 
         Router = require('./util/router'),
         utils = require('./util/utils'),
@@ -103,6 +104,9 @@
         // Profile Controller
         this.workspaceController = new WorkspaceController();
         this.homescreenController = new HomescreenController();
+        this.mysteryBoxController = new MysteryBoxController();
+
+
 
         // Communication Controller
         this.TxService = new TxService();
@@ -408,11 +412,19 @@
                 utils.toggleBackNavigation(false);
             });
 
+
+            // Ninja Home screen
+            this.router.route('/mysteryBox', function(data) {
+                self.container.innerHTML = '';
+                self.mysteryBoxController.render(self.container, self, data);
+                utils.toggleBackNavigation(false);
+            });
+
             var subscriptionCompleted = cacheProvider.getFromCritical('subscriptionCompleted');
             var ftueCompleted = cacheProvider.getFromCritical('ftueCompleted');
 
             if (!subscriptionCompleted || !ftueCompleted) {
-                self.router.navigateTo('/home');
+                self.router.navigateTo('/mysteryBox');
             } else {
                 self.NinjaService.getNinjaProfile(function(res) {
                     console.log(res.data);

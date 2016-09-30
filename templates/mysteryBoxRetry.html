@@ -1,0 +1,19 @@
+<div class="mysteryBoxWrapper centerToScreenWrapper">
+    <div class="mysteryBoxRetryIcon"></div>
+    <div class="mysteryBoxScr_title">Oh! no luck </div>
+    <div class="mysteryBoxScr_subtitle">Don’t worry, lets get back tomorrow and see what you win.</div>
+</div>
+<div class="ctaWinner">Who won today?</div>
+{{#previousWinner}}
+<div class="previousWinnerRow align-center">
+    <p class="previousWinnerHeading">Today’s bumper winnner</p>
+    <div class="winnerWrapper">
+        <div class="winnerIcon leftWrapper inlineBlock"></div>
+        <div class="rightWrapper inlineBlock">
+            <div class="winnerName">{{previousWinner.name}}</div>
+            <div class="streakIcon inlineBlock"></div>
+            <div class="streakValue inlineBlock"> 45</div>
+        </div>
+    </div>
+</div>
+{{/previousWinner}}
