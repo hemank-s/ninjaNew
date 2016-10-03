@@ -5,24 +5,26 @@
         Constants = require('../../constants.js'),
         cacheProvider = require('../util/cacheProvider'),
         mysteryBoxModel = require('../models/mysteryBoxModel'),
+        profileModel = require('../models/profileModel'),
 
         MysteryBoxController = function(options) {
-            this.template = require('raw!../../templates/mysteryBox.html');
+            this.template = require('raw!../../templates/mysteryBoxActiveTemplate.html');
 
         };
 
     MysteryBoxController.prototype.bind = function(App, data) {
 
         var that = this;
-
         var DOMcache = {
-
+            crossIcon: document.getElementsByClassName('mysteryBox_CrossIcon')[0],
         };
 
+        DOMcache.crossIcon.addEventListener('click', function(event) {
+            console.log("cross clicked");
+            App.router.navigateTo('/home', {});
+        });
 
-        mysteryBoxModel.getMysteryBoxDetails(App);
-
-
+        mysteryBoxModel.updateMysteryBoxTab(data, App);
     };
 
 

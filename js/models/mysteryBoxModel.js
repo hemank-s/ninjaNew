@@ -24,27 +24,16 @@
 
         getMysteryBoxDetails: function(App) {
 
-            // Active :: Can Spin The Wheel and Earn Some Gift
+            var res = null;
 
-            // Inactive :: The Wheel is Not Available as of now
-
-            // Under Cooldown :: The spinning has been done and under cooldown period
-
-            // STUB TO REMOVE
-
-            var res1 = { 'data': { 'history': [], 'status': 'active', 'rewards': [{ 'id': 1, 'type': 'mysteryBox_medium', 'title': 'Battery + 1' }, { 'id': 2, 'type': 'mysteryBox_medium', 'title': 'Streak + 1' }, { 'id': 3, 'type': 'mysteryBox_low', 'title': 'Battery + 0' }, { 'id': 4, 'type': 'mysteryBox_low', 'title': 'Streak + 0' }, { 'id': 5, 'type': 'mysteryBox_bumper', 'title': 'Custom sticker' }, { 'id': 6, 'type': 'mysteryBox_low', 'title': 'Battery - 1' }, { 'id': 7, 'type': 'mysteryBox_low', 'title': 'streak - 1' }, { 'id': 8, 'type': 'mysteryBox_low', 'title': 'Better Luck next time' }] } };
-            // var res2 = { 'data': { 'status': 'inactive', 'rewards': [], 'streakToUnlock': 14 } };
-            // var res3 = { 'data': { 'status': 'cooldown', 'rewards': [], 'coolDownTime': 1470916209263 } };
-
-            this.updateMysteryBoxTab(res1.data, App);
-
-            // STUB TO REMOVE
-
-            /*   App.NinjaService.getMysteryBox(function( res ) {
-                   console.log( 'MYSTERY BOX DATA IS', res.data );
-                   this.updateMysteryBoxTab( res.data, App );
-               }, this );
-               */
+            if (platformSdk.bridgeEnabled) {
+                App.NinjaService.getMysteryBox(function(res) {
+                    console.log('MYSTERY BOX DATA IS', res.data);
+                    cacheProvider.setInCritical('ninjaMysteryBoxData', res.data);
+                }, this);
+            } else {
+                res = { 'data': { 'history': [], 'status': 'active', 'rewards': [{ 'id': 1, 'type': 'mysteryBox_medium', 'title': 'Battery + 1' }, { 'id': 2, 'type': 'mysteryBox_medium', 'title': 'Streak + 1' }, { 'id': 3, 'type': 'mysteryBox_low', 'title': 'Battery + 0' }, { 'id': 4, 'type': 'mysteryBox_low', 'title': 'Streak + 0' }, { 'id': 5, 'type': 'mysteryBox_bumper', 'title': 'Custom sticker' }, { 'id': 6, 'type': 'mysteryBox_low', 'title': 'Battery - 1' }, { 'id': 7, 'type': 'mysteryBox_low', 'title': 'streak - 1' }, { 'id': 8, 'type': 'mysteryBox_low', 'title': 'Better Luck next time' }] } };
+            }
         },
 
         getMysteryBoxRewardDetails: function(data, rId) {
@@ -73,13 +62,10 @@
             }
         },
 
-        defineMysteryBoxResultAnimation: function(App, rewardData, cooldownTime) {
+        defineMysteryBoxResultAnimation: function(App, rewardData, mysteryBoxData) {
 
             var that = this;
-
             var mysteryBoxContainer = document.getElementsByClassName('mysteryBoxContainer')[0]; // Gives Existing List of Rewards in the Template
-            //mysteryBoxContainer.innerHTML = '';
-
 
             if (rewardData.value == 'HIGH' || rewardData.value == 'MED') {
 
@@ -95,14 +81,16 @@
 
                     document.getElementsByClassName('mysteryBoxScr_title')[0].classList.add('animation_fadeout');
                     document.getElementsByClassName('mysteryBoxScr_subtitle')[0].classList.add('animation_fadeout');
+
                     that.template = require('raw!../../templates/mysteryBoxCongrats.html');
                     mysteryBoxContainer.innerHTML = Mustache.render(that.template, {
                         mysterBoxReward: rewardData
                     });
 
+                    var congratsIcon = document.getElementsByClassName('mysteryBoxCongratsIcon')[0];
+                    congratsIcon.style.backgroundImage = "url('" + rewardData.icon + "')";
 
-                    var congratsBtn = document.getElementsByClassName('congrats')[0];
-
+                    var congratsBtn = document.getElementsByClassName('congratsBtn')[0];
                     congratsBtn.addEventListener('click', function() {
 
                         if (rewardData.value == 'HIGH') {
@@ -112,178 +100,56 @@
                             var rewardRouter = rewardsModel.getRewardRouter(rewardType);
 
                             App.NinjaService.getRewardDetails(data, function(res) {
-
                                 console.log(res.data);
                                 App.router.navigateTo(rewardRouter, { 'rewardDetails': res.data, 'rewardId': rid, 'rewardRouter': rewardRouter });
                             }, this);
-
-
-
-                        } else if (rewardData.value == 'MED') {
-
+                        } else {
                             App.NinjaService.getNinjaProfile(function(res) {
                                 console.log('REUPDATING THE PROFILE', res.data);
-                                profileModel.updateNinjaData(res.data, App);
+                                cacheProvider.setInCritical('userProfileData', res.data);
+                                var oldHash = cacheProvider.getFromCritical('oldHash');
+                                var newHash = res.data.rewards_hash;
+                                utils.hashCheck(oldHash, newHash);
+                                if (res.data.status != 'inactive' && res.data.status != 'locked') {
+                                    profileModel.updateNinjaData(res.data, App, true);
+                                }
                             }, that);
-
-                        } else {
-
-                            if (platformSdk.bridgeEnabled) {
-
-                            } else {
-
-                            }
-
                         }
-
-
-
-
-
                     });
                 });
-
 
             } else {
 
                 that.template = require('raw!../../templates/mysteryBoxRetry.html');
                 mysteryBoxContainer.innerHTML = Mustache.render(that.template, {
                     mysterBoxReward: rewardData,
-                    previousWinner: { 'name': 'Sandeep Chugh', 'streakVal': '45' }
+                    previousWinner: mysteryBoxData.yesterday_winner
                 });
 
                 var ctaWinner = document.getElementsByClassName('ctaWinner')[0];
                 var previousWinnerRow = document.getElementsByClassName('previousWinnerRow')[0];
+                var mysteryBoxScr_title = document.getElementsByClassName('mysteryBoxScr_title')[0];
+                var mysteryBoxScr_subtitle = document.getElementsByClassName('mysteryBoxScr_subtitle')[0];
+
                 ctaWinner.addEventListener('click', function() {
+
+                    mysteryBoxScr_title.classList.add('hideClass');
+                    mysteryBoxScr_subtitle.classList.add('hideClass');
 
                     this.classList.add('slideDownCtaCls');
                     previousWinnerRow.classList.add('slideUpCtaCls');
 
-                    if (platformSdk.bridgeEnabled) {
-
-                    } else {
-
-                    }
-
-                })
-
+                });
             }
-
-
-            /*
-
-                        if (rewardData.value == 'HIGH') {
-
-                            console.log('High Reward');
-                            that.template = require('raw!../../templates/mysteryBoxResultAnimation.html');
-                            mysteryBoxContainer.innerHTML = Mustache.render(that.template, {
-                                mysterBoxReward: rewardData
-                            });
-
-
-                            var mysteryRewardBumperAction = document.getElementsByClassName('mysteryRewardBumperAction')[0];
-
-                            mysteryRewardBumperAction.addEventListener('click', function() {
-
-                                if (platformSdk.bridgeEnabled) {
-                                    var rid = this.getAttribute('data-rid');
-                                    var rewardType = this.getAttribute('data-rewardtype');
-                                    var rewardRouter = rewardsModel.getRewardRouter(rewardType);
-                                    var data = {};
-                                    data.rewardId = rid;
-                                    App.NinjaService.getRewardDetails(data, function(res) {
-                                        console.log(res.data);
-                                        App.router.navigateTo(rewardRouter, { 'rewardDetails': res.data, 'rewardId': rid, 'rewardRouter': rewardRouter });
-                                    }, this);
-
-                                } else {
-                                    //Route to congrats Screen , then route to custom sticker
-
-                                    that.template = require('raw!../../templates/mysteryBoxCongrats.html');
-                                    mysteryBoxContainer.innerHTML = Mustache.render(that.template, {
-                                        mysterBoxReward: rewardData
-                                    });
-
-
-                                    var congratsBtn = document.getElementsByClassName('congrats')[0];
-
-                                    congratsBtn.addEventListener('click', function() {
-                                        App.router.navigateTo(rewardRouter, { 'rewardDetails': res.data, 'rewardId': rid, 'rewardRouter': rewardRouter });
-
-                                    });
-                                }
-                            });
-
-                        } else if (rewardData.value == 'LOW') {
-
-                            console.log('Low reward');
-                            that.template = require('raw!../../templates/mysteryBoxResultAnimation.html');
-                            mysteryBoxContainer.innerHTML = Mustache.render(that.template, {
-                                mysterBoxReward: rewardData
-                            });
-
-
-                            var mysteryRewardBumperAction = document.getElementsByClassName('mysteryRewardBumperAction')[0];
-                            mysteryRewardBumperAction.addEventListener('click', function() {
-
-
-                            });
-
-
-
-                             mysteryRewardBumperAction.addEventListener('click', function() {
-                                 that.template = require('raw!../../templates/mysteryBoxCooldownTemplate.html');
-                                 mysteryBoxContainer.innerHTML = Mustache.render(that.template, {});
-                                 that.defineCooldown(cooldownTime, App);
-                             });
-
-                             App.NinjaService.getNinjaProfile(function(res) {
-                                 console.log('REUPDATING THE PROFILE', res.data);
-                                 profileModel.updateNinjaData(res.data, App);
-                             }, that);
-
-                        } else if (rewardData.value == 'MED') {
-                            console.log('Low animation :: Figure Out Design');
-                            that.template = require('raw!../../templates/mysteryBoxResultAnimation.html');
-                            mysteryBoxContainer.innerHTML = Mustache.render(that.template, {
-                                mysterBoxReward: rewardData
-                            });
-
-                            var mysteryRewardActionMed = document.getElementsByClassName('mysteryRewardAction')[0];
-                            mysteryRewardActionMed.addEventListener('click', function() {
-                                that.template = require('raw!../../templates/mysteryBoxCooldownTemplate.html');
-                                mysteryBoxContainer.innerHTML = Mustache.render(that.template, {});
-                                that.defineCooldown(cooldownTime, App);
-                            });
-
-                            App.NinjaService.getNinjaProfile(function(res) {
-                                console.log('REUPDATING THE PROFILE', res.data);
-                                profileModel.updateNinjaData(res.data, App);
-                            }, that);
-
-                        } else {
-                            console.log('Low animation :: Figure Out Design');
-                            that.template = require('raw!../../templates/mysteryBoxResultAnimation.html');
-                            mysteryBoxContainer.innerHTML = Mustache.render(that.template, {
-                                mysterBoxReward: rewardData
-                            });
-
-                        }
-
-
-                        */
         },
 
         mapRewardsToSlice: function(mysteryBoxData) {
             console.log(mysteryBoxData);
-
             var slices = document.getElementsByClassName('part');
 
             for (var i = 0; i < slices.length; i++) {
                 slices[i].setAttribute('data-reward', mysteryBoxData.rewards[i].id);
             }
-
-            // Set Icons here as well
         },
 
         getRewardMapping: function(resultId, mysteryBoxData) {
@@ -301,53 +167,19 @@
             }
         },
 
-        defineMysteryBoxHistoryAction: function(App, historyData) {
-
-            var that = this;
-
-            var bumperRow = document.getElementsByClassName('bumperRow');
-            var bumperRowIcon = document.getElementsByClassName('bumperRowIcon');
-
-            for (var i = 0; i < bumperRowIcon.length; i++) {
-                bumperRowIcon[i].style.backgroundImage = 'url(\'' + historyData[i].icon + '\')';
-            }
-
-            for (var j = 0; j < bumperRow.length; j++) {
-                bumperRow[j].addEventListener('click', function(event) {
-
-                    var rid = this.getAttribute('data-rid');
-                    var url = this.getAttribute('data-url');
-                    var rewardType = this.getAttribute('data-rewardtype');
-
-                    var rewardRouter = rewardsModel.getRewardRouter(rewardType);
-
-                    var data = {};
-                    data.rewardId = rid;
-
-                    App.NinjaService.getRewardDetails(data, function(res) {
-                        console.log(res.data);
-                        App.router.navigateTo(rewardRouter, { 'rewardDetails': res.data, 'rewardId': rid, 'rewardRouter': rewardRouter });
-                    }, this);
-                });
-            }
-
-        },
-
         defineLuckyBox: function(App, mysteryBoxData) {
 
             var that = this;
 
             var spin = document.getElementById('spin');
             var wheel = document.getElementById('wheel');
-            var result = document.getElementById('result');
 
             var rewardData = null;
             var cooldownTime = null;
 
-            var setText = function(a, b, c) {
+            var setText = function(a, c) {
                 a.addEventListener('transitionend', function() {
-                    // b.innerText = rewardData.title;
-                    that.defineMysteryBoxResultAnimation(App, rewardData, cooldownTime);
+                    that.defineMysteryBoxResultAnimation(App, rewardData, mysteryBoxData);
                     a.removeEventListener('transitionend', setText);
                 });
             };
@@ -357,7 +189,6 @@
 
             spin.addEventListener('click', function() {
                 rotations++;
-
                 if (platformSdk.bridgeEnabled) {
                     App.NinjaService.getMysteryBoxResult(function(res) {
                         console.log(res.data);
@@ -367,7 +198,6 @@
                         var spinResult = that.getRewardMapping(mysteryBoxData.spin_result.id, mysteryBoxData);
                         console.log('WINNER IS', spinResult);
                         rewardData = mysteryBoxData.spin_result;
-                        cooldownTime = res.data.cooldown_time;
 
                         // Define Wheel
                         var stop = spinResult;
@@ -377,78 +207,25 @@
                         var rot = 'rotate3d(0,0,1,' + deg + 'deg)';
                         wheel.style.transform = rot;
                         wheel.style.webkitTransform = rot;
-                        setText(wheel, result, rewardData);
+                        setText(wheel, rewardData);
                     }, that);
-
                 } else {
                     var stop = 4;
                     rewardData = {};
-                    rewardData.value = "HIGH";
-                    rewardData.title = "My Sticker";
+                    rewardData.value = 'HIGH';
+                    rewardData.title = 'My Sticker';
                     console.log('stop is', stop);
                     var rotationFix = 360 / 16 + 360 / 8 + rotations * 720;
                     deg = 360 / 8 * stop + rotationFix;
                     var rot = 'rotate3d(0,0,1,' + deg + 'deg)';
                     wheel.style.transform = rot;
                     wheel.style.webkitTransform = rot;
-                    setText(wheel, result, rewardData);
-
+                    setText(wheel, rewardData);
                 }
+
 
             });
 
-        },
-
-        defineCooldown: function(spinTimeLeft, App) {
-
-            var that = this;
-
-            function getTimeRemaining(timeRemaining) {
-                var t = timeRemaining;
-                var seconds = Math.floor((t / 1000) % 60);
-                var minutes = Math.floor((t / 1000 / 60) % 60);
-                var hours = Math.floor((t / (1000 * 60 * 60)) % 24);
-                var days = Math.floor(t / (1000 * 60 * 60 * 24));
-                return {
-                    'total': t,
-                    'days': days,
-                    'hours': hours,
-                    'minutes': minutes,
-                    'seconds': seconds
-                };
-            }
-
-            function initializeClock(id, timeRemaining) {
-                var clock = document.getElementById(id);
-                var daysSpan = clock.querySelector('.days');
-                var hoursSpan = clock.querySelector('.hours');
-                var minutesSpan = clock.querySelector('.minutes');
-                var secondsSpan = clock.querySelector('.seconds');
-
-                function updateClock() {
-                    var t = getTimeRemaining(timeRemaining);
-
-                    daysSpan.innerHTML = t.days;
-                    hoursSpan.innerHTML = ('0' + t.hours).slice(-2);
-                    minutesSpan.innerHTML = ('0' + t.minutes).slice(-2);
-                    secondsSpan.innerHTML = ('0' + t.seconds).slice(-2);
-
-                    if (t.total <= 0) {
-                        clearInterval(timeinterval);
-                        console.log('Cooldown has ended');
-                        App.NinjaService.getMysteryBox(function(res) {
-                            console.log('MYSTERY BOX DATA IS', res.data);
-                            that.updateMysteryBoxTab(res.data, App);
-                        }, that);
-                    }
-                    timeRemaining = timeRemaining - 1000;
-                }
-
-                updateClock();
-                var timeinterval = setInterval(updateClock, 1000);
-            }
-
-            initializeClock('clockdiv', spinTimeLeft * 1000);
         },
 
         updateMysteryBoxTab: function(mysteryBoxData, App) {
@@ -456,70 +233,17 @@
             var that = this;
 
             var mysteryBoxContainer = document.getElementsByClassName('mysteryBoxContainer')[0]; // Gives Existing List of Rewards in the Template
-            var showMysteryBoxHistoryButton = false;
             mysteryBoxContainer.innerHTML = '';
 
-            if (mysteryBoxData.history.length > 0) {
-                showMysteryBoxHistoryButton = true;
-            }
-
-            if (mysteryBoxData.status == 'inactive') {
-
-                // Re Render The Reward Template Only From External HTML
-                that.template = require('raw!../../templates/mysteryBoxInactiveTemplate.html');
-                mysteryBoxContainer.innerHTML = Mustache.render(that.template, {
-                    streakToUnlock: mysteryBoxData.streak_unlock
-                });
-            } else if (mysteryBoxData.status == 'active') {
-
+            if (mysteryBoxData.mstatus == 'active') {
                 that.template = require('raw!../../templates/mysteryBoxActiveTemplate.html');
-                mysteryBoxContainer.innerHTML = Mustache.render(that.template, {
-                    previousWinner: mysteryBoxData.yesterday_winner,
-                    showMysteryBoxHistoryButton: showMysteryBoxHistoryButton
-                });
+                mysteryBoxContainer.innerHTML = Mustache.render(that.template, {});
                 that.mapRewardsToSlice(mysteryBoxData);
                 that.defineLuckyBox(App, mysteryBoxData);
-                //that.defineLuckyBoxRewardIcons(mysteryBoxData.rewards);
-                //that.defineYesterdayWinner(mysteryBoxData.yesterday_winner);
-
-            } else if (mysteryBoxData.status == 'cooldown') {
-
-                console.log(mysteryBoxData);
-
-                that.template = require('raw!../../templates/mysteryBoxCooldownTemplate.html');
-                mysteryBoxContainer.innerHTML = Mustache.render(that.template, {
-                    showMysteryBoxHistoryButton: showMysteryBoxHistoryButton
-                });
-
-                that.defineCooldown(mysteryBoxData.time_left, App);
-
+                that.defineLuckyBoxRewardIcons(mysteryBoxData.rewards);
             } else {
                 console.log('Add a default state here Later');
             }
-
-            var mHistoryButton = document.getElementsByClassName('mysteryBoxHistory')[0];
-
-            if (showMysteryBoxHistoryButton && mHistoryButton) {
-                mHistoryButton.addEventListener('click', function() {
-                    console.log('Opening your Mystery Box History');
-
-                    that.template = require('raw!../../templates/mysteryBoxHistory.html');
-                    mysteryBoxContainer.innerHTML = Mustache.render(that.template, {
-                        mysteryBoxHistory: mysteryBoxData.history
-                    });
-
-                    that.defineMysteryBoxHistoryAction(App, mysteryBoxData.history);
-                });
-
-            }
-
-            var swipeTab = document.getElementsByClassName('swipeTab')[0];
-
-            if (swipeTab) {
-                console.log('Scrolling to top');
-                swipeTab.scrollTop = 0;
-            }
-
         }
 
     };

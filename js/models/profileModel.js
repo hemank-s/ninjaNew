@@ -10,6 +10,7 @@
         cacheProvider = require('../util/cacheProvider'),
         rewardsModel = require('../models/rewardsModel'),
         activityModel = require('../models/activityModel'),
+        mysteryBoxModel = require('../models/mysteryBoxModel'),
         ugcModel = require('../models/ugcModel'),
         TxService = require('../util/txServices'),
         NinjaService = require('../util/ninjaServices'),
@@ -48,6 +49,7 @@
                         rewardsModel.updateNinjaRewards(res.data, App, existingUser);
                     }, this);
 
+
                 } else {
                     console.log("stub needed");
                 }
@@ -84,7 +86,7 @@
 
             activityModel.fetchNinjaActivity('lifetime');
             ugcModel.fetchUgcTypes();
-                
+            mysteryBoxModel.getMysteryBoxDetails(App);
 
             if (platformSdk.platformVersion >= 15) {
                 console.log("Platform Verison is latest");
