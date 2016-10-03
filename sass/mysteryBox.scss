@@ -1,0 +1,547 @@
+.mysteryBoxContainer {
+    height: 100%;
+    width: 100%;
+    background: #1D47F5;
+    background: -webkit-linear-gradient(left top, #1D47F5, #33FFE2);
+    background: -o-linear-gradient(bottom left, #1D47F5, #33FFE2);
+    background: -moz-linear-gradient(bottom left, #1D47F5, #33FFE2);
+    background: linear-gradient(to bottom left, #1D47F5, #33FFE2);
+}
+
+.wheel-wrapper {
+    position: absolute;
+    top: 45%;
+    left: 50%;
+    height: 200px;
+    width: 200px;
+    margin: -100px;
+}
+
+.wheel-wrapper .needle {
+    background: url(images/needle.png);
+    position: absolute;
+    height: 50px;
+    width: 27px;
+    z-index: 4;
+    left: 50%;
+    margin: -43px -13px;
+    border: 0 solid transparent;
+}
+
+.wheel {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    height: 200px;
+    width: 200px;
+    margin: -100px;
+    border-radius: 100%;
+    -webkit-transition: -webkit-transform 5s cubic-bezier(0.43, -0.31, 0.11, 0.86);
+    transition: -webkit-transform 5s cubic-bezier(0.43, -0.31, 0.11, 0.86);
+    transition: transform 5s cubic-bezier(0.43, -0.31, 0.11, 0.86);
+    transition: transform 5s cubic-bezier(0.43, -0.31, 0.11, 0.86), -webkit-transform 5s cubic-bezier(0.43, -0.31, 0.11, 0.86);
+}
+
+.wheel:before {
+    content: '';
+    position: absolute;
+    z-index: 2;
+    height: inherit;
+    width: inherit;
+    top: 90px;
+    left: 90px;
+    margin: inherit;
+    border-radius: inherit;
+    border: 10px solid #fff;
+    box-shadow: 0 0 0 3px #fff;
+    pointer-events: none;
+}
+
+.wheel:after {
+    content: '';
+    position: absolute;
+    z-index: 2;
+    height: 50px;
+    width: 50px;
+    top: inherit;
+    left: inherit;
+    margin: -25px;
+    border-radius: inherit;
+    background: #FFFBEF;
+    box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.5) inset;
+    pointer-events: none;
+}
+
+.wheel .cutter {
+    position: absolute;
+    z-index: 0;
+    height: inherit;
+    width: inherit;
+    top: inherit;
+    left: inherit;
+    margin: inherit;
+    border-radius: inherit;
+    clip: rect(0, 100px, 100px, 0);
+}
+
+.wheel .cutter:nth-child(1) {
+    -webkit-transform: rotate3d(0, 0, 1, 0deg);
+    transform: rotate3d(0, 0, 1, 0deg);
+}
+
+.wheel .cutter:nth-child(1) .slicer {
+    background-color: #A6CEF0;
+}
+
+.wheel .cutter:nth-child(2) {
+    -webkit-transform: rotate3d(0, 0, 1, 45deg);
+    transform: rotate3d(0, 0, 1, 45deg);
+}
+
+.wheel .cutter:nth-child(2) .slicer {
+    background-color: #F6A4BE;
+}
+
+.wheel .cutter:nth-child(3) {
+    -webkit-transform: rotate3d(0, 0, 1, 90deg);
+    transform: rotate3d(0, 0, 1, 90deg);
+}
+
+.wheel .cutter:nth-child(3) .slicer {
+    background-color: #8FF1CD;
+}
+
+.wheel .cutter:nth-child(4) {
+    -webkit-transform: rotate3d(0, 0, 1, 135deg);
+    transform: rotate3d(0, 0, 1, 135deg);
+}
+
+.wheel .cutter:nth-child(4) .slicer {
+    background-color: white;
+}
+
+// .wheel .cutter:nth-child(4) .slicer div:nth-child(1) {
+//     font-size: 9px;
+// }
+// .wheel .cutter:nth-child(4) .slicer div:nth-child(2) {
+//     font-size: 7px;
+// }
+.wheel .cutter:nth-child(5) {
+    -webkit-transform: rotate3d(0, 0, 1, 180deg);
+    transform: rotate3d(0, 0, 1, 180deg);
+}
+
+.wheel .cutter:nth-child(5) .slicer {
+    background-color: #D7FFA8;
+}
+
+.wheel .cutter:nth-child(6) {
+    -webkit-transform: rotate3d(0, 0, 1, 225deg);
+    transform: rotate3d(0, 0, 1, 225deg);
+}
+
+.wheel .cutter:nth-child(6) .slicer {
+    background-color: #F6A4BE;
+}
+
+.wheel .cutter:nth-child(7) {
+    -webkit-transform: rotate3d(0, 0, 1, 270deg);
+    transform: rotate3d(0, 0, 1, 270deg);
+}
+
+.wheel .cutter:nth-child(7) .slicer {
+    background-color: #C0FFA8;
+}
+
+.wheel .cutter:nth-child(8) {
+    -webkit-transform: rotate3d(0, 0, 1, 315deg);
+    transform: rotate3d(0, 0, 1, 315deg);
+}
+
+.wheel .cutter:nth-child(8) .slicer {
+    color: #fff;
+    background-color: black;
+}
+
+.wheel .cutter .slicer {
+    position: absolute;
+    height: inherit;
+    width: inherit;
+    top: inherit;
+    left: inherit;
+    margin: inherit;
+    border-radius: inherit;
+    clip: rect(0, 100px, 100px, 0);
+    color: #000;
+    -webkit-transform: rotate3d(0, 0, 1, 45deg);
+    transform: rotate3d(0, 0, 1, 45deg);
+}
+
+.wheel .cutter .part {
+    position: absolute;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-flex-flow: wrap;
+    -ms-flex-flow: wrap;
+    flex-flow: wrap;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    height: 66.66px;
+    width: 78.5px;
+    top: 0;
+    left: 0;
+    margin: 0;
+    padding-top: 0.5em;
+    border-radius: inherit;
+    background-color: inherit;
+    -webkit-transform-origin: 0 100%;
+    transform-origin: 0 100%;
+    -webkit-transform: rotate3d(0, 0, 1, -67.5deg) translate3d(-33.33px, 66.66px, 0);
+    transform: rotate3d(0, 0, 1, -67.5deg) translate3d(-33.33px, 66.66px, 0);
+}
+
+.wheel .cutter .part div {
+    -webkit-box-flex: 0;
+    -webkit-flex: 0 0 100%;
+    -ms-flex: 0 0 100%;
+    flex: 0 0 100%;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+}
+
+.wheel .cutter .part div:nth-child(1) {
+    font-size: 20px;
+}
+
+.wheel .cutter .part div:nth-child(2) {
+    font-size: 16px;
+}
+
+.wheel .cutter .part div:nth-child(3) {
+    font-size: 12px;
+}
+
+.wheel .cutter .part div:nth-child(4) {
+    font-size: 8px;
+}
+
+.wheel .cutter .part div:nth-child(5) {
+    font-size: 6px;
+}
+
+.wheel .cutter .part div:nth-child(6) {
+    font-size: 6px;
+}
+
+.wheel .cutter .part div:nth-child(7) {
+    font-size: 6px;
+}
+
+.wheel .cutter .part div:nth-child(8) {
+    font-size: 6px;
+}
+
+.spin {
+    text-align: center;
+    color: #1da8e8;
+    position: absolute;
+    top: 43%;
+    z-index: 1000;
+    left: 38%;
+    padding: 4%;
+}
+
+.mysteryBoxMessageSpin {
+    color: rgba(61, 71, 91, 0.64);
+    font-size: 14px;
+    font-weight: 400;
+    padding: 20px 24px 0px 24px;
+    text-align: center;
+    line-height: 21px;
+}
+
+.mysteryRewardBumperAction {
+    margin-top: 24px;
+    font-size: 15px;
+    border: 1px solid #EAC6A4;
+    color: #E49F5C;
+    font-weight: 500;
+    display: inline-block;
+    border-radius: 4px;
+    padding: 12px 32px;
+    text-transform: uppercase;
+}
+
+.mysteryRewardAction {
+    margin-top: 24px;
+    font-size: 15px;
+    border: 1px solid #EAC6A4;
+    color: #E49F5C;
+    font-weight: 500;
+    display: inline-block;
+    border-radius: 4px;
+    padding: 12px 32px;
+    text-transform: uppercase;
+}
+
+.mysteryBoxHistory {
+    color: #1da8e8;
+    font-size: 12px;
+    font-weight: 400;
+    padding: 4px 12px;
+    border-radius: 4px;
+    text-align: center;
+    line-height: 21px;
+    margin: 16px auto 0px auto;
+    text-transform: uppercase;
+}
+
+.mysteryBoxHistoryContainer {
+    padding: 30px 0px 20px 30px;
+}
+
+.bumperRow {
+    list-style: none;
+    margin-bottom: 16px;
+    padding-bottom: 16px;
+}
+
+.bumperRowIcon {
+    background: url(images/giftSample.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 26px;
+    height: 26px;
+    display: inline-block;
+    background-position: center;
+    vertical-align: middle;
+}
+
+.bumperRowDetails {
+    display: inline-block;
+    margin-left: 18px;
+    vertical-align: middle;
+}
+
+.bumperRowHeading {
+    font-size: 16px;
+    color: #3D475B;
+    margin-bottom: 7px;
+    font-weight: 500;
+}
+
+.bumperRowSubHeading {
+    font-size: 12px;
+    color: rgba(61, 71, 91, 0.64);
+    width: 120%;
+}
+
+.mBoxRewardIcon {
+    background: url(images/reward_spec.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 25px;
+    height: 25px;
+    display: inline-block;
+    background-position: center;
+    vertical-align: middle;
+    margin: 1px 1px 1px 15px;
+}
+
+.mysteryBoxScr_title {
+    @include fontStyle(32px, 300, #FFFFFF, 43px);
+    text-align: center;
+}
+
+.spinScrTitle {
+    position: absolute;
+    top: 50%;
+    margin-top: 100px;
+    width: 100%;
+}
+
+.spinScrSubtitle {
+    position: absolute;
+    top: 50%;
+    margin-top: 150px;
+}
+
+.mysteryBoxScr_subtitle {
+    @include fontStyle(16px, 400, rgba(255, 255, 255, 0.72), 20px);
+    text-align: center;
+    padding-top: 11px;
+    max-width: 80%;
+    margin-left: 10%;
+}
+
+.ctaWinner {
+    @include fontStyle(16px, 400, #ffffff, 21px);
+    padding: 14px;
+    position: absolute;
+    bottom: 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.24);
+    width: 100%;
+    text-align: center;
+}
+
+.mysteryBoxIcon {
+    background: url(images/mysteryBox_Gift.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 173px;
+    height: 173px;
+    margin: 0px auto 84px auto;
+}
+
+.mysteryBoxCongratsIcon {
+    background: url(images/mysteryBox_Congrats.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 210px;
+    height: 171px;
+    margin: 0px auto 84px auto;
+    -ms-transform: scale(0);
+    -webkit-transform: scale(0);
+    transform: scale(0);
+    opacity: 0;
+}
+
+.mysteryBoxRetryIcon {
+    background: url(images/mysteryBox_Retry.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 153px;
+    height: 144px;
+    margin: 0px auto 84px auto;
+    opacity: 0;
+}
+
+.previousWinnerRow {
+    border-top: 1px solid rgba(255, 255, 255, 0.24);
+    position: absolute;
+    bottom: -25%;
+    width: 100%;
+    padding-bottom: 34px;
+    .previousWinnerHeading {
+        @include fontStyle(16px, 400, rgba(255, 255, 255, 0.72), 21px);
+        padding: 24px;
+        text-align: center;
+    }
+    .rightWrapper {
+        margin-left: 16px;
+        vertical-align: middle;
+        text-align: left;
+    }
+    .winnerIcon {
+        background: url(images/ninjaDefaultDp.png);
+        background-size: cover;
+        background-repeat: no-repeat;
+        width: 80px;
+        height: 80px;
+        display: inline-block;
+        -webkit-border-radius: 50%;
+        border-radius: 50%;
+        vertical-align: middle;
+    }
+    .streakIcon {
+        float: none !important;
+    }
+    .winnerName {
+        @include fontStyle(16px, 400, rgba(255, 255, 255, 0.96), 21px);
+        margin-bottom: 5px;
+    }
+}
+
+.giftBoxAnimCls {
+    @include animation(0s, 0.7s, giftBoxAnim);
+}
+
+.congratsIconAnimCls {
+    @include animation(0s, 1s, congratsIconAnim);
+}
+
+.slideDownCtaCls {
+    @include animation(0s, 0.6s, slideDownCta);
+}
+
+.slideUpCtaCls {
+    @include animation(0.6s, 0.4s, slideUpCta);
+}
+
+@include keyframe(slideDownCta) {
+    0% {
+        bottom: 0;
+    }
+    100% {
+        bottom: -10%;
+    }
+}
+
+@include keyframe(slideUpCta) {
+    0% {
+        bottom: -25%;
+    }
+    100% {
+        bottom: 0;
+    }
+}
+
+@include keyframe(giftBoxAnim) {
+    0% {
+        opacity: 0;
+    }
+    45% {
+        -ms-transform: scale(1, 0.7);
+        -webkit-transform: scale(1, 0.7);
+        transform: scale(1, 0.7);
+        opacity: 1;
+    }
+    90% {
+        -ms-transform: scale(1, 1.1);
+        -webkit-transform: scale(1, 1.1);
+        transform: scale(1, 1.1);
+        opacity: 1;
+    }
+    100% {
+        -ms-transform: scale(1, 1);
+        -webkit-transform: scale(1, 1);
+        transform: scale(1, 1);
+        opacity: 1;
+        opacity: 1;
+    }
+}
+
+@include keyframe(congratsIconAnim) {
+    45% {
+        -ms-transform: scale(0);
+        -webkit-transform: scale(0);
+        transform: scale(0);
+        opacity: 0;
+    }
+    90% {
+        -ms-transform: scale(1.5);
+        -webkit-transform: scale(1.5);
+        transform: scale(1.5);
+        opacity: 1;
+    }
+    100% {
+        -ms-transform: scale(1);
+        -webkit-transform: scale(1);
+        transform: scale(1);
+        opacity: 1;
+    }
+}

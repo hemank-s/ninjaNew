@@ -4,6 +4,7 @@
     var WorkspaceController = require('./controllers/WorkspaceController'),
         HomescreenController = require('./controllers/HomescreenController'),
         ProfilescreenController = require('./controllers/ProfilescreenController'),
+        MysteryBoxController = require('./controllers/MysteryBoxController'),
 
         Router = require('./util/router'),
         utils = require('./util/utils'),
@@ -105,7 +106,7 @@
         this.workspaceController = new WorkspaceController();
         this.homescreenController = new HomescreenController();
         this.profilescreenController = new ProfilescreenController();
-
+        this.mysteryBoxController = new MysteryBoxController();
         // Communication Controller
         this.TxService = new TxService();
         this.NinjaService = new NinjaService(this.TxService); //communication layer
@@ -415,6 +416,12 @@
                 self.container.innerHTML = '';
                 self.profilescreenController.render(self.container, self, data);
                 utils.toggleBackNavigation(true);
+            });
+            // Ninja Home screen
+            this.router.route('/mysteryBox', function(data) {
+                self.container.innerHTML = '';
+                self.mysteryBoxController.render(self.container, self, data);
+                utils.toggleBackNavigation(false);
             });
 
             var subscriptionCompleted = cacheProvider.getFromCritical('subscriptionCompleted');

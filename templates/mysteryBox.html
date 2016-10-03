@@ -1,5 +1,7 @@
+<div id="spin" class="spin">SPIN</div>
+<div id="result" class="result"></div>
+<div class="mysteryBoxMessageSpin">Spin the wheel to unlock the surprise. Only one Ninja per day wins the grand prize.</div>
 <div class="wheel-wrapper">
-    <div id="spin" class="spin">SPIN</div>
     <div class="needle"></div>
     <div id="wheel" class="wheel">
         <div class="cutter">
@@ -60,16 +62,3 @@
         </div>
     </div>
 </div>
-<div class="mysteryBoxScr_title spinScrTitle">Lucky Box </div>
-<div class="mysteryBoxScr_subtitle spinScrSubtitle">Spin to get a surprise gift. Only a lucky few will get one every day! </div>
-{{#previousWinner}}
-<div class="previousWinnerRow align-center">
-    <p class="previousWinnerHeading">Yesterday's Grand Prize Winner</p>
-    <div class="winnerWrapper">
-        <div class="winnerIcon"></div>
-        <div class="winnerName">{{previousWinner.name}}</div>
-    </div>
-</div>
-{{/previousWinner}} {{#showMysteryBoxHistoryButton}}
-<div class="mysteryBoxHistory  align-center">My History</div>
-{{/showMysteryBoxHistoryButton}}
