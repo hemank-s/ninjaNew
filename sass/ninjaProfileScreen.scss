@@ -41,7 +41,7 @@
 .swipe-wrap {
     overflow: hidden;
     position: relative;
-    max-height: 340px;
+    max-height: auto;
     overflow: scroll;
 }
 
@@ -133,6 +133,38 @@
     height: 100%;
 }
 
+.ugcTypeIcon{
+    background: url(images/defaultRewardIcon.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 26px;
+    height: 26px;
+    display: inline-block;
+    background-position: center;
+}
+
+.ugcTypeDetails {
+    display: inline-block;
+    margin-left: 12px;
+}
+
+.ugcTypeSubheading{
+    font-size: 12px;
+    font-weight: 400; 
+    color: rgba(61, 71, 91, 0.64);
+    line-height: 14px;
+}
+
+.ugcTypeHeading{
+    font-size: 14px;
+    font-weight: 500; 
+    color: #3D475B;
+    width: 95%;
+    line-height: 16px;
+    margin-bottom:4px;
+}
+
+
 .redeemedRewardIcon{
 	background: url(images/defaultRewardIcon.png);
     background-size: contain;
@@ -160,6 +192,10 @@
 	margin: 0px 0px 18px 0px; 
 }
 
+.ugcTypeRow{
+    margin: 0px 0px 22px 0px; 
+}
+
 .emptyLine{
 	background: #eee;
 	width: 85%;
@@ -170,4 +206,18 @@
 
 .redeemedRewardsContainer{
 	margin-top: 16px; 
+}
+
+.ugcTypesContainer{
+    margin-top: 16px;   
+}
+
+.ugcTypeList{
+    
+}
+
+.ugcListContainer{
+    margin-left: 20px;
+    margin-right: 12px;
+    height: 100%;
 }

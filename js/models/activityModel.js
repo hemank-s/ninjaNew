@@ -71,9 +71,6 @@
                     // Set In Critical cache for quick fetch
                     this.updateNinjaActivityTab(res.data);
                 }, this);
-            } else {
-                var res = { 'data': { 'chatThemes': { 'rec': 10, 'sent': 10 }, 'files': { 'rec': 155, 'sent': 139 }, 'messages': { 'rec': 1203, 'sent': 187 }, 'statusUpdates': { 'count': 10 }, 'stickers': { 'rec': 133, 'sent': 17 } } };
-                this.updateNinjaActivityTab(res.data);
             }
         },
 

@@ -160,6 +160,15 @@
             if (typeof fn === "function") return this.ninjaService.communicate(params, fn, x);
             else this.ninjaService.communicate(params);
 
+        },
+
+        getUgcTypes: function(fn, x) {
+            var params = {
+                'url': URL.api_location + '/ugc?random=' + Math.round(Math.random() * 999999999),
+                'type': 'GET'
+            };
+            if (typeof fn === "function") return this.ninjaService.communicate(params, fn, x);
+            else this.ninjaService.communicate(params);
         }
 
         // Rewards Service For Ninja 

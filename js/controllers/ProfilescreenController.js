@@ -16,6 +16,8 @@
 
         var DOMcache = {
             unlockedReward: document.getElementsByClassName('unlockedReward')[0],
+            ugcTypeRow: document.getElementsByClassName('ugcTypeRow'),
+            redeemedRewardRow: document.getElementsByClassName('redeemedRewardRow'),
         };
 
         //Swipe
@@ -79,17 +81,50 @@
         }
 
         defineNinjaHomeScreenTabs();
+        updateIcons(DOMcache, data)
     };
+
+    ProfilescreenController.prototype.updateIcons = function (DOMcache,rewards, ugc){
+        
+        console.log("Updating Reward Icons and UGC Icons");
+
+        // UGC ICONS
+        for(var i= 0;i<data.ugc.length;i++){
+            if(data.ugc[i].icon){
+                DOMcache.ugcTypeRow[i].getElementsByClassName('ugcTypeIcon')[0].style.backgroundImage = "url('" + data.ugc[i].icon + "')";
+            }else{
+                console.log("Set a default icon for ugc");
+            }
+        }
+
+        // REWARD ICONS
+        for(var j=0;j<data.redeemedRewards.length;j++){
+            if(data.ugc[i].icon){
+                DOMcache.redeemedRewardRow[i].getElementsByClassName('redeemedRewardIcon')[0].style.backgroundImage = "url('" + data.ugc[i].icon + "')";
+            }else{
+                console.log("Set a default icon for rewards");
+            }
+        }
+    }
 
     ProfilescreenController.prototype.render = function(ctr, App, data) {
 
         var that = this;
+        var ninjaStats = cacheProvider.getFromCritical('ninjaStats');
+        var ninjaUgc = cacheProvider.getFromCritical('ninjaUgc');
+        
+        data.ugcList = ninjaUgc;
+        console.log("reward data recieved is ", data);
 
-        console.log("data recieved is ", data);
-
+        if(!platformSdk.bridgeEnabled){
+            ninjaStats = {  'chatThemes': { 'rec': 10, 'sent': 10 }, 'files': { 'rec': 155, 'sent': 139 }, 'messages': { 'rec': 1203, 'sent': 187 }, 'statusUpdates': { 'count': 10 }, 'stickers': { 'rec': 133, 'sent': 17 } } ;
+            ninjaUgc = {"stat":"ok","data":{"content":[{"type":"jfl","title":"Just for Laugh","stitle":"Submit funny new memes and get recognized","icon":"s3 url here"},{"type":"quotes","title":"Daily quotes","stitle":"Submit famous quotes and get recognized","icon":"s3 url here"},{"type":"facts","title":"Facts","stitle":"Submit fun and new facts and get recognized","icon":"s3 url here"}]}};
+            ninjaUgc = ninjaUgc.data.content;
+        }   
+        
         that.el = document.createElement('div');
         that.el.className = 'profileScreenContainer animation_fadein noselect';
-        that.el.innerHTML = Mustache.render(unescape(that.template), {ninjaRedeemedRewards: data.rewardsData.redeemedRewards, ninjaActivityData:ninjaStats});
+        that.el.innerHTML = Mustache.render(unescape(that.template), {ninjaRedeemedRewards: data.rewardsData.redeemedRewards, ninjaActivityData:ninjaStats, ninjaUgcData:ninjaUgc});
         ctr.appendChild(that.el);
         events.publish('update.loader', { show: false });
         that.bind(App, data);

@@ -9,6 +9,8 @@
         utils = require('../util/utils'),
         cacheProvider = require('../util/cacheProvider'),
         rewardsModel = require('../models/rewardsModel'),
+        activityModel = require('../models/activityModel'),
+        ugcModel = require('../models/ugcModel'),
         TxService = require('../util/txServices'),
         NinjaService = require('../util/ninjaServices'),
 
@@ -79,6 +81,10 @@
 
             var ninjaProfileData = [];
             ninjaProfileData = data;
+
+            activityModel.fetchNinjaActivity('lifetime');
+            ugcModel.fetchUgcTypes();
+                
 
             if (platformSdk.platformVersion >= 15) {
                 console.log("Platform Verison is latest");

@@ -7,6 +7,7 @@
         Constants = require('../../constants.js'),
         cacheProvider = require('../util/cacheProvider'),
         activityModel = require('../models/activityModel'),
+        ugcModel = require('../models/activityModel'),
 
         HomescreenController = function(options) {
             this.template = require('raw!../../templates/ninjaHomeScreen.html');
@@ -52,13 +53,11 @@
         });
 
         DOMcache.ninjaDp.addEventListener('click', function(event) {
-            console.log("Going to profile controller, Fetching the stats");
             App.router.navigateTo('/profile', { rewardsData: data });
         });
 
         DOMcache.batteryStreakInfoContainer.addEventListener('click', function(event) {
-            DOMcache.batteryStreakInfoContainer.classList.add('hideClass');
-            activityModel.fetchNinjaActivity('lifetime');           
+            DOMcache.batteryStreakInfoContainer.classList.add('hideClass');           
         });
 
         DOMcache.streakValueContainer.addEventListener('click', function(event) {
@@ -101,6 +100,9 @@
         } else {
             console.log("Empty illustrations here");
         }
+
+        updateIcons(DOMcache,data);
+
     };
 
     // Filter Rewards Based on category of reward
@@ -127,6 +129,27 @@
             }
         }
         return filteredRewards;
+    };
+
+    HomescreenController.prototype.updateIcons = function(DOMcache, data) {
+
+        // UGC ICONS
+        for(var i= 0;i<data.unlockedRewards.length;i++){
+            if(data.ugc[i].icon){
+                DOMcache.unlockedRewardListItem[i].getElementsByClassName('unlockedRewardIcon')[0].style.backgroundImage = "url('" + data.unlockedRewards[i].icon + "')";
+            }else{
+                console.log("Set a default icon for ugc");
+            }
+        }
+
+        // REWARD ICONS
+        for(var j=0;j<data.lockedRewards.length.length;j++){
+            if(data.ugc[i].icon){
+                DOMcache.lockedRewardListItem[i].getElementsByClassName('rewardIcon')[0].style.backgroundImage = "url('" + data.lockedRewards[i].icon + "')";
+            }else{
+                console.log("Set a default icon for rewards");
+            }
+        }
     };
 
     HomescreenController.prototype.render = function(ctr, App, data) {
