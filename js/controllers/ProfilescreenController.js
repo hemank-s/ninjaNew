@@ -81,26 +81,24 @@
         }
 
         defineNinjaHomeScreenTabs();
-        updateIcons(DOMcache, data)
+        this.updateIcons(DOMcache, data)
     };
 
-    ProfilescreenController.prototype.updateIcons = function (DOMcache,rewards, ugc){
+    ProfilescreenController.prototype.updateIcons = function (DOMcache,data){
         
-        console.log("Updating Reward Icons and UGC Icons");
-
         // UGC ICONS
-        for(var i= 0;i<data.ugc.length;i++){
-            if(data.ugc[i].icon){
-                DOMcache.ugcTypeRow[i].getElementsByClassName('ugcTypeIcon')[0].style.backgroundImage = "url('" + data.ugc[i].icon + "')";
+        for(var i= 0;i<data.ugcList.length;i++){
+            if(data.ugcList[i].icon){
+                DOMcache.ugcTypeRow[i].getElementsByClassName('ugcTypeIcon')[0].style.backgroundImage = "url('" + data.ugcList[i].icon + "')";
             }else{
                 console.log("Set a default icon for ugc");
             }
         }
 
         // REWARD ICONS
-        for(var j=0;j<data.redeemedRewards.length;j++){
-            if(data.ugc[i].icon){
-                DOMcache.redeemedRewardRow[i].getElementsByClassName('redeemedRewardIcon')[0].style.backgroundImage = "url('" + data.ugc[i].icon + "')";
+        for(var j=0;j<data.rewardsData.redeemedRewards.length;j++){
+            if(data.rewardsData.redeemedRewards[i].icon){
+                DOMcache.redeemedRewardRow[i].getElementsByClassName('redeemedRewardIcon')[0].style.backgroundImage = "url('" + data.rewardsData.redeemedRewards[i].icon + "')";
             }else{
                 console.log("Set a default icon for rewards");
             }

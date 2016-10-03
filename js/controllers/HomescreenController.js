@@ -38,6 +38,7 @@
             lockedRewardListItem: document.getElementsByClassName('lockedRewardListItem'),
             ninjaDp: document.getElementsByClassName('ninjaDp')[0]
         };
+        
         if(showNewRewardAnimation){
             that.newRewardUnlockAnimation(DOMcache);    
         }else{
@@ -101,7 +102,7 @@
             console.log("Empty illustrations here");
         }
 
-        updateIcons(DOMcache,data);
+        that.updateIcons(DOMcache,data);
 
     };
 
@@ -133,9 +134,11 @@
 
     HomescreenController.prototype.updateIcons = function(DOMcache, data) {
 
+        console.log("Updating the icons for rewards");
+
         // UGC ICONS
         for(var i= 0;i<data.unlockedRewards.length;i++){
-            if(data.ugc[i].icon){
+            if(data.unlockedRewards[i].icon){
                 DOMcache.unlockedRewardListItem[i].getElementsByClassName('unlockedRewardIcon')[0].style.backgroundImage = "url('" + data.unlockedRewards[i].icon + "')";
             }else{
                 console.log("Set a default icon for ugc");
@@ -144,7 +147,8 @@
 
         // REWARD ICONS
         for(var j=0;j<data.lockedRewards.length.length;j++){
-            if(data.ugc[i].icon){
+            console.log("Updating the icons for locked rewards");
+            if(data.lockedRewards[i].icon){
                 DOMcache.lockedRewardListItem[i].getElementsByClassName('rewardIcon')[0].style.backgroundImage = "url('" + data.lockedRewards[i].icon + "')";
             }else{
                 console.log("Set a default icon for rewards");
