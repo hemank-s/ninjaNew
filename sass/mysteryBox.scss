@@ -1,3 +1,4 @@
+$spinnerDim: 300px;
 .mysteryBoxContainer {
     height: 100%;
     width: 100%;
@@ -12,9 +13,9 @@
     position: absolute;
     top: 45%;
     left: 50%;
-    height: 200px;
-    width: 200px;
-    margin: -100px;
+    height: $spinnerDim;
+    width: $spinnerDim;
+    margin: $spinnerDim/-2;
 }
 
 .wheel-wrapper .needle {
@@ -24,7 +25,7 @@
     width: 27px;
     z-index: 4;
     left: 50%;
-    margin: -43px -13px;
+    margin: -38px -13px;
     border: 0 solid transparent;
 }
 
@@ -32,9 +33,9 @@
     position: absolute;
     top: 50%;
     left: 50%;
-    height: 200px;
-    width: 200px;
-    margin: -100px;
+    height: $spinnerDim;
+    width: $spinnerDim;
+    margin: $spinnerDim/-2;
     border-radius: 100%;
     -webkit-transition: -webkit-transform 5s cubic-bezier(0.43, -0.31, 0.11, 0.86);
     transition: -webkit-transform 5s cubic-bezier(0.43, -0.31, 0.11, 0.86);
@@ -46,30 +47,33 @@
     content: '';
     position: absolute;
     z-index: 2;
-    height: inherit;
-    width: inherit;
-    top: 90px;
-    left: 90px;
+    height: 100%;
+    width: 100%;
+    top: 42%;
+    left: 42%;
     margin: inherit;
     border-radius: inherit;
-    border: 10px solid #fff;
-    box-shadow: 0 0 0 3px #fff;
+    border: 24px solid rgba(0, 0, 0, 0.10);
     pointer-events: none;
+    -ms-transform: scale(0.93, 0.93);
+    -webkit-transform: scale(0.93, 0.93);
+    transform: scale(0.93, 0.93);
 }
 
 .wheel:after {
     content: '';
     position: absolute;
     z-index: 2;
-    height: 50px;
-    width: 50px;
     top: inherit;
     left: inherit;
-    margin: -25px;
+    height: $spinnerDim/4;
+    width: $spinnerDim/4;
+    margin: $spinnerDim/-8;
     border-radius: inherit;
-    background: #FFFBEF;
-    box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.5) inset;
+    background: #FFFFFF;
     pointer-events: none;
+    box-shadow: 0 0 100px 0px rgba(255, 255, 255, 1);
+    -webkit-box-shadow: 0 0 100px 0px rgba(255, 255, 255, 0.72);
 }
 
 .wheel .cutter {
@@ -81,7 +85,7 @@
     left: inherit;
     margin: inherit;
     border-radius: inherit;
-    clip: rect(0, 100px, 100px, 0);
+    clip: rect(0, $spinnerDim/2, $spinnerDim/2, 0);
 }
 
 .wheel .cutter:nth-child(1) {
@@ -90,7 +94,7 @@
 }
 
 .wheel .cutter:nth-child(1) .slicer {
-    background-color: #A6CEF0;
+    @include setGradient(#FBD249, #F5A623);
 }
 
 .wheel .cutter:nth-child(2) {
@@ -99,7 +103,7 @@
 }
 
 .wheel .cutter:nth-child(2) .slicer {
-    background-color: #F6A4BE;
+    @include setGradient(#F279FC, #CC44F7);
 }
 
 .wheel .cutter:nth-child(3) {
@@ -108,7 +112,7 @@
 }
 
 .wheel .cutter:nth-child(3) .slicer {
-    background-color: #8FF1CD;
+    @include setGradient(#CDED57, #9ED62C);
 }
 
 .wheel .cutter:nth-child(4) {
@@ -117,22 +121,26 @@
 }
 
 .wheel .cutter:nth-child(4) .slicer {
-    background-color: white;
+    @include setGradient(#7987FC, #4451F7);
 }
 
+
+/*
 // .wheel .cutter:nth-child(4) .slicer div:nth-child(1) {
 //     font-size: 9px;
 // }
 // .wheel .cutter:nth-child(4) .slicer div:nth-child(2) {
 //     font-size: 7px;
 // }
+*/
+
 .wheel .cutter:nth-child(5) {
     -webkit-transform: rotate3d(0, 0, 1, 180deg);
     transform: rotate3d(0, 0, 1, 180deg);
 }
 
 .wheel .cutter:nth-child(5) .slicer {
-    background-color: #D7FFA8;
+    @include setGradient(#FCF679, #F7D144);
 }
 
 .wheel .cutter:nth-child(6) {
@@ -141,7 +149,7 @@
 }
 
 .wheel .cutter:nth-child(6) .slicer {
-    background-color: #F6A4BE;
+    @include setGradient(#C398E4, #8F5FC4);
 }
 
 .wheel .cutter:nth-child(7) {
@@ -150,7 +158,7 @@
 }
 
 .wheel .cutter:nth-child(7) .slicer {
-    background-color: #C0FFA8;
+    @include setGradient(#FC7981, #F7444A);
 }
 
 .wheel .cutter:nth-child(8) {
@@ -159,8 +167,7 @@
 }
 
 .wheel .cutter:nth-child(8) .slicer {
-    color: #fff;
-    background-color: black;
+    @include setGradient(#50E3A2, #44D6F7);
 }
 
 .wheel .cutter .slicer {
@@ -171,7 +178,7 @@
     left: inherit;
     margin: inherit;
     border-radius: inherit;
-    clip: rect(0, 100px, 100px, 0);
+    clip: rect(0, $spinnerDim/2, $spinnerDim/2, 0);
     color: #000;
     -webkit-transform: rotate3d(0, 0, 1, 45deg);
     transform: rotate3d(0, 0, 1, 45deg);
@@ -199,7 +206,7 @@
     top: 0;
     left: 0;
     margin: 0;
-    padding-top: 0.5em;
+    padding-top: 2.5em;
     border-radius: inherit;
     background-color: inherit;
     -webkit-transform-origin: 0 100%;
@@ -257,11 +264,11 @@
 
 .spin {
     text-align: center;
-    color: #1da8e8;
+    @include fontStyle(14PX, 500, #64615E, 10px);
     position: absolute;
-    top: 43%;
+    top: 45%;
     z-index: 1000;
-    left: 38%;
+    left: 41%;
     padding: 4%;
 }
 
@@ -351,7 +358,7 @@
 }
 
 .mBoxRewardIcon {
-    background: url(images/reward_spec.png);
+    background: url(images/mysteryReward.png);
     background-size: contain;
     background-repeat: no-repeat;
     width: 25px;
@@ -359,7 +366,7 @@
     display: inline-block;
     background-position: center;
     vertical-align: middle;
-    margin: 1px 1px 1px 15px;
+    margin: 50% 1px 1px 15px;
 }
 
 .mysteryBoxScr_title {
@@ -370,14 +377,14 @@
 .spinScrTitle {
     position: absolute;
     top: 50%;
-    margin-top: 100px;
+    margin-top: 140px;
     width: 100%;
 }
 
 .spinScrSubtitle {
     position: absolute;
     top: 50%;
-    margin-top: 150px;
+    margin-top: 190px;
 }
 
 .mysteryBoxScr_subtitle {
@@ -464,6 +471,16 @@
         @include fontStyle(16px, 400, rgba(255, 255, 255, 0.96), 21px);
         margin-bottom: 5px;
     }
+}
+
+.mysteryBox_CrossIcon {
+    background: url(images/crossWhite.png);
+    background-repeat: no-repeat;
+    height: 16px;
+    background-position: center;
+    width: 16px;
+    padding: 24px;
+    float: right;
 }
 
 .giftBoxAnimCls {

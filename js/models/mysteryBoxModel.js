@@ -90,8 +90,8 @@
                     mysterBoxReward: rewardData
                 });
 
-                //var openGiftBox = document.getElementsByClassName('openGiftBox')[0];
-                document.addEventListener('click', function() {
+                var mysteryBoxIcon = document.getElementsByClassName('mysteryBoxIcon')[0];
+                mysteryBoxIcon.addEventListener('click', function() {
 
                     document.getElementsByClassName('mysteryBoxScr_title')[0].classList.add('animation_fadeout');
                     document.getElementsByClassName('mysteryBoxScr_subtitle')[0].classList.add('animation_fadeout');
@@ -106,13 +106,25 @@
                     congratsBtn.addEventListener('click', function() {
 
                         if (rewardData.value == 'HIGH') {
-                            if (platformSdk.bridgeEnabled) {
 
-                            } else {
+                            var rid = this.getAttribute('data-rid');
+                            var rewardType = this.getAttribute('data-rewardtype');
+                            var rewardRouter = rewardsModel.getRewardRouter(rewardType);
+
+                            App.NinjaService.getRewardDetails(data, function(res) {
+
+                                console.log(res.data);
+                                App.router.navigateTo(rewardRouter, { 'rewardDetails': res.data, 'rewardId': rid, 'rewardRouter': rewardRouter });
+                            }, this);
 
 
-                            }
 
+                        } else if (rewardData.value == 'MED') {
+
+                            App.NinjaService.getNinjaProfile(function(res) {
+                                console.log('REUPDATING THE PROFILE', res.data);
+                                profileModel.updateNinjaData(res.data, App);
+                            }, that);
 
                         } else {
 
@@ -137,7 +149,7 @@
                 that.template = require('raw!../../templates/mysteryBoxRetry.html');
                 mysteryBoxContainer.innerHTML = Mustache.render(that.template, {
                     mysterBoxReward: rewardData,
-                    previousWinner: { 'name': 'Sandeep Chugh' }
+                    previousWinner: { 'name': 'Sandeep Chugh', 'streakVal': '45' }
                 });
 
                 var ctaWinner = document.getElementsByClassName('ctaWinner')[0];
@@ -371,7 +383,7 @@
                 } else {
                     var stop = 4;
                     rewardData = {};
-                    rewardData.value = "LOW";
+                    rewardData.value = "HIGH";
                     rewardData.title = "My Sticker";
                     console.log('stop is', stop);
                     var rotationFix = 360 / 16 + 360 / 8 + rotations * 720;
