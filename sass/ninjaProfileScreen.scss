@@ -1,0 +1,173 @@
+.profileScreenWrapper {
+    height: 100%;
+    background: #1D47F5;
+    background: -webkit-linear-gradient(left top, #1D47F5, #33FFE2);
+    background: -o-linear-gradient(bottom left, #1D47F5, #33FFE2);
+    background: -moz-linear-gradient(bottom left, #1D47F5, #33FFE2);
+    background: linear-gradient(to bottom left, #1D47F5, #33FFE2);
+}
+
+.ninjaProfileBottomContainer{
+	height: 100%;
+    padding-top: 78px;
+    display: block;
+}
+
+.containerProfile{
+	width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 5%;
+}
+
+.tab-activity {
+    height: 600px !important;
+}
+
+.tab-rewards {
+    height: 600px !important;
+}
+
+.tab-mysterybox {
+    height: 500px !important;
+}
+
+.swipe {
+    overflow: hidden;
+    visibility: hidden;
+    position: relative;
+}
+
+.swipe-wrap {
+    overflow: hidden;
+    position: relative;
+    max-height: 340px;
+    overflow: scroll;
+}
+
+.swipe-wrap > div {
+    float: left;
+    width: 100%;
+    position: relative;
+}
+
+.container {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    background-color: #fff;
+}
+
+.view {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    will-change: transform;
+    transition: -webkit-transform 0.3s cubic-bezier(0.465, 0.183, 0.153, 0.946);
+    transition: transform 0.3s cubic-bezier(0.465, 0.183, 0.153, 0.946);
+}
+
+.details-view {
+    -webkit-transform: translateX(100%);
+    transform: translateX(100%);
+    background: #fff;
+}
+
+.view-change .list-view {
+    -webkit-transform: translateX(-100%);
+    transform: translateX(-100%);
+}
+
+.view-change .details-view {
+    -webkit-transform: translateX(0);
+    transform: translateX(0);
+    overflow-y: scroll;
+}
+
+.comp__tabs {
+    box-sizing: border-box;
+}
+
+.comp__tabs .comp__tab {
+    box-sizing: border-box;
+    text-transform: uppercase;
+    padding: 18px 16px 12px;
+    width: 33.33%;
+    font-size: 12px;
+    text-align: center;
+    font-weight: 500;
+    color: rgba(255,255,255,0.64);
+    float: left;
+}
+
+.comp__tabs .selected {
+    color: #fff;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.comp__data {
+    padding: 0px;
+    margin-top: 5px;
+}
+
+#sliderTabs{
+	margin-top: 92px; 
+}
+
+.emptyBorder{
+	border: 3px solid #fff;
+    border-radius: 14px;
+    width: 7%;
+    -webkit-transition: margin 2s;
+    transition: margin 0.5s;
+    margin-left: 13.5%; 
+	display: inline-block; 
+}
+
+.redeemedRewardListContainer{
+	margin-left: 20px;
+    margin-right: 12px;
+    height: 100%;
+}
+
+.redeemedRewardIcon{
+	background: url(images/defaultRewardIcon.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 26px;
+    height: 26px;
+    display: inline-block;
+    background-position: center;
+}
+
+.redeemedRewardDetails {
+    display: inline-block;
+    margin-left: 12px;
+    vertical-align: middle;
+}
+
+.redeemedRewardSubheading{
+	font-size: 12px;
+    color: rgba(61, 71, 91, 0.64);
+    width: 95%;
+    line-height: 14px;
+}
+
+.redeemedRewardRow{
+	margin: 0px 0px 18px 0px; 
+}
+
+.emptyLine{
+	background: #eee;
+	width: 85%;
+	position: absolute;
+	right: 0px;   
+	height: 1px; 
+}
+
+.redeemedRewardsContainer{
+	margin-top: 16px; 
+}

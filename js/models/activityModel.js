@@ -65,33 +65,22 @@
 
             // Timeperiod can be of three type :: Lifetime/ Last month / Last week :: decide the activity value string/integer
 
-            // STUB TO REMOVE
-            // var res = { 'data': { 'chatThemes': { 'rec': 10, 'sent': 10 }, 'files': { 'rec': 155, 'sent': 139 }, 'messages': { 'rec': 1203, 'sent': 187 }, 'statusUpdates': { 'count': 10 }, 'stickers': { 'rec': 133, 'sent': 17 } } };
-            // this.updateNinjaActivityTab( res.data );
-
-            // STUB TO REMOVE
-
-            this.NinjaService.getNinjaActivity(function(res) {
-                console.log(res.data);
-                // Set In Critical cache for quick fetch
-                cacheProvider.setInCritical('ninjaStats', res.data);
+            if (platformSdk.bridgeEnabled) {
+                this.NinjaService.getNinjaActivity(function(res) {
+                    console.log(res.data);
+                    // Set In Critical cache for quick fetch
+                    this.updateNinjaActivityTab(res.data);
+                }, this);
+            } else {
+                var res = { 'data': { 'chatThemes': { 'rec': 10, 'sent': 10 }, 'files': { 'rec': 155, 'sent': 139 }, 'messages': { 'rec': 1203, 'sent': 187 }, 'statusUpdates': { 'count': 10 }, 'stickers': { 'rec': 133, 'sent': 17 } } };
                 this.updateNinjaActivityTab(res.data);
-            }, this);
+            }
         },
 
         updateNinjaActivityTab: function(activityData) {
             console.log('Updating the activity Three tab in Ninja');
-
             this.formatActivityData(activityData);
-
-            var statsWrapper = document.getElementsByClassName('statsWrapper')[0]; // Gives Existing List of Rewards in the Template
-            statsWrapper.innerHTML = '';
-
-            // Re Render The Reward Template Only From External HTML
-            this.template = require('raw!../../templates/newActivityTemplate.html');
-            statsWrapper.innerHTML = Mustache.render(this.template, {
-                ninjaActivityData: activityData
-            });
+            cacheProvider.setInCritical('ninjaStats', activityData);
         }
 
     };

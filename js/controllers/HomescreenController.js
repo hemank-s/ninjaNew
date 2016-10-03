@@ -6,6 +6,7 @@
     var utils = require('../util/utils'),
         Constants = require('../../constants.js'),
         cacheProvider = require('../util/cacheProvider'),
+        activityModel = require('../models/activityModel'),
 
         HomescreenController = function(options) {
             this.template = require('raw!../../templates/ninjaHomeScreen.html');
@@ -17,7 +18,7 @@
         DOMcache.streakValueContainer.classList.add('newRewardDayScale');
     };
 
-    HomescreenController.prototype.bind = function(App, data) {
+    HomescreenController.prototype.bind = function(App, data, showNewRewardAnimation) {
 
         var that = this;
 
@@ -33,18 +34,31 @@
             batteryStreakInfoContainer: document.getElementsByClassName('batteryStreakInfoContainer')[0],
             informationAction: document.getElementsByClassName('informationAction')[0],
             unlockedRewardListItem: document.getElementsByClassName('unlockedRewardListItem'),
-            lockedRewardListItem: document.getElementsByClassName('lockedRewardListItem')
+            lockedRewardListItem: document.getElementsByClassName('lockedRewardListItem'),
+            ninjaDp: document.getElementsByClassName('ninjaDp')[0]
         };
-
-        that.newRewardUnlockAnimation(DOMcache);
-
+        if(showNewRewardAnimation){
+            that.newRewardUnlockAnimation(DOMcache);    
+        }else{
+            DOMcache.unlockedRewardHeading.innerHTML = 'Next Gift';
+            DOMcache.unlockedReward.classList.remove('hideClass');
+            DOMcache.unlockedRewardListContainer.classList.add('unlockedRewardListUl');
+            DOMcache.rewardUnlockAnimation.classList.add('hideClass');
+        }
+        
         DOMcache.streakContainer.addEventListener('click', function(event) {
             //DOMcache.unlockedRewardListContainer.classList.remove('unlockedRewardListUl');
             DOMcache.batteryStreakInfoContainer.classList.remove('hideClass');
         });
 
+        DOMcache.ninjaDp.addEventListener('click', function(event) {
+            console.log("Going to profile controller, Fetching the stats");
+            App.router.navigateTo('/profile', { rewardsData: data });
+        });
+
         DOMcache.batteryStreakInfoContainer.addEventListener('click', function(event) {
             DOMcache.batteryStreakInfoContainer.classList.add('hideClass');
+            activityModel.fetchNinjaActivity('lifetime');           
         });
 
         DOMcache.streakValueContainer.addEventListener('click', function(event) {
@@ -119,6 +133,7 @@
 
         var that = this;
         var rewardsData = {};
+        var showNewRewardAnimation = true;
 
         // Get Data From Cache Always :: Cache updated in all cases before rendering data
         var profile_data = cacheProvider.getFromCritical('userProfileData');
@@ -135,13 +150,14 @@
         }
         // Stub 
         if (!platformSdk.bridgeEnabled) {
-            data = { "rewards": [{ "desc": "Get the best stickers on hike way before everyone else does. You get these 2 weeks before mere mortals. You're a Ninja!", "hicon": "https://s3-ap-southeast-1.amazonaws.com/hike-giscassets/nixy/secretStickerShopIllustration.png", "icon": "https://s3-ap-southeast-1.amazonaws.com/hike-giscassets/nixy/early_access_sticker_icon.png", "id": "57b56ec17e401ddfe70a9e8f", "state": 0, "stitle": "Get all the hike stickers before everyone else.", "streak": 1, "title": "Early Access Stickers", "type": "sticker_reward", "value": null }, { "icon": "https://s3-ap-southeast-1.amazonaws.com/hike-giscassets/nixy/GIFSharingHeader.png", "id": "57cfce41733265431b98b317", "state": 1, "stitle": "Get the exclusive GIF feature.", "streak": 15, "title": "Exclusive Gif", "type": "exclusive_feature", "value": null }, { "failed_preview_img": "https://staging.im.hike.in/sticker?catId=mumbai&stId=023_mb_badey.png&resId=XHDPI&image=True", "icon": "https://s3-ap-southeast-1.amazonaws.com/hike-giscassets/nixy/custom_sticker_icon.png", "id": "57c554417332654291dc1097", "state": 0, "stitle": "Have an exclusive sticker made just for you", "streak": 7, "title": "My Sticker", "type": "custom_sticker", "value": null }, { "desc": "Share animated stickers with your friends and get krazzy", "hicon": "https://s3-ap-southeast-1.amazonaws.com/hike-giscassets/nixy/animatedStickers.png", "icon": "https://s3-ap-southeast-1.amazonaws.com/hike-giscassets/nixy/animatedStickers.png", "id": "58c563ce7332657fe8d3ca69", "state": 1, "stitle": "Experience the new animated before anyone else", "streak": 0, "title": "Animated Stickers", "type": "exclusive_feature", "value": null }, { "desc": "Share animated stickers with your friends and get krazzy", "hicon": "https://s3-ap-southeast-1.amazonaws.com/hike-giscassets/nixy/animatedStickers.png", "icon": "https://s3-ap-southeast-1.amazonaws.com/hike-giscassets/nixy/animatedStickers.png", "id": "58c563ce7332657fe8d3ca69", "state": 1, "stitle": "Experience the new animated before anyone else", "streak": 0, "title": "Animated Stickers", "type": "exclusive_feature", "value": null }, { "desc": "Share animated stickers with your friends and get krazzy", "hicon": "https://s3-ap-southeast-1.amazonaws.com/hike-giscassets/nixy/animatedStickers.png", "icon": "https://s3-ap-southeast-1.amazonaws.com/hike-giscassets/nixy/animatedStickers.png", "id": "58c563ce7332657fe8d3ca69", "state": 1, "stitle": "Experience the new animated before anyone else", "streak": 0, "title": "Animated Stickers", "type": "exclusive_feature", "value": null }, { "desc": "Share animated stickers with your friends and get krazzy", "hicon": "https://s3-ap-southeast-1.amazonaws.com/hike-giscassets/nixy/animatedStickers.png", "icon": "https://s3-ap-southeast-1.amazonaws.com/hike-giscassets/nixy/animatedStickers.png", "id": "58c563ce7332657fe8d3ca69", "state": 1, "stitle": "Experience the new animated before anyone else", "streak": 0, "title": "Animated Stickers", "type": "exclusive_feature", "value": null }, { "desc": "Share animated stickers with your friends and get krazzy", "hicon": "https://s3-ap-southeast-1.amazonaws.com/hike-giscassets/nixy/animatedStickers.png", "icon": "https://s3-ap-southeast-1.amazonaws.com/hike-giscassets/nixy/animatedStickers.png", "id": "58c563ce7332657fe8d3ca69", "state": 1, "stitle": "Experience the new animated before anyone else", "streak": 0, "title": "Animated Stickers", "type": "exclusive_feature", "value": null }], "rewards_hash": "1474970960" };
+            data = {"rewards":[{"desc":"Get the best stickers on hike way before everyone else does. You get these 2 weeks before mere mortals. You're a Ninja!","hicon":"https://s3-ap-southeast-1.amazonaws.com/hike-giscassets/nixy/secretStickerShopIllustration.png","icon":"https://s3-ap-southeast-1.amazonaws.com/hike-giscassets/nixy/early_access_sticker_icon.png","id":"57b56ec17e401ddfe70a9e8f","state":1,"stitle":"Get all the hike stickers before everyone else.","streak":1,"title":"Early Access Stickers","type":"sticker_reward","value":null},{"icon":"https://s3-ap-southeast-1.amazonaws.com/hike-giscassets/nixy/GIFSharingHeader.png","id":"57cfce41733265431b98b317","state":0,"stitle":"Get the exclusive GIF feature.","streak":15,"title":"Exclusive Gif","type":"exclusive_feature","value":null},{"failed_preview_img":"https://staging.im.hike.in/sticker?catId=mumbai&stId=023_mb_badey.png&resId=XHDPI&image=True","icon":"https://s3-ap-southeast-1.amazonaws.com/hike-giscassets/nixy/custom_sticker_icon.png","id":"57c554417332654291dc1097","state":0,"stitle":"Have an exclusive sticker made just for you","streak":7,"title":"My Sticker","type":"custom_sticker","value":null},{"desc":"Share animated stickers with your friends and get krazzy","hicon":"https://s3-ap-southeast-1.amazonaws.com/hike-giscassets/nixy/animatedStickers.png","icon":"https://s3-ap-southeast-1.amazonaws.com/hike-giscassets/nixy/animatedStickers.png","id":"58c563ce7332657fe8d3ca69","state":3,"stitle":"Experience the new animated before anyone else","streak":0,"title":"Animated Stickers","type":"exclusive_feature","value":null},{"desc":"Share animated stickers with your friends and get krazzy","hicon":"https://s3-ap-southeast-1.amazonaws.com/hike-giscassets/nixy/animatedStickers.png","icon":"https://s3-ap-southeast-1.amazonaws.com/hike-giscassets/nixy/animatedStickers.png","id":"58c563ce7332657fe8d3ca69","state":3,"stitle":"Experience the new animated before anyone else","streak":0,"title":"Animated Stickers","type":"exclusive_feature","value":null},{"desc":"Share animated stickers with your friends and get krazzy","hicon":"https://s3-ap-southeast-1.amazonaws.com/hike-giscassets/nixy/animatedStickers.png","icon":"https://s3-ap-southeast-1.amazonaws.com/hike-giscassets/nixy/animatedStickers.png","id":"58c563ce7332657fe8d3ca69","state":3,"stitle":"Experience the new animated before anyone else","streak":0,"title":"Animated Stickers","type":"exclusive_feature","value":null},{"desc":"Share animated stickers with your friends and get krazzy","hicon":"https://s3-ap-southeast-1.amazonaws.com/hike-giscassets/nixy/animatedStickers.png","icon":"https://s3-ap-southeast-1.amazonaws.com/hike-giscassets/nixy/animatedStickers.png","id":"58c563ce7332657fe8d3ca69","state":0,"stitle":"Experience the new animated before anyone else","streak":0,"title":"Animated Stickers","type":"exclusive_feature","value":null},{"desc":"Share animated stickers with your friends and get krazzy","hicon":"https://s3-ap-southeast-1.amazonaws.com/hike-giscassets/nixy/animatedStickers.png","icon":"https://s3-ap-southeast-1.amazonaws.com/hike-giscassets/nixy/animatedStickers.png","id":"58c563ce7332657fe8d3ca69","state":0,"stitle":"Experience the new animated before anyone else","streak":0,"title":"Animated Stickers","type":"exclusive_feature","value":null}],"rewards_hash":"1474970960"};
             profile_data = { "battery": 7, "hike_version": "4.2.2.2", "rewards_hash": "1474970960", "status": "active", "streak": 10 };
             rewardsData = that.filterRewards(data.rewards);
         }
 
         // For No Unlocked Rewards :: Show First locked reward
         if (rewardsData.unlockedRewards.length === 0) {
+            showNewRewardAnimation = false;
             rewardsData.unlockedRewards.push(rewardsData.lockedRewards[0]);
         }
 
@@ -150,7 +166,7 @@
         that.el.innerHTML = Mustache.render(unescape(that.template), { ninjaProfile: profile_data, ninjaUnlockedRewards: rewardsData.unlockedRewards, ninjaLockedRewards: rewardsData.lockedRewards });
         ctr.appendChild(that.el);
         events.publish('update.loader', { show: false });
-        that.bind(App, rewardsData);
+        that.bind(App, rewardsData , showNewRewardAnimation);
     };
 
     HomescreenController.prototype.destroy = function() {
