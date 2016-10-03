@@ -8,7 +8,6 @@
     var platformSdk = require('../../libs/js/platformSdk_v2.0'),
         utils = require('../util/utils'),
         cacheProvider = require('../util/cacheProvider'),
-        profileModel = require('../models/profileModel'),
         rewardsModel = require('../models/rewardsModel'),
         TxService = require('../util/txServices'),
         NinjaService = require('../util/ninjaServices'),
@@ -88,22 +87,33 @@
                     });
 
                     var congratsIcon = document.getElementsByClassName('mysteryBoxCongratsIcon')[0];
+
+
                     congratsIcon.style.backgroundImage = "url('" + rewardData.icon + "')";
+                    window.setTimeout(function() {
+                        congratsIcon.classList.add('congratsIconAnimCls');
+                    }, 700);
+
 
                     var congratsBtn = document.getElementsByClassName('congratsBtn')[0];
                     congratsBtn.addEventListener('click', function() {
 
                         if (rewardData.value == 'HIGH') {
 
-                            var rid = this.getAttribute('data-rid');
+                            var tid = this.getAttribute('data-tid');
                             var rewardType = this.getAttribute('data-rewardtype');
                             var rewardRouter = rewardsModel.getRewardRouter(rewardType);
 
+                            var data = {};
+                            data.rewardId = tid;
+
                             App.NinjaService.getRewardDetails(data, function(res) {
                                 console.log(res.data);
-                                App.router.navigateTo(rewardRouter, { 'rewardDetails': res.data, 'rewardId': rid, 'rewardRouter': rewardRouter });
+                                App.router.navigateTo(rewardRouter, { 'rewardDetails': res.data, 'rewardId': tid, 'rewardRouter': rewardRouter });
                             }, this);
                         } else {
+
+                            var profileModelM = require('../models/profileModel');
                             App.NinjaService.getNinjaProfile(function(res) {
                                 console.log('REUPDATING THE PROFILE', res.data);
                                 cacheProvider.setInCritical('userProfileData', res.data);
@@ -111,7 +121,7 @@
                                 var newHash = res.data.rewards_hash;
                                 utils.hashCheck(oldHash, newHash);
                                 if (res.data.status != 'inactive' && res.data.status != 'locked') {
-                                    profileModel.updateNinjaData(res.data, App, true);
+                                    profileModelM.updateNinjaData(res.data, App, true);
                                 }
                             }, that);
                         }

@@ -15,13 +15,13 @@
     MysteryBoxController.prototype.bind = function(App, data) {
 
         var that = this;
-        var DOMcache = {
-            crossIcon: document.getElementsByClassName('mysteryBox_CrossIcon')[0],
-        };
 
-        DOMcache.crossIcon.addEventListener('click', function(event) {
-            console.log("cross clicked");
-            App.router.navigateTo('/home', {});
+        document.addEventListener('click', function(event) {
+
+            if (event.target.classList.contains('mysteryBox_CrossIcon')) {
+                console.log("cross clicked");
+                App.router.navigateTo('/home', {});
+            }
         });
 
         mysteryBoxModel.updateMysteryBoxTab(data, App);
