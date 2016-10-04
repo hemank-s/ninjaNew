@@ -369,6 +369,10 @@
             }
         },
 
+        calculateBatteryChange: function(){
+
+        },
+
         start: function() {
 
             var self = this;
@@ -431,7 +435,6 @@
                 self.router.navigateTo('/home');
             } else {
                 self.NinjaService.getNinjaProfile(function(res) {
-                    console.log(res.data);
                     cacheProvider.setInCritical('userProfileData', res.data);
                     var oldHash = cacheProvider.getFromCritical('oldHash');
                     var newHash = res.data.rewards_hash;

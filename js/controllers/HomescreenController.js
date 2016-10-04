@@ -133,12 +133,13 @@
     HomescreenController.prototype.checkBatteryStatus = function(pdata, DOMcache, App) {
 
         console.log(pdata);
+
         if (!platformSdk.bridgeEnabled) {
-            pdata = { "maxBattery": 7, "battery": 2, "hike_version": "4.2.2.2", "rewards_hash": "1474970960", "status": "active", "streak": 10 };
+            pdata = { "maxBattery": 7, "battery": 4, "hike_version": "4.2.2.2", "rewards_hash": "1474970960", "status": "active", "streak": 10 };
         }
         if (pdata.battery < pdata.maxBattery / 2) {
             console.log("Show indication always");
-            DOMcache.streakStatus.innerHTML = 'Life in danger';
+            DOMcache.streakStatus.innerHTML = 'Critical Life - '+' '+pdata.battery;
             DOMcache.streakStatus.classList.add('streakDanger');
         } else {
             console.log("Show status as healthy");
