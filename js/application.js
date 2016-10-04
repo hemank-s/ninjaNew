@@ -5,6 +5,7 @@
         HomescreenController = require('./controllers/HomescreenController'),
         ProfilescreenController = require('./controllers/ProfilescreenController'),
         MysteryBoxController = require('./controllers/MysteryBoxController'),
+        StickerRewardController = require('./controllers/StickerRewardController'),
 
         Router = require('./util/router'),
         utils = require('./util/utils'),
@@ -107,6 +108,7 @@
         this.homescreenController = new HomescreenController();
         this.profilescreenController = new ProfilescreenController();
         this.mysteryBoxController = new MysteryBoxController();
+        this.stickerRewardController = new StickerRewardController();
         // Communication Controller
         this.TxService = new TxService();
         this.NinjaService = new NinjaService(this.TxService); //communication layer
@@ -293,44 +295,12 @@
 
         backPressTrigger: function() {
 
-            var stickerCooldownElement = document.getElementsByClassName('stickerCooldownContainer')[0];
-            var stickerShopElement = document.getElementsByClassName('stickerShopPageOne')[0];
-            var customStickerHistory = document.getElementsByClassName('customStickerHistory')[0];
-            var showHistoryButton = document.getElementsByClassName('showHistoryButton')[0];
-            var customStickerReadyState = document.getElementsByClassName('customStickerReadyState')[0];
-            var customStickerStatusCheck = document.getElementsByClassName('customStickerStatusCheck')[0];
-            var customStickerUploadScreen = document.getElementsByClassName('customStickerUploadScreen')[0];
-            var uploadParent = document.getElementsByClassName('uploadParent')[0];
             var batteryStreakInfoContainer = document.getElementsByClassName('batteryStreakInfoContainer')[0];
 
-            if (stickerCooldownElement || stickerShopElement) {
-                this.goToNinjaProfilePage();
-            } else if (customStickerHistory && !customStickerHistory.classList.contains('hideClass')) {
-                customStickerHistory.classList.add('hideClass');
-                showHistoryButton.classList.remove('hideClass');
-                if (customStickerUploadScreen && customStickerUploadScreen.classList.contains('hideClass')) {
-                    customStickerUploadScreen.classList.remove('hideClass');
-                }
-                if (uploadParent && uploadParent.classList.contains('hideClass')) {
-                    uploadParent.classList.remove('hideClass');
-                }
-
-            } else if (customStickerReadyState && !customStickerReadyState.classList.contains('hideClass')) {
-                customStickerReadyState.classList.add('hideClass');
-                customStickerHistory.classList.remove('hideClass');
-
-            } else if (customStickerStatusCheck && !customStickerStatusCheck.classList.contains('hideClass')) {
-                customStickerStatusCheck.classList.add('hideClass');
-                customStickerHistory.classList.remove('hideClass');
-                if (customStickerUploadScreen) {
-                    customStickerUploadScreen.classList.remove('hideClass');
-                }
-
-            } else if (!batteryStreakInfoContainer.classList.contains('hideClass'))
+            if (!batteryStreakInfoContainer.classList.contains('hideClass'))
                 batteryStreakInfoContainer.classList.add('hideClass');
             else
                 this.router.back();
-
         },
 
         goToNinjaProfilePage: function() {
@@ -369,7 +339,7 @@
             }
         },
 
-        calculateBatteryChange: function(){
+        calculateBatteryChange: function() {
 
         },
 
@@ -425,8 +395,16 @@
             this.router.route('/mysteryBox', function(data) {
                 self.container.innerHTML = '';
                 self.mysteryBoxController.render(self.container, self, data);
-                utils.toggleBackNavigation(false);
+                utils.toggleBackNavigation(true);
             });
+
+            // Sticker Features :: User For Early Access Stickers and Animated Stickers as of now 
+            this.router.route('/stickerReward', function(data) {
+                self.container.innerHTML = '';
+                self.stickerRewardController.render(self.container, self, data);
+                utils.toggleBackNavigation(true);
+            });
+
 
             var subscriptionCompleted = cacheProvider.getFromCritical('subscriptionCompleted');
             var ftueCompleted = cacheProvider.getFromCritical('ftueCompleted');

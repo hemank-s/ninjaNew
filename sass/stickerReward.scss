@@ -1,0 +1,139 @@
+.stickerRewardContainer {
+    background: linear-gradient(44deg, #A944FA 0%, #6C81F6 100%);
+}
+
+.stickerRewardWrapper {
+    overflow: scroll;
+    height: 100%;
+}
+
+.stickerRewardTitle {
+    color: #fff;
+    font-size: 24px;
+    font-weight: 400;
+    line-height: 24px;
+    text-align: center;
+    margin-bottom: 50px;
+    margin-top: 38px;
+}
+
+.stickerRewardIllustration {
+    background: url(images/earlyAccessSticker.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 201px;
+    height: 201px;
+    margin: 48px auto 24px auto;
+    text-align: center;
+}
+
+.stickerRewardDescription {
+    color: rgba(255, 255, 255, 0.72);
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 21px;
+    text-align: center;
+    padding: 0px 30px;
+    margin-bottom: 36px;
+}
+
+.stickerRewardAction {
+    padding: 12px 24px;
+    color: rgba(0, 0, 0, 0.74);
+    text-transform: uppercase;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 16px;
+    text-align: center;
+    margin: 0px auto;
+    background: #fff;
+    border-radius: 4px;
+    width: 20%;
+}
+
+.stickerDownloadList {
+    padding: 32px 24px 0px 24px;
+}
+
+.stickerDownloadRow {
+    background: #fff;
+    margin-bottom: 8px;
+    padding-right: 8px;
+    padding-left: 8px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.16);
+    border-radius: 4px;
+}
+
+.stickerPackIcon {
+    width: 60px;
+    height: 60px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    display: inline-block;
+    vertical-align: middle;
+    padding-right: 8px;
+}
+
+.stickerPackText {
+    display: inline-block;
+    vertical-align: middle;
+    padding-left: 12px;
+}
+
+.stickerPackName {
+    font-size: 16px;
+    color: #444;
+    font-weight: 400;
+    line-height: 16px;
+    margin-bottom: 8px;
+}
+
+.stickerPackCount {
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 12px;
+    color: #808080;
+}
+
+.stickerPackStatedownloaded {
+    background: url(images/stickerDownloadedIcon.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 30px;
+    height: 30px;
+    display: inline-block;
+    margin-top: 15px;
+    float: right;
+}
+
+.stickerPackStatenotdownloaded {
+    background: url(images/stickerDownloadIcon.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 30px;
+    height: 30px;
+    margin-top: 15px;
+    display: inline-block;
+    float: right;
+}
+
+.stickerRewardSelectTitle {
+    color: #fff;
+    font-size: 24px;
+    font-weight: 400;
+    line-height: 24px;
+    text-align: center;
+    margin-top: 38px;
+}
+
+.stickerRewardSelectSubtitle {
+    margin-top: 8px;
+    color: rgba(255, 255, 255, 0.72);
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 16px;
+    text-align: center;
+    padding: 0px 30px;
+}

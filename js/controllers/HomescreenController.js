@@ -7,6 +7,7 @@
         Constants = require('../../constants.js'),
         cacheProvider = require('../util/cacheProvider'),
         activityModel = require('../models/activityModel'),
+        rewardsModel = require('../models/rewardsModel'),
         ugcModel = require('../models/activityModel'),
 
         HomescreenController = function(options) {
@@ -92,12 +93,7 @@
 
         // Reward Links :: Unlocked Rewards
         if (DOMcache.unlockedRewardListItem.length) {
-            for (var i = 0; i < DOMcache.unlockedRewardListItem.length; i++) {
-                DOMcache.unlockedRewardListItem[i].addEventListener('click', function(event) {
-                    events.publish('update.notif.toast', { show: true, text: 'Unlocked reward has been clicked' });
-                    console.log("unlocked reward clicked");
-                });
-            }
+            rewardsModel.updateNinjaRewardsLinks(App, DOMcache);
         }
 
         // Rewards Link :: Locked Rewards

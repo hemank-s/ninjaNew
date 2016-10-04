@@ -1,0 +1,24 @@
+<div class="stickerRewardWrapper">
+    <div class="stickerRewardHeader">
+        <div class="stickerRewardSelectTitle">{{rewardTitle}}</div>
+        <div class="stickerRewardSelectSubtitle">{{sub}}</div>
+    </div>
+    <div class="stickerRewardBody">
+        <div class="stickerDownloadList">
+            <ul>
+                {{#stickerPacks}}
+                <li class="stickerDownloadRow" data-status="{{downloaded}}" data-catId="{{catId}}" data-rewardid="{{rewardId}}">
+                    <div class="stickerPackIcon"></div>
+                    <div class="stickerPackText">
+                        <div class="stickerPackName">{{name}}</div>
+                        <div class="stickerPackCount">{{nos}} Stickers</div>
+                    </div>
+                    {{#downloaded}}
+                    <div class="stickerPackStatedownloaded"></div>{{/downloaded}} {{^downloaded}}
+                    <div class="stickerPackStatenotdownloaded"></div>{{/downloaded}}
+                </li>
+                {{/stickerPacks}}
+            </ul>
+        </div>
+    </div>
+</div>

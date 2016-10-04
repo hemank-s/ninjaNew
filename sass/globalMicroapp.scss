@@ -517,3 +517,118 @@ a:visited {
 #notifToast.nToast {
     display: block;
 }
+
+
+/*Ninja Loader*/
+
+$bgColor: #fff;
+$jaggedDistance: 16px;
+// boo
+$booSize: $jaggedDistance * 5;
+$booBg: $bgColor;
+$booShadow: darken($booBg,
+5%);
+// face
+$booFaceSize: round($jaggedDistance / 1.3333);
+$booFaceColor: #9b9b9b;
+// ===========
+@keyframes floating {
+    0% {
+        transform: translate3d(0, 0, 0);
+    }
+    45% {
+        transform: translate3d(0, -10%, 0);
+    }
+    55% {
+        transform: translate3d(0, -10%, 0);
+    }
+    100% {
+        transform: translate3d(0, 0, 0);
+    }
+}
+
+@keyframes floatingShadow {
+    0% {
+        transform: scale(1);
+    }
+    45% {
+        transform: scale(.85);
+    }
+    55% {
+        transform: scale(.85);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+// ===========
+@mixin border-bottom-jagged($size,
+$color-outer) {
+    position: relative;
+}
+
+// ===========
+body {
+    background-color: #fff;
+}
+
+.loading {
+    color: $booFaceColor;
+    position: relative;
+    height: 100vh;
+    text-align: center;
+    font-size: $jaggedDistance / 2;
+    h1 {
+        font-size: $jaggedDistance;
+        margin-top: $jaggedDistance;
+    }
+}
+
+.boo-wrapper {
+    width: 100%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    paddig-top: $jaggedDistance * 2;
+    paddig-bottom: $jaggedDistance * 2;
+}
+
+.boo {
+    width: 72px;
+    height: 89px;
+    margin-left: auto;
+    margin-right: auto;
+    border-bottom: 0;
+    overflow: hidden;
+    @include border-bottom-jagged($jaggedDistance,
+    $bgColor);
+    animation: floating 2s ease-in-out infinite;
+    background: url(images/ninjaLoader.png);
+    display: inline-block;
+    -webkit-background-size: contain;
+    -o-background-size: contain;
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+.shadow {
+    width: $booSize - $jaggedDistance;
+    height: $jaggedDistance / 2;
+    background-color: rgba($booShadow, .75);
+    margin-top: $jaggedDistance * 0.5;
+    margin-right: auto;
+    margin-left: auto;
+    border-radius: 50%;
+    animation: floatingShadow 2s ease-in-out infinite;
+}
+
+.ninjaLoaderText {
+    text-align: center;
+    margin-top: 16px;
+    color: rgba(102, 102, 102, 0.64);
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 14px;
+}

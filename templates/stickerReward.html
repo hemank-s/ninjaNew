@@ -1,54 +1,11 @@
-<div id="animate-area" class="topIllustration animate-area"></div>
-<div class="bottomIllustration"></div>
-<div class="stickerRewardsWrapper">
-    <div class="stickerShopPageOne">
-        <div class="stickerRewardHeader">
-            <div class="stickerRewardHeaderImage"></div>
-            <div class="stickerRewardHeadingContainer">
-                <p class="stickerRewardHead">{{title}}</p>
-                <p class="stickerRewardSub">{{stitle}}</p>
-            </div>
-        </div>
-        <!-- Only If applicable -->
-        <div class="stickerRewardLevels"></div>
-        
-        <div class="stickerRewardList">
-            <div class="stickerDownloadList">
-                <ul>
-                    {{#stickerPacks}}
-                    <li class="stickerDownloadRow" data-status="{{downloaded}}" data-catId="{{catId}}" data-rewardid="{{rewardId}}">
-                        <div class="stickerPackIcon"></div>
-                        <!-- <div class="stickerPackIcon"></div> -->
-                        <div class="stickerPackText">
-                            <p class="stickerPackName">{{name}}</p>
-                            <p class="stickerPackCount">{{nos}} Stickers</p>
-                        </div>
-                        <div class="stickerPackStatenotdownloaded"></div>
-                        <!-- {{#downloaded}}
-                            <div class="stickerPackStatedownloaded"></div>
-                        {{/downloaded}}
-                        {{^downloaded}}
-                            <div class="stickerPackStatenotdownloaded"></div>
-                        {{/downloaded}} -->
-                    </li>
-                    {{/stickerPacks}}
-                </ul>
-            </div>
-        </div>
-        <!-- <div class="stickerListEmptyState">
-        </div>
-        <div class="stickerPackBlocked">
-            <div class="stickerBlockedIllustration"></div>
-            <div class="stickerBlockedText"></div>
-        </div> -->
+<div class="stickerRewardWrapper centerToScreenWrapper">
+    <div class="stickerRewardHeader">
+        <div class="stickerRewardTitle">{{rewardTitle}}</div>
+        <div class="stickerRewardSubtitle hideClass"></div>
     </div>
-    <!-- <div class="stickerDownloadPage">
-        <div class="stickerCategoryIcon"></div>
-        <div class="stickerIconPreview">
-            <ul class="stickerPreviewList">
-                <li class="stickerPreviewIcon"></li>
-            </ul>
-        </div>
-        <div class="stickerDownloadButton">Download</div>
-    </div> -->
+    <div class="stickerRewardBody">
+        <div class="stickerRewardIllustration"></div>
+        <div class="stickerRewardDescription">{{rewardSubtitle}}</div>
+        <div class="stickerRewardAction">GET IT</div>
+    </div>
 </div>

@@ -209,6 +209,12 @@
 
         },
 
+        // Sets action bar and status bar color
+        changeBarColors: function(scolor, acolor) {
+            PlatformBridge.setStatusBarColor(scolor);
+            PlatformBridge.setActionBarColor(acolor);
+        },
+
         hashCheck: function(oldHash, newHash) {
 
             var that = this;

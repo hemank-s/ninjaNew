@@ -1,3 +1,5 @@
+/*jshint loopfunc: true */
+
 /**
  * Created by hemanksabharwal on 17/05/15.
  */
@@ -56,28 +58,18 @@
         },
 
         // Update the ninja Click Events For rewards
-        updateNinjaRewardsLinks: function(App) {
+        updateNinjaRewardsLinks: function(App, DOMcache) {
 
             var that = this;
 
-            var allRewards = document.getElementsByClassName('rewardRow');
+            var openRewards = DOMcache.unlockedRewardListItem;
 
-            if (allRewards.length) {
-                console.log(allRewards);
-                for (var i = 0; i < allRewards.length; i++) {
-                    allRewards[i].addEventListener('click', function(event) {
+            if (openRewards.length) {
+                for (var i = 0; i < openRewards.length; i++) {
+                    openRewards[i].addEventListener('click', function(event) {
 
                         // Get Reward related information
                         var rewardState = this.getAttribute('data-state');
-
-                        if (rewardState == Constants.REWARD_STATE.LOCKED) {
-                            that.showRewardStateToast(rewardState);
-                            return;
-                        } else if (rewardState == Constants.REWARD_STATE.DISABLED) {
-                            that.showRewardStateToast(rewardState);
-                            return;
-                        }
-
                         var rewardType = this.getAttribute('data-rewardtype');
                         var rewardRouter = that.getRewardRouter(rewardType);
                         var rewardId = this.getAttribute('data-rewardId');
@@ -85,18 +77,54 @@
                         var data = {};
                         data.rewardId = rewardId;
 
-                        // STUB TO REMOVE 
+                        if (platformSdk.bridgeEnabled) {
+                            App.NinjaService.getRewardDetails(data, function(res) {
+                                console.log(res.data);
+                                App.router.navigateTo(rewardRouter, { "rewardDetails": res.data, "rewardId": rewardId, "rewardRouter": rewardRouter });
+                            }, this);
+                        } else {
+                            var res = {
+                                "hicon": "",
+                                "title": "Early Access Stickers",
+                                "desc": "Get all the hike stickers before anyone else on hike. Ninja mode on!",
+                                "cooldown": 123,
+                                "packs": [{
+                                    "catId": "bengalibabu",
+                                    "copyright": "Copyright \u00a92016 Hike Limited",
+                                    "desc": "Check out these funny Bong Babu stickers!",
+                                    "name": "Bong Babu",
+                                    "new": 1,
+                                    "nos": 30,
+                                    "size": 864090,
+                                    "status": "notdownloaded",
+                                    "act_stickers": [
+                                        "030_benbabu_humkiptenahihai.png",
+                                        "029_benbabu_matlab.png",
+                                        "028_benbabu_bahutburahua.png",
+                                        "027_benbabu_sobshottihai.png",
+                                        "026_benbabu_kisikobolnamat.png"
+                                    ]
+                                }, {
+                                    "catId": "bengalibabu",
+                                    "copyright": "Copyright \u00a92016 Hike Limited",
+                                    "desc": "Check out these funny Bong Babu stickers!",
+                                    "name": "Bong Babu",
+                                    "new": 1,
+                                    "nos": 30,
+                                    "size": 864090,
+                                    "status": "notdownloaded",
+                                    "act_stickers": [
+                                        "030_benbabu_humkiptenahihai.png",
+                                        "029_benbabu_matlab.png",
+                                        "028_benbabu_bahutburahua.png",
+                                        "027_benbabu_sobshottihai.png",
+                                        "026_benbabu_kisikobolnamat.png"
+                                    ]
+                                }]
 
-                        // var GifRes = {'desc':"Now express your feelings with animated GIFs",'hicon':"https://s3-ap-southeast-1.amazonaws.com/hike-giscassets/nixy/GIFSharingHeader.png",'title': 'Animated GIF'};
-                        // App.router.navigateTo(rewardRouter,{ "rewardDetails": GifRes , "rewardId" :rewardId, "rewardRouter":rewardRouter} );
-
-                        // STUB TO REMOVE
-
-                        // Reward Details API :: Send Reward Id As well
-                        App.NinjaService.getRewardDetails(data, function(res) {
-                            console.log(res.data);
-                            App.router.navigateTo(rewardRouter, { "rewardDetails": res.data, "rewardId": rewardId, "rewardRouter": rewardRouter });
-                        }, this);
+                            };
+                            App.router.navigateTo(rewardRouter, { "rewardDetails": res, "rewardId": rewardId, "rewardRouter": rewardRouter });
+                        }
                     });
                 }
             }
