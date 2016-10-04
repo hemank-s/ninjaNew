@@ -7,14 +7,14 @@
     background: linear-gradient(to bottom left, #1D47F5, #33FFE2);
 }
 
-.ninjaProfileBottomContainer{
-	height: 100%;
+.ninjaProfileBottomContainer {
+    height: 100%;
     padding-top: 78px;
     display: block;
 }
 
-.containerProfile{
-	width: 100%;
+.containerProfile {
+    width: 100%;
     height: 100%;
     position: absolute;
     top: 5%;
@@ -98,7 +98,7 @@
     font-size: 12px;
     text-align: center;
     font-weight: 500;
-    color: rgba(255,255,255,0.64);
+    color: rgba(255, 255, 255, 0.64);
     float: left;
 }
 
@@ -113,27 +113,27 @@
     margin-top: 5px;
 }
 
-#sliderTabs{
-	margin-top: 92px; 
+#sliderTabs {
+    margin-top: 92px;
 }
 
-.emptyBorder{
-	border: 3px solid #fff;
+.emptyBorder {
+    border: 3px solid #fff;
     border-radius: 14px;
     width: 7%;
     -webkit-transition: margin 2s;
     transition: margin 0.5s;
-    margin-left: 13.5%; 
-	display: inline-block; 
+    margin-left: 13.5%;
+    display: inline-block;
 }
 
-.redeemedRewardListContainer{
-	margin-left: 20px;
+.redeemedRewardListContainer {
+    margin-left: 20px;
     margin-right: 12px;
     height: 100%;
 }
 
-.ugcTypeIcon{
+.ugcTypeIcon {
     background: url(images/defaultRewardIcon.png);
     background-size: contain;
     background-repeat: no-repeat;
@@ -148,25 +148,24 @@
     margin-left: 12px;
 }
 
-.ugcTypeSubheading{
+.ugcTypeSubheading {
     font-size: 12px;
-    font-weight: 400; 
+    font-weight: 400;
     color: rgba(61, 71, 91, 0.64);
     line-height: 14px;
 }
 
-.ugcTypeHeading{
+.ugcTypeHeading {
     font-size: 14px;
-    font-weight: 500; 
+    font-weight: 500;
     color: #3D475B;
     width: 95%;
     line-height: 16px;
-    margin-bottom:4px;
+    margin-bottom: 4px;
 }
 
-
-.redeemedRewardIcon{
-	background: url(images/defaultRewardIcon.png);
+.redeemedRewardIcon {
+    background: url(images/defaultRewardIcon.png);
     background-size: contain;
     background-repeat: no-repeat;
     width: 26px;
@@ -181,43 +180,50 @@
     vertical-align: middle;
 }
 
-.redeemedRewardSubheading{
-	font-size: 12px;
+.redeemedRewardSubheading {
+    font-size: 12px;
     color: rgba(61, 71, 91, 0.64);
     width: 95%;
     line-height: 14px;
 }
 
-.redeemedRewardRow{
-	margin: 0px 0px 18px 0px; 
+.redeemedRewardRow {
+    margin: 0px 0px 18px 0px;
 }
 
-.ugcTypeRow{
-    margin: 0px 0px 22px 0px; 
+.ugcTypeRow {
+    margin: 0px 0px 22px 0px;
 }
 
-.emptyLine{
-	background: #eee;
-	width: 85%;
-	position: absolute;
-	right: 0px;   
-	height: 1px; 
+.emptyLine {
+    background: #eee;
+    width: 85%;
+    position: absolute;
+    right: 0px;
+    height: 1px;
 }
 
-.redeemedRewardsContainer{
-	margin-top: 16px; 
+.redeemedRewardsContainer {
+    margin-top: 16px;
 }
 
-.ugcTypesContainer{
-    margin-top: 16px;   
+.ugcTypesContainer {
+    margin-top: 16px;
 }
 
-.ugcTypeList{
-    
-}
+.ugcTypeList {}
 
-.ugcListContainer{
+.ugcListContainer {
     margin-left: 20px;
     margin-right: 12px;
     height: 100%;
+}
+
+.mysteryBoxHistoryIcon {
+    background: url(images/mysteryBoxHistoryIcon.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 18px;
+    height: 16px;
+    display: inline-block;
 }

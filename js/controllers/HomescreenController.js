@@ -22,7 +22,9 @@
     HomescreenController.prototype.bind = function(App, data, showNewRewardAnimation) {
 
         var that = this;
+
         var mysteryBoxData = cacheProvider.getFromCritical('ninjaMysteryBoxData');
+        var profileData = cacheProvider.getFromCritical('ninjaProfileData');
 
         var DOMcache = {
             unlockedReward: document.getElementsByClassName('unlockedReward')[0],
@@ -38,17 +40,13 @@
             unlockedRewardListItem: document.getElementsByClassName('unlockedRewardListItem'),
             lockedRewardListItem: document.getElementsByClassName('lockedRewardListItem'),
             ninjaDp: document.getElementsByClassName('ninjaDp')[0],
-            mysteryBoxAvailable: document.getElementsByClassName('mysteryBoxAvailable')[0]
+            mysteryBoxAvailable: document.getElementsByClassName('mysteryBoxAvailable')[0],
+            streakStatus: document.getElementsByClassName('streakStatus')[0],
         };
 
-        if (mysteryBoxData.mstatus == 'active') {
-            DOMcache.mysteryBoxAvailable.classList.remove('hideClass');
-            DOMcache.mysteryBoxAvailable.addEventListener('click', function(event) {
-                App.router.navigateTo('/mysteryBox', mysteryBoxData);
-            });
-        } else {
-            DOMcache.mysteryBoxAvailable.classList.add('hideClass');
-        }
+        // Show Hide Mystery Box Based on data
+        that.checkMysteryBoxStatus(mysteryBoxData, DOMcache, App);
+        that.checkBatteryStatus(profileData, DOMcache);
 
         if (showNewRewardAnimation) {
             that.newRewardUnlockAnimation(DOMcache);
@@ -114,6 +112,39 @@
         }
 
         that.updateIcons(DOMcache, data);
+
+    };
+
+    HomescreenController.prototype.checkMysteryBoxStatus = function(mysteryBoxData, DOMcache, App) {
+
+        if (platformSdk.bridgeEnabled) {
+            if (mysteryBoxData.mstatus == 'active') {
+                DOMcache.mysteryBoxAvailable.classList.remove('hideClass');
+                DOMcache.mysteryBoxAvailable.addEventListener('click', function(event) {
+                    App.router.navigateTo('/mysteryBox', mysteryBoxData);
+                });
+            } else {
+                DOMcache.mysteryBoxAvailable.classList.add('hideClass');
+            }
+        }
+
+    };
+
+    HomescreenController.prototype.checkBatteryStatus = function(pdata, DOMcache, App) {
+
+        console.log(pdata);
+        if (!platformSdk.bridgeEnabled) {
+            pdata = { "maxBattery": 7, "battery": 2, "hike_version": "4.2.2.2", "rewards_hash": "1474970960", "status": "active", "streak": 10 };
+        }
+        if (pdata.battery < pdata.maxBattery / 2) {
+            console.log("Show indication always");
+            DOMcache.streakStatus.innerHTML = 'Life in danger';
+            DOMcache.streakStatus.classList.add('streakDanger');
+        } else {
+            console.log("Show status as healthy");
+            DOMcache.streakStatus.innerHTML = 'Healthy';
+            DOMcache.streakStatus.classList.add('streakHealthy');
+        }
 
     };
 

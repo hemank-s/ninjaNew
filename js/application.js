@@ -428,7 +428,7 @@
             var ftueCompleted = cacheProvider.getFromCritical('ftueCompleted');
 
             if (!subscriptionCompleted || !ftueCompleted) {
-                self.router.navigateTo('/');
+                self.router.navigateTo('/home');
             } else {
                 self.NinjaService.getNinjaProfile(function(res) {
                     console.log(res.data);

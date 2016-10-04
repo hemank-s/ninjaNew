@@ -108,11 +108,18 @@
     ProfilescreenController.prototype.render = function(ctr, App, data) {
 
         var that = this;
+
         var ninjaStats = cacheProvider.getFromCritical('ninjaStats');
         var ninjaUgc = cacheProvider.getFromCritical('ninjaUgc');
+        var ninjaMysteryBoxData = cacheProvider.getFromCritical('ninjaMysteryBoxData');
+        var boxHistory = [];
         
         data.ugcList = ninjaUgc;
         console.log("reward data recieved is ", data);
+
+        if(ninjaMysteryBoxData && ninjaMysteryBoxData.history.length > 0){
+            boxHistory = ninjaMysteryBoxData.history;
+        }
 
         if(!platformSdk.bridgeEnabled){
             ninjaStats = {  'chatThemes': { 'rec': 10, 'sent': 10 }, 'files': { 'rec': 155, 'sent': 139 }, 'messages': { 'rec': 1203, 'sent': 187 }, 'statusUpdates': { 'count': 10 }, 'stickers': { 'rec': 133, 'sent': 17 } } ;
@@ -122,7 +129,7 @@
         
         that.el = document.createElement('div');
         that.el.className = 'profileScreenContainer animation_fadein noselect';
-        that.el.innerHTML = Mustache.render(unescape(that.template), {ninjaRedeemedRewards: data.rewardsData.redeemedRewards, ninjaActivityData:ninjaStats, ninjaUgcData:ninjaUgc});
+        that.el.innerHTML = Mustache.render(unescape(that.template), {ninjaMysteryBoxRewards: boxHistory,ninjaRedeemedRewards: data.rewardsData.redeemedRewards, ninjaActivityData:ninjaStats, ninjaUgcData:ninjaUgc});
         ctr.appendChild(that.el);
         events.publish('update.loader', { show: false });
         that.bind(App, data);

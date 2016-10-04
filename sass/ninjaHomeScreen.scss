@@ -77,15 +77,22 @@
     background: url(images/streakIcon.png);
     background-size: contain;
     background-repeat: no-repeat;
-    width: 36px;
-    height: 36px;
-    display: inline-flex;
+    width: 14px;
+    height: 12px;
+    display: inline-block;
     vertical-align: middle;
-    float: left;
+}
+
+.streakStatusContainer {
+    display: inline-block;
+    vertical-align: bottom;
 }
 
 .streakValue {
-    @include fontStyle(28px, 500, #FFFFFF, 32px);
+    font-size: 48px;
+    color: #FFFFFF;
+    line-height: 32px;
+    font-weight: 500;
     display: inline-flex;
     vertical-align: middle;
 }
@@ -100,8 +107,31 @@
 }
 
 span.streakDef {
-    @include fontStyle(11px, 300, #FFFFFF, 13px);
-    margin-top: 15px;
+    font-size: 12px;
+    color: #FFFFFF;
+    line-height: 13px;
+    font-weight: 400;
+    margin-left: 6px;
+    vertical-align: middle;
+}
+
+.streakStatus {
+    font-size: 9px;
+    font-weight: 500;
+    color: #fff;
+    padding: 2px 9px;
+    text-align: center;
+    border-radius: 4px;
+    display: block;
+    margin-top: 7px;
+}
+
+.streakHealthy {
+    background: #7ED321;
+}
+
+.streakDanger {
+    background: #FF6D5C;
 }
 
 .ninjaHomeContainer {
@@ -561,14 +591,15 @@ ul.unlockedRewardList > li.unlockedRewardListItem {
     color: #3D475B;
 }
 
-.mysteryBoxAvailable{
+.mysteryBoxAvailable {
     background: url(images/mysteryBox_Gift.png);
     background-size: contain;
     background-repeat: no-repeat;
     width: 30px;
     height: 30px;
-    display: inline-block ;
+    display: inline-block;
 }
+
 
 /*
 
@@ -737,23 +768,23 @@ ul.unlockedRewardList > li.unlockedRewardListItem {
     color: #3D475B;
     font-weight: 300;
     margin-bottom: 14px;
-    display: inline-block; 
-    vertical-align:super;
+    display: inline-block;
+    vertical-align: super;
 }
 
-.statValueLeft{
+.statValueLeft {
     background-image: linear-gradient(44deg, #FA4454 0%, #F6876C 100%);
     border-radius: 92px;
     width: 3px;
-    height: 32px; 
-    display: inline-block;  
+    height: 32px;
+    display: inline-block;
 }
 
-.statValueRight{
+.statValueRight {
     background-image: linear-gradient(44deg, #B52E84 0%, #7026FF 100%);
     border-radius: 92px;
     width: 3px;
-    height: 32px; 
+    height: 32px;
     display: inline-block;
 }
 

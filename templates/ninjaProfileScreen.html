@@ -37,9 +37,21 @@
                                                         </div>
                                                     </li>
                                                     {{/ninjaRedeemedRewards}}
-                                                    {{^ninjaRedeemedRewards}}
+                                                    {{#ninjaMysteryBoxRewards}}
+                                                    <li class="redeemedRewardRow lockedRewardListItem" data-rewardId="{{id}}" data-state="{{state}}" data-rewardtype="{{type}}">
+                                                        <div class="redeemedRewardIcon"></div>
+                                                        <div class="redeemedRewardDetails">
+                                                            <p class="rewardHeading {{^state}}{{#lockedGreyout}}rewardHeadingLocked{{/lockedGreyout}}{{/state}}">{{title}}</p>
+                                                            <p class="redeemedRewardSubheading {{^state}}{{#lockedGreyout}}rewardSubheadingLocked{{/lockedGreyout}}{{/state}}">{{stitle}}</p>
+                                                        </div>
+                                                        <div class="rewardStreakWrapper">
+                                                            <div class="mysteryBoxHistoryIcon"></div>
+                                                        </div>
+                                                    </li>
+                                                    {{/ninjaMysteryBoxRewards}}
+                                                    {{^ninjaMysteryBoxRewards}}{{^ninjaRedeemedRewards}}
                                                     <p class="align-center">No rewards redeemed</p>
-                                                    {{/ninjaRedeemedRewards}}
+                                                    {{/ninjaRedeemedRewards}}{{/ninjaMysteryBoxRewards}}
                                                 </ul>
                                             </div>
                                         </div>
