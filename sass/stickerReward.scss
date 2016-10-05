@@ -119,6 +119,17 @@
     float: right;
 }
 
+.stickerPackStatecooldown {
+    background: url(images/stickerLockedIcon.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 30px;
+    height: 30px;
+    display: inline-block;
+    margin-top: 15px;
+    float: right;
+}
+
 .stickerRewardSelectTitle {
     color: #fff;
     font-size: 24px;
@@ -136,4 +147,84 @@
     line-height: 16px;
     text-align: center;
     padding: 0px 30px;
+}
+
+.stickerPackViewContainer {
+    display: table-cell;
+    vertical-align: middle;
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    background: rgba(0, 0, 0, 0.42);
+}
+
+.stickerPackViewWrapper {
+    position: absolute;
+    width: 77%;
+    height: 71%;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    background: #FFF;
+    -webkit-border-radius: 4px;
+    border-radius: 4px;
+    box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.5);
+    padding: 7%;
+}
+
+.stickerPackTitle {
+    @include fontStyle(16px, 400, #2e2e2e, 16px);
+    height: 4%;
+}
+
+.stickerQuantity {
+    @include fontStyle(12px, 400, #808080, 12px);
+    margin-top: 8px;
+    height: 4%;
+}
+
+.allStickerWrapper {
+    margin: 10% auto 8% auto;
+    overflow: scroll;
+    height: 68%
+}
+
+.stickerList {
+    height: 100%;
+}
+
+.stickerRow {
+    display: inline-flex;
+    width: 32.3%;
+    margin-bottom: 6%;
+    height: 29%;
+}
+
+.stickerIcon {
+    background: url(data:image/png;base64,R0lGODlhFAAUAIAAAP///wAAACH5BAEAAAAALAAAAAAUABQAAAIRhI+py+0Po5y02ouz3rz7rxUAOw==);
+    background-size: contain;
+    background-repeat: no-repeat;
+    text-align: center;
+    margin: 0px auto;
+    width: 72px;
+    height: 100%;
+}
+
+.stickerPackActionButtons {
+    float: right;
+}
+
+.stickerActionCancel {
+    @include fontStyle(14px, 500, #B0B0B0, 12px);
+    padding: 12px 12px;
+    display: inline-block;
+    text-transform: uppercase;
+}
+
+.stickerActionDownload {
+    display: inline-block;
+    padding: 12px 12px;
+    @include fontStyle(14px, 500, #5252F6, 12px);
+    text-transform: uppercase;
 }

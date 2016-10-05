@@ -1,16 +1,19 @@
-<div id="animate-area" class="topIllustration animate-area"></div>
-<div class="bottomIllustration"></div>
-<div class="stickerPreviewWrapper">
-	<div class="selectedSticker"></div>
-	<div class="allStickerWrapper">
-		<ul class="stickerList">
-			{{#stickers}}
-				<li class="stickerRow">
-					<div class="stickerIcon"></div>
-				</li>
-			{{/stickers}}
-		</ul>
-	</div>
+<div class="stickerPackViewContainer">
+    <div class="stickerPackViewWrapper">
+        <div class="stickerPackTitle">{{name}}</div>
+        <div class="stickerQuantity">{{nos}} stickers</div>
+        <div class="allStickerWrapper">
+            <ul class="stickerList">
+                {{#stickers}}
+                <li class="stickerRow">
+                    <div class="stickerIcon"></div>
+                </li>
+                {{/stickers}}
+            </ul>
+        </div>
+        <div class="stickerPackActionButtons">
+            <div class="stickerActionCancel">Cancel</div>
+            <div data-rewardId="{{rewardId}}" data-cooldown="{{cooldown}}" class="stickerActionDownload">Download</div>
+        </div>
+    </div>
 </div>
-
-<div data-rewardId = "{{rewardId}}" class="downloadStickerPackButton">Get Sticker Pack</div>

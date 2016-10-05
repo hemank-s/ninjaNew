@@ -100,6 +100,15 @@
             else this.ninjaService.communicate(params);
         },
 
+        recallRewardDetails: function(data, fn, x) {
+            var params = {
+                'url': URL.api_location + '/rewards/' + data.rewardId + '?random=' + Math.round(Math.random() * 999999999),
+                'type': 'GET'
+            };
+            if (typeof fn === "function") return this.ninjaService.communicate(params, fn, x);
+            else this.ninjaService.communicate(params);
+        },
+
         uploadCustomStickerData: function(data, fn, x) {
             console.log(data);
             var params = {

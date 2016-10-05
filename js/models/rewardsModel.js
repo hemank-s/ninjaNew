@@ -85,43 +85,9 @@
                         } else {
                             var res = {
                                 "hicon": "",
-                                "title": "Early Access Stickers",
-                                "desc": "Get all the hike stickers before anyone else on hike. Ninja mode on!",
-                                "cooldown": 123,
-                                "packs": [{
-                                    "catId": "bengalibabu",
-                                    "copyright": "Copyright \u00a92016 Hike Limited",
-                                    "desc": "Check out these funny Bong Babu stickers!",
-                                    "name": "Bong Babu",
-                                    "new": 1,
-                                    "nos": 30,
-                                    "size": 864090,
-                                    "status": "notdownloaded",
-                                    "act_stickers": [
-                                        "030_benbabu_humkiptenahihai.png",
-                                        "029_benbabu_matlab.png",
-                                        "028_benbabu_bahutburahua.png",
-                                        "027_benbabu_sobshottihai.png",
-                                        "026_benbabu_kisikobolnamat.png"
-                                    ]
-                                }, {
-                                    "catId": "bengalibabu",
-                                    "copyright": "Copyright \u00a92016 Hike Limited",
-                                    "desc": "Check out these funny Bong Babu stickers!",
-                                    "name": "Bong Babu",
-                                    "new": 1,
-                                    "nos": 30,
-                                    "size": 864090,
-                                    "status": "notdownloaded",
-                                    "act_stickers": [
-                                        "030_benbabu_humkiptenahihai.png",
-                                        "029_benbabu_matlab.png",
-                                        "028_benbabu_bahutburahua.png",
-                                        "027_benbabu_sobshottihai.png",
-                                        "026_benbabu_kisikobolnamat.png"
-                                    ]
-                                }]
-
+                                "title": "GIF Sharing",
+                                "desc": "Another way of expressing inside chats.",
+                                "sanctioned": false
                             };
                             App.router.navigateTo(rewardRouter, { "rewardDetails": res, "rewardId": rewardId, "rewardRouter": rewardRouter });
                         }

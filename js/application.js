@@ -6,6 +6,7 @@
         ProfilescreenController = require('./controllers/ProfilescreenController'),
         MysteryBoxController = require('./controllers/MysteryBoxController'),
         StickerRewardController = require('./controllers/StickerRewardController'),
+        ExclusiveFeatureController = require('./controllers/ExclusiveFeatureController'),
 
         Router = require('./util/router'),
         utils = require('./util/utils'),
@@ -19,11 +20,13 @@
         NinjaService = require('./util/ninjaServices'),
         Constants = require('../constants.js');
 
-    // Notifications Toast
     var toastTime = null;
-
     var notifToast = document.getElementById('notifToast');
+
+    // Notifications Toast
     var nToastObject = events.subscribe('update.notif.toast', function(params) {
+
+
         clearTimeout(toastTime);
         notifToast.innerHTML = params.text;
         if (params.show) {
@@ -39,6 +42,12 @@
     var loader = document.getElementById('loader');
     var loadObject = events.subscribe('update.loader', function(params) {
         loader.toggleClass('loading', params.show);
+    });
+
+    var heartActive = document.getElementsByClassName('heart')[0];
+
+    heartActive.addEventListener('click', function(event) {
+        heartActive.classList.add('_active');
     });
 
     // Tap State Events :: Touch Start And Touch End
@@ -109,6 +118,7 @@
         this.profilescreenController = new ProfilescreenController();
         this.mysteryBoxController = new MysteryBoxController();
         this.stickerRewardController = new StickerRewardController();
+        this.exclusiveFeatureController = new ExclusiveFeatureController();
         // Communication Controller
         this.TxService = new TxService();
         this.NinjaService = new NinjaService(this.TxService); //communication layer
@@ -294,13 +304,7 @@
         },
 
         backPressTrigger: function() {
-
-            var batteryStreakInfoContainer = document.getElementsByClassName('batteryStreakInfoContainer')[0];
-
-            if (!batteryStreakInfoContainer.classList.contains('hideClass'))
-                batteryStreakInfoContainer.classList.add('hideClass');
-            else
-                this.router.back();
+            this.router.back();
         },
 
         goToNinjaProfilePage: function() {
@@ -405,6 +409,11 @@
                 utils.toggleBackNavigation(true);
             });
 
+            this.router.route('/exclusiveFeature', function(data) {
+                self.container.innerHTML = '';
+                self.exclusiveFeatureController.render(self.container, self, data);
+                utils.toggleBackNavigation(true);
+            });
 
             var subscriptionCompleted = cacheProvider.getFromCritical('subscriptionCompleted');
             var ftueCompleted = cacheProvider.getFromCritical('ftueCompleted');
