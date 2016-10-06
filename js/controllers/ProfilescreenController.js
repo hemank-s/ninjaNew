@@ -117,7 +117,15 @@
     ProfilescreenController.prototype.updateLinks = function (DOMcache,data, App){
         
         // UGC LINKS
-        
+            if (DOMcache.ugcTypeRow.length) {
+                for (var i = 0; i < DOMcache.ugcTypeRow.length; i++) {
+                    DOMcache.ugcTypeRow[i].addEventListener('click', function(event) {
+
+                        // Get Reward related information
+                        var ugcType = this.getAttribute('data-type');
+                    });
+                }
+            }
         // REWARD LINKS
             if (DOMcache.redeemedRewardRow.length) {
                 for (var i = 0; i < DOMcache.redeemedRewardRow.length; i++) {

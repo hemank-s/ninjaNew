@@ -131,6 +131,37 @@ $gap: 100px;
     .rewardStreakValue {
         font-size: 12px !important;
     }
+    .ugcTypeIcon {
+        width: 24px !important;
+        height: 24px !important;
+    }
+    .ugcTypeHeading {
+        font-size: 12px !important;
+        width: 91% !important;
+        line-height: 14px !important;
+        margin-bottom: 2px !important;
+    }
+    .ugcTypeSubheading {
+        font-size: 10px !important;
+    }
+    .statTypeContainer {
+        padding: 18px 18px 0 18px !important;
+    }
+    .statHeading {
+        font-size: 12px !important;
+        margin-bottom: 16px !important;
+    }
+    .statBoxWrapper {
+        margin-bottom: 24px !important;
+    }
+    .statValue {
+        font-size: 28px !important;
+        margin-bottom: 12px !important;
+    }
+    .statText {
+        font-size: 10px !important;
+        margin-top: 4px !important;
+    }
 }
 
 @media screen and (min-width: 300px) and (max-width: 320px) {
@@ -261,6 +292,37 @@ $gap: 100px;
     .rewardStreakValue {
         font-size: 12px !important;
     }
+    .ugcTypeIcon {
+        width: 24px !important;
+        height: 24px !important;
+    }
+    .ugcTypeHeading {
+        font-size: 12px !important;
+        width: 91% !important;
+        line-height: 14px !important;
+        margin-bottom: 2px !important;
+    }
+    .ugcTypeSubheading {
+        font-size: 10px !important;
+    }
+    .statTypeContainer {
+        padding: 18px 18px 0 18px !important;
+    }
+    .statHeading {
+        font-size: 12px !important;
+        margin-bottom: 16px !important;
+    }
+    .statBoxWrapper {
+        margin-bottom: 24px !important;
+    }
+    .statValue {
+        font-size: 28px !important;
+        margin-bottom: 12px !important;
+    }
+    .statText {
+        font-size: 10px !important;
+        margin-top: 4px !important;
+    }
 }
 
 @media screen and (min-width: 321px) and (max-width: 340px) {
@@ -352,6 +414,118 @@ $gap: 100px;
     }
 }
 
+@media screen and (min-width: 321px) and (max-width: 330px) {
+    .comp__tabs .comp__tab,
+    .comp__tabs .selected {
+        font-size: 11px !important;
+    }
+    .redeemedRewardsContainer {
+        margin-top: 14px !important;
+    }
+    .redeemedRewardListContainer {
+        margin-left: 14px !important;
+        margin-right: 14px !important;
+    }
+    .redeemedRewardRow {
+        margin: 0px 0px 18px 0px !important;
+    }
+    .redeemedRewardIcon {
+        width: 25px !important;
+        height: 25px !important;
+    }
+    .redeemedRewardDetails {
+        margin-left: 4px !important;
+    }
+    .rewardHeading {
+        font-size: 11px !important;
+    }
+    .redeemedRewardSubheading {
+        font-size: 10px !important;
+        width: 91% !important;
+    }
+    .rewardStreakIcon {
+        width: 12px !important;
+        height: 10px !important;
+    }
+    .rewardStreakValue {
+        font-size: 12px !important;
+    }
+    .statTypeContainer {
+        padding: 18px 18px 0 18px !important;
+    }
+    .statHeading {
+        font-size: 12px !important;
+        margin-bottom: 16px !important;
+    }
+    .statBoxWrapper {
+        margin-bottom: 24px !important;
+    }
+    .statValue {
+        font-size: 28px !important;
+        margin-bottom: 12px !important;
+    }
+    .statText {
+        font-size: 10px !important;
+        margin-top: 4px !important;
+    }
+}
+
+@media screen and (min-width: 331px) and (max-width: 340px) {
+    .comp__tabs .comp__tab,
+    .comp__tabs .selected {
+        font-size: 12px !important;
+    }
+    .redeemedRewardsContainer {
+        margin-top: 16px !important;
+    }
+    .redeemedRewardListContainer {
+        margin-left: 16px !important;
+        margin-right: 16px !important;
+    }
+    .redeemedRewardRow {
+        margin: 0px 0px 20px 0px !important;
+    }
+    .redeemedRewardIcon {
+        width: 26px !important;
+        height: 26px !important;
+    }
+    .redeemedRewardDetails {
+        margin-left: 5px !important;
+    }
+    .rewardHeading {
+        font-size: 13px !important;
+    }
+    .redeemedRewardSubheading {
+        font-size: 11px !important;
+        width: 91% !important;
+    }
+    .rewardStreakIcon {
+        width: 14px !important;
+        height: 12px !important;
+    }
+    .rewardStreakValue {
+        font-size: 13px !important;
+    }
+    .statTypeContainer {
+        padding: 20px 20px 0 20px !important;
+    }
+    .statHeading {
+        font-size: 13px !important;
+        margin-bottom: 18px !important;
+    }
+    .statBoxWrapper {
+        margin-bottom: 26px !important;
+    }
+    .statValue {
+        font-size: 30px !important;
+        margin-bottom: 14px !important;
+    }
+    .statText {
+        font-size: 11px !important;
+        margin-top: 6px !important;
+    }
+}
+
 @media screen and (min-width: 341px) and (max-width: 360px) {
     /***** Subscribe Screen *****/
     .subscribeScreen {
@@ -397,6 +571,41 @@ $gap: 100px;
     .winnerIcon {
         width: 65px !important;
         height: 65px !important;
+    }
+    .comp__tabs .comp__tab,
+    .comp__tabs .selected {
+        font-size: 12px !important;
+    }
+    .redeemedRewardsContainer {
+        margin-top: 16px !important;
+    }
+    .redeemedRewardListContainer {
+        margin-left: 16px !important;
+        margin-right: 16px !important;
+    }
+    .redeemedRewardRow {
+        margin: 0px 0px 20px 0px !important;
+    }
+    .redeemedRewardIcon {
+        width: 26px !important;
+        height: 26px !important;
+    }
+    .redeemedRewardDetails {
+        margin-left: 5px !important;
+    }
+    .rewardHeading {
+        font-size: 13px !important;
+    }
+    .redeemedRewardSubheading {
+        font-size: 11px !important;
+        width: 91% !important;
+    }
+    .rewardStreakIcon {
+        width: 14px !important;
+        height: 12px !important;
+    }
+    .rewardStreakValue {
+        font-size: 13px !important;
     }
 }
 

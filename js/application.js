@@ -444,7 +444,7 @@
 
             if (!subscriptionCompleted || !ftueCompleted) {
 
-                self.router.navigateTo('/');
+                self.router.navigateTo('/home');
                 //self.router.navigateTo('/ugc', { type: Constants.UGC_TYPE.JFL });
             } else {
                 self.NinjaService.getNinjaProfile(function(res) {

@@ -146,6 +146,7 @@
                 DOMcache.mysteryBoxAvailable.classList.remove('hideClass');
                 DOMcache.mysteryBoxAvailable.getElementsByClassName('mBoxToastIconContainer')[0].getElementsByClassName('mysteryBoxToastIconBig')[0].classList.add('spinMysteryBoxBig');
                 DOMcache.mysteryBoxAvailable.getElementsByClassName('mBoxToastIconContainer')[0].getElementsByClassName('mysteryBoxToastIconSmall')[0].classList.add('spinMysteryBoxSmall');
+
                 DOMcache.mysteryBoxAvailable.addEventListener('click', function(event) {
                     App.router.navigateTo('/mysteryBox', mysteryBoxData);
                 });

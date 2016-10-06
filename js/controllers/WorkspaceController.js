@@ -31,7 +31,7 @@
 
             var target = evt.target;
 
-            if (target.classList.contains('cta')) {
+            if (target.classList.contains('subscribeCta')) {
 
                 if (target.getAttribute('data-screen') == "subscribe") {
 
