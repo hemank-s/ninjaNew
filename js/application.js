@@ -7,6 +7,8 @@
         MysteryBoxController = require('./controllers/MysteryBoxController'),
         StickerRewardController = require('./controllers/StickerRewardController'),
         ExclusiveFeatureController = require('./controllers/ExclusiveFeatureController'),
+        UgcController = require('./controllers/UgcController'),
+
 
         Router = require('./util/router'),
         utils = require('./util/utils'),
@@ -119,6 +121,7 @@
         this.mysteryBoxController = new MysteryBoxController();
         this.stickerRewardController = new StickerRewardController();
         this.exclusiveFeatureController = new ExclusiveFeatureController();
+        this.ugcController = new UgcController();
         // Communication Controller
         this.TxService = new TxService();
         this.NinjaService = new NinjaService(this.TxService); //communication layer
@@ -415,11 +418,17 @@
                 utils.toggleBackNavigation(true);
             });
 
+            this.router.route('/ugc', function(data) {
+                self.container.innerHTML = '';
+                self.ugcController.render(self.container, self, data);
+                utils.toggleBackNavigation(false);
+            });
+
             var subscriptionCompleted = cacheProvider.getFromCritical('subscriptionCompleted');
             var ftueCompleted = cacheProvider.getFromCritical('ftueCompleted');
 
             if (!subscriptionCompleted || !ftueCompleted) {
-                self.router.navigateTo('/home');
+                self.router.navigateTo('/ugc', { type: Constants.UGC_TYPE.QUOTE });
             } else {
                 self.NinjaService.getNinjaProfile(function(res) {
                     cacheProvider.setInCritical('userProfileData', res.data);

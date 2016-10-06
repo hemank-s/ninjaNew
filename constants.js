@@ -54,6 +54,13 @@
 
         INVOKE_MODE_APP_START: 1,
         INVOKE_MODE_THREE_DOT: 2,
+        MAX_LENGTH_QUOTE: 10,
+
+        UGC_TYPE: {
+            JFL: 0,
+            QUOTE: 1,
+            FACT: 2
+        }
 
 
     };

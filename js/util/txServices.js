@@ -58,9 +58,15 @@
                         } else {
                             console.log(res);
                             if (res.stat == 'fail') {
-                                events.publish('update.loader', { show: false });
-                                console.log(res.data.reason);
-                                platformSdk.ui.showToast(res.data.reason);
+
+                                if (params.url.indexOf('/ugc/type') != -1) {
+                                    fn.call(x, res);
+
+                                } else {
+                                    events.publish('update.loader', { show: false });
+                                    console.log(res.data.reason);
+                                    platformSdk.ui.showToast(res.data.reason);
+                                }
                             }
                         }
                     } else {

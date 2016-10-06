@@ -8,14 +8,14 @@
 
 
 .sidebar {
-  width: 60%;
-  float: left;
-  margin: 0 2% 0 0;
-  @include bp-small {
-    width: 100%;
-    float: none;
-    margin: 0;
-  }
+width: 60%;
+float: left;
+margin: 0 2% 0 0;
+@include bp-small {
+width: 100%;
+float: none;
+margin: 0;
+}
 }
 
 */
@@ -44,15 +44,15 @@
 ANIMATION MIXIN
 
 @include keyframes(slide-down) {
-  0% { opacity: 1; }
-  90% { opacity: 0; }
+0% { opacity: 1; }
+90% { opacity: 0; }
 }
 
 .element {
-  width: 100px;
-  height: 100px;
-  background: black;
-  @include animation('slide-down 5s 3');
+width: 100px;
+height: 100px;
+background: black;
+@include animation('slide-down 5s 3');
 }
 
 */
@@ -108,4 +108,42 @@ ANIMATION MIXIN
     background: -o-linear-gradient(bottom right, $stCol, $endCol);
     background: -moz-linear-gradient(bottom right, $stCol, $endCol);
     background: linear-gradient(to bottom right, $stCol, $endCol);
+}
+
+@mixin mysteryBoxStyling($spinnerDim) {
+    .wheel:before {
+        @if $spinnerDim==225px {
+            border: 18px solid rgba(0, 0, 0, 0.1);
+        }
+        @if $spinnerDim==250px {
+            border: 20px solid rgba(0, 0, 0, 0.1);
+        }
+        @if $spinnerDim==275px {
+            border: 22px solid rgba(0, 0, 0, 0.1);
+        }
+        @if $spinnerDim==300px {
+            border: 24px solid rgba(0, 0, 0, 0.1);
+        }
+    }
+    .wheel-wrapper {
+        height: $spinnerDim;
+        width: $spinnerDim;
+        margin: $spinnerDim/-2;
+    }
+    .wheel {
+        height: $spinnerDim;
+        width: $spinnerDim;
+        margin: $spinnerDim/-2;
+    }
+    .wheel:after {
+        height: $spinnerDim/4;
+        width: $spinnerDim/4;
+        margin: $spinnerDim/-8;
+    }
+    .wheel .cutter {
+        clip: rect(0, $spinnerDim/2, $spinnerDim/2, 0);
+    }
+    .wheel .cutter .slicer {
+        clip: rect(0, $spinnerDim/2, $spinnerDim/2, 0);
+    }
 }

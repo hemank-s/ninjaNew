@@ -143,11 +143,14 @@
 
                 ctaWinner.addEventListener('click', function() {
 
-                    mysteryBoxScr_title.classList.add('hideClass');
-                    mysteryBoxScr_subtitle.classList.add('hideClass');
+                    mysteryBoxScr_title.classList.remove('retryTitle');
+                    mysteryBoxScr_subtitle.classList.remove('retrySubtitle');
+                    mysteryBoxScr_title.classList.add('animation_fadeout');
+                    mysteryBoxScr_subtitle.classList.add('animation_fadeout');
 
-                    this.classList.add('slideDownCtaCls');
-                    previousWinnerRow.classList.add('slideUpCtaCls');
+                    this.classList.remove('slideUpBtn_lessCls');
+                    this.classList.add('slideUpBtn_highCls');
+                    previousWinnerRow.classList.add('slideUpCtaWinnerRowCls');
 
                 });
             }

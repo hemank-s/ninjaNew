@@ -1,9 +1,93 @@
 /*   Screen Resolution - 120   */
 
 $gap: 100px;
-@media screen and (max-width: 320px) {
+@media screen and (max-width: 299px) {
+    .infoDetails {
+        width: 299px - $gap;
+    }
+    @include mysteryBoxStyling(225px);
+    .spinScrTitle {
+        margin-top: 120px !important;
+    }
+    .spinScrSubtitle {
+        margin-top: 160px !important;
+    }
+    .mysteryBoxScr_title {
+        font-size: 24px !important;
+    }
+    .mysteryBoxScr_subtitle {
+        font-size: 12px !important;
+    }
+    .spin {
+        font-size: 12px !important;
+        top: 44% !important;
+        left: 39% !important;
+    }
+    .ctaWinner {
+        font-size: 12px !important;
+    }
+    .mysteryBoxRetryIcon {
+        width: 140px !important;
+        height: 130px !important;
+        margin: 0px auto 50px auto !important;
+    }
+    .previousWinnerHeading {
+        font-size: 12px !important;
+        padding: 24px 24px !important;
+    }
+    .previousWinnerRow {
+        padding-bottom: 24px !important;
+    }
+    .winnerName {
+        font-size: 14px !important;
+    }
+    .winnerIcon {
+        width: 60px !important;
+        height: 60px !important;
+    }
+}
+
+@media screen and (min-width: 300px) and (max-width: 320px) {
     .infoDetails {
         width: 300px - $gap;
+    }
+    @include mysteryBoxStyling(250px);
+    .spinScrSubtitle {
+        margin-top: 160px !important;
+    }
+    .spinScrTitle {
+        margin-top: 120px !important;
+    }
+    .mysteryBoxScr_title {
+        font-size: 26px !important;
+    }
+    .mysteryBoxScr_subtitle {
+        font-size: 14px !important;
+    }
+    .ctaWinner {
+        font-size: 14px !important;
+    }
+    .spin {
+        left: 40% !important;
+    }
+    .mysteryBoxRetryIcon {
+        width: 140px !important;
+        height: 130px !important;
+        margin: 25px auto 25px auto !important;
+    }
+    .previousWinnerHeading {
+        font-size: 12px !important;
+        padding: 24px 24px !important;
+    }
+    .previousWinnerRow {
+        padding-bottom: 24px !important;
+    }
+    .winnerName {
+        font-size: 14px !important;
+    }
+    .winnerIcon {
+        width: 60px !important;
+        height: 60px !important;
     }
 }
 
@@ -11,11 +95,69 @@ $gap: 100px;
     .infoDetails {
         width: 320px - $gap;
     }
+    @include mysteryBoxStyling(250px);
+    .spinScrSubtitle {
+        margin-top: 160px !important;
+    }
+    .spinScrTitle {
+        margin-top: 120px !important;
+    }
+    .mysteryBoxScr_title {
+        font-size: 26px !important;
+    }
+    .mysteryBoxScr_subtitle {
+        font-size: 14px !important;
+    }
+    .ctaWinner {
+        font-size: 14px !important;
+    }
+    .spin {
+        left: 40% !important;
+    }
+    .mysteryBoxRetryIcon {
+        margin: 30px auto 30px auto !important;
+    }
+    .previousWinnerHeading {
+        padding: 24px 24px !important;
+    }
+    .previousWinnerRow {
+        padding-bottom: 24px !important;
+    }
+    .winnerIcon {
+        width: 60px !important;
+        height: 60px !important;
+    }
 }
 
 @media screen and (min-width: 341px) and (max-width: 360px) {
     .infoDetails {
         width: 340px - $gap;
+    }
+    @include mysteryBoxStyling(275px);
+    .spinScrSubtitle {
+        margin-top: 170px !important;
+    }
+    .spinScrTitle {
+        margin-top: 130px !important;
+    }
+    .mysteryBoxScr_title {
+        font-size: 28px !important;
+    }
+    .mysteryBoxScr_subtitle {
+        font-size: 14px !important;
+    }
+    .spin {
+        left: 40% !important;
+    }
+    .mysteryBoxRetryIcon {
+        margin: 35px auto 35px auto !important;
+    }
+    .previousWinnerHeading {
+        padding: 24px 24px !important;
+    }
+    .winnerIcon {
+        width: 65px !important;
+        height: 65px !important;
     }
 }
 
@@ -23,16 +165,38 @@ $gap: 100px;
     .infoDetails {
         width: 360px - $gap;
     }
+    @include mysteryBoxStyling(275px);
+    .spinScrSubtitle {
+        margin-top: 170px !important;
+    }
+    .spinScrTitle {
+        margin-top: 130px !important;
+    }
+    .mysteryBoxScr_title {
+        font-size: 28px !important;
+    }
+    .mysteryBoxScr_subtitle {
+        font-size: 14px !important;
+    }
+    .spin {
+        left: 40% !important;
+    }
 }
 
 @media screen and (min-width: 381px) and (max-width: 400px) {
     .infoDetails {
         width: 380px - $gap;
     }
+    @include mysteryBoxStyling(300px);
 }
 
 @media screen and (min-width: 401px) and (max-width: 420px) {
     .infoDetails {
         width: 400px - $gap;
     }
+    @include mysteryBoxStyling(300px);
+}
+
+@media screen and (min-width: 421px) {
+    @include mysteryBoxStyling(300px);
 }

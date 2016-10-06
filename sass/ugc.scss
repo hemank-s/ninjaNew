@@ -1,0 +1,213 @@
+.ugcContainer {
+    background: #1D47F5;
+    background: -webkit-linear-gradient(left top, #1D47F5, #33FFE2);
+    background: -o-linear-gradient(bottom right, #1D47F5, #33FFE2);
+    background: -moz-linear-gradient(bottom right, #1D47F5, #33FFE2);
+    background: linear-gradient(to bottom right, #1D47F5, #33FFE2);
+    height: 100%;
+    padding-top: 12px;
+    .quoteCardContainer {
+        background-color: #ffffff;
+        overflow: hidden;
+        margin: 0px 12px;
+        position: relative;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+    .quoteCard {
+        padding: 32px 32px 0 32px;
+        .quoteName {
+            @include fontStyle(22px, 300, rgba(0, 0, 0, 0.9), 27px);
+            margin-bottom: 44px;
+            position: relative;
+            z-index: 1000;
+        }
+        .quoteAuthor {
+            @include fontStyle(14px, 400, rgba(0, 0, 0, 0.4), 19px);
+            padding-bottom: 4px;
+            position: relative;
+            z-index: 1000;
+        }
+        .quoteAuthor:before {
+            content: '— ';
+        }
+    }
+    .quoteChar {
+        @include fontStyle(12px, 400, #CDCDCD, 16px);
+        text-align: right;
+        margin: 12px;
+    }
+    .inputExceeded {
+        color: #F35F5F !important;
+    }
+    [contenteditable=true]:empty:before {
+        content: attr(placeholder);
+    }
+}
+
+.cardNote,
+.jflNote {
+    padding: 12px 32px 0 32px;
+    @include fontStyle(14px, 400, rgba(255, 255, 255, 0.64), 17px);
+    text-align: center;
+}
+
+.cta,
+.ctaContainer,
+.jflCtaContainer {
+    border-top: 1px solid rgba(255, 255, 255, 0.32);
+    padding: 15px 0;
+    position: absolute;
+    width: 100%;
+    text-align: center;
+    bottom: 0;
+    @include fontStyle(16px, 400, #ffffff, 21px);
+}
+
+.ctaContainer div,
+.jflCtaContainer div {
+    width: 49%;
+}
+
+.disabled {
+    color: rgba(255, 255, 255, 0.48) !important;
+}
+
+.test {
+    background-image: url(images/ninjaSubscribe.png);
+}
+
+.jflImage {
+    background-repeat: no-repeat;
+    background-position: center;
+    border: 1px dashed rgba(255, 255, 255, 0.32);
+    border-radius: 4px;
+    margin: 0 auto 0;
+    background-size: 100% 100%;
+}
+
+.successCard {
+    background: #fff;
+    margin-left: 12px;
+    margin-right: 12px;
+}
+
+.successIcon {
+    background-image: url(images/successIcon.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 100%;
+    height: 124px;
+    display: inline-block;
+    background-position: center;
+    margin-bottom: 24px;
+    margin-top: 64px;
+}
+
+.successTitle {
+    @include fontStyle(24px, 400, #4A90E2, 27px);
+    margin-bottom: 12px;
+    text-align: center;
+}
+
+.successSubtitle {
+    @include fontStyle(14px, 400, rgba(61, 71, 91, 0.64), 17px);
+    width: 80%;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.successCta {
+    @include fontStyle(16px, 400, #3D475B, 21px);
+    border-top: 1px solid rgba(61, 71, 91, 0.13);
+    padding: 15px;
+    text-align: center;
+    margin-top: 48px;
+}
+
+.uploadIcon {
+    background-image: url(images/jfl_illustration.png);
+    background-repeat: no-repeat;
+    background-size: 220px 160px;
+    width: 100%;
+    height: 250px;
+    background-position: center;
+    margin: 60px 0;
+}
+
+.title {
+    @include fontStyle(20px, 400, #ffffff, 26px);
+    text-align: center;
+}
+
+.uploadContainer {
+    background: rgba(0, 0, 0, 0.8);
+    padding: 11px 12px;
+    border-radius: 20px;
+}
+
+.replaceCtaText {
+    @include fontStyle(10px, 400, #ffffff, 10px);
+}
+
+.replacePhotoCta {
+    padding: 16px;
+    float: right;
+}
+
+.uploadIllustration {
+    background-image: url(images/upload_illustration.png);
+    background-repeat: no-repeat;
+    width: 14px;
+    height: 12px;
+    background-position: center;
+    display: inline-block;
+    background-size: 100% 100%;
+    margin-right: 8px;
+    vertical-align: middle;
+}
+
+.addPhotoCta {
+    border: 1px dashed rgba(255, 255, 255, 0.3);
+    padding: 22px;
+    margin: 16px 12px 0;
+}
+
+.addPhotoContainer {
+    margin: 0 auto;
+    text-align: center;
+}
+
+.addPhotoIllustration {
+    background-image: url(images/upload_illustration.png);
+    background-repeat: no-repeat;
+    width: 32px;
+    height: 28px;
+    background-position: center;
+    display: inline-block;
+    background-size: 100% 100%;
+    margin-right: 12px;
+    vertical-align: bottom;
+}
+
+.cardOverlay {
+    position: absolute;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.72);
+    z-index: 500;
+}
+
+.addPhotoText {
+    @include fontStyle(16px, 400, #ffffff, 21px);
+}
+
+.overlayQuoteName {
+    color: rgba(255, 255, 255, 0.9) !important;
+}
+
+.overlayQuoteAuthor {
+    color: rgba(255, 255, 255, 0.64) !important;
+}

@@ -1,0 +1,32 @@
+<div class="quoteCardContainer imageElement">
+    <div class="cardOverlay hideClass"></div>
+    <div class="quoteCard">
+        <div class="quoteName" contenteditable="true" placeholder="Tap here to type the quote here use only maximum 120 words."></div>
+        <div class="quoteAuthor {{^isQuote}}hideClass{{/isQuote}}" contenteditable="true" placeholder="— Type Author Name">{{^isQuote}} author{{/isQuote}}</div>
+    </div>
+    <div class="quoteChar">
+        <div class="userInput inlineBlock">0 </div>
+        <div class="allowedInput inlineBlock">/{{length}} </div>
+    </div>
+</div>
+<div class="addPhotoCta hideClass">
+    <div class="addPhotoContainer">
+        <span class="addPhotoIllustration"> </span>
+        <span class="addPhotoText"> ADD IMAGE </span>
+    </div>
+</div>
+<div class="cardNote">
+    If any inappropriate content found out, {{#isQuote}} Quote {{/isQuote}} {{^isQuote}} #Fact {{/isQuote}} won’t be submitted.
+</div>
+<div class="cta disabled">
+    NEXT
+</div>
+<div class="ctaContainer hideClass">
+    <div class="sendCta inlineBlock"> SEND </div>
+</div>
+<div class="successCard hideClass">
+    <div class="successIcon"> </div>
+    <div class="successTitle">Success! </div>
+    <div class="successSubtitle">Thanks for submitting, we’ll notify you after your {{#isQuote}} Quote {{/isQuote}} {{^isQuote}} #Fact {{/isQuote}} ready to published in Hike Daily. </div>
+    <div class="successCta">Add Another {{#isQuote}} Quote {{/isQuote}} {{^isQuote}} Fact {{/isQuote}} </div>
+</div>

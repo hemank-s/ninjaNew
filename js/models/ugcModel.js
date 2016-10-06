@@ -34,6 +34,47 @@
         updateUgcData: function(content) {
             console.log('Updating the activity Three tab in Ninja');
             cacheProvider.setInCritical('ninjaUgc', content);
+        },
+
+        postUgcData: function(data, imagePresent, callback) {
+
+            if (platformSdk.bridgeEnabled) {
+
+                console.log('Post request with data');
+                console.log(data);
+
+                if (imagePresent) {
+                    try {
+                        platformSdk.nativeReq({
+                            ctx: self,
+                            fn: 'uploadFile',
+                            data: platformSdk.utils.validateStringifyJson(data),
+                            success: function(res) {
+                                try {
+                                    res = JSON.parse(decodeURIComponent(res));
+                                    console.log(res);
+                                    callback(res);
+                                } catch (err) {
+                                    utils.showToast('Sorry. Your data could not be send. Try again , please ?');
+                                }
+                            }
+                        });
+                    } catch (err) {
+                        utils.showToast('Sorry. Your image couldn’t be updated. Could you try again with another files, please?');
+                    }
+
+                } else {
+
+                    this.NinjaService.postUgcContent(data.uploadUrl, function(res) {
+                        callback(res);
+                    }, this);
+                }
+
+            } else {
+                console.log('Ugc Data Posted');
+                callback();
+            }
+
         }
 
 
