@@ -1,18 +1,31 @@
+<div class="batteryCriticalAnimation centerToScreenContainer hideClass">
+    <div class="batteryCritical_crossIcon"> </div>
+    <div class="batteryCriticalWrapper">
+        <div class="batteryDangerHeading"></div>
+        <div class="batteryDangerIcon"></div>
+        <div class="batteryDangerDescription"></div>
+    </div>
+</div>
 <!-- Full Screen Popup For Battery/Streak Explanation -->
 <div class="batteryStreakInfoContainer centerToScreenContainer hideClass">
     <div class="blurScreen">
         <div class="centerToScreenWrapper">
             <div class="streakInfoWrapper">
                 <div class="streakInfoContainer">
-                    <div class="streakInfoIcon"></div>
-                    <div class="streakInfoValue">{{ninjaProfile.streak}}
+                    <div class="streakContainerInfo">
+                        <div class="streakValueInfo">{{ninjaProfile.streak}}</div>
+                        <div class="streakStatusContainerInfo">
+                            <div class="streakIconInfo"></div><span class="streakDefInfo">Days</span>
+                        </div>
                     </div>
                     <p class="dayHeading">Ninja Days</p>
                     <p class="dayInformation">This is the number of days you’ve been a Ninja for. Continue being a Ninja every day to go higher and get more awesome gifts.</p>
                 </div>
+                <hr class="infoSep" noshade>
                 <div class="batteryInfoWrapper">
-                    <div class="batteryIconContainer"></div>
-                    <div class="batteryHeading">Ninja Life</div>
+                    <div class="batteryIconContainer">
+                    </div>
+                    <div class="batteryHeading">Ninja Life - {{ninjaProfile.battery}} days remaining</div>
                     <p class="batteryInformation">You’re going to reaming a Ninja for X more days. Keep loving and using hike with your best friends to be a Ninja for more days and get more awesome gifts.</p>
                 </div>
                 <div class="informationAction">Got It</div>
@@ -42,7 +55,10 @@
                 </div>
             </div>
             <div class="mysteryBoxAvailable hideClass"></div>
-            <div class="ninjaDp"></div>
+            <div class="ninjaDpContainer">
+                <div class="myProfileNotif hideClass"></div>
+                <div class="ninjaDp"></div>
+            </div>
         </div>
     </div>
     <div class="ninjaBottomContainer">
@@ -96,4 +112,14 @@
             </div>
         </div>
     </div>
+</div>
+<div class="mysteryBoxAvailable hideClass">
+    <div class="mBoxToastIconContainer">
+        <div class="mysteryBoxToastIconBig"></div>
+        <div class="mysteryBoxToastIconSmall"></div>
+    </div>
+    <div class="mysteryBoxToastText">
+        Your lucky box is ready
+    </div>
+    <div class="mysteryBoxToastAction">Spin now</div>
 </div>

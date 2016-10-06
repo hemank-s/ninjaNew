@@ -6,6 +6,7 @@
     var utils = require('../util/utils'),
         Constants = require('../../constants.js'),
         cacheProvider = require('../util/cacheProvider'),
+        rewardsModel = require('../models/rewardsModel'),
         
         ProfilescreenController = function(options) {
             this.template = require('raw!../../templates/ninjaProfileScreen.html');
@@ -82,28 +83,73 @@
 
         defineNinjaHomeScreenTabs();
         this.updateIcons(DOMcache, data)
+        this.updateLinks(DOMcache, data, App);
     };
 
     ProfilescreenController.prototype.updateIcons = function (DOMcache,data){
         
         // UGC ICONS
-        for(var i= 0;i<data.ugcList.length;i++){
+
+        console.log(data);
+        if(data.ugcList){
+            for(var i= 0;i<data.ugcList.length;i++){
             if(data.ugcList[i].icon){
                 DOMcache.ugcTypeRow[i].getElementsByClassName('ugcTypeIcon')[0].style.backgroundImage = "url('" + data.ugcList[i].icon + "')";
             }else{
                 console.log("Set a default icon for ugc");
             }
+        }    
         }
-
+        
         // REWARD ICONS
-        for(var j=0;j<data.rewardsData.redeemedRewards.length;j++){
-            if(data.rewardsData.redeemedRewards[i].icon){
-                DOMcache.redeemedRewardRow[i].getElementsByClassName('redeemedRewardIcon')[0].style.backgroundImage = "url('" + data.rewardsData.redeemedRewards[i].icon + "')";
-            }else{
-                console.log("Set a default icon for rewards");
-            }
+        if(data.rewardsData.redeemedRewards){
+            for(var j=0;j<data.rewardsData.redeemedRewards.length;j++){
+                if(data.rewardsData.redeemedRewards[j].icon){
+                    DOMcache.redeemedRewardRow[j].getElementsByClassName('redeemedRewardIcon')[0].style.backgroundImage = "url('" + data.rewardsData.redeemedRewards[j].icon + "')";
+                }else{
+                    console.log("Set a default icon for rewards");
+                }
+        }    
         }
-    }
+        
+    };
+
+    ProfilescreenController.prototype.updateLinks = function (DOMcache,data, App){
+        
+        // UGC LINKS
+        
+        // REWARD LINKS
+            if (DOMcache.redeemedRewardRow.length) {
+                for (var i = 0; i < DOMcache.redeemedRewardRow.length; i++) {
+                    DOMcache.redeemedRewardRow[i].addEventListener('click', function(event) {
+
+                        // Get Reward related information
+                        var rewardState = this.getAttribute('data-state');
+                        var rewardType = this.getAttribute('data-rewardtype');
+                        var rewardRouter = rewardsModel.getRewardRouter(rewardType);
+                        var rewardId = this.getAttribute('data-rewardId');
+
+                        var data = {};
+                        data.rewardId = rewardId;
+
+                        if (platformSdk.bridgeEnabled) {
+                            App.NinjaService.getRewardDetails(data, function(res) {
+                                console.log(res.data);
+                                App.router.navigateTo(rewardRouter, { "rewardDetails": res.data, "rewardId": rewardId, "rewardRouter": rewardRouter });
+                            }, this);
+                        } else {
+                            var res = {
+                                "hicon": "",
+                                "title": "GIF Sharing",
+                                "desc": "Another way of expressing inside chats.",
+                                "sanctioned": false
+                            };
+                            App.router.navigateTo(rewardRouter, { "rewardDetails": res, "rewardId": rewardId, "rewardRouter": rewardRouter });
+                        }
+                    });
+                }
+            }
+        };
 
     ProfilescreenController.prototype.render = function(ctr, App, data) {
 

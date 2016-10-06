@@ -73,6 +73,14 @@
     float: left;
 }
 
+.streakIconInfo {
+    background: url(images/streakIcon.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 14px;
+    height: 12px;
+}
+
 .streakIcon {
     background: url(images/streakIcon.png);
     background-size: contain;
@@ -88,11 +96,26 @@
     vertical-align: bottom;
 }
 
+.streakStatusContainerInfo {
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 4px;
+}
+
 .streakValue {
     font-size: 48px;
     color: #FFFFFF;
     line-height: 32px;
     font-weight: 500;
+    display: inline-flex;
+    vertical-align: middle;
+}
+
+.streakValueInfo {
+    font-size: 48px;
+    color: #FFFFFF;
+    line-height: 32px;
+    font-weight: 400;
     display: inline-flex;
     vertical-align: middle;
 }
@@ -103,7 +126,10 @@
     background-repeat: no-repeat;
     width: 36px;
     height: 36px;
-    float: right;
+    position: absolute;
+    border: 1px solid #fff;
+    -webkit-border-radius: 50%;
+    border-radius: 50%;
 }
 
 span.streakDef {
@@ -115,7 +141,16 @@ span.streakDef {
     vertical-align: middle;
 }
 
-.streakStatus {
+span.streakDefInfo {
+    font-size: 12px;
+    color: #FFFFFF;
+    line-height: 13px;
+    font-weight: 400;
+    vertical-align: middle;
+}
+
+.streakStatus,
+.streakStatusInfo {
     font-size: 9px;
     font-weight: 500;
     color: #fff;
@@ -374,35 +409,57 @@ ul.unlockedRewardList > li.unlockedRewardListItem {
 
 .informationAction {
     text-transform: uppercase;
-    @include fontStyle(16px, 400, #FFFFFF, 19px);
-    text-align: right;
+    font-size: 16px;
+    color: #FFFFFF;
+    line-height: 19px;
+    font-weight: 500;
+    float: right;
+    border: 1px solid rgba(255, 255, 255, 0.42);
+    display: inline-block;
+    padding: 12px 18px;
+    border-radius: 4px;
 }
 
 .dayHeading {
-    @include fontStyle(16px, 500, #FFFFFF, 19px);
-    margin: 14px 0px 10px 0px;
+    @include fontStyle(18px, 500, #FFFFFF, 19px);
+    margin: 30px 0px 12px 0px;
 }
 
 .dayInformation {
-    @include fontStyle(14px, 300, #FFFFFF, 19px);
+    @include fontStyle(16px, 400, rgba(255, 255, 255, 0.96), 20px);
 }
 
 .batteryIconContainer {
-    background: url(images/batteryIcon.png);
-    background-size: contain;
-    background-repeat: no-repeat;
-    width: 161px;
-    height: 24px;
     margin-bottom: 24px;
 }
 
+.batteryIconFilled {
+    background: url(images/batteryFtue.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 23px;
+    height: 20px;
+    display: inline-block;
+    margin-left: 4px;
+}
+
+.batteryIconEmpty {
+    background: url(images/batteryEmpty.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 23px;
+    height: 20px;
+    margin-left: 4px;
+    display: inline-block;
+}
+
 .batteryHeading {
-    @include fontStyle(16px, 500, #FFFFFF, 19px);
+    @include fontStyle(18px, 500, #FFFFFF, 19px);
     margin-bottom: 12px;
 }
 
 .batteryInformation {
-    @include fontStyle(14px, 300, #FFFFFF, 19px);
+    @include fontStyle(16px, 400, rgba(255, 255, 255, 0.96), 20px);
     margin-bottom: 24px;
 }
 
@@ -410,9 +467,7 @@ ul.unlockedRewardList > li.unlockedRewardListItem {
     padding: 0px 24px 0px 16px;
 }
 
-.batteryInfoWrapper {
-    padding-top: 48px;
-}
+.batteryInfoWrapper {}
 
 .streakInfoIcon {
     background: url(images/streakIcon.png);
@@ -592,12 +647,65 @@ ul.unlockedRewardList > li.unlockedRewardListItem {
 }
 
 .mysteryBoxAvailable {
-    background: url(images/mysteryBox_Gift.png);
+    position: fixed;
+    box-shadow: 0px -2px 4px 0px rgba(0, 0, 0, 0.12);
+    bottom: 0px;
+    height: 60px;
+    background: #FFF;
+    width: 100%;
+    overflow: hidden;
+}
+
+.mBoxToastIconContainer {
+    position: relative;
+}
+
+.mysteryBoxToastIconBig {
+    background: url(images/mBoxToastIcon.png);
     background-size: contain;
     background-repeat: no-repeat;
-    width: 30px;
-    height: 30px;
+    width: 92px;
+    height: 92px;
+    position: absolute;
+    opacity: 0.12;
+    left: -46px;
+    top: -12px;
+}
+
+.mysteryBoxToastIconSmall {
+    background: url(images/mBoxToastIcon.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 92px;
+    height: 92px;
+    -webkit-transform: scale(0.4);
+    -moz-transform: scale(0.4);
+    -ms-transform: scale(0.4);
+    -o-transform: scale(0.4);
+    transform: scale(0.4);
+    position: absolute;
+    top: -12px;
+    left: -46px;
+}
+
+.mysteryBoxToastText {
+    font-size: 14px;
+    color: #3d475b;
+    font-weight: 400;
     display: inline-block;
+    margin-left: 56px;
+    line-height: 60px;
+}
+
+.mysteryBoxToastAction {
+    display: inline-block;
+    float: right;
+    font-size: 12px;
+    color: #448bf7;
+    font-weight: 400;
+    text-transform: uppercase;
+    margin-right: 16px;
+    line-height: 60px;
 }
 
 
@@ -826,3 +934,167 @@ ul.unlockedRewardList > li.unlockedRewardListItem {
     color: rgba(61, 71, 91, 0.48);
     margin-top: 4px;
 }
+
+.batteryCriticalWrapper {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    text-align: center;
+    width: 90%;
+}
+
+.batteryCriticalAnimation {
+    position: absolute;
+    opacity: 1;
+    width: 100%;
+    height: 100%;
+    background: #1D47F5;
+    z-index: 1000;
+    background: -webkit-linear-gradient(left top, rgba(29, 71, 245, 0.92), rgba(51, 255, 226, 0.92));
+    background: -o-linear-gradient(bottom right, rgba(29, 71, 245, 0.92), rgba(51, 255, 226, 0.92));
+    background: -moz-linear-gradient(bottom right, rgba(29, 71, 245, 0.92), rgba(51, 255, 226, 0.92));
+    background: linear-gradient(to bottom right, rgba(29, 71, 245, 0.92), rgba(51, 255, 226, 0.92));
+}
+
+.batteryDangerHeading {
+    font-size: 32px;
+    font-weight: 400;
+    color: #FFF;
+}
+
+.batteryDangerIcon {
+    text-align: center;
+    bottom: 0px;
+    margin: 16px auto;
+    left: 0px;
+    right: 0px;
+    display: block;
+    width: 100px;
+    height: 91px;
+    background: url(images/lifeup_sequence.png) no-repeat;
+    background-size: auto 91px;
+    background-position: -1900px 0px;
+}
+
+.batteryAnimationActive {
+    background-position: -1900px 0;
+    transition: background 666ms steps(19);
+    animation: fave-heart 666ms steps(19);
+    -webkit-animation-fill-mode: forwards;
+    -moz-animation-fill-mode: forwards;
+    -o-animation-fill-mode: forwards;
+    animation-fill-mode: forwards;
+}
+
+@keyframes fave-heart {
+    0% {
+        background-position: -1900px 0
+    }
+    100% {
+        background-position: 0px 0
+    }
+}
+
+.batteryDangerDescription {
+    font-size: 16px;
+    font-weight: 400;
+    color: #FFF;
+}
+
+.batteryCritical_crossIcon {
+    background: url(images/crossWhite.png);
+    background-repeat: no-repeat;
+    height: 16px;
+    background-position: center;
+    width: 16px;
+    padding: 24px;
+    float: right;
+}
+
+.ninjaDpContainer {
+    position: relative;
+    float: right;
+    right: 12%;
+}
+
+.spinMysteryBoxBig {
+    @include animation(0s, 4s, spinBig);
+    -webkit-animation-iteration-count: infinite;
+    -moz-animation-iteration-count: infinite;
+    -o-animation-iteration-count: infinite;
+    animation-iteration-count: infinite;
+    -webkit-animation-timing-function: linear;
+    -moz-animation-timing-function: linear;
+    -o-animation-timing-function: linear;
+    animation-timing-function: linear;
+}
+
+.spinMysteryBoxSmall {
+    @include animation(0s, 4s, spinSmall);
+    -webkit-animation-iteration-count: infinite;
+    -moz-animation-iteration-count: infinite;
+    -o-animation-iteration-count: infinite;
+    animation-iteration-count: infinite;
+    -webkit-animation-timing-function: linear;
+    -moz-animation-timing-function: linear;
+    -o-animation-timing-function: linear;
+    animation-timing-function: linear;
+}
+
+@-moz-keyframes spinBig {
+    from {
+        -moz-transform: rotate(0deg);
+    }
+    to {
+        -moz-transform: rotate(360deg);
+    }
+}
+
+@-webkit-keyframes spinBig {
+    from {
+        -webkit-transform: rotate(0deg);
+    }
+    to {
+        -webkit-transform: rotate(360deg);
+    }
+}
+
+@keyframes spinBig {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@-moz-keyframes spinSmall {
+    from {
+        -moz-transform: rotate(0deg) scale(0.4);
+    }
+    to {
+        -moz-transform: rotate(360deg) scale(0.4);
+    }
+}
+
+@-webkit-keyframes spinSmall {
+    from {
+        -webkit-transform: rotate(0deg) scale(0.4);
+    }
+    to {
+        -webkit-transform: rotate(360deg) scale(0.4);
+    }
+}
+
+@keyframes spinSmall {
+    from {
+        transform: rotate(0deg) scale(0.4);
+    }
+    to {
+        transform: rotate(360deg) scale(0.4);
+    }
+}
+
+hr.infoSep {}

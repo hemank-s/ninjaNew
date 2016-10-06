@@ -43,6 +43,7 @@
             ninjaDp: document.getElementsByClassName('ninjaDp')[0],
             mysteryBoxAvailable: document.getElementsByClassName('mysteryBoxAvailable')[0],
             streakStatus: document.getElementsByClassName('streakStatus')[0],
+            batteryCriticalAnimation: document.getElementsByClassName('batteryCriticalAnimation')[0],
         };
 
         // Show Hide Mystery Box Based on data
@@ -59,8 +60,26 @@
         }
 
         DOMcache.streakContainer.addEventListener('click', function(event) {
-            //DOMcache.unlockedRewardListContainer.classList.remove('unlockedRewardListUl');
             DOMcache.batteryStreakInfoContainer.classList.remove('hideClass');
+
+            var batteryIconContainer = document.getElementsByClassName('batteryIconContainer')[0];
+            batteryIconContainer.innerHTML = "";
+
+            if (!platformSdk.bridgeEnabled) {
+                profileData = { "battery": 2, "maxBattery": 7, "hike_version": "4.2.2.2", "rewards_hash": "1474970960", "status": "active", "streak": 10 };
+            }
+
+            for (var i = 1; i <= profileData.battery; i++) {
+                var iDiv = document.createElement('div');
+                iDiv.className = 'batteryIconFilled';
+                batteryIconContainer.appendChild(iDiv);
+            }
+
+            for (var j = 1; j <= (profileData.maxBattery - profileData.battery); j++) {
+                var jDiv = document.createElement('div');
+                jDiv.className = 'batteryIconEmpty';
+                batteryIconContainer.appendChild(jDiv);
+            }
         });
 
         DOMcache.ninjaDp.addEventListener('click', function(event) {
@@ -100,7 +119,7 @@
         if (DOMcache.lockedRewardListItem.length) {
             for (var j = 0; j < DOMcache.lockedRewardListItem.length; j++) {
                 DOMcache.lockedRewardListItem[j].addEventListener('click', function(event) {
-                    events.publish('update.notif.toast', { show: true, text: 'Locked reward has been clicked' });
+                    events.publish('update.notif.toast', { show: true, heading: 'Bamm', details: 'The reward is currently in locked state', notifType: 'notifNeutral' });
                 });
             }
         } else {
@@ -115,7 +134,18 @@
 
         if (platformSdk.bridgeEnabled) {
             if (mysteryBoxData.mstatus == 'active') {
+
+                var spinNowColor = ['#F5A623', '#F8E71C', '#DF75FD', '#448BF7', '#1DA8E8', '#9ED62C', '#FF7154'];
+                var spinNowText = document.getElementsByClassName('mysteryBoxToastAction')[0];
+
+                setInterval(function() {
+                    var setColor = spinNowColor[Math.floor(Math.random() * spinNowColor.length)];
+                    spinNowText.style.color = setColor;
+                }, 1000);
+
                 DOMcache.mysteryBoxAvailable.classList.remove('hideClass');
+                DOMcache.mysteryBoxAvailable.getElementsByClassName('mBoxToastIconContainer')[0].getElementsByClassName('mysteryBoxToastIconBig')[0].classList.add('spinMysteryBoxBig');
+                DOMcache.mysteryBoxAvailable.getElementsByClassName('mBoxToastIconContainer')[0].getElementsByClassName('mysteryBoxToastIconSmall')[0].classList.add('spinMysteryBoxSmall');
                 DOMcache.mysteryBoxAvailable.addEventListener('click', function(event) {
                     App.router.navigateTo('/mysteryBox', mysteryBoxData);
                 });
@@ -123,16 +153,45 @@
                 DOMcache.mysteryBoxAvailable.classList.add('hideClass');
             }
         }
-
     };
 
     HomescreenController.prototype.checkBatteryStatus = function(pdata, DOMcache, App) {
 
         console.log(pdata);
 
+        //Check if first ever battery lost has occured or not 
+
+        var batteryLostFtueDone = cacheProvider.getFromCritical('batteryLostFtueDone');
+
         if (!platformSdk.bridgeEnabled) {
-            pdata = { "maxBattery": 7, "battery": 4, "hike_version": "4.2.2.2", "rewards_hash": "1474970960", "status": "active", "streak": 10 };
+            batteryLostFtueDone = true;
+            pdata = { "maxBattery": 7, "battery": 6, "hike_version": "4.2.2.2", "rewards_hash": "1474970960", "status": "active", "streak": 10 };
         }
+
+        if (!batteryLostFtueDone) {
+            if (pdata.battery < pdata.maxBattery) {
+                console.log("user has lost a battery for the first time");
+                var batteryLost = pdata.maxBattery - pdata.battery;
+                cacheProvider.setInCritical('batteryLostFtueDone', true);
+                DOMcache.batteryCriticalAnimation.classList.remove('hideClass');
+                DOMcache.batteryDangerIcon = document.getElementsByClassName('batteryDangerIcon')[0];
+
+                setTimeout(function() {
+                    DOMcache.batteryDangerIcon.classList.add('batteryAnimationActive');
+                }, 500);
+
+                DOMcache.batteryCriticalAnimation.getElementsByClassName('batteryDangerHeading')[0].innerHTML = batteryLost + ' ' + 'Life Lost';
+                DOMcache.batteryCriticalAnimation.getElementsByClassName('batteryDangerDescription')[0].innerHTML = 'You have just lost' + ' ' + batteryLost + ' days as ninja';
+
+                DOMcache.batteryCritical_crossIcon = document.getElementsByClassName('batteryCritical_crossIcon')[0];
+
+                DOMcache.batteryCritical_crossIcon.addEventListener('click', function(event) {
+                    DOMcache.batteryCriticalAnimation.classList.add('hideClass');
+                });
+
+            }
+        }
+
         if (pdata.battery < pdata.maxBattery / 2) {
             console.log("Show indication always");
             DOMcache.streakStatus.innerHTML = 'Critical Life - ' + ' ' + pdata.battery;

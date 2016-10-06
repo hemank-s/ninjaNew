@@ -480,6 +480,10 @@ a:visited {
     animation-timing-function: ease;
     -webkit-animation-timing-function: ease;
     visibility: visible !important;
+    -webkit-animation-fill-mode: forwards;
+    -moz-animation-fill-mode: forwards;
+    -o-animation-fill-mode: forwards;
+    animation-fill-mode: forwards;
 }
 
 @keyframes slideUp {
@@ -500,22 +504,76 @@ a:visited {
     }
 }
 
+.slideDown {
+    animation-name: slideDown;
+    -webkit-animation-name: slideDown;
+    animation-duration: 0.6s;
+    -webkit-animation-duration: 0.6s;
+    animation-timing-function: ease;
+    -webkit-animation-timing-function: ease;
+    visibility: visible !important;
+    -webkit-animation-fill-mode: forwards;
+    -moz-animation-fill-mode: forwards;
+    -o-animation-fill-mode: forwards;
+    animation-fill-mode: forwards;
+}
+
+@keyframes slideDown {
+    0% {
+        transform: translateY(0%);
+    }
+    100% {
+        transform: translateY(100%);
+    }
+}
+
+@-webkit-keyframes slideDown {
+    0% {
+        -webkit-transform: translateY(0%);
+    }
+    100% {
+        -webkit-transform: translateY(100%);
+    }
+}
+
 #notifToast {
-    background-color: #263238;
+    background-color: #424242;
     display: none;
     width: 100%;
     overflow: hidden;
     z-index: 100;
     position: absolute;
     bottom: 0px;
-    padding: 16px 0px 16px 24px;
-    color: #FFF;
-    font-size: 14px;
+    padding: 12px 0px 12px 24px;
+}
+
+.notifHeading {
+    font-size: 12px;
     font-weight: 400;
+    color: #fff;
+    margin-bottom: 4px;
+}
+
+.notifDetails {
+    font-size: 12px;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.80);
 }
 
 #notifToast.nToast {
     display: block;
+}
+
+.notifNeutral {
+    color: #F8E71C !important;
+}
+
+.notifSuccess {
+    color: #B8E986 !important;
+}
+
+.notifError {
+    color: #FF4D63 !important;
 }
 
 
@@ -633,32 +691,159 @@ body {
     line-height: 14px;
 }
 
-.heart {
+.myProfileNotif {
+    width: 40px;
+    height: 40px;
+    background-color: #FFF;
+    border-radius: 100px;
+    position: relative;
+    transform: scale(0.5);
+    -webkit-transform: scale(0.5);
     position: absolute;
-    text-align: center;
-    top: 0px;
-    bottom: 0px;
-    margin: auto auto;
-    left: 0px;
-    right: 0px;
-    display: block;
-    width: 58px;
-    height: 58px;
-    background: url(https://cssanimation.rocks/images/posts/steps/heart.png) no-repeat;
-    background-size: auto 55px;
 }
 
-._active {
-    background-position: -1540px 0;
-    transition: background 1s steps(28);
-    animation: fave-heart 1s steps(28);
+.myProfileNotif:after,
+.myProfileNotif:before {
+    display: inline-block;
+    margin: auto;
+    position: absolute;
+    content: "";
+    width: 40px;
+    height: 40px;
+    border-radius: 100px;
+    background-color: #FFF;
 }
 
-@keyframes fave-heart {
+.myProfileNotif:after {
+    z-index: -100;
+    -webkit-animation: outer-ripple 1.66s ease-in-out infinite;
+    -moz-animation: outer-ripple 1.66s ease-in-out infinite;
+    animation: outer-ripple 1.66s ease-in-out infinite;
+}
+
+.myProfileNotif:before {
+    z-index: -200;
+    -webkit-animation: inner-ripple 1.66s ease-out 0.1s infinite;
+    -moz-animation: inner-ripple 1.66s ease-out 0.1s infinite;
+    animation: inner-ripple 1.66s ease-out 0.1s infinite;
+}
+
+
+/* outer ripple */
+
+@keyframes outer-ripple {
     0% {
-        background-position: 0 0
+        transform: scale(1);
+        filter: alpha(opacity=50);
+        opacity: 0.5;
+    }
+    80% {
+        transform: scale(6.5);
+        filter: alpha(opacity=0);
+        opacity: 0;
     }
     100% {
-        background-position: -1540px 0
+        transform: scale(6.5);
+        filter: alpha(opacity=0);
+        opacity: 0;
+    }
+}
+
+@-webkit-keyframes outer-ripple {
+    0% {
+        transform: scale(1);
+        -webkit-transform: scale(1);
+        filter: alpha(opacity=50);
+        opacity: 0.5;
+    }
+    80% {
+        transform: scale(6.5);
+        -webkit-transform: scale(6.5);
+        filter: alpha(opacity=0);
+        opacity: 0;
+    }
+    100% {
+        transform: scale(6.5);
+        -webkit-transform: scale(6.5);
+        filter: alpha(opacity=0);
+        opacity: 0;
+    }
+}
+
+@-moz-keyframes outer-ripple {
+    0% {
+        transform: scale(1);
+        filter: alpha(opacity=50);
+        opacity: 0.5;
+    }
+    80% {
+        transform: scale(6.5);
+        filter: alpha(opacity=0);
+        opacity: 0;
+    }
+    100% {
+        transform: scale(6.5);
+        filter: alpha(opacity=0);
+        opacity: 0;
+    }
+}
+
+
+/* inner ripple */
+
+@keyframes inner-ripple {
+    0% {
+        transform: scale(1);
+        filter: alpha(opacity=50);
+        opacity: 0.5;
+    }
+    30% {
+        transform: scale(1);
+        filter: alpha(opacity=50);
+        opacity: 0.5;
+    }
+    100% {
+        transform: scale(4.5);
+        filter: alpha(opacity=0);
+        opacity: 0;
+    }
+}
+
+@-webkit-keyframes inner-ripple {
+    0% {
+        transform: scale(1);
+        -webkit-transform: scale(1);
+        filter: alpha(opacity=50);
+        opacity: 0.5;
+    }
+    30% {
+        transform: scale(1);
+        -webkit-transform: scale(1);
+        filter: alpha(opacity=50);
+        opacity: 0.5;
+    }
+    100% {
+        transform: scale(4.5);
+        -webkit-transform: scale(4.5);
+        filter: alpha(opacity=0);
+        opacity: 0;
+    }
+}
+
+@-moz-keyframes inner-ripple {
+    0% {
+        transform: scale(1);
+        filter: alpha(opacity=50);
+        opacity: 0.5;
+    }
+    30% {
+        transform: scale(1);
+        filter: alpha(opacity=50);
+        opacity: 0.5;
+    }
+    100% {
+        transform: scale(4.5);
+        filter: alpha(opacity=0);
+        opacity: 0;
     }
 }

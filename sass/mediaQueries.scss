@@ -45,6 +45,66 @@ $gap: 100px;
         width: 60px !important;
         height: 60px !important;
     }
+    .streakValueInfo {
+        font-size: 46px !important;
+    }
+    .dayHeading {
+        font-size: 16px !important;
+        margin: 30px 0px 8px 0px !important;
+    }
+    .dayInformation {
+        font-size: 14px !important;
+    }
+    .batteryStreakInfoContainer hr {
+        margin-top: 24px !important;
+        margin-bottom: 24px !important;
+    }
+    .batteryHeading {
+        margin-bottom: 8px !important;
+        font-size: 16px !important;
+    }
+    .batteryInformation {
+        font-size: 14px !important;
+    }
+    .informationAction {
+        font-size: 14px !important;
+        padding: 8px 16px !important;
+    }
+    .comp__tabs .comp__tab,
+    .comp__tabs .selected {
+        font-size: 10px !important;
+    }
+    .redeemedRewardsContainer {
+        margin-top: 10px !important;
+    }
+    .redeemedRewardListContainer {
+        margin-left: 12px !important;
+        margin-right: 12px !important;
+    }
+    .redeemedRewardRow {
+        margin: 0px 0px 16px 0px !important;
+    }
+    .redeemedRewardIcon {
+        width: 24px !important;
+        height: 24px !important;
+    }
+    .redeemedRewardDetails {
+        margin-left: 8px !important;
+    }
+    .rewardHeading {
+        font-size: 12px !important;
+    }
+    .redeemedRewardSubheading {
+        font-size: 10px !important;
+        width: 91% !important;
+    }
+    .rewardStreakIcon {
+        width: 12px !important;
+        height: 10px !important;
+    }
+    .rewardStreakValue {
+        font-size: 12px !important;
+    }
 }
 
 @media screen and (min-width: 300px) and (max-width: 320px) {
@@ -89,6 +149,66 @@ $gap: 100px;
         width: 60px !important;
         height: 60px !important;
     }
+    .streakValueInfo {
+        font-size: 46px !important;
+    }
+    .dayHeading {
+        font-size: 16px !important;
+        margin: 30px 0px 8px 0px !important;
+    }
+    .dayInformation {
+        font-size: 14px !important;
+    }
+    .batteryStreakInfoContainer hr {
+        margin-top: 24px !important;
+        margin-bottom: 24px !important;
+    }
+    .batteryHeading {
+        margin-bottom: 8px !important;
+        font-size: 16px !important;
+    }
+    .batteryInformation {
+        font-size: 14px !important;
+    }
+    .informationAction {
+        font-size: 14px !important;
+        padding: 8px 16px !important;
+    }
+    .comp__tabs .comp__tab,
+    .comp__tabs .selected {
+        font-size: 10px !important;
+    }
+    .redeemedRewardsContainer {
+        margin-top: 10px !important;
+    }
+    .redeemedRewardListContainer {
+        margin-left: 12px !important;
+        margin-right: 12px !important;
+    }
+    .redeemedRewardRow {
+        margin: 0px 0px 16px 0px !important;
+    }
+    .redeemedRewardIcon {
+        width: 24px !important;
+        height: 24px !important;
+    }
+    .redeemedRewardDetails {
+        margin-left: 8px !important;
+    }
+    .rewardHeading {
+        font-size: 12px !important;
+    }
+    .redeemedRewardSubheading {
+        font-size: 10px !important;
+        width: 91% !important;
+    }
+    .rewardStreakIcon {
+        width: 12px !important;
+        height: 10px !important;
+    }
+    .rewardStreakValue {
+        font-size: 12px !important;
+    }
 }
 
 @media screen and (min-width: 321px) and (max-width: 340px) {
@@ -126,6 +246,31 @@ $gap: 100px;
     .winnerIcon {
         width: 60px !important;
         height: 60px !important;
+    }
+    .streakValueInfo {
+        font-size: 46px !important;
+    }
+    .dayHeading {
+        font-size: 16px !important;
+        margin: 30px 0px 8px 0px !important;
+    }
+    .dayInformation {
+        font-size: 14px !important;
+    }
+    .batteryStreakInfoContainer hr {
+        margin-top: 24px !important;
+        margin-bottom: 24px !important;
+    }
+    .batteryHeading {
+        margin-bottom: 8px !important;
+        font-size: 16px !important;
+    }
+    .batteryInformation {
+        font-size: 14px !important;
+    }
+    .informationAction {
+        font-size: 14px !important;
+        padding: 8px 16px !important;
     }
 }
 

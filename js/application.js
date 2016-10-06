@@ -28,28 +28,43 @@
     // Notifications Toast
     var nToastObject = events.subscribe('update.notif.toast', function(params) {
 
+        clearTimeout(toastTime);
+
+        var notifHeading = notifToast.getElementsByClassName('notifHeading')[0];
+        var notifDetails = notifToast.getElementsByClassName('notifDetails')[0];
+
+        notifHeading.innerHTML = params.heading;
+        notifDetails.innerHTML = params.details;
+        notifHeading.classList.add(params.notifType); //notifSuccess //notifNeutral //notifError
+
+        notifToast.classList.add('slideUp');
+        notifToast.classList.remove('slideDown');
+        notifToast.toggleClass('nToast', params.show);
+
+        toastTime = setTimeout(function() { events.publish('update.notif.toast.remove', { show: false, heading: '', details: '', notifType: 'none' }); }, 2000);
+    });
+
+    var nToastObject2 = events.subscribe('update.notif.toast.remove', function(params) {
 
         clearTimeout(toastTime);
-        notifToast.innerHTML = params.text;
-        if (params.show) {
-            notifToast.classList.add('slideUp');
-        } else {
-            notifToast.classList.remove('slideUp');
-        }
-        notifToast.toggleClass('nToast', params.show);
-        toastTime = setTimeout(function() { events.publish('update.notif.toast', { show: false, text: '' }); }, 2000);
+
+        notifToast.classList.remove('slideUp');
+        notifToast.classList.add('slideDown');
+        setTimeout(function() {
+            notifToast.toggleClass('nToast', params.show);
+            var notifHeading = notifToast.getElementsByClassName('notifHeading')[0];
+            var notifDetails = notifToast.getElementsByClassName('notifDetails')[0];
+
+            notifHeading.innerHTML = params.heading;
+            notifDetails.innerHTML = params.details;
+            notifHeading.classList.add(params.notifType); //notifSuccess //notifNeutral //notifError
+        }, 1000);
     });
 
     // Full Screen Loader
     var loader = document.getElementById('loader');
     var loadObject = events.subscribe('update.loader', function(params) {
         loader.toggleClass('loading', params.show);
-    });
-
-    var heartActive = document.getElementsByClassName('heart')[0];
-
-    heartActive.addEventListener('click', function(event) {
-        heartActive.classList.add('_active');
     });
 
     // Tap State Events :: Touch Start And Touch End
@@ -428,7 +443,7 @@
             var ftueCompleted = cacheProvider.getFromCritical('ftueCompleted');
 
             if (!subscriptionCompleted || !ftueCompleted) {
-                self.router.navigateTo('/ugc', { type: Constants.UGC_TYPE.QUOTE });
+                self.router.navigateTo('/home');
             } else {
                 self.NinjaService.getNinjaProfile(function(res) {
                     cacheProvider.setInCritical('userProfileData', res.data);
