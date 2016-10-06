@@ -8,17 +8,14 @@
     width: 100%;
     .subscribeScreen {
         height: 100%;
-        .slideFromBottomCls {
-            @include animation(0.4s, 0.7s, slideFromBottom);
-        }
         .bottomSection {
             margin-top: 100%;
         }
-        .title {
+        .title_subscribe {
             opacity: 0;
             @include animation(0s, 1.7s, fadein);
         }
-        .subtitle {
+        .subtitle_subscribe {
             opacity: 0;
             @include animation(0s, 1.7s, fadein);
         }
@@ -30,12 +27,12 @@
         background-position: center;
         float: right;
     }
-    .title {
+    .title_subscribe {
         padding-top: 80px;
         @include fontStyle(28px, 300, #FFFFFF, 34px);
         text-align: center;
     }
-    .subtitle {
+    .subtitle_subscribe {
         @include fontStyle(16px, 400, rgba(255, 255, 255, 0.64), 20px);
         text-align: center;
         padding-top: 8px;
@@ -56,7 +53,7 @@
         max-width: 80%;
         margin-left: 10%;
     }
-    .cta {
+    .subscribeCta {
         @include fontStyle(14px, 500, #17B197, 20px);
         text-align: center;
         margin-top: 48px;
@@ -79,6 +76,10 @@
             margin-top: -2px;
         }
     }
+}
+
+.slideFromBottomCls {
+    @include animation(0.4s, 0.7s, slideFromBottom);
 }
 
 @include keyframe(slideFromBottom) {

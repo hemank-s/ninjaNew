@@ -17,11 +17,11 @@
         var that = this;
 
         var DOMcache = {
-            cta: document.getElementsByClassName('cta')[0],
+            cta: document.getElementsByClassName('subscribeCta')[0],
             centerIcon: document.getElementsByClassName('centreIcon')[0],
             info: document.getElementsByClassName('info')[0],
-            title: document.getElementsByClassName('title')[0],
-            subtitle: document.getElementsByClassName('subtitle')[0],
+            title: document.getElementsByClassName('title_subscribe')[0],
+            subtitle: document.getElementsByClassName('subtitle_subscribe')[0],
             screenCls: document.getElementsByClassName('screenCls')[0],
             content: document.getElementsByClassName('content')[0],
             bottomSection: document.getElementsByClassName('bottomSection')[0]

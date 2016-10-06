@@ -60,7 +60,8 @@
                             }
                         });
                     } catch (err) {
-                        utils.showToast('Sorry. Your image couldn’t be updated. Could you try again with another files, please?');
+                        var res = { stat: 'exception' }
+                        callback(res);
                     }
 
                 } else {

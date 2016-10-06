@@ -52,8 +52,15 @@
             successCta: document.getElementsByClassName('successCta'),
             contentType: (data.type == Constants.UGC_TYPE.QUOTE) ? 'quote' : 'fact',
             cardOverlay: document.getElementsByClassName('cardOverlay'),
+            ugcContainer: document.getElementsByClassName('ugcContainer'),
+            ugcWrapper: document.getElementsByClassName('ugcWrapper'),
+
 
         };
+
+
+        var defHeight = parseInt(window.getComputedStyle(DOMcache.quoteName[0]).height);
+        DOMcache.quoteName[0].style.minHeight = defHeight + 'px';
 
 
         DOMcache.quoteName[0].addEventListener('keyup', function() {
@@ -76,7 +83,7 @@
 
 
         DOMcache.sendCta[0].addEventListener('click', function() {
-            that.sendUgcContent(DOMcache, data);
+            that.sendUgcContent(DOMcache, data, DOMcache.sendCta[0]);
         });
 
         DOMcache.addPhotoCta[0].addEventListener('click', function() {
@@ -102,10 +109,14 @@
             if (DOMcache.screenH > window.innerHeight) {
                 DOMcache.cardNote[0].classList.remove('animation_fadein');
                 DOMcache.cardNote[0].classList.add('animation_fadeout');
+                DOMcache.ugcContainer[0].classList.add('overscroll');
+                DOMcache.ugcWrapper[0].classList.add('marB_30');
 
             } else {
                 DOMcache.cardNote[0].classList.remove('animation_fadeout');
                 DOMcache.cardNote[0].classList.add('animation_fadein');
+                DOMcache.ugcContainer[0].classList.remove('overscroll');
+                DOMcache.ugcWrapper[0].classList.remove('marB_30');
 
             }
         });
@@ -145,7 +156,7 @@
         });
 
         DOMcache.sendJflCta[0].addEventListener('click', function() {
-            that.sendUgcContent(DOMcache, data);
+            that.sendUgcContent(DOMcache, data, DOMcache.sendJflCta[0]);
         });
 
         DOMcache.successCta[0].addEventListener('click', function() {
@@ -159,19 +170,48 @@
 
     UgcController.prototype.chooseFileSuccess = function(DOMcache) {
 
-        var img = new Image();
-        img.src = 'file://' + DOMcache.jflImage[0].getAttribute('filePath');
+
+        if (platformSdk.bridgeEnabled) {
+            var img = new Image();
+            img.src = 'file://' + DOMcache.jflImage[0].getAttribute('filePath');
 
 
-        img.onload = function() {
-            var aspectRatio = img.height / img.width;
-            //var h1 = DOMcache.jflCtaContainer[0].getBoundingClientRect().height;
+            img.onload = function() {
+                var aspectRatio = img.height / img.width;
+                var h1 = 52;
+                var h2 = DOMcache.jflNote[0].getBoundingClientRect().height;
+                var gap = 10;
+                var oldH;
+                var newH = oldH = window.innerHeight - (h1 + h2 + gap * 2);
+
+
+
+                var newW = newH / aspectRatio;
+
+                if (newW > (window.innerWidth - gap * 2)) {
+                    newW = window.innerWidth - gap * 2;
+                    newH = newW * aspectRatio;
+                }
+
+
+
+                DOMcache.jflImage[0].style.height = newH + 'px';
+                DOMcache.jflImage[0].style.width = newW + 'px';
+                DOMcache.jflContainer[0].style.paddingTop = (oldH - newH) / 2 + gap + 'px';
+                DOMcache.title[0].classList.add('hideClass');
+                DOMcache.uploadIcon[0].classList.add('hideClass');
+                DOMcache.jflNote[0].innerHTML = "Don’t send any inappropriate image, or it won’t be published.";
+                DOMcache.jflImage[0].classList.remove('hideClass');
+                DOMcache.jflCtaContainer[0].classList.remove('hideClass');
+            }
+        } else {
+
+            var aspectRatio = 163 / 115;
             var h1 = 52;
             var h2 = DOMcache.jflNote[0].getBoundingClientRect().height;
             var gap = 10;
-            var padTop = parseInt(window.getComputedStyle(document.getElementsByClassName('ugcContainer')[0]).paddingTop);
             var oldH;
-            var newH = oldH = window.innerHeight - (h1 + h2 + gap * 2 + padTop);
+            var newH = oldH = window.innerHeight - (h1 + h2 + gap * 2);
 
 
 
@@ -182,20 +222,25 @@
                 newH = newW * aspectRatio;
             }
 
+
+
             DOMcache.jflImage[0].style.height = newH + 'px';
             DOMcache.jflImage[0].style.width = newW + 'px';
-            DOMcache.jflImage[0].style.marginTop = (oldH - newH) / 2 + 'px';
+            DOMcache.jflContainer[0].style.paddingTop = (oldH - newH) / 2 + gap + 'px';
             DOMcache.title[0].classList.add('hideClass');
             DOMcache.uploadIcon[0].classList.add('hideClass');
             DOMcache.jflNote[0].innerHTML = "Don’t send any inappropriate image, or it won’t be published.";
             DOMcache.jflImage[0].classList.remove('hideClass');
             DOMcache.jflCtaContainer[0].classList.remove('hideClass');
+
         }
+
+
 
     };
 
 
-    UgcController.prototype.sendUgcContent = function(DOMcache, data) {
+    UgcController.prototype.sendUgcContent = function(DOMcache, data, element) {
 
         var that = this;
 
@@ -203,6 +248,8 @@
             return;
 
         this.callInProgress = 1;
+        element.classList.add('disabled');
+
 
         var serverPath;
         if (data.type == Constants.UGC_TYPE.QUOTE) {
@@ -238,31 +285,43 @@
 
         ugcModel.postUgcData(ugcData, imagePresent, function(res) {
 
-            if (res.stat == 'ok') {
-                if (data.type == Constants.UGC_TYPE.QUOTE || data.type == Constants.UGC_TYPE.FACT) {
-                    DOMcache.card[0].classList.add('hideClass');
-                    DOMcache.cardNote[0].classList.add('hideClass');
-                    DOMcache.ctaContainer[0].classList.add('hideClass');
-                    DOMcache.addPhotoCta[0].classList.add('hideClass');
+            if (platformSdk.bridgeEnabled) {
+                if (res.stat == 'ok') {
+                    if (data.type == Constants.UGC_TYPE.QUOTE || data.type == Constants.UGC_TYPE.FACT) {
+                        DOMcache.card[0].classList.add('hideClass');
+                        DOMcache.cardNote[0].classList.add('hideClass');
+                        DOMcache.ctaContainer[0].classList.add('hideClass');
+                        DOMcache.addPhotoCta[0].classList.add('hideClass');
 
 
+                    } else {
+                        DOMcache.jflNote[0].classList.add('hideClass');
+                        DOMcache.jflImage[0].classList.add('hideClass');
+                        DOMcache.jflCtaContainer[0].classList.add('hideClass');
+                        DOMcache.jflContainer[0].classList.add('hideClass');
+                    }
+
+                    DOMcache.successCard[0].classList.remove('hideClass');
+
+
+                } else if (res.stat == 'fail') {
+                    utils.showToast(res.data.reason);
+                } else if (res.stat == "exception") {
+                    utils.showToast('Sorry. Your image couldn’t be updated. Could you try again with another files, please?');
                 } else {
-                    DOMcache.jflNote[0].classList.add('hideClass');
-                    DOMcache.jflImage[0].classList.add('hideClass');
-                    DOMcache.jflCtaContainer[0].classList.add('hideClass');
-                    DOMcache.jflContainer[0].classList.add('hideClass');
+                    utils.showToast('Sorry. Your image couldn’t be updated. Could you try again with another files, please?');
                 }
 
-                DOMcache.successCard[0].classList.remove('hideClass');
-
-
-            } else if (res.stat == 'fail') {
-                utils.showToast(res.data.reason);
             } else {
-                utils.showToast('Sorry. Your data could not be send. Try again , please ?');
+                DOMcache.card[0].classList.add('hideClass');
+                DOMcache.cardNote[0].classList.add('hideClass');
+                DOMcache.ctaContainer[0].classList.add('hideClass');
+                DOMcache.addPhotoCta[0].classList.add('hideClass');
+                DOMcache.successCard[0].classList.remove('hideClass');
             }
 
             that.callInProgress = 0;
+            element.classList.remove('disabled');
 
 
         });
@@ -348,18 +407,23 @@
 
             DOMcache.cta[0].classList.remove('disabled');
             if (eventType == 'click') {
-                console.log('Preview Screen');
-                if (data.type == Constants.UGC_TYPE.FACT)
-                    DOMcache.cardNote[0].innerHTML = "Add only #Fact related image or your #fact image won’t be published.";
-                else
-                    DOMcache.cardNote[0].innerHTML = "Add only quote or author related image or image will change accordingly.";
 
-                DOMcache.quoteName[0].setAttribute('contentEditable', false);
-                DOMcache.quoteAuthor[0].setAttribute('contentEditable', false);
-                DOMcache.quoteChar[0].classList.add('animation_fadeout');
-                DOMcache.ctaContainer[0].classList.remove('hideClass');
-                DOMcache.addPhotoCta[0].classList.remove('hideClass');
-                DOMcache.cta[0].classList.add('hide');
+                window.setTimeout(function() {
+                    console.log('Preview Screen');
+                    if (data.type == Constants.UGC_TYPE.FACT)
+                        DOMcache.cardNote[0].innerHTML = "Add only #Fact related image or your #fact image won’t be published.";
+                    else
+                        DOMcache.cardNote[0].innerHTML = "Add only quote or author related image or image will change accordingly.";
+
+                    DOMcache.quoteName[0].setAttribute('contentEditable', false);
+                    DOMcache.quoteAuthor[0].setAttribute('contentEditable', false);
+                    DOMcache.quoteChar[0].classList.add('animation_fadeout');
+                    DOMcache.ctaContainer[0].classList.remove('hideClass');
+                    DOMcache.addPhotoCta[0].classList.remove('hideClass');
+                    DOMcache.cta[0].classList.add('hide');
+
+                }, 300);
+
             }
         }
 

@@ -2,6 +2,32 @@
 
 $gap: 100px;
 @media screen and (max-width: 299px) {
+    /***** Subscribe Screen *****/
+    .subscribeScreen {
+        .title_subscribe {
+            padding-top: 50px !important;
+            font-size: 24px !important;
+        }
+        .subtitle_subscribe {
+            font-size: 14px !important;
+        }
+        .centreIcon {
+            height: 163px !important;
+            margin-top: 10px !important;
+            background-size: 100px 144px !important;
+        }
+        .ninjaWave {
+            height: 90px !important;
+        }
+        .info {
+            font-size: 12px !important;
+        }
+        .subscribeCta {
+            font-size: 12px !important;
+            margin-top: 22px !important;
+        }
+    }
+    /******************/
     .infoDetails {
         width: 299px - $gap;
     }
@@ -108,6 +134,32 @@ $gap: 100px;
 }
 
 @media screen and (min-width: 300px) and (max-width: 320px) {
+    /***** Subscribe Screen *****/
+    .subscribeScreen {
+        .title_subscribe {
+            padding-top: 50px !important;
+            font-size: 24px !important;
+        }
+        .subtitle_subscribe {
+            font-size: 14px !important;
+        }
+        .centreIcon {
+            height: 163px !important;
+            margin-top: 10px !important;
+            background-size: 100px 144px !important;
+        }
+        .ninjaWave {
+            height: 90px !important;
+        }
+        .info {
+            font-size: 12px !important;
+        }
+        .subscribeCta {
+            font-size: 12px !important;
+            margin-top: 22px !important;
+        }
+    }
+    /******************/
     .infoDetails {
         width: 300px - $gap;
     }
@@ -212,6 +264,32 @@ $gap: 100px;
 }
 
 @media screen and (min-width: 321px) and (max-width: 340px) {
+    /***** Subscribe Screen *****/
+    .subscribeScreen {
+        .title_subscribe {
+            padding-top: 60px !important;
+            font-size: 26px !important;
+        }
+        .subtitle_subscribe {
+            font-size: 14px !important;
+        }
+        .centreIcon {
+            height: 163px !important;
+            margin-top: 16px !important;
+            background-size: 110px 158px !important;
+        }
+        .ninjaWave {
+            height: 100px !important;
+        }
+        .info {
+            font-size: 14px !important;
+        }
+        .subscribeCta {
+            font-size: 14px !important;
+            margin-top: 28px !important;
+        }
+    }
+    /******************/
     .infoDetails {
         width: 320px - $gap;
     }
@@ -275,6 +353,22 @@ $gap: 100px;
 }
 
 @media screen and (min-width: 341px) and (max-width: 360px) {
+    /***** Subscribe Screen *****/
+    .subscribeScreen {
+        .title_subscribe {
+            padding-top: 70px !important;
+        }
+        .centreIcon {
+            margin-top: 20px !important;
+        }
+        .ninjaWave {
+            height: 100px !important;
+        }
+        .subscribeCta {
+            margin-top: 36px !important;
+        }
+    }
+    /******************/
     .infoDetails {
         width: 340px - $gap;
     }
