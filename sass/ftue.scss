@@ -33,7 +33,7 @@
     .row4 {
         @include animation(0.9s, 0.8s, inforRowAnim);
     }
-    .cta {
+    .ftueCta {
         opacity: 0;
         @include animation(1.7s, 1s, fadeInTranslate);
     }

@@ -17,7 +17,8 @@
         var that = this;
 
         var DOMcache = {
-            cta: document.getElementsByClassName('subscribeCta')[0],
+            subscribeCta: document.getElementsByClassName('subscribeCta')[0],
+            ftueCta: document.getElementsByClassName('ftueCta')[0],
             centerIcon: document.getElementsByClassName('centreIcon')[0],
             info: document.getElementsByClassName('info')[0],
             title: document.getElementsByClassName('title_subscribe')[0],
@@ -31,7 +32,8 @@
 
             var target = evt.target;
 
-            if (target.classList.contains('subscribeCta')) {
+
+            if (target.classList.contains('workspaceCta')) {
 
                 if (target.getAttribute('data-screen') == "subscribe") {
 
