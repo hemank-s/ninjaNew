@@ -97,8 +97,7 @@
 
                 if (target.getAttribute('data-screen') == "subscribe") {
 
-                    that.subscribeScreenAnimation(DOMcache, App, that.ftueTemplate);
-
+                    
                     if (platformSdk.bridgeEnabled) {
                         App.NinjaService.subscribeHandler({}, function(res) {
 
@@ -126,6 +125,8 @@
                                 utils.showToast('Something went wrong while subscribing');
                         }, that);
 
+                    }else{
+                        that.subscribeScreenAnimation(DOMcache, App, that.ftueTemplate);
                     }
 
                 } else {
