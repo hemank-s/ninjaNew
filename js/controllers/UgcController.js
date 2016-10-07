@@ -11,7 +11,7 @@
         UgcController = function(options) {
             this.quoteTemplate = require('raw!../../templates/quoteTemplate.html');
             this.jflTemplate = require('raw!../../templates/jflTemplate.html');
-            //this.backButtonTemplate = require('raw!../../templates/backButtonPop.html');
+            this.backButtonTemplate = require('raw!../../templates/backButtonPopUp.html');
             this.callInProgress = 0;
         };
 
@@ -55,6 +55,9 @@
             cardOverlay: document.getElementsByClassName('cardOverlay'),
             ugcContainer: document.getElementsByClassName('ugcContainer'),
             ugcWrapper: document.getElementsByClassName('ugcWrapper'),
+            confirmPopup: document.getElementsByClassName('ugcBackPopupContainer'),
+            dialogPositiveAction: document.getElementsByClassName('dialogPositiveAction'),
+            dialogNegativeAction: document.getElementsByClassName('dialogNegativeAction'),
 
 
         };
@@ -447,7 +450,14 @@
             that.el.innerHTML = Mustache.render(unescape(template));
         }
 
+        var backButtonTemplate = document.createElement('div');
+        backButtonTemplate.classList.add('ugcBackPopupContainer');
+        backButtonTemplate.classList.add('centerToScreenContainer');
+        backButtonTemplate.classList.add('hideClass');
+        backButtonTemplate.innerHTML = Mustache.render(unescape(that.backButtonTemplate));
+
         ctr.appendChild(that.el);
+        ctr.appendChild(backButtonTemplate)
         events.publish('update.loader', { show: false });
         that.bind(App, data);
     };

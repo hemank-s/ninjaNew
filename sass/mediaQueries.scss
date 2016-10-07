@@ -1016,3 +1016,79 @@ $gap: 65px;
         }
     }
 }
+
+@media screen and (min-height: 506px) and (max-height: 512px) {
+    /***** Subscribe Screen *****/
+    .subscribeScreen {
+        .title_subscribe {
+            padding-top: 20% !important;
+            font-size: 24px !important;
+        }
+        .subtitle_subscribe {
+            font-size: 14px !important;
+        }
+        .centreIcon {
+            height: 150px !important;
+            margin-top: 10px !important;
+            background-size: 100px 144px !important;
+            margin-bottom: 0px !important;
+        }
+        .ninjaWave {
+            height: 17.5% !important;
+        }
+        .info {
+            font-size: 12px !important;
+        }
+        .subscribeCta {
+            font-size: 12px !important;
+        }
+    }
+    /******************/
+    /***** FTUE Screen *****/
+    .ftueScreen {
+        .title_subscribe {
+            font-size: 24px !important;
+            padding-top: 18%;
+        }
+        .ninjaWave {
+            height: 100px !important;
+        }
+        .crossIcon {
+            background-size: 13px 13px;
+        }
+        .content {
+            margin-top: -15px !important;
+        }
+        .infoRow {
+            margin-bottom: 20px !important;
+            padding-left: 16px !important;
+        }
+        .infoIcon {
+            width: 17px !important;
+            height: 17px !important;
+        }
+        .infoDetails {
+            margin-left: 12px !important;
+        }
+        .infoHeading {
+            font-size: 13px !important;
+            line-height: 17px !important;
+        }
+        .infoSubHeading {
+            font-size: 11px !important;
+            line-height: 13px !important;
+        }
+        .ftueCta {
+            font-size: 12px !important;
+        }
+        @include keyframe(slideFromBottom2) {
+            0% {
+                margin-top: 0%;
+            }
+            100% {
+                margin-top: -63%;
+            }
+        }
+    }
+    /******************/
+}
