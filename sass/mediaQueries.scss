@@ -1,11 +1,10 @@
 /*   Screen Resolution - 120   */
 
-$gap: 90px;
+$gap: 65px;
 @media screen and (max-width: 299px) {
     /***** Subscribe Screen *****/
     .subscribeScreen {
         .title_subscribe {
-            /*padding-top: 50px !important;*/
             padding-top: 20% !important;
             font-size: 24px !important;
         }
@@ -13,12 +12,12 @@ $gap: 90px;
             font-size: 14px !important;
         }
         .centreIcon {
-            height: 163px !important;
+            height: 150px !important;
             margin-top: 10px !important;
             background-size: 100px 144px !important;
+            margin-bottom: 0px !important;
         }
         .ninjaWave {
-            /*height: 90px !important;*/
             height: 17.5% !important;
         }
         .info {
@@ -26,8 +25,6 @@ $gap: 90px;
         }
         .subscribeCta {
             font-size: 12px !important;
-            /*margin-top: 22px !important;*/
-            margin-top: 10% !important;
         }
     }
     /******************/
@@ -35,12 +32,46 @@ $gap: 90px;
     .ftueScreen {
         .title_subscribe {
             font-size: 24px !important;
-        }
-        .centreIcon {
-            margin-top: 10px !important;
+            padding-top: 18%;
         }
         .ninjaWave {
             height: 100px !important;
+        }
+        .crossIcon {
+            background-size: 13px 13px;
+        }
+        .content {
+            margin-top: -15px !important;
+        }
+        .infoRow {
+            margin-bottom: 20px !important;
+            padding-left: 16px !important;
+        }
+        .infoIcon {
+            width: 17px !important;
+            height: 17px !important;
+        }
+        .infoDetails {
+            margin-left: 12px !important;
+        }
+        .infoHeading {
+            font-size: 13px !important;
+            line-height: 17px !important;
+        }
+        .infoSubHeading {
+            font-size: 11px !important;
+            line-height: 13px !important;
+        }
+        .ftueCta {
+            font-size: 12px !important;
+        }
+        @include keyframe(slideFromBottom2) {
+            0% {
+                margin-top: 0%;
+            }
+            100% {
+                margin-top: -70%;
+            }
         }
     }
     /******************/
@@ -184,8 +215,6 @@ $gap: 90px;
     /***** Subscribe Screen *****/
     .subscribeScreen {
         .title_subscribe {
-            /*padding-top: 50px !important*/
-            ;
             padding-top: 20% !important;
             font-size: 24px !important;
         }
@@ -193,12 +222,12 @@ $gap: 90px;
             font-size: 14px !important;
         }
         .centreIcon {
-            height: 163px !important;
+            height: 150px !important;
             margin-top: 10px !important;
             background-size: 100px 144px !important;
+            margin-bottom: 0px !important;
         }
         .ninjaWave {
-            /*height: 90px !important;*/
             height: 17.5% !important;
         }
         .info {
@@ -206,8 +235,53 @@ $gap: 90px;
         }
         .subscribeCta {
             font-size: 12px !important;
-            /*margin-top: 22px !important;*/
-            margin-top: 10% !important;
+        }
+    }
+    /******************/
+    /***** FTUE Screen *****/
+    .ftueScreen {
+        .title_subscribe {
+            font-size: 24px !important;
+            padding-top: 18%;
+        }
+        .ninjaWave {
+            height: 100px !important;
+        }
+        .crossIcon {
+            background-size: 13px 13px;
+        }
+        .content {
+            margin-top: -15px !important;
+        }
+        .infoRow {
+            margin-bottom: 20px !important;
+            padding-left: 16px !important;
+        }
+        .infoIcon {
+            width: 17px !important;
+            height: 17px !important;
+        }
+        .infoDetails {
+            margin-left: 12px !important;
+        }
+        .infoHeading {
+            font-size: 13px !important;
+            line-height: 17px !important;
+        }
+        .infoSubHeading {
+            font-size: 11px !important;
+            line-height: 13px !important;
+        }
+        .ftueCta {
+            font-size: 12px !important;
+        }
+        @include keyframe(slideFromBottom2) {
+            0% {
+                margin-top: 0%;
+            }
+            100% {
+                margin-top: -63%;
+            }
         }
     }
     /******************/
@@ -370,8 +444,53 @@ $gap: 90px;
         }
         .subscribeCta {
             font-size: 12px !important;
-            /*margin-top: 22px !important;*/
-            margin-top: 10% !important;
+        }
+    }
+    /******************/
+    /***** FTUE Screen *****/
+    .ftueScreen {
+        .title_subscribe {
+            font-size: 24px !important;
+            padding-top: 18%;
+        }
+        .ninjaWave {
+            height: 100px !important;
+        }
+        .crossIcon {
+            background-size: 14px 14px;
+        }
+        .content {
+            margin-top: -15px !important;
+        }
+        .infoRow {
+            margin-bottom: 18px !important;
+            padding-left: 16px !important;
+        }
+        .infoIcon {
+            width: 18px !important;
+            height: 18px !important;
+        }
+        .infoDetails {
+            margin-left: 14px !important;
+        }
+        .infoHeading {
+            font-size: 13px !important;
+            line-height: 18px !important;
+        }
+        .infoSubHeading {
+            font-size: 11px !important;
+            line-height: 14px !important;
+        }
+        .ftueCta {
+            font-size: 12px !important;
+        }
+        @include keyframe(slideFromBottom2) {
+            0% {
+                margin-top: 0%;
+            }
+            100% {
+                margin-top: -63%;
+            }
         }
     }
     /******************/
@@ -560,12 +679,49 @@ $gap: 90px;
             background-size: 105px 152px;
         }
         .ninjaWave {
-            /*height: 100px !important;*/
             height: 17.5% !important;
         }
-        .subscribeCta {
-            /*margin-top: 22px !important;*/
-            margin-top: 10% !important;
+    }
+    /******************/
+    /***** FTUE Screen *****/
+    .ftueScreen {
+        .title_subscribe {
+            padding-top: 18%;
+        }
+        .ninjaWave {
+            height: 100px !important;
+        }
+        .crossIcon {
+            background-size: 14px 14px;
+        }
+        .content {
+            margin-top: -18px !important;
+        }
+        .infoRow {
+            margin-bottom: 20px !important;
+            padding-left: 18px !important;
+        }
+        .infoDetails {
+            margin-left: 14px !important;
+        }
+        .infoHeading {
+            font-size: 14px !important;
+            line-height: 18px !important;
+        }
+        .infoSubHeading {
+            font-size: 12px !important;
+            line-height: 14px !important;
+        }
+        .ftueCta {
+            font-size: 13px !important;
+        }
+        @include keyframe(slideFromBottom2) {
+            0% {
+                margin-top: 0%;
+            }
+            100% {
+                margin-top: -57%;
+            }
         }
     }
     /******************/
@@ -646,12 +802,43 @@ $gap: 90px;
             background-size: 105px 152px;
         }
         .ninjaWave {
-            /*height: 100px !important;*/
             height: 17.5% !important;
         }
-        .subscribeCta {
-            /*margin-top: 22px !important;*/
-            margin-top: 10% !important;
+    }
+    /******************/
+    /***** FTUE Screen *****/
+    /***** FTUE Screen *****/
+    .ftueScreen {
+        .title_subscribe {
+            padding-top: 18%;
+        }
+        .ninjaWave {
+            height: 100px !important;
+        }
+        .content {
+            margin-top: -22px !important;
+        }
+        .infoRow {
+            margin-bottom: 24px !important;
+        }
+        .infoHeading {
+            font-size: 14px !important;
+            line-height: 18px !important;
+        }
+        .infoSubHeading {
+            font-size: 12px !important;
+            line-height: 14px !important;
+        }
+        .ftueCta {
+            font-size: 13px !important;
+        }
+        @include keyframe(slideFromBottom2) {
+            0% {
+                margin-top: 0%;
+            }
+            100% {
+                margin-top: -53%;
+            }
         }
     }
     /******************/
@@ -690,9 +877,26 @@ $gap: 90px;
             /*height: 100px !important;*/
             height: 17.5% !important;
         }
-        .subscribeCta {
-            /*margin-top: 22px !important;*/
-            margin-top: 10% !important;
+    }
+    /******************/
+    /***** FTUE Screen *****/
+    .ftueScreen {
+        .title_subscribe {
+            padding-top: 18% !important;
+        }
+        .ninjaWave {
+            height: 100px !important;
+        }
+        .infoRow {
+            margin-bottom: 26px;
+        }
+        @include keyframe(slideFromBottom2) {
+            0% {
+                margin-top: 0%;
+            }
+            100% {
+                margin-top: -48%;
+            }
         }
     }
     /******************/
@@ -706,9 +910,109 @@ $gap: 90px;
     .infoDetails {
         width: 400px - $gap;
     }
+    /***** FTUE Screen *****/
+    .ftueScreen {
+        .ninjaWave {
+            height: 100px !important;
+        }
+        @include keyframe(slideFromBottom2) {
+            0% {
+                margin-top: 0%;
+            }
+            100% {
+                margin-top: -43%;
+            }
+        }
+    }
     @include mysteryBoxStyling(300px);
 }
 
 @media screen and (min-width: 421px) {
+    .infoDetails {
+        width: 421px - $gap;
+    }
     @include mysteryBoxStyling(300px);
+    /***** FTUE Screen *****/
+    .ftueScreen {
+        .ninjaWave {
+            height: 110px !important;
+        }
+        @include keyframe(slideFromBottom2) {
+            0% {
+                margin-top: 0%;
+            }
+            100% {
+                margin-top: -40%;
+            }
+        }
+    }
+}
+
+@media screen and (min-width: 450px) {
+    .ftueScreen,
+    .subscribeScreen {
+        .ninjaWave {
+            height: 126px !important;
+        }
+    }
+}
+
+@media screen and (min-height: 601px) {
+    .ftueScreen .infoRow {
+        margin-bottom: 30px !important;
+    }
+}
+
+@media screen and (max-height: 505px) {
+    .subscribeScreen {
+        .title_subscribe {
+            padding-top: 16% !important;
+        }
+        .subtitle_subscribe {
+            font-size: 14px !important;
+        }
+        .centreIcon {
+            height: 140px !important;
+            margin-top: 0px !important;
+            background-size: 80px 115px !important;
+            margin-bottom: 0px !important;
+        }
+    }
+    .ftueScreen {
+        .crossIcon {
+            background-size: 12px 12px;
+        }
+        .title_subscribe {
+            font-size: 22px !important;
+            padding-top: 18%;
+        }
+        .ninjaWave {
+            height: 89px !important;
+        }
+        .content {
+            margin-top: -20px !important;
+        }
+        .infoRow {
+            margin-bottom: 18px !important;
+            padding-left: 16px !important;
+        }
+        .infoIcon {
+            width: 16px !important;
+            height: 16px !important;
+        }
+        .infoDetails {
+            margin-left: 12px !important;
+        }
+        .infoHeading {
+            font-size: 12px !important;
+            line-height: 16px !important;
+        }
+        .infoSubHeading {
+            font-size: 10px !important;
+            line-height: 12px !important;
+        }
+        .ftueCta {
+            font-size: 10px !important;
+        }
+    }
 }

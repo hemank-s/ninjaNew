@@ -18,7 +18,6 @@
 
         var DOMcache = {
             subscribeCta: document.getElementsByClassName('subscribeCta')[0],
-            ftueCta: document.getElementsByClassName('ftueCta')[0],
             centerIcon: document.getElementsByClassName('centreIcon')[0],
             info: document.getElementsByClassName('info')[0],
             title: document.getElementsByClassName('title_subscribe')[0],
@@ -27,6 +26,67 @@
             content: document.getElementsByClassName('content')[0],
             bottomSection: document.getElementsByClassName('bottomSection')[0]
         };
+
+
+        DOMcache.bottomSection.addEventListener('webkitAnimationEnd', function() {
+
+            var marginTop, elem1, elem2, ftue = false;
+            if (document.getElementsByClassName('screenCls')[0].classList.contains('subscribeScreen')) {
+                elem1 = DOMcache.info;
+                elem2 = DOMcache.subscribeCta;
+
+            } else {
+                elem1 = document.getElementsByClassName('infoRow')[3];
+                elem2 = document.getElementsByClassName('ftueCta')[0];
+                ftue = true;
+            }
+
+            if (!ftue)
+                var time = 0;
+            else
+                var time = 900;
+
+            setTimeout(function() {
+                marginTop = (window.innerHeight - elem1.offsetTop - elem1.offsetHeight - elem2.offsetHeight) / 2;
+                elem2.style.marginTop = marginTop + 'px';
+                elem2.style.opacity = "1";
+
+
+            }, time);
+
+
+
+
+
+        });
+
+        DOMcache.bottomSection.addEventListener('animationend', function() {
+
+            var marginTop, elem1, elem2, ftue = false;
+            if (document.getElementsByClassName('screenCls')[0].classList.contains('subscribeScreen')) {
+                elem1 = DOMcache.info;
+                elem2 = DOMcache.subscribeCta;
+
+            } else {
+                elem1 = document.getElementsByClassName('infoRow')[3];
+                elem2 = document.getElementsByClassName('ftueCta')[0];
+                ftue = true;
+            }
+
+            if (!ftue)
+                var time = 0;
+            else
+                var time = 900;
+
+            setTimeout(function() {
+                marginTop = (window.innerHeight - elem1.offsetTop - elem1.offsetHeight - elem2.offsetHeight) / 2;
+                elem2.style.marginTop = marginTop + 'px';
+                elem2.style.opacity = "1";
+
+
+            }, time);
+        });
+
 
         document.addEventListener('click', function(evt) {
 
@@ -37,36 +97,37 @@
 
                 if (target.getAttribute('data-screen') == "subscribe") {
 
+                    that.subscribeScreenAnimation(DOMcache, App, that.ftueTemplate);
+
                     if (platformSdk.bridgeEnable) {
+                        App.NinjaService.subscribeHandler({}, function(res) {
 
-                    } else {
-                        that.subscribeScreenAnimation(DOMcache, App, that.ftueTemplate);
+                            if (res.stat === 'ok') {
+
+                                cacheProvider.setInCritical('subscriptionCompleted', true);
+
+                                that.subscribeScreenAnimation(DOMcache, App, that.ftueTemplate);
+
+                                //Fetch Profile Data in Background 
+                                App.NinjaService.getNinjaProfile(function(res) {
+                                    console.log(res.data);
+                                    cacheProvider.setInCritical('userProfileData', res.data);
+
+                                    var oldHash = cacheProvider.getFromCritical('oldHash');
+                                    var newHash = res.data.rewards_hash;
+                                    utils.hashCheck(oldHash, newHash);
+
+                                    if (res.data.status != 'inactive' && res.data.status != 'locked') {
+                                        profileModel.updateNinjaData(res.data, App, false);
+                                    }
+
+                                }, that);
+                            } else
+                                utils.showToast('Something went wrong while subscribing');
+                        }, that);
+
                     }
-                    App.NinjaService.subscribeHandler({}, function(res) {
 
-                        if (res.stat === 'ok') {
-
-                            cacheProvider.setInCritical('subscriptionCompleted', true);
-
-                            that.subscribeScreenAnimation(DOMcache, App, that.ftueTemplate);
-
-                            //Fetch Profile Data in Background 
-                            App.NinjaService.getNinjaProfile(function(res) {
-                                console.log(res.data);
-                                cacheProvider.setInCritical('userProfileData', res.data);
-
-                                var oldHash = cacheProvider.getFromCritical('oldHash');
-                                var newHash = res.data.rewards_hash;
-                                utils.hashCheck(oldHash, newHash);
-
-                                if (res.data.status != 'inactive' && res.data.status != 'locked') {
-                                    profileModel.updateNinjaData(res.data, App, false);
-                                }
-
-                            }, that);
-                        } else
-                            utils.showToast('Something went wrong while subscribing');
-                    }, that);
                 } else {
 
                     /* Animation FTUE screen dismiss */
@@ -75,12 +136,19 @@
 
             } else if (target.classList.contains('crossIcon')) {
 
-                App.NinjaService.unsubscribeHandler({}, function(res) {
-                    if (res.stat === 'ok')
-                        PlatformBridge.closeWebView();
-                    else
-                        utils.showToast('Something went wrong while unsubscribing');
-                }, that);
+                if (platformSdk.bridgeEnabled) {
+                    App.NinjaService.unsubscribeHandler({}, function(res) {
+                        if (res.stat === 'ok')
+                            PlatformBridge.closeWebView();
+                        else
+                            utils.showToast('Something went wrong while unsubscribing');
+                    }, that);
+
+                } else {
+                    console.log('closing miroapp');
+                }
+
+
             }
         });
     };

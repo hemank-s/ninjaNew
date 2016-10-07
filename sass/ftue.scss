@@ -1,4 +1,7 @@
 .ftueScreen {
+    .title_subscribe {
+        padding-bottom: 20px;
+    }
     height: 100%;
     .titleAnimFtueCls {
         @include animation(0s, 0.7s, titleAnimFtue);
@@ -35,7 +38,10 @@
     }
     .ftueCta {
         opacity: 0;
-        @include animation(1.7s, 1s, fadeInTranslate);
+        /*@include animation(1.7s, 1s, fadeInTranslate);*/
+        -webkit-transition: all 0.5s;
+        transition: all 0.5s;
+        margin-top: 100px;
     }
     .giftIcon {
         background: url(images/giftIcon.png);
@@ -72,15 +78,6 @@
     }
     .content {
         margin-top: -30px !important;
-    }
-}
-
-@include keyframe(slideFromBottom2) {
-    0% {
-        margin-top: 0%;
-    }
-    100% {
-        margin-top: -50%;
     }
 }
 

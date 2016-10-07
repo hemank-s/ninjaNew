@@ -26,7 +26,9 @@
         padding: 24px;
         background-image: url(images/cross.png);
         background-position: center;
-        float: right;
+        position: absolute;
+        right: 0;
+        z-index: 1000;
     }
     .title_subscribe {
         padding-top: 80px;
@@ -43,10 +45,11 @@
     }
     .centreIcon {
         height: 163px;
-        margin-top: 46px;
+        margin-top: 30px;
         background-image: url(images/ninjaSubscribe.png);
         background-size: 114px 163px;
         background-position: center;
+        margin-bottom: 15px;
     }
     .info {
         @include fontStyle(14px, 400, rgba(61, 71, 91, 0.64), 18px);
@@ -57,7 +60,10 @@
     .workspaceCta {
         @include fontStyle(14px, 500, #17B197, 20px);
         text-align: center;
-        margin-top: 48px;
+        margin-top: 100px;
+        opacity: 0;
+        -webkit-transition: all 0.5s;
+        transition: all 0.5s;
         /*transform: translate(-50%, -50%);
         left: 50%;
         position: absolute;
@@ -67,7 +73,7 @@
         height: 100%;
         .ninjaWave {
             background-image: url(images/ninjaWave.png);
-            height: 136px;
+            height: 110px;
             background-size: cover;
             background-position: bottom;
         }
