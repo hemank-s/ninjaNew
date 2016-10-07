@@ -145,6 +145,7 @@
                 }, 1000);
 
                 DOMcache.mysteryBoxAvailable.classList.remove('hideClass');
+                DOMcache.mysteryBoxAvailable.classList.add('slideUp');
                 console.log(DOMcache.mysteryBoxAvailable.getElementsByClassName('mysteryBoxToastIconBig')[0]);
                 console.log(DOMcache.mysteryBoxAvailable.getElementsByClassName('mysteryBoxToastIconSmall')[0]);
 

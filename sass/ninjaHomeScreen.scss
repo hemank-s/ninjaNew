@@ -193,7 +193,7 @@ span.streakDefInfo {
     height: 100%;
     background-color: #FFF;
     margin-top: -20px;
-    overflow: scroll; 
+    overflow: scroll;
 }
 
 .unlockedRewardHeading {
@@ -654,6 +654,11 @@ ul.unlockedRewardList > li.unlockedRewardListItem {
     background: #FFF;
     width: 100%;
     overflow: hidden;
+    -webkit-transform: translateY(100%);
+    -moz-transform: translateY(100%);
+    -ms-transform: translateY(100%);
+    -o-transform: translateY(100%);
+    transform: translateY(100%);
 }
 
 .mBoxToastIconContainer {
@@ -964,12 +969,12 @@ ul.unlockedRewardList > li.unlockedRewardListItem {
     color: #FFF;
 }
 
-.batteryDangerAction{
-    text-transform: uppercase ;
+.batteryDangerAction {
+    text-transform: uppercase;
     text-align: center;
     margin-top: 144px;
     font-size: 16px;
-    color: #FFF;    
+    color: #FFF;
 }
 
 .batteryDangerIcon {
