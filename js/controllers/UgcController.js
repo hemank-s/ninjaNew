@@ -11,6 +11,7 @@
         UgcController = function(options) {
             this.quoteTemplate = require('raw!../../templates/quoteTemplate.html');
             this.jflTemplate = require('raw!../../templates/jflTemplate.html');
+            //this.backButtonTemplate = require('raw!../../templates/backButtonPop.html');
             this.callInProgress = 0;
         };
 

@@ -436,16 +436,15 @@
             this.router.route('/ugc', function(data) {
                 self.container.innerHTML = '';
                 self.ugcController.render(self.container, self, data);
-                utils.toggleBackNavigation(false);
+                utils.toggleBackNavigation(true);
             });
 
             var subscriptionCompleted = cacheProvider.getFromCritical('subscriptionCompleted');
             var ftueCompleted = cacheProvider.getFromCritical('ftueCompleted');
 
             if (!subscriptionCompleted || !ftueCompleted) {
-
-                self.router.navigateTo('/home');
-                //self.router.navigateTo('/ugc', { type: Constants.UGC_TYPE.JFL });
+                self.router.navigateTo('/');
+                //self.router.navigateTo('/ugc', { type: 'jfl' });
             } else {
                 self.NinjaService.getNinjaProfile(function(res) {
                     cacheProvider.setInCritical('userProfileData', res.data);

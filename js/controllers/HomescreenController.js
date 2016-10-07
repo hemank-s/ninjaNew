@@ -134,6 +134,7 @@
 
         if (platformSdk.bridgeEnabled) {
             if (mysteryBoxData.mstatus == 'active') {
+                console.log("enabling mystery box for you");
 
                 var spinNowColor = ['#F5A623', '#F8E71C', '#DF75FD', '#448BF7', '#1DA8E8', '#9ED62C', '#FF7154'];
                 var spinNowText = document.getElementsByClassName('mysteryBoxToastAction')[0];
@@ -144,8 +145,11 @@
                 }, 1000);
 
                 DOMcache.mysteryBoxAvailable.classList.remove('hideClass');
-                DOMcache.mysteryBoxAvailable.getElementsByClassName('mBoxToastIconContainer')[0].getElementsByClassName('mysteryBoxToastIconBig')[0].classList.add('spinMysteryBoxBig');
-                DOMcache.mysteryBoxAvailable.getElementsByClassName('mBoxToastIconContainer')[0].getElementsByClassName('mysteryBoxToastIconSmall')[0].classList.add('spinMysteryBoxSmall');
+                console.log(DOMcache.mysteryBoxAvailable.getElementsByClassName('mysteryBoxToastIconBig')[0]);
+                console.log(DOMcache.mysteryBoxAvailable.getElementsByClassName('mysteryBoxToastIconSmall')[0]);
+
+                DOMcache.mysteryBoxAvailable.getElementsByClassName('mysteryBoxToastIconBig')[0].classList.add('spinMysteryBoxBig');
+                DOMcache.mysteryBoxAvailable.getElementsByClassName('mysteryBoxToastIconSmall')[0].classList.add('spinMysteryBoxSmall');
 
                 DOMcache.mysteryBoxAvailable.addEventListener('click', function(event) {
                     App.router.navigateTo('/mysteryBox', mysteryBoxData);
@@ -163,19 +167,21 @@
         //Check if first ever battery lost has occured or not 
 
         var batteryLostFtueDone = cacheProvider.getFromCritical('batteryLostFtueDone');
+        console.log(batteryLostFtueDone);
 
         if (!platformSdk.bridgeEnabled) {
             batteryLostFtueDone = true;
             pdata = { "maxBattery": 7, "battery": 6, "hike_version": "4.2.2.2", "rewards_hash": "1474970960", "status": "active", "streak": 10 };
         }
 
-        if (!batteryLostFtueDone) {
+        if (typeof batteryLostFtueDone === 'undefined' || batteryLostFtueDone === false) {
             if (pdata.battery < pdata.maxBattery) {
                 console.log("user has lost a battery for the first time");
                 var batteryLost = pdata.maxBattery - pdata.battery;
                 cacheProvider.setInCritical('batteryLostFtueDone', true);
                 DOMcache.batteryCriticalAnimation.classList.remove('hideClass');
                 DOMcache.batteryDangerIcon = document.getElementsByClassName('batteryDangerIcon')[0];
+                DOMcache.batteryDangerAction = document.getElementsByClassName('batteryDangerAction')[0];
 
                 setTimeout(function() {
                     DOMcache.batteryDangerIcon.classList.add('batteryAnimationActive');
@@ -190,6 +196,10 @@
                     DOMcache.batteryCriticalAnimation.classList.add('hideClass');
                 });
 
+                DOMcache.batteryDangerAction.addEventListener('click', function(event) {
+                    DOMcache.batteryCriticalAnimation.classList.add('hideClass');
+                    DOMcache.batteryStreakInfoContainer.classList.remove('hideClass');
+                });
             }
         }
 
@@ -245,10 +255,10 @@
         }
 
         // REWARD ICONS
-        for (var j = 0; j < data.lockedRewards.length.length; j++) {
+        for (var j = 0; j < data.lockedRewards.length; j++) {
             console.log("Updating the icons for locked rewards");
-            if (data.lockedRewards[i].icon) {
-                DOMcache.lockedRewardListItem[i].getElementsByClassName('rewardIcon')[0].style.backgroundImage = "url('" + data.lockedRewards[i].icon + "')";
+            if (data.lockedRewards[j].icon) {
+                DOMcache.lockedRewardListItem[j].getElementsByClassName('rewardIcon')[0].style.backgroundImage = "url('" + data.lockedRewards[j].icon + "')";
             } else {
                 console.log("Set a default icon for rewards");
             }
@@ -286,6 +296,8 @@
             showNewRewardAnimation = false;
             rewardsData.unlockedRewards.push(rewardsData.lockedRewards[0]);
         }
+
+        utils.changeBotTitle('Hike Ninja');
 
         that.el = document.createElement('div');
         that.el.className = 'homeScreenContainer animation_fadein noselect';

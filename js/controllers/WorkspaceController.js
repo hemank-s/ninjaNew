@@ -99,7 +99,7 @@
         DOMcache.centerIcon.classList.remove('scaleZeroToOneAnim');
         DOMcache.centerIcon.classList.add('animation_fadeout');
         DOMcache.info.classList.add('animation_fadeout');
-        DOMcache.cta.classList.add('animation_fadeout');
+        DOMcache.subscribeCta.classList.add('animation_fadeout');
     };
 
     WorkspaceController.prototype.ftueScreenDismissAnimation = function(DOMcache, App) {
@@ -112,7 +112,7 @@
         cacheProvider.setInCritical('ftueCompleted', true);
         window.setTimeout(function() {
             App.router.navigateTo('/home');
-        }, 300)
+        }, 300);
 
     };
 

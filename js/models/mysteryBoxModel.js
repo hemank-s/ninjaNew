@@ -83,7 +83,8 @@
 
                     that.template = require('raw!../../templates/mysteryBoxCongrats.html');
                     mysteryBoxContainer.innerHTML = Mustache.render(that.template, {
-                        mysterBoxReward: rewardData
+                        mysterBoxReward: rewardData,
+                        congratsText: rewardData.stitle
                     });
 
                     var congratsIcon = document.getElementsByClassName('mysteryBoxCongratsIcon')[0];
@@ -165,6 +166,12 @@
             }
         },
 
+        removeMysteryBoxToast: function() {
+            var mBoxCacheData = cacheProvider.getFromCritical('ninjaMysteryBoxData');
+            mBoxCacheData.mstatus = '';
+            cacheProvider.setInCritical('ninjaMysteryBoxData', mBoxCacheData);
+        },
+
         getRewardMapping: function(resultId, mysteryBoxData) {
 
             var slices = document.getElementsByClassName('part');
@@ -193,6 +200,7 @@
             var setText = function(a, c) {
                 a.addEventListener('transitionend', function() {
                     that.defineMysteryBoxResultAnimation(App, rewardData, mysteryBoxData);
+                    that.removeMysteryBoxToast();
                     a.removeEventListener('transitionend', setText);
                 });
             };

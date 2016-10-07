@@ -60,7 +60,7 @@
                             }
                         });
                     } catch (err) {
-                        var res = { stat: 'exception' }
+                        var res = { stat: 'exception' };
                         callback(res);
                     }
 

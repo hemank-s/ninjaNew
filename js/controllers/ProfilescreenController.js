@@ -13,12 +13,13 @@
         };
 
 
-    ProfilescreenController.prototype.bind = function(App, data) {
+    ProfilescreenController.prototype.bind = function(App, data, mBoxHistory) {
 
         var DOMcache = {
             unlockedReward: document.getElementsByClassName('unlockedReward')[0],
             ugcTypeRow: document.getElementsByClassName('ugcTypeRow'),
             redeemedRewardRow: document.getElementsByClassName('redeemedRewardRow'),
+            mysteryRedeemedRewardRow: document.getElementsByClassName('mysteryRedeemedRewardRow')
         };
 
         //Swipe
@@ -82,11 +83,11 @@
         }
 
         defineNinjaHomeScreenTabs();
-        this.updateIcons(DOMcache, data)
+        this.updateIcons(DOMcache, data, mBoxHistory)
         this.updateLinks(DOMcache, data, App);
     };
 
-    ProfilescreenController.prototype.updateIcons = function (DOMcache,data){
+    ProfilescreenController.prototype.updateIcons = function (DOMcache,data, mBoxHistory){
         
         // UGC ICONS
 
@@ -109,7 +110,19 @@
                 }else{
                     console.log("Set a default icon for rewards");
                 }
-        }    
+            }    
+        }
+
+        // Mboxhostory icon
+
+        if(mBoxHistory){
+            for(var z=0;z<mBoxHistory.length;z++){
+                if(mBoxHistory[z].icon){
+                    DOMcache.mysteryRedeemedRewardRow[z].getElementsByClassName('redeemedRewardIcon')[0].style.backgroundImage = "url('" + mBoxHistory[z].icon + "')";
+                }else{
+                    console.log("Set a default icon for rewards");
+                }
+            }
         }
         
     };
@@ -123,6 +136,7 @@
 
                         // Get Reward related information
                         var ugcType = this.getAttribute('data-type');
+                        App.router.navigateTo('/ugc', { type: ugcType });
                     });
                 }
             }
@@ -180,13 +194,15 @@
             ninjaUgc = {"stat":"ok","data":{"content":[{"type":"jfl","title":"Just for Laugh","stitle":"Submit funny new memes and get recognized","icon":"s3 url here"},{"type":"quotes","title":"Daily quotes","stitle":"Submit famous quotes and get recognized","icon":"s3 url here"},{"type":"facts","title":"Facts","stitle":"Submit fun and new facts and get recognized","icon":"s3 url here"}]}};
             ninjaUgc = ninjaUgc.data.content;
         }   
+
+        utils.changeBotTitle('Profile');
         
         that.el = document.createElement('div');
         that.el.className = 'profileScreenContainer animation_fadein noselect';
         that.el.innerHTML = Mustache.render(unescape(that.template), {ninjaMysteryBoxRewards: boxHistory,ninjaRedeemedRewards: data.rewardsData.redeemedRewards, ninjaActivityData:ninjaStats, ninjaUgcData:ninjaUgc});
         ctr.appendChild(that.el);
         events.publish('update.loader', { show: false });
-        that.bind(App, data);
+        that.bind(App, data, boxHistory);
     };
 
     ProfilescreenController.prototype.destroy = function() {

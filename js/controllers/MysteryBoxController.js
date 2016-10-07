@@ -33,6 +33,9 @@
     MysteryBoxController.prototype.render = function(ctr, App, data) {
 
         var that = this;
+
+        utils.changeBotTitle('Lucky Box');
+
         that.el = document.createElement('div');
         that.el.className = 'mysteryBoxContainer animation_fadein noselect';
         that.el.innerHTML = Mustache.render(unescape(that.template));

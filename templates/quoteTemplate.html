@@ -2,7 +2,7 @@
     <div class="quoteCardContainer imageElement">
         <div class="cardOverlay hideClass"></div>
         <div class="quoteCard">
-            <div class="quoteName" contenteditable="true" placeholder="Tap here to type the quote here use only maximum 120 words."></div>
+            <div class="quoteName" contenteditable="true" placeholder="Tap here to type the {{#isQuote}} Quote {{/isQuote}} {{^isQuote}} #Fact {{/isQuote}} here use only maximum 120 words."></div>
             <div class="quoteAuthor {{^isQuote}}hideClass{{/isQuote}}" contenteditable="true" placeholder="— Type Author Name">{{^isQuote}} author{{/isQuote}}</div>
         </div>
         <div class="quoteChar">

@@ -209,6 +209,16 @@
 
         },
 
+        changeBotTitle: function(title) {
+            if (platformSdk.bridgeEnabled) {
+                try {
+                    PlatformBridge.changeBotTitle(title);
+                } catch (e) {
+                    console.log('Error in changing bot title');
+                }
+            }
+        },
+
         // Sets action bar and status bar color
         changeBarColors: function(scolor, acolor) {
             PlatformBridge.setStatusBarColor(scolor);

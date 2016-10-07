@@ -57,9 +57,9 @@
         MAX_LENGTH_QUOTE: 250,
 
         UGC_TYPE: {
-            JFL: 0,
-            QUOTE: 1,
-            FACT: 2
+            JFL: 'jfl',
+            QUOTE: 'quotes',
+            FACT: 'facts'
         }
 
 
