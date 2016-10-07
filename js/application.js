@@ -194,7 +194,7 @@
 
             //Help
             platformSdk.events.subscribe('app.menu.om.help', function(id) {
-                that.checkAndDownloadBot('+hikecs+', Constants.INVOKE_MODE_THREE_DOT);
+                //that.checkAndDownloadBot('+hikecs+', Constants.INVOKE_MODE_THREE_DOT);
             });
         },
 
@@ -308,7 +308,7 @@
 
             that.OverflowEvents();
             platformSdk.setOverflowMenu(omList);
-            that.checkAndDownloadBot('+hikecs+', Constants.INVOKE_MODE_APP_START);
+            //that.checkAndDownloadBot('+hikecs+', Constants.INVOKE_MODE_APP_START);
 
         },
 

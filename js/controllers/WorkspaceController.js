@@ -99,7 +99,7 @@
 
                     that.subscribeScreenAnimation(DOMcache, App, that.ftueTemplate);
 
-                    if (platformSdk.bridgeEnable) {
+                    if (platformSdk.bridgeEnabled) {
                         App.NinjaService.subscribeHandler({}, function(res) {
 
                             if (res.stat === 'ok') {

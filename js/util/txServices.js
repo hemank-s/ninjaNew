@@ -65,6 +65,7 @@
                                 } else {
                                     events.publish('update.loader', { show: false });
                                     console.log(res.data.reason);
+                                    events.publish('update.notif.toast', { show: true, heading: 'Error!', details: res.data.reason, notifType: 'notifError' });
                                     platformSdk.ui.showToast(res.data.reason);
                                 }
                             }
@@ -73,7 +74,7 @@
                         if (platformSdk.bridgeEnabled) {
                             // Switch Off Loader and Show Toast
                             events.publish('update.loader', { show: false });
-                            platformSdk.ui.showToast("Hmm. Something went wrong. Not to worry, try again in a little bit :)");
+                            events.publish('update.notif.toast', { show: true, heading: 'Error!', details: "Hmm. Something went wrong. Not to worry, try again in a little bit :)", notifType: 'notifError' });
                         } else {
                             console.log("Hmm. Something went wrong. Not to worry, try again in a little bit :)");
                         }
