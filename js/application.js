@@ -453,6 +453,7 @@
             var ftueCompleted = cacheProvider.getFromCritical('ftueCompleted');
 
             if (!subscriptionCompleted || !ftueCompleted) {
+                //self.router.navigateTo('/ugc', { type: 'facts' });
                 self.router.navigateTo('/');
 
             } else {

@@ -20,6 +20,11 @@
         var that = this;
         var imageSelected = 0;
 
+        var parentCache = {
+            confirmPopup: document.getElementsByClassName('ugcBackPopupContainer'),
+            yesAction: document.getElementsByClassName('dialogPositiveAction'),
+            noAction: document.getElementsByClassName('dialogNegativeAction')
+        };
 
 
         if (data.type == Constants.UGC_TYPE.QUOTE || data.type == Constants.UGC_TYPE.FACT)
@@ -27,7 +32,53 @@
         else
             that.bindHandlersJfl(App, data);
 
+
+        events.subscribe('ugc.backpress', function() {
+            that.backpressHandler(App, data);
+        });
+
+        parentCache.yesAction[0].addEventListener('click', function() {
+            App.router.back();
+        });
+
+        parentCache.noAction[0].addEventListener('click', function() {
+            parentCache.confirmPopup[0].classList.add('hideClass');
+        });
+
     };
+
+
+    UgcController.prototype.backpressHandler = function(App, data) {
+
+        var quoteName = document.querySelectorAll('.quoteName');
+        var quoteAuthor = document.querySelectorAll('.quoteAuthor');
+        var jflImage = document.querySelectorAll('.jflImage');
+
+        if (data.type == Constants.UGC_TYPE.QUOTE) {
+
+            if ((quoteName.length > 0 && quoteName[0].innerHTML.length > 0) || (quoteAuthor.length > 0 && quoteAuthor[0].innerHTML.length > 0)) {
+                parentCache.confirmPopup[0].classList.remove('hideClass');
+            } else {
+                App.router.back();
+            }
+
+        } else if (data.type == Constants.UGC_TYPE.FACT) {
+
+            if (quoteName.length > 0 && quoteName[0].innerHTML.length > 0) {
+                parentCache.confirmPopup[0].classList.remove('hideClass');
+            } else {
+                App.router.back();
+            }
+
+        } else {
+
+            if (jflImage.getAttribute('filePath'))
+                parentCache.confirmPopup[0].classList.remove('hideClass');
+            else
+                App.router.back();
+        }
+
+    }
 
 
 
@@ -55,10 +106,6 @@
             cardOverlay: document.getElementsByClassName('cardOverlay'),
             ugcContainer: document.getElementsByClassName('ugcContainer'),
             ugcWrapper: document.getElementsByClassName('ugcWrapper'),
-            confirmPopup: document.getElementsByClassName('ugcBackPopupContainer'),
-            yesAction: document.getElementsByClassName('dialogPositiveAction'),
-            noAction: document.getElementsByClassName('dialogNegativeAction'),
-
 
         };
 
@@ -67,17 +114,7 @@
         DOMcache.quoteName[0].style.minHeight = defHeight + 'px';
 
 
-        events.subscribe('ugc.backpress', function() {
-            DOMcache.confirmPopup[0].classList.remove('hideClass');
-        });
 
-        DOMcache.yesAction[0].addEventListener('click', function() {
-            App.router.back();
-        });
-
-        DOMcache.noAction[0].addEventListener('click', function() {
-            DOMcache.confirmPopup[0].classList.add('hideClass');
-        });
 
         DOMcache.quoteName[0].addEventListener('keyup', function() {
             DOMcache.userInput[0].innerHTML = this.innerHTML.length;
@@ -269,11 +306,11 @@
 
         var serverPath;
         if (data.type == Constants.UGC_TYPE.QUOTE) {
-            serverPath = 'http://54.169.82.65:5016/v1/ugc/type/quotes?message=' + DOMcache.quoteName[0].innerHTML + '&author=' + DOMcache.quoteAuthor[0].innerHTML;
+            serverPath = appConfig.API_URL + '/ugc/type/quotes?message=' + DOMcache.quoteName[0].innerHTML + '&author=' + DOMcache.quoteAuthor[0].innerHTML;
         } else if (data.type == Constants.UGC_TYPE.FACT) {
-            serverPath = 'http://54.169.82.65:5016/v1/ugc/type/facts?message=' + DOMcache.quoteName[0].innerHTML;
+            serverPath = appConfig.API_URL + '/ugc/type/facts?message=' + DOMcache.quoteName[0].innerHTML;
         } else {
-            serverPath = 'http://54.169.82.65:5016/v1/ugc/type/jfl';
+            serverPath = appConfig.API_URL + '/ugc/type/jfl';
         }
 
 
