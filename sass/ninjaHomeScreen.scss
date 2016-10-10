@@ -91,7 +91,7 @@
 .streakStatusContainer {
     display: inline-block;
     vertical-align: bottom;
-    margin-left: 8px; 
+    margin-left: 8px;
 }
 
 .streakStatusContainerInfo {
@@ -158,7 +158,7 @@ span.streakDefInfo {
 }
 
 .streakHealthy {
-    border: 1px solid #2BE6AB; 
+    border: 1px solid #2BE6AB;
 }
 
 .streakDanger {
@@ -167,6 +167,7 @@ span.streakDefInfo {
 
 .ninjaHomeContainer {
     height: 100%;
+    overflow: scroll;
 }
 
 .profileContainer {
@@ -190,29 +191,30 @@ span.streakDefInfo {
 .ninjaRewards {
     height: 100%;
     background-color: #FFF;
+    margin-top: -2px;
     overflow: scroll;
 }
 
 .unlockedRewardHeading {
     display: inline-block;
-    margin-left: 15px;
+    margin-left: 16px;
     font-size: 12px;
+    font-weight: 500;
     color: rgba(61, 71, 91, 0.48);
     text-transform: uppercase;
 }
 
 .lockedRewardHeading {
     display: inline-block;
-    margin-left: 15px;
+    margin-left: 16px;
     font-size: 12px;
+    font-weight: 500;
     color: rgba(61, 71, 91, 0.48);
     text-transform: uppercase;
-    margin-bottom: 24px;
+    margin-bottom: 8px;
 }
 
 .lockedRewardListContainer {
-    margin-left: 20px;
-    margin-right: 12px;
     height: 100%;
 }
 
@@ -220,43 +222,66 @@ span.streakDefInfo {
     background: url(images/defaultRewardIcon.png);
     background-size: contain;
     background-repeat: no-repeat;
-    width: 24px;
-    height: 24px;
+    width: 30px;
+    height: 30px;
+}
+
+.uStreakIconContainer {
+    line-height: 46px;
+}
+
+.unlockedRewardStreakIcon {
+    background: url(images/streakIcon.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 10px;
+    height: 10px;
+    display: inline-block;
 }
 
 .unlockedRewardStreak {
-    @include fontStyle(14px, 500, #FFFFFF, 14px);
-    float: right;
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.72);
+    line-height: 14px;
+    font-weight: 400;
+    display: inline-block;
 }
 
 .unlockedRewardDetails {
-    margin: 0px 0px 28px 15px;
+    padding: 0px 0px 16px 16px;
+    width: 87%;
 }
 
 .uRewardHeading {
-    @include fontStyle(14px, 500, #FFFFFF, 17px);
+    @include fontStyle(16px, 400, #FFFFFF, 18px);
     margin-bottom: 8px;
 }
 
 .uRewardSubheading {
-    @include fontStyle(12px, 400, rgba(255, 255, 255, 0.70), 17px);
+    @include fontStyle(14px, 400, rgba(255, 255, 255, 0.80), 18px);
+    white-space: initial;
+    word-break: break-all;
 }
 
 .unlockedRewardAction {
-    @include fontStyle(12px, 400, #FFFFFF, 14px);
+    font-size: 12px;
+    color: #FFFFFF;
+    line-height: 14px;
+    font-weight: 500;
     text-transform: uppercase;
-}
-
-.unlockedRewardAction {
-    margin-left: 15px;
+    position: absolute;
+    right: 24px;
+    bottom: 24px;
 }
 
 li.unlockedRewardListItem:first-child {
-    margin-left: 15px;
+    margin-left: 16px;
 }
 
 li.unlockedRewardListItem:nth-child(odd) {
-    background: linear-gradient(44deg, #FA4454 0%, #F6876C 100%);
+    /* Rectangle Copy 2: */
+    background: linear-gradient(0deg, #FF8B50 0%, #FF7C86 100%);
+    ;
 }
 
 li.unlockedRewardListItem:nth-child(even) {
@@ -264,9 +289,9 @@ li.unlockedRewardListItem:nth-child(even) {
 }
 
 li.unlockedRewardListItem {
-    width: 272px;
-    height: 180px;
-    border-radius: 2px;
+    width: 296px;
+    height: 192px;
+    border-radius: 4px;
     display: inline-block;
     margin-right: 12px;
     opacity: 0;
@@ -280,7 +305,11 @@ li.unlockedRewardListItem {
 .unlockedRewardHeader {
     display: flex;
     justify-content: space-between;
-    margin: 24px 15px 22px 20px;
+    padding: 8px 24px 14px 8px;
+}
+
+.uhContainer {
+    padding: 8px;
 }
 
 .unlockedRewardListContainer {
@@ -303,16 +332,20 @@ ul.unlockedRewardList > li.unlockedRewardListItem {
 
 .rewardRow {
     list-style: none;
-    margin-bottom: 16px;
-    padding-bottom: 16px;
+    padding: 12px 12px;
+}
+
+.riContainer {
+    padding: 8px;
+    display: inline-block;
 }
 
 .rewardIcon {
-    background: url(images/defaultRewardIcon.png);
+    background: url(images/streakIcon.png);
     background-size: contain;
     background-repeat: no-repeat;
-    width: 26px;
-    height: 26px;
+    width: 30px;
+    height: 30px;
     display: inline-block;
     background-position: center;
     vertical-align: middle;
@@ -320,15 +353,18 @@ ul.unlockedRewardList > li.unlockedRewardListItem {
 
 .rewardDetails {
     display: inline-block;
-    margin-left: 18px;
+    margin-left: 12px;
     vertical-align: middle;
+    width: 66%;
 }
 
+.lrewardHeading,
 .rewardHeading {
-    font-size: 14px;
+    font-size: 16px;
     color: #3D475B;
     margin-bottom: 4px;
-    font-weight: 500;
+    font-weight: 400;
+    display: inline-block;
 }
 
 .rewardHeadingLocked {
@@ -339,10 +375,13 @@ ul.unlockedRewardList > li.unlockedRewardListItem {
     width: 62%;
 }
 
+.lrewardSubheading,
 .rewardSubheading {
-    font-size: 12px;
-    color: rgba(61, 71, 91, 0.64);
-    width: 120%;
+    font-size: 14px;
+    color: rgba(61, 71, 91, 0.48);
+    white-space: initial;
+    word-break: break-all;
+    line-height: 18px;
 }
 
 .rewardSubheadingLocked {
@@ -354,21 +393,23 @@ ul.unlockedRewardList > li.unlockedRewardListItem {
 
 .rewardStreakWrapper {
     display: inline-block;
+    line-height: 10px;
     float: right;
-    vertical-align: middle;
-    line-height: 35px;
+    padding: 16px 8px;
 }
 
-.rewardStreakIcon {
-    background: url(images/rewardStreakIcon.png);
+.rewardStreakIcon,
+.lrewardStreakIcon {
+    background: url(images/lockedStreakIcon.png);
     background-size: contain;
     background-repeat: no-repeat;
-    width: 14px;
+    width: 10px;
     display: inline-block;
-    height: 12px;
+    height: 10px;
 }
 
-.rewardStreakValue {
+.rewardStreakValue,
+.lrewardStreakValue {
     font-size: 14px;
     color: rgba(61, 71, 91, 0.72);
     font-weight: 400;
@@ -376,8 +417,6 @@ ul.unlockedRewardList > li.unlockedRewardListItem {
 }
 
 .lockedRewards {
-    height: 100%;
-    overflow: scroll;
     -ms-transform: translate(0px, 0%);
     -webkit-transform: translate(0px, 0%);
     transform: translate(0px, 0%);
@@ -614,9 +653,18 @@ ul.unlockedRewardList > li.unlockedRewardListItem {
 }
 
 .upcoming0card {
-    background: rgba(61, 71, 91, 0.07) !important;
-    border: 1px dashed rgba(0, 0, 0, 0.20) !important;
-    border-radius: 2px !important;
+    background: #F2F2F2 !important;
+    border: 1px dashed #979797 !important;
+    border-radius: 4px;
+}
+
+.upcoming0card .unlockedRewardStreakIcon {
+    background: url(images/lockedStreakIcon.png) !important; 
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 10px;
+    height: 10px;
+    display: inline-block;
 }
 
 .upcoming0card .unlockedRewardStreak {
@@ -626,21 +674,31 @@ ul.unlockedRewardList > li.unlockedRewardListItem {
 }
 
 .upcoming0card .unlockedRewardAction {
-    font-size: 14px;
-    font-weight: 400;
-    color: #3D475B;
+    font-size: 12px;
+    color: rgba(68, 68, 68, 0.4);
+    line-height: 14px;
+    font-weight: 500;
+    text-transform: uppercase;
+    position: absolute;
+    right: 24px;
+    bottom: 24px;
 }
 
 .upcoming0card .uRewardHeading {
-    font-size: 14px;
-    font-weight: 500;
-    color: #3D475B;
+    font-size: 16px;
+    color: #444444;
+    line-height: 19px;
+    font-weight: 400;
+    margin-bottom: 4px;
 }
 
 .upcoming0card .uRewardSubheading {
-    font-size: 12px;
+    font-size: 14px;
+    color: rgba(68, 68, 68, 0.8);
+    line-height: 18px;
     font-weight: 400;
-    color: #3D475B;
+    white-space: initial;
+    word-break: break-all;
 }
 
 .mysteryBoxAvailable {
@@ -702,9 +760,9 @@ ul.unlockedRewardList > li.unlockedRewardListItem {
 .mysteryBoxToastAction {
     display: inline-block;
     float: right;
-    font-size: 12px;
+    font-size: 14px;
     color: #448bf7;
-    font-weight: 400;
+    font-weight: 500;
     text-transform: uppercase;
     margin-right: 16px;
     line-height: 60px;
