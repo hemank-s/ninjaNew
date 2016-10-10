@@ -47,7 +47,7 @@
 
     StickerRewardController.prototype.assignStickerCatImages = function(packs, DOMcache) {
 
-        var stickerCatUrl = 'http://54.169.82.65:5016/v1/stickerpack/';
+        var stickerCatUrl = appConfig.API_URL + '/stickerpack/';
 
         for (var i = 0; i < DOMcache.stickerPackIcon.length; i++) {
             var icon = DOMcache.stickerPackIcon[i];

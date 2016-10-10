@@ -47,6 +47,7 @@
     }
     [contenteditable=true]:empty:before {
         content: attr(placeholder);
+        opacity: 0.4;
     }
 }
 
@@ -266,11 +267,12 @@
 }
 
 .backUgcPopup .dialogPositiveAction {
-    color: #FF5E5C;
+    color: #00A7FF;
     float: right;
     font-size: 14px;
     text-transform: uppercase;
     font-weight: 500;
+    margin-right: 28px;
 }
 
 .backUgcPopup .dialogNegativeAction {
@@ -279,7 +281,6 @@
     text-transform: uppercase;
     float: right;
     font-weight: 500;
-    margin-right: 28px;
 }
 
 .ugcBackPopupContainer {

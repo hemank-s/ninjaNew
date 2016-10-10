@@ -28,62 +28,12 @@
 
 
         DOMcache.bottomSection.addEventListener('webkitAnimationEnd', function() {
-
-            var marginTop, elem1, elem2, ftue = false;
-            if (document.getElementsByClassName('screenCls')[0].classList.contains('subscribeScreen')) {
-                elem1 = DOMcache.info;
-                elem2 = DOMcache.subscribeCta;
-
-            } else {
-                elem1 = document.getElementsByClassName('infoRow')[2];
-                elem2 = document.getElementsByClassName('ftueCta')[0];
-                ftue = true;
-            }
-
-            if (!ftue)
-                var time = 0;
-            else
-                var time = 600;
-
-
-            setTimeout(function() {
-                marginTop = (window.innerHeight - elem1.offsetTop - elem1.offsetHeight - elem2.offsetHeight) / 2;
-                elem2.style.marginTop = marginTop + 'px';
-                elem2.style.opacity = "1";
-
-            }, time);
-
-
-
-
+            that.animHandlerFtue(DOMcache);
 
         });
 
         DOMcache.bottomSection.addEventListener('animationend', function() {
-
-            var marginTop, elem1, elem2, ftue = false;
-            if (document.getElementsByClassName('screenCls')[0].classList.contains('subscribeScreen')) {
-                elem1 = DOMcache.info;
-                elem2 = DOMcache.subscribeCta;
-
-            } else {
-                elem1 = document.getElementsByClassName('infoRow')[2];
-                elem2 = document.getElementsByClassName('ftueCta')[0];
-                ftue = true;
-            }
-
-            if (!ftue)
-                var time = 0;
-            else
-                var time = 600;
-
-
-            setTimeout(function() {
-                marginTop = (window.innerHeight - elem1.offsetTop - elem1.offsetHeight - elem2.offsetHeight) / 2;
-                elem2.style.marginTop = marginTop + 'px';
-                elem2.style.opacity = "1";
-
-            }, time);
+            that.animHandlerFtue(DOMcache);
         });
 
 
@@ -129,13 +79,40 @@
                     }
 
                 } else {
-
                     /* Animation FTUE screen dismiss */
                     that.ftueScreenDismissAnimation(DOMcache, App);
                 }
 
             }
         });
+    };
+
+
+    WorkspaceController.prototype.animHandlerFtue = function(DOMcache) {
+
+        var marginTop, elem1, elem2, ftue = false;
+        if (document.getElementsByClassName('screenCls')[0].classList.contains('subscribeScreen')) {
+            elem1 = DOMcache.info;
+            elem2 = DOMcache.subscribeCta;
+
+        } else {
+            elem1 = document.getElementsByClassName('infoRow')[2];
+            elem2 = document.getElementsByClassName('ftueCta')[0];
+            ftue = true;
+        }
+
+        if (!ftue)
+            var time = 0;
+        else
+            var time = 600;
+
+        setTimeout(function() {
+            marginTop = (window.innerHeight - elem1.offsetTop - elem1.offsetHeight - elem2.offsetHeight) / 2;
+            elem2.style.marginTop = marginTop + 'px';
+            elem2.style.opacity = "1";
+
+        }, time);
+
     };
 
     WorkspaceController.prototype.subscribeScreenAnimation = function(DOMcache, App, template) {
