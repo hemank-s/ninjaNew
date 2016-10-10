@@ -7,9 +7,9 @@
         "cbot": [{
             "name": "Hike Ninja",
             "dp": "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",
-            "msisdn": "+hikeninjanew+",
+            "msisdn": "+hikeninjaprod+",
             "bot_type": "nm_bot",
-            "nameSpace": "hikeninjanew",
+            "nameSpace": "hikeninjaprod",
             "config": "2757",
             "enable_bot": true,
             "md": {
@@ -18,10 +18,10 @@
                     "ld": {},
                     "hm": "Exclusive ninja stuff only for you",
                     "layoutId": "app.html",
-                    "appName": "hikeninjanew",
-                    "appVersion": "300015",
-                    "mAppVersionCode": 30015,
-                    "appPackage": "http://static.platform.hike.in/download/microapp/hikeninjanew/v20/hikeninjanew.zip"
+                    "appName": "hikeninjaprod",
+                    "appVersion": "1",
+                    "mAppVersionCode": 1,
+                    "appPackage": "http://static.platform.hike.in/download/microapp/hikeninjaprod/v1/hikeninjaprod.zip"
                 }
             },
             "cd": {
