@@ -122,7 +122,7 @@
 
                                 }, that);
                             } else
-                                utils.showToast('Something went wrong while subscribing');
+                                events.publish('update.notif.toast', { show: true, heading: 'Bamm', details: 'Something went wrong while subscribing', notifType: 'notifNeutral' });
                         }, that);
 
                     }else{
@@ -142,7 +142,7 @@
                         if (res.stat === 'ok')
                             PlatformBridge.closeWebView();
                         else
-                            utils.showToast('Something went wrong while unsubscribing');
+                            events.publish('update.notif.toast', { show: true, heading: 'Bamm', details: 'Something went wrong while unsubscribing', notifType: 'notifNeutral' });
                     }, that);
 
                 } else {

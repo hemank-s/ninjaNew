@@ -309,11 +309,11 @@
 
 
                 } else if (res.stat == 'fail') {
-                    utils.showToast(res.data.reason);
+                    events.publish('update.notif.toast', { show: true, heading: 'Error', details: res.data.reason, notifType: 'notifError' });
                 } else if (res.stat == "exception") {
-                    utils.showToast('Sorry. Your image couldn’t be updated. Could you try again with another files, please?');
+                    events.publish('update.notif.toast', { show: true, heading: 'Bamm', details: 'Sorry. Your image couldn’t be updated. Could you try again with another files, please?', notifType: 'notifNeutral' });
                 } else {
-                    utils.showToast('Sorry. Your image couldn’t be updated. Could you try again with another files, please?');
+                    events.publish('update.notif.toast', { show: true, heading: 'Bamm', details: 'Sorry. Your image couldn’t be updated. Could you try again with another files, please?', notifType: 'notifNeutral' });
                 }
 
             } else {
@@ -345,14 +345,13 @@
                         fileUrl = JSON.parse(fileUrl);
 
                         if (!fileUrl.filesize || fileUrl.filesize === 0) {
-
-                            utils.showToast('Sorry. Your image couldn’t be updated. Could you try again with another files, please?');
+                            events.publish('update.notif.toast', { show: true, heading: 'Bamm', details: 'Sorry. Your image couldn’t be updated. Could you try again with another files, please?', notifType: 'notifNeutral' });
                             return;
                         }
 
                         // Check Max Upload Size :: To Be Decided
                         if (fileUrl.filesize > 10000000) {
-                            utils.showToast('Max file upload size is 10 Mb');
+                            events.publish('update.notif.toast', { show: true, heading: 'Bamm', details: 'Max file upload size is 10 Mb', notifType: 'notifNeutral' });
                             return;
                         }
 
@@ -363,7 +362,8 @@
                 });
 
             } catch (err) {
-                utils.showToast('Sorry. Your image couldn’t be updated. Could you try again with another files, please?');
+                events.publish('update.notif.toast', { show: true, heading: 'Bamm', details: 'Sorry. Your image couldn’t be updated. Could you try again with another files, please?', notifType: 'notifNeutral' });
+                            
             }
 
         } else {
@@ -385,24 +385,22 @@
         if (DOMcache.quoteName[0].innerHTML.length > Constants.MAX_LENGTH_QUOTE) {
 
             if (eventType == 'click')
-                utils.showToast('Add only ' + Constants.MAX_LENGTH_QUOTE + ' Characters');
-
-        } else if (DOMcache.quoteName[0].innerHTML.length == 0 && DOMcache.quoteAuthor[0].innerHTML.length == 0) {
+                events.publish('update.notif.toast', { show: true, heading: 'Bamm', details: 'Add only ' + Constants.MAX_LENGTH_QUOTE + ' Characters', notifType: 'notifNeutral' });
+        } else if (DOMcache.quoteName[0].innerHTML.length === 0 && DOMcache.quoteAuthor[0].innerHTML.length === 0) {
 
             if (eventType == 'click')
-                utils.showToast('Add a quote & author');
-
-        } else if (DOMcache.quoteName[0].innerHTML.length == 0 && DOMcache.quoteAuthor[0].innerHTML.length != 0) {
+                events.publish('update.notif.toast', { show: true, heading: 'Bamm', details: 'Add a quote & author', notifType: 'notifNeutral' });
+        } else if (DOMcache.quoteName[0].innerHTML.length === 0 && DOMcache.quoteAuthor[0].innerHTML.length !== 0) {
 
             if (eventType == 'click') {
                 if (data.type == Constants.UGC_TYPE.FACT)
-                    utils.showToast('Add a Fact');
+                    events.publish('update.notif.toast', { show: true, heading: 'Bamm', details: 'Add a Fact', notifType: 'notifNeutral' });
                 else
                     DOMcache.quoteName[0].focus();
             }
 
 
-        } else if (DOMcache.quoteName[0].innerHTML.length != 0 && DOMcache.quoteAuthor[0].innerHTML.length == 0) {
+        } else if (DOMcache.quoteName[0].innerHTML.length !== 0 && DOMcache.quoteAuthor[0].innerHTML.length === 0) {
 
             if (eventType == 'click')
                 DOMcache.quoteAuthor[0].focus();

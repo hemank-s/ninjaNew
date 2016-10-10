@@ -28,7 +28,7 @@
 
         checkRewardStatus: function(data, App, existingUser) {
 
-            // Adhoc Reward Check here
+            // Adhoc Reward Check here :: If present add in locked rewards in controller before render
 
             if (data.adhoc_reward && data.adhoc_reward.length > 0) {
                 console.log("At least one reward is present");
@@ -48,8 +48,6 @@
                         console.log("NINJA REWARDS ARE", res.data);
                         rewardsModel.updateNinjaRewards(res.data, App, existingUser);
                     }, this);
-
-
                 } else {
                     console.log("stub needed");
                 }
@@ -70,11 +68,6 @@
             } else if (status == 'lapsed') {
                 return 'lapsed';
             }
-        },
-
-        // Check and Update Adhoc reward
-        checkAndUpdateAdhocReward: function(res) {
-
         },
 
         // Updates the Ninja Profile Data and check For Reward Status here

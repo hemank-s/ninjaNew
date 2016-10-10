@@ -10,7 +10,7 @@
             "msisdn": "+hikeninjanew+",
             "bot_type": "nm_bot",
             "nameSpace": "hikeninjanew",
-            "config": "237",
+            "config": "2757",
             "enable_bot": true,
             "md": {
                 "replace": true,
@@ -19,15 +19,15 @@
                     "hm": "Exclusive ninja stuff only for you",
                     "layoutId": "app.html",
                     "appName": "hikeninjanew",
-                    "appVersion": "20000",
-                    "mAppVersionCode": 20000,
-                    "appPackage": "http://static.platform.hike.in/download/microapp/hikeninjanew/v60/hikeninjanew.zip"
+                    "appVersion": "300015",
+                    "mAppVersionCode": 30015,
+                    "appPackage": "http://static.platform.hike.in/download/microapp/hikeninjanew/v20/hikeninjanew.zip"
                 }
             },
             "cd": {
-                "color": "#1D47F5",
+                "color": "#1F5EF2",
                 "js_inject": "",
-                "sb_color": "#1D47F5"
+                "sb_color": "#1F55D4"
             },
             "hd": {}
         }]

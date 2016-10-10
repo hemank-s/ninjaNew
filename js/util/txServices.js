@@ -66,7 +66,7 @@
                                     events.publish('update.loader', { show: false });
                                     console.log(res.data.reason);
                                     events.publish('update.notif.toast', { show: true, heading: 'Error!', details: res.data.reason, notifType: 'notifError' });
-                                    platformSdk.ui.showToast(res.data.reason);
+                                    //platformSdk.ui.showToast(res.data.reason);
                                 }
                             }
                         }

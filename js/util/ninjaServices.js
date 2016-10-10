@@ -182,7 +182,7 @@
 
         postUgcContent: function(url, fn, x) {
             var params = {
-                'url': url + Math.round(Math.random() * 999999999),
+                'url': url + '?random=' + Math.round(Math.random() * 999999999),
                 'type': 'POST',
                 'data': {}
             };

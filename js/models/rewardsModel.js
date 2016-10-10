@@ -30,19 +30,7 @@
                 return '/customSticker';
             }
         },
-
-        showRewardStateToast: function(state) {
-            if (state == Constants.REWARD_STATE.UNLOCKED) {
-                console.log("The state is currently unlocked :: Can open the reward");
-            } else if (state == Constants.REWARD_STATE.LOCKED) {
-                utils.showToast('The reward is currently under locked state. Try again once you unlock it at a higher streak');
-            } else if (state == Constants.REWARD_STATE.REDEEMED) {
-                console.log("Reward already redeemed once or more.");
-            } else if (state == Constants.REWARD_STATE.DISABLED) {
-                utils.showToast('The reward is in disabled state, sorry for the inconvienience');
-            }
-        },
-
+        
         updateNinjaRewardsIcons: function(data) {
             var that = this;
 
@@ -104,29 +92,15 @@
 
             cacheProvider.setInCritical('ninjaRewards', rewardsData);
 
-            var adhocReward = cacheProvider.getFromCritical('adhocRewardForUser');
+            // var oldNinjaCompareRewards = cacheProvider.getFromCritical('oldNinjaCompareRewards');
 
-            if (adhocReward) {
-                for (var i = 0; i < adhocReward.length; i++) {
-                    rewardsData.rewards.push(adhocReward[i]);
-                }
-            }
-
-            cacheProvider.setInCritical('adhocRewardForUser', adhocReward);
-
-            // A/B Testing Wrap for Locked Greyed out rewards
-
-            // ninjaRewardsListOld.innerHTML = Mustache.render(this.template, {
-            //     ninjaRewardsCollection: (typeof rewardsData === 'undefined' ? {} : rewardsData.rewards),
-            //     lockedGreyout: cacheProvider.getFromCritical('lockedGreyout')
-            // });
+            // if(typeof oldNinjaCompareRewards === 'undefined'){
+            //     cacheProvider.setInCritical('oldNinjaCompareRewards', rewardsData);                 
+            // }
 
             if (existingUser) {
                 App.router.navigateTo('/home');
             }
-
-            // this.updateNinjaRewardsLinks(App);
-            // this.updateNinjaRewardsIcons(rewardsData.rewards);
         }
 
     };

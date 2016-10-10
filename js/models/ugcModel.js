@@ -55,7 +55,7 @@
                                     console.log(res);
                                     callback(res);
                                 } catch (err) {
-                                    utils.showToast('Sorry. Your data could not be send. Try again , please ?');
+                                    events.publish('update.notif.toast', { show: true, heading: 'Error', details: 'Sorry. Your data could not be send. Try again , please ?', notifType: 'notifError' });
                                 }
                             }
                         });

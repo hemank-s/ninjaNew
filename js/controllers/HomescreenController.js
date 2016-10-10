@@ -220,6 +220,7 @@
     HomescreenController.prototype.filterRewards = function(rewards) {
 
         var filteredRewards = {};
+        var adhocReward = cacheProvider.getFromCritical('adhocRewardForUser');
 
         filteredRewards.unlockedRewards = [];
         filteredRewards.lockedRewards = [];
@@ -239,6 +240,14 @@
                 filteredRewards.expiredRewards.push(rewards[i]);
             }
         }
+
+        // Adds The adhoc Reward Here
+        if (adhocReward) {
+            for (var j = 0; j < adhocReward.length; j++) {
+                filteredRewards.unlockedRewards.push(adhocReward[j]);
+            }
+        }
+
         return filteredRewards;
     };
 
@@ -275,6 +284,7 @@
         // Get Data From Cache Always :: Cache updated in all cases before rendering data
         var profile_data = cacheProvider.getFromCritical('userProfileData');
         var rewards_data = cacheProvider.getFromCritical('ninjaRewards');
+        var oldNinjaCompareRewards = cacheProvider.getFromCritical('oldNinjaCompareRewards');
 
         if (platformSdk.bridgeEnabled) {
             if (utils.upgradeRequired(profile_data.hike_version, platformSdk.appData.appVersion)) {
@@ -292,6 +302,8 @@
             rewardsData = that.filterRewards(data.rewards);
         }
 
+        // showNewRewardAnimation = compareForAnimation(rewardsData.unlockedRewards,oldNinjaCompareRewards);
+
         // For No Unlocked Rewards :: Show First locked reward
         if (rewardsData.unlockedRewards.length === 0) {
             showNewRewardAnimation = false;
@@ -299,6 +311,7 @@
         }
 
         utils.changeBotTitle('Hike Ninja');
+        console.log("rewards before rendering are", rewardsData);
 
         that.el = document.createElement('div');
         that.el.className = 'homeScreenContainer animation_fadein noselect';
