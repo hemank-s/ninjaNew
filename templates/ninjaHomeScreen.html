@@ -14,20 +14,47 @@
             <div class="streakInfoWrapper">
                 <div class="streakInfoContainer">
                     <div class="streakContainerInfo">
-                        <div class="streakValueInfo">{{ninjaProfile.streak}}</div>
+                        <div class="dayHeading">Ninja Days</div>
                         <div class="streakStatusContainerInfo">
-                            <div class="streakIconInfo"></div><span class="streakDefInfo">Days</span>
+                            <div class="streakIconInfo">
+                                <svg width="16px" height="16px" viewBox="0 0 10 10" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                    <defs>
+                                        <linearGradient x1="-9.9247045%" y1="-13.0623229%" x2="16.0944836%" y2="84.8408029%" id="linearGradient-1">
+                                            <stop stop-color="#37AAFF" offset="0%"></stop>
+                                            <stop stop-color="#9BEDF9" offset="40.5829387%"></stop>
+                                            <stop stop-color="#FFFFFF" offset="100%"></stop>
+                                        </linearGradient>
+                                    </defs>
+                                    <g id="Home-Screen" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" opacity="1">
+                                        <g transform="translate(-78.000000, -116.000000)" id="Main-Content" fill="#FFFFFF">
+                                            <g transform="translate(0.000000, 112.000000)">
+                                                <g id="profile-pic-&amp;-name" transform="translate(16.000000, 0.000000)">
+                                                    <g id="Streak">
+                                                        <g id="Group-2">
+                                                            <g transform="translate(62.000000, 3.000000)">
+                                                                <path d="M5.41235254,7.07467505 C4.85726289,7.36424463 4.17146,7.15113196 3.88044642,6.59879665 C3.58943283,6.04646134 3.80360823,5.36406139 4.35869788,5.07449181 C4.91378753,4.78492222 5.59959041,4.99803489 5.890604,5.5503702 C6.18161759,6.10270551 5.96744219,6.78510546 5.41235254,7.07467505 M7.25646898,4.59641638 C6.58788845,3.86524219 6.94514185,2.48550243 6.17499361,1.62470301 C5.50994586,0.881225408 3.98289733,0.838163467 3.0974918,1.30129904 C4.26728694,1.90021155 4.1732264,3.26676908 3.59296562,3.77516364 C2.93763305,4.34946933 1.96434937,3.95268429 1.17344598,4.3942889 C-0.227305308,5.17687377 -0.0422754246,6.33954619 0.0884378102,7.85330526 C0.980467318,6.61549414 2.26596133,6.7758779 2.90053875,7.67226934 C3.40970213,8.39157952 3.16814761,9.52964512 3.78241149,10.2656528 C4.40771534,11.0148427 5.99482131,11.2376223 6.92659471,10.7147273 C5.71838048,10.00816 5.83275456,8.75189373 6.55741814,8.175391 C7.11957337,7.7280741 7.84732813,7.96579359 8.53048142,7.62788917 C9.972743,6.91473069 10.2973181,5.73404257 9.74841082,4.42109276 C9.18007321,4.77481585 7.95684463,5.36230376 7.25646898,4.59641638" id="Fill-1"></path>
+                                                            </g>
+                                                        </g>
+                                                    </g>
+                                                </g>
+                                            </g>
+                                        </g>
+                                    </g>
+                                </svg>
+                            </div>
+                            <div class="streakValueInfo">{{ninjaProfile.streak}}</div>
                         </div>
                     </div>
-                    <p class="dayHeading">Ninja Days</p>
                     <p class="dayInformation">This is the number of days you’ve been a Ninja for. Continue being a Ninja every day to go higher and get more awesome gifts.</p>
                 </div>
                 <hr class="infoSep" noshade>
                 <div class="batteryInfoWrapper">
-                    <div class="batteryIconContainer">
+                    <div class="bContainer">
+                        <div class="batteryHeading">Ninja Life</div>
+                        <div class="batteryIconContainer">
+                        </div>
                     </div>
-                    <div class="batteryHeading">Ninja Life - {{ninjaProfile.battery}} days remaining</div>
-                    <p class="batteryInformation">You’re going to reaming a Ninja for X more days. Keep loving and using hike with your best friends to be a Ninja for more days and get more awesome gifts.</p>
+                    <p class="batteryInformation">You’re going to reaming a Ninja for {{ninjaProfile.battery}} more days. Keep loving and using hike with your best friends to be a Ninja for more days and get more awesome gifts.</p>
                 </div>
                 <div class="informationAction">Got It</div>
             </div>
@@ -40,10 +67,18 @@
         <div class="dayDef">Day</div>
         <div class="streakValueContainer">
             <div class="rewardUnlockStreakIcon">
-                <svg width="32px" height="32px" viewBox="0 0 29 30">
+                <svg width="32px" height="32px" viewBox="0 0 32 32" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                    <!-- Generator: Sketch 40.1 (33804) - http://www.bohemiancoding.com/sketch -->
+                    <title>Fill 1</title>
+                    <desc>Created with Sketch.</desc>
+                    <defs></defs>
                     <g id="Home-Screen" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                        <g transform="translate(-134.000000, -317.000000)" fill="#23D3DA">
-                            <path d="M150.298813,334.816805 C148.693608,335.65418 146.710407,335.037902 145.868855,333.440662 C145.027304,331.843422 145.646655,329.870061 147.25186,329.032686 C148.857065,328.19531 150.840266,328.811588 151.681818,330.408828 C152.523369,332.006068 151.904018,333.979429 150.298813,334.816805 M156.459791,329.47735 C155.139521,326.934591 157.17009,323.348008 155.663133,320.367153 C154.36194,317.792672 150.128727,316.529467 147.308926,317.160441 C150.12821,319.708894 148.842672,323.455643 146.841345,324.441424 C144.580991,325.555124 142.159332,323.718345 139.619615,324.359908 C135.121227,325.497476 134.767859,328.883607 134,333.209761 C137.418111,330.419874 140.888789,331.829998 141.990423,334.808802 C142.874279,337.199105 141.347768,340.197225 142.5127,342.712832 C143.698603,345.273523 147.965062,347.083676 150.959107,346.320482 C148.113084,343.442567 149.372814,340.019093 151.828472,338.951148 C153.733512,338.122421 155.588398,339.331123 157.749527,338.898575 C162.311902,337.986002 164.102212,334.930963 163.551651,330.852723 C161.699392,331.415391 157.842892,332.140869 156.459791,329.47735" id="Fill-1" transform="translate(148.824039, 331.748355) rotate(20.000000) translate(-148.824039, -331.748355) "></path>
+                        <g id="RTUE-streak-up" transform="translate(-128.000000, -328.000000)" fill="#23D3DA">
+                            <g id="Group-5" transform="translate(104.000000, 268.000000)">
+                                <g id="Group-4" transform="translate(0.000000, 40.000000)">
+                                    <path d="M41.5926523,39.3301814 C39.8607784,40.238957 37.7210806,39.5701312 36.8131212,37.8367003 C35.9051619,36.1032694 36.5733869,33.9616479 38.3052608,33.0528723 C40.0371347,32.1440966 42.1768325,32.8129224 43.0847918,34.5463533 C43.9927512,36.2797842 43.3245261,38.4214057 41.5926523,39.3301814 M48.2464763,33.5247189 C46.8254998,30.7683284 49.0228667,26.8742309 47.4010884,23.6428735 C46.0007522,20.8520389 41.4336968,19.4883885 38.3891785,20.1773752 C41.4280868,22.9375609 40.034606,27.0042289 37.8729334,28.0768234 C35.431481,29.2886013 32.8206131,27.2998364 30.0783828,27.9998652 C25.2212993,29.2410918 24.8345169,32.9150656 23.9988648,37.6094724 C27.6925907,34.5774602 31.4363815,36.101705 32.6206827,39.331482 C33.570864,41.9231762 31.9184807,45.1780837 33.1718382,47.9052652 C34.4477591,50.6813225 39.0498292,52.6382716 42.2826261,51.805571 C39.2153798,48.6880133 40.5804928,44.972089 43.2326712,43.8096366 C45.290168,42.9075743 47.2902946,44.2158755 49.6235683,43.7431969 C54.5493576,42.7459516 56.4865591,39.428877 55.8987977,35.0055124 C53.8986926,35.6188592 49.7350766,36.4120149 48.2464763,33.5247189" id="Fill-1"></path>
+                                </g>
+                            </g>
                         </g>
                     </g>
                 </svg>
@@ -59,7 +94,32 @@
             <div class="streakContainer">
                 <div class="streakValue">{{ninjaProfile.streak}}</div>
                 <div class="streakStatusContainer">
-                    <div class="streakIcon"></div><span class="streakDef">Days</span>
+                    <div class="streakIcon">
+                        <svg width="10px" height="10px" viewBox="0 0 10 10" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                            <defs>
+                                <linearGradient x1="-9.9247045%" y1="-13.0623229%" x2="16.0944836%" y2="84.8408029%" id="linearGradient-1">
+                                    <stop stop-color="#37AAFF" offset="0%"></stop>
+                                    <stop stop-color="#9BEDF9" offset="40.5829387%"></stop>
+                                    <stop stop-color="#FFFFFF" offset="100%"></stop>
+                                </linearGradient>
+                            </defs>
+                            <g id="Home-Screen" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" opacity="0.72">
+                                <g transform="translate(-78.000000, -116.000000)" id="Main-Content" fill="#FFFFFF">
+                                    <g transform="translate(0.000000, 112.000000)">
+                                        <g id="profile-pic-&amp;-name" transform="translate(16.000000, 0.000000)">
+                                            <g id="Streak">
+                                                <g id="Group-2">
+                                                    <g transform="translate(62.000000, 3.000000)">
+                                                        <path d="M5.41235254,7.07467505 C4.85726289,7.36424463 4.17146,7.15113196 3.88044642,6.59879665 C3.58943283,6.04646134 3.80360823,5.36406139 4.35869788,5.07449181 C4.91378753,4.78492222 5.59959041,4.99803489 5.890604,5.5503702 C6.18161759,6.10270551 5.96744219,6.78510546 5.41235254,7.07467505 M7.25646898,4.59641638 C6.58788845,3.86524219 6.94514185,2.48550243 6.17499361,1.62470301 C5.50994586,0.881225408 3.98289733,0.838163467 3.0974918,1.30129904 C4.26728694,1.90021155 4.1732264,3.26676908 3.59296562,3.77516364 C2.93763305,4.34946933 1.96434937,3.95268429 1.17344598,4.3942889 C-0.227305308,5.17687377 -0.0422754246,6.33954619 0.0884378102,7.85330526 C0.980467318,6.61549414 2.26596133,6.7758779 2.90053875,7.67226934 C3.40970213,8.39157952 3.16814761,9.52964512 3.78241149,10.2656528 C4.40771534,11.0148427 5.99482131,11.2376223 6.92659471,10.7147273 C5.71838048,10.00816 5.83275456,8.75189373 6.55741814,8.175391 C7.11957337,7.7280741 7.84732813,7.96579359 8.53048142,7.62788917 C9.972743,6.91473069 10.2973181,5.73404257 9.74841082,4.42109276 C9.18007321,4.77481585 7.95684463,5.36230376 7.25646898,4.59641638" id="Fill-1"></path>
+                                                    </g>
+                                                </g>
+                                            </g>
+                                        </g>
+                                    </g>
+                                </g>
+                            </g>
+                        </svg>
+                    </div><span class="streakDef">Days</span>
                     <div class="streakStatus"></div>
                 </div>
             </div>
@@ -83,7 +143,61 @@
                                     <div class="unlockedRewardIcon"></div>
                                 </div>
                                 <div class="uStreakIconContainer">
-                                    <div class="unlockedRewardStreakIcon"></div>
+                                    <div class="unlockedRewardStreakIcon">
+                                        {{#state}}
+                                        <svg width="11px" height="12px" viewBox="0 0 11 12" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                            <defs>
+                                                <linearGradient x1="-34.1993117%" y1="-48.0595006%" x2="45.1866212%" y2="82.3566234%" id="linearGradient-1">
+                                                    <stop stop-color="#FF0C0C" offset="0%"></stop>
+                                                    <stop stop-color="#F4FCFF" offset="100%"></stop>
+                                                </linearGradient>
+                                            </defs>
+                                            <g id="Home-Screen" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" opacity="0.72">
+                                                <g transform="translate(-309.000000, -291.000000)" id="Main-Content" fill="#FFF">
+                                                    <g transform="translate(0.000000, 112.000000)">
+                                                        <g id="upcoming-gifts" transform="translate(0.000000, 124.000000)">
+                                                            <g id="gifts-list">
+                                                                <g id="01" transform="translate(0.000000, 20.000000)">
+                                                                    <g id="Streak" transform="translate(300.000000, 16.000000)">
+                                                                        <g id="Group-6" transform="translate(8.000000, 17.000000)">
+                                                                            <path d="M7.41235254,9.07467505 C6.85726289,9.36424463 6.17146,9.15113196 5.88044642,8.59879665 C5.58943283,8.04646134 5.80360823,7.36406139 6.35869788,7.07449181 C6.91378753,6.78492222 7.59959041,6.99803489 7.890604,7.5503702 C8.18161759,8.10270551 7.96744219,8.78510546 7.41235254,9.07467505 M9.25646898,6.59641638 C8.58788845,5.86524219 8.94514185,4.48550243 8.17499361,3.62470301 C7.50994586,2.88122541 5.98289733,2.83816347 5.0974918,3.30129904 C6.26728694,3.90021155 6.1732264,5.26676908 5.59296562,5.77516364 C4.93763305,6.34946933 3.96434937,5.95268429 3.17344598,6.3942889 C1.77269469,7.17687377 1.95772458,8.33954619 2.08843781,9.85330526 C2.98046732,8.61549414 4.26596133,8.7758779 4.90053875,9.67226934 C5.40970213,10.3915795 5.16814761,11.5296451 5.78241149,12.2656528 C6.40771534,13.0148427 7.99482131,13.2376223 8.92659471,12.7147273 C7.71838048,12.00816 7.83275456,10.7518937 8.55741814,10.175391 C9.11957337,9.7280741 9.84732813,9.96579359 10.5304814,9.62788917 C11.972743,8.91473069 12.2973181,7.73404257 11.7484108,6.42109276 C11.1800732,6.77481585 9.95684463,7.36230376 9.25646898,6.59641638" id="Fill-1" transform="translate(7.000000, 8.000000) rotate(20.000000) translate(-7.000000, -8.000000) "></path>
+                                                                        </g>
+                                                                    </g>
+                                                                </g>
+                                                            </g>
+                                                        </g>
+                                                    </g>
+                                                </g>
+                                            </g>
+                                        </svg>
+                                        {{/state}} {{^state}}
+                                        <svg width="11px" height="12px" viewBox="0 0 11 12" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                            <defs>
+                                                <linearGradient x1="-34.1993117%" y1="-48.0595006%" x2="45.1866212%" y2="82.3566234%" id="linearGradient-1">
+                                                    <stop stop-color="#FF0C0C" offset="0%"></stop>
+                                                    <stop stop-color="#F4FCFF" offset="100%"></stop>
+                                                </linearGradient>
+                                            </defs>
+                                            <g id="Home-Screen" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" opacity="0.72">
+                                                <g transform="translate(-309.000000, -291.000000)" id="Main-Content" fill="#444444">
+                                                    <g transform="translate(0.000000, 112.000000)">
+                                                        <g id="upcoming-gifts" transform="translate(0.000000, 124.000000)">
+                                                            <g id="gifts-list">
+                                                                <g id="01" transform="translate(0.000000, 20.000000)">
+                                                                    <g id="Streak" transform="translate(300.000000, 16.000000)">
+                                                                        <g id="Group-6" transform="translate(8.000000, 17.000000)">
+                                                                            <path d="M7.41235254,9.07467505 C6.85726289,9.36424463 6.17146,9.15113196 5.88044642,8.59879665 C5.58943283,8.04646134 5.80360823,7.36406139 6.35869788,7.07449181 C6.91378753,6.78492222 7.59959041,6.99803489 7.890604,7.5503702 C8.18161759,8.10270551 7.96744219,8.78510546 7.41235254,9.07467505 M9.25646898,6.59641638 C8.58788845,5.86524219 8.94514185,4.48550243 8.17499361,3.62470301 C7.50994586,2.88122541 5.98289733,2.83816347 5.0974918,3.30129904 C6.26728694,3.90021155 6.1732264,5.26676908 5.59296562,5.77516364 C4.93763305,6.34946933 3.96434937,5.95268429 3.17344598,6.3942889 C1.77269469,7.17687377 1.95772458,8.33954619 2.08843781,9.85330526 C2.98046732,8.61549414 4.26596133,8.7758779 4.90053875,9.67226934 C5.40970213,10.3915795 5.16814761,11.5296451 5.78241149,12.2656528 C6.40771534,13.0148427 7.99482131,13.2376223 8.92659471,12.7147273 C7.71838048,12.00816 7.83275456,10.7518937 8.55741814,10.175391 C9.11957337,9.7280741 9.84732813,9.96579359 10.5304814,9.62788917 C11.972743,8.91473069 12.2973181,7.73404257 11.7484108,6.42109276 C11.1800732,6.77481585 9.95684463,7.36230376 9.25646898,6.59641638" id="Fill-1" transform="translate(7.000000, 8.000000) rotate(20.000000) translate(-7.000000, -8.000000) "></path>
+                                                                        </g>
+                                                                    </g>
+                                                                </g>
+                                                            </g>
+                                                        </g>
+                                                    </g>
+                                                </g>
+                                            </g>
+                                        </svg>
+                                        {{/state}}
+                                    </div>
                                     <div class="unlockedRewardStreak">{{streak}}</div>
                                 </div>
                             </div>
@@ -118,7 +232,33 @@
                             </div>
                             {{#streak}}
                             <div class="rewardStreakWrapper">
-                                <div class="rewardStreakIcon"></div>
+                                <div class="lrewardStreakIcon">
+                                    <svg width="11px" height="12px" viewBox="0 0 11 12" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                        <defs>
+                                            <linearGradient x1="-34.1993117%" y1="-48.0595006%" x2="45.1866212%" y2="82.3566234%" id="linearGradient-1">
+                                                <stop stop-color="#FF0C0C" offset="0%"></stop>
+                                                <stop stop-color="#F4FCFF" offset="100%"></stop>
+                                            </linearGradient>
+                                        </defs>
+                                        <g id="Home-Screen" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" opacity="0.72">
+                                            <g transform="translate(-309.000000, -291.000000)" id="Main-Content" fill="#3D475B">
+                                                <g transform="translate(0.000000, 112.000000)">
+                                                    <g id="upcoming-gifts" transform="translate(0.000000, 124.000000)">
+                                                        <g id="gifts-list">
+                                                            <g id="01" transform="translate(0.000000, 20.000000)">
+                                                                <g id="Streak" transform="translate(300.000000, 16.000000)">
+                                                                    <g id="Group-6" transform="translate(8.000000, 17.000000)">
+                                                                        <path d="M7.41235254,9.07467505 C6.85726289,9.36424463 6.17146,9.15113196 5.88044642,8.59879665 C5.58943283,8.04646134 5.80360823,7.36406139 6.35869788,7.07449181 C6.91378753,6.78492222 7.59959041,6.99803489 7.890604,7.5503702 C8.18161759,8.10270551 7.96744219,8.78510546 7.41235254,9.07467505 M9.25646898,6.59641638 C8.58788845,5.86524219 8.94514185,4.48550243 8.17499361,3.62470301 C7.50994586,2.88122541 5.98289733,2.83816347 5.0974918,3.30129904 C6.26728694,3.90021155 6.1732264,5.26676908 5.59296562,5.77516364 C4.93763305,6.34946933 3.96434937,5.95268429 3.17344598,6.3942889 C1.77269469,7.17687377 1.95772458,8.33954619 2.08843781,9.85330526 C2.98046732,8.61549414 4.26596133,8.7758779 4.90053875,9.67226934 C5.40970213,10.3915795 5.16814761,11.5296451 5.78241149,12.2656528 C6.40771534,13.0148427 7.99482131,13.2376223 8.92659471,12.7147273 C7.71838048,12.00816 7.83275456,10.7518937 8.55741814,10.175391 C9.11957337,9.7280741 9.84732813,9.96579359 10.5304814,9.62788917 C11.972743,8.91473069 12.2973181,7.73404257 11.7484108,6.42109276 C11.1800732,6.77481585 9.95684463,7.36230376 9.25646898,6.59641638" id="Fill-1" transform="translate(7.000000, 8.000000) rotate(20.000000) translate(-7.000000, -8.000000) "></path>
+                                                                    </g>
+                                                                </g>
+                                                            </g>
+                                                        </g>
+                                                    </g>
+                                                </g>
+                                            </g>
+                                        </g>
+                                    </svg>
+                                </div>
                                 <div class="lrewardStreakValue">{{streak}}</div>
                             </div>
                             {{/streak}}

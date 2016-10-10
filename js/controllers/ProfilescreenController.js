@@ -200,7 +200,7 @@
             ninjaUgc = ninjaUgc.data.content;
         }   
 
-        utils.changeBotTitle('Profile');
+        utils.changeBotTitle('My Profile');
         
         that.el = document.createElement('div');
         that.el.className = 'profileScreenContainer animation_fadein noselect';

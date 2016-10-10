@@ -1,5 +1,6 @@
 .homeScreenContainer {
     height: 100%;
+    overflow: scroll;
     background: #1F5EF2;
     background: -webkit-linear-gradient(-180deg, #1F5EF2 12%, #33FFE2 100%);
     background: -o-linear-gradient(-180deg, #1F5EF2 12%, #33FFE2 100%);
@@ -65,20 +66,9 @@
     float: left;
 }
 
-.streakIconInfo {
-    background: url(images/streakIcon.png);
-    background-size: contain;
-    background-repeat: no-repeat;
-    width: 14px;
-    height: 12px;
-}
+.streakIconInfo {}
 
 .streakIcon {
-    background: url(images/streakIcon.png);
-    background-size: contain;
-    background-repeat: no-repeat;
-    width: 10px;
-    height: 10px;
     display: inline-block;
     vertical-align: middle;
 }
@@ -91,8 +81,12 @@
 
 .streakStatusContainerInfo {
     display: inline-block;
-    vertical-align: bottom;
-    margin-left: 4px;
+    float: right;
+}
+
+.streakIconInfo {
+    display: inline-block;
+    vertical-align: middle;
 }
 
 .streakValue {
@@ -104,11 +98,10 @@
 }
 
 .streakValueInfo {
-    font-size: 48px;
+    font-size: 24px;
     color: #FFFFFF;
-    line-height: 32px;
     font-weight: 400;
-    display: inline-flex;
+    display: inline-block;
     vertical-align: middle;
 }
 
@@ -149,6 +142,7 @@ span.streakDefInfo {
     border-radius: 100px;
     display: block;
     margin-top: 8px;
+    line-height: 8px;
 }
 
 .streakHealthy {
@@ -160,8 +154,8 @@ span.streakDefInfo {
 }
 
 .ninjaHomeContainer {
-    height: 100%;
-    overflow: scroll;
+    //height: 100%;
+    //overflow: scroll;
 }
 
 .profileContainer {
@@ -222,12 +216,8 @@ span.streakDefInfo {
 }
 
 .unlockedRewardStreakIcon {
-    background: url(images/streakIcon.png);
-    background-size: contain;
-    background-repeat: no-repeat;
-    width: 10px;
-    height: 10px;
     display: inline-block;
+    vertical-align: middle;
 }
 
 .unlockedRewardStreak {
@@ -389,14 +379,18 @@ ul.unlockedRewardList > li.unlockedRewardListItem {
     padding: 16px 8px;
 }
 
-.rewardStreakIcon,
-.lrewardStreakIcon {
+.rewardStreakIcon {
     background: url(images/lockedStreakIcon.png);
     background-size: contain;
     background-repeat: no-repeat;
     width: 10px;
     display: inline-block;
     height: 10px;
+}
+
+.lrewardStreakIcon {
+    display: inline-block;
+    vertical-align: middle;
 }
 
 .rewardStreakValue,
@@ -419,16 +413,12 @@ ul.unlockedRewardList > li.unlockedRewardListItem {
     z-index: 100;
     width: 100%;
     height: 100%;
-    background: #1D47F5;
-    background: -webkit-linear-gradient(left top, rgba(29, 71, 245, 0.92), rgba(51, 255, 226, 0.92));
-    background: -o-linear-gradient(bottom right, rgba(29, 71, 245, 0.92), rgba(51, 255, 226, 0.92));
-    background: -moz-linear-gradient(bottom right, rgba(29, 71, 245, 0.92), rgba(51, 255, 226, 0.92));
-    background: linear-gradient(to bottom right, rgba(29, 71, 245, 0.92), rgba(51, 255, 226, 0.92));
+    background: rgba(31, 94, 242, 0.96);
 }
 
 .batteryStreakInfoContainer hr {
-    margin-top: 32px;
-    margin-bottom: 32px;
+    margin-top: 52px;
+    margin-bottom: 52px;
     border: none;
     height: 1px;
     background: rgba(255, 255, 255, 0.28);
@@ -436,36 +426,44 @@ ul.unlockedRewardList > li.unlockedRewardListItem {
 
 .informationAction {
     text-transform: uppercase;
-    font-size: 16px;
-    color: #FFFFFF;
-    line-height: 19px;
+    font-size: 14px;
+    color: #396BE1;
     font-weight: 500;
     float: right;
-    border: 1px solid rgba(255, 255, 255, 0.42);
     display: inline-block;
-    padding: 12px 18px;
+    padding: 14px 26px;
     border-radius: 4px;
+    background: #fff;
+    margin-top: 52px;
 }
 
 .dayHeading {
-    @include fontStyle(18px, 500, #FFFFFF, 19px);
-    margin: 30px 0px 12px 0px;
+    font-size: 24px;
+    color: #FFFFFF;
+    font-weight: 400;
+    margin-bottom: 24px;
+    display: inline-block;
 }
 
 .dayInformation {
-    @include fontStyle(16px, 400, rgba(255, 255, 255, 0.96), 20px);
+    font-size: 16px;
+    color: rgba(255, 255, 255, 0.96);
+    line-height: 20px;
+    font-weight: 400;
 }
 
 .batteryIconContainer {
-    margin-bottom: 24px;
+    display: inline-block;
+    float: right;
+    line-height: 30px;
 }
 
 .batteryIconFilled {
     background: url(images/batteryFtue.png);
     background-size: contain;
     background-repeat: no-repeat;
-    width: 23px;
-    height: 20px;
+    width: 18px;
+    height: 16px;
     display: inline-block;
     margin-left: 4px;
 }
@@ -474,20 +472,22 @@ ul.unlockedRewardList > li.unlockedRewardListItem {
     background: url(images/batteryEmpty.png);
     background-size: contain;
     background-repeat: no-repeat;
-    width: 23px;
-    height: 20px;
+    width: 18px;
+    height: 16px;
     margin-left: 4px;
     display: inline-block;
 }
 
 .batteryHeading {
-    @include fontStyle(18px, 500, #FFFFFF, 19px);
-    margin-bottom: 12px;
+    font-size: 24px;
+    color: #FFFFFF;
+    font-weight: 400;
+    margin-bottom: 24px;
+    display: inline-block;
 }
 
 .batteryInformation {
-    @include fontStyle(16px, 400, rgba(255, 255, 255, 0.96), 20px);
-    margin-bottom: 24px;
+    @include fontStyle(16px, 400, rgba(255, 255, 255, 1), 20px);
 }
 
 .streakInfoWrapper {
@@ -650,11 +650,6 @@ ul.unlockedRewardList > li.unlockedRewardListItem {
 }
 
 .upcoming0card .unlockedRewardStreakIcon {
-    background: url(images/lockedStreakIcon.png) !important;
-    background-size: contain;
-    background-repeat: no-repeat;
-    width: 10px;
-    height: 10px;
     display: inline-block;
 }
 
@@ -896,8 +891,11 @@ ul.unlockedRewardList > li.unlockedRewardListItem {
     border-radius: 50%;
 }
 
+.statsWrapper{
+    padding: 34px 24px 0px 24px; 
+}
+
 .statTypeContainer {
-    padding: 24px 24px 0 24px;
     overflow: hidden;
 }
 
@@ -908,10 +906,9 @@ ul.unlockedRewardList > li.unlockedRewardListItem {
 }
 
 .statBoxWrapper {
-    padding-left: 12px;
     width: 40%;
     display: inline-block;
-    margin-bottom: 28px;
+    padding: 12px 0px 28px 8px;
 }
 
 .statBoxFloatLeft {
@@ -923,27 +920,27 @@ ul.unlockedRewardList > li.unlockedRewardListItem {
 }
 
 .statValue {
-    font-size: 32px;
-    color: #3D475B;
-    font-weight: 300;
-    margin-bottom: 14px;
+    font-size: 40px;
+    color: rgba(33,62,112,0.72);
+    font-weight: 600;
     display: inline-block;
-    vertical-align: super;
+    vertical-align: baseline;
+    margin-left: 8px;
 }
 
 .statValueLeft {
     background-image: linear-gradient(44deg, #FA4454 0%, #F6876C 100%);
-    border-radius: 92px;
-    width: 3px;
-    height: 32px;
+    border-radius: 97px;
+    width: 2px;
+    height: 28px;
     display: inline-block;
 }
 
 .statValueRight {
-    background-image: linear-gradient(44deg, #B52E84 0%, #7026FF 100%);
-    border-radius: 92px;
-    width: 3px;
-    height: 32px;
+    background-image: linear-gradient(44deg, #FA4454 0%, #F6876C 100%);
+    border-radius: 97px;
+    width: 2px;
+    height: 28px;
     display: inline-block;
 }
 
@@ -982,8 +979,9 @@ ul.unlockedRewardList > li.unlockedRewardListItem {
 
 .statText {
     font-size: 12px;
-    color: rgba(61, 71, 91, 0.48);
-    margin-top: 4px;
+    color: rgba(61, 71, 91, 0.60);
+    font-weight: 400;
+    margin-bottom: 8px;
 }
 
 .batteryCriticalWrapper {

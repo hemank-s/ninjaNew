@@ -7,7 +7,7 @@
                     <div class="containerTabs">
                         <div class="comp__tabs clearfix">
                             <a class="comp__tab" data-id="rewards">
-                                MY REWARDS
+                                REWARDS
                             </a>
                             <a class="comp__tab" data-id="activity">
                                 STATS
@@ -16,129 +16,124 @@
                                 CONTRIBUTE
                             </a>
                         </div>
-                        <div class="emptyBorder"></div>
-                        <div class="comp__data">
-                            <div id="sliderTabs" class="swipe">
-                                <div class="swipe-wrap">
-                                    <div class="tab-data videos_data tab-rewards" data-id="rewards">
-                                        <div class="redeemedRewardsContainer">
-                                            <div class="redeemedRewardListContainer">
-                                                <ul class="redeemedRewardList">
-                                                    {{#ninjaRedeemedRewards}}
-                                                    <li class="redeemedRewardRow lockedRewardListItem" data-rewardId="{{id}}" data-state="{{state}}" data-rewardtype="{{type}}">
-                                                        <div class="redeemedRewardIcon"></div>
-                                                        <div class="redeemedRewardDetails">
-                                                            <p class="rewardHeading {{^state}}{{#lockedGreyout}}rewardHeadingLocked{{/lockedGreyout}}{{/state}}">{{title}}</p>
-                                                            <p class="redeemedRewardSubheading {{^state}}{{#lockedGreyout}}rewardSubheadingLocked{{/lockedGreyout}}{{/state}}">{{stitle}}</p>
-                                                        </div>
-                                                        <div class="rewardStreakWrapper">
-                                                            <div class="rewardStreakIcon"></div>
-                                                            <div class="rewardStreakValue">{{streak}}</div>
-                                                        </div>
-                                                    </li>
-                                                    {{/ninjaRedeemedRewards}}
-                                                    {{#ninjaMysteryBoxRewards}}
-                                                    <li class="redeemedRewardRow lockedRewardListItem mysteryRedeemedRewardRow" data-rewardId="{{id}}" data-state="{{state}}" data-rewardtype="{{type}}">
-                                                        <div class="redeemedRewardIcon"></div>
-                                                        <div class="redeemedRewardDetails">
-                                                            <p class="rewardHeading {{^state}}{{#lockedGreyout}}rewardHeadingLocked{{/lockedGreyout}}{{/state}}">{{title}}</p>
-                                                            <p class="redeemedRewardSubheading {{^state}}{{#lockedGreyout}}rewardSubheadingLocked{{/lockedGreyout}}{{/state}}">{{stitle}}</p>
-                                                        </div>
-                                                        <div class="rewardStreakWrapper">
-                                                            <div class="mysteryBoxHistoryIcon"></div>
-                                                        </div>
-                                                    </li>
-                                                    {{/ninjaMysteryBoxRewards}}
-                                                    {{^ninjaMysteryBoxRewards}}{{^ninjaRedeemedRewards}}
-                                                    <p class="align-center">No rewards redeemed</p>
-                                                    {{/ninjaRedeemedRewards}}{{/ninjaMysteryBoxRewards}}
-                                                </ul>
-                                            </div>
+                        <div class="emptyBorderContainer">
+                            <div class="emptyBorder"></div>
+                        </div>
+                    </div>
+                    <div class="comp__data">
+                        <div id="sliderTabs" class="swipe">
+                            <div class="swipe-wrap">
+                                <div class="tab-data videos_data tab-rewards" data-id="rewards">
+                                    <div class="redeemedRewardsContainer">
+                                        <div class="redeemedRewardListContainer">
+                                            <ul class="redeemedRewardList">
+                                                {{#ninjaRedeemedRewards}}
+                                                <li class="redeemedRewardRow lockedRewardListItem" data-rewardId="{{id}}" data-state="{{state}}" data-rewardtype="{{type}}">
+                                                    <div class="redeemedRewardIcon"></div>
+                                                    <div class="redeemedRewardDetails">
+                                                        <p class="rewardHeading {{^state}}{{#lockedGreyout}}rewardHeadingLocked{{/lockedGreyout}}{{/state}}">{{title}}</p>
+                                                        <p class="redeemedRewardSubheading {{^state}}{{#lockedGreyout}}rewardSubheadingLocked{{/lockedGreyout}}{{/state}}">{{stitle}}</p>
+                                                    </div>
+                                                    <div class="rewardStreakWrapper">
+                                                        <div class="rewardStreakIcon"></div>
+                                                        <div class="rewardStreakValue">{{streak}}</div>
+                                                    </div>
+                                                </li>
+                                                {{/ninjaRedeemedRewards}} {{#ninjaMysteryBoxRewards}}
+                                                <li class="redeemedRewardRow lockedRewardListItem mysteryRedeemedRewardRow" data-rewardId="{{id}}" data-state="{{state}}" data-rewardtype="{{type}}">
+                                                    <div class="redeemedRewardIcon"></div>
+                                                    <div class="redeemedRewardDetails">
+                                                        <p class="rewardHeading {{^state}}{{#lockedGreyout}}rewardHeadingLocked{{/lockedGreyout}}{{/state}}">{{title}}</p>
+                                                        <p class="redeemedRewardSubheading {{^state}}{{#lockedGreyout}}rewardSubheadingLocked{{/lockedGreyout}}{{/state}}">{{stitle}}</p>
+                                                    </div>
+                                                    <div class="rewardStreakWrapper">
+                                                        <div class="mysteryBoxHistoryIcon"></div>
+                                                    </div>
+                                                </li>
+                                                {{/ninjaMysteryBoxRewards}} {{^ninjaMysteryBoxRewards}}{{^ninjaRedeemedRewards}}
+                                                <p class="align-center">No rewards redeemed</p>
+                                                {{/ninjaRedeemedRewards}}{{/ninjaMysteryBoxRewards}}
+                                            </ul>
                                         </div>
                                     </div>
-                                    <div class="news_data tab-data tab-activity" data-id="activity">
-                                        <div class="activityContainer">
-                                            <div class="statsWrapper">
-                                                {{#ninjaActivityData}}
-                                                <div class="statTypeContainer">
-                                                    <div class="statHeading">Messaging</div>
-                                                    <div class="statBoxWrapper statBoxFloatLeft">
-                                                        <div class="statValueLeft"></div>
-                                                        <div class="statValue messagesR">{{ninjaActivityData.messages.rec}}</div>
-                                                        <div class="statText">Messages Received</div>
-                                                    </div>
-                                                    <div class="statBoxWrapper statBoxFloatRight">
-                                                        <div class="statValueRight"></div>
-                                                        <div class="statValue messagesS">{{ninjaActivityData.messages.sent}}</div>
-                                                        <div class="statText">Messages Sent</div>
-                                                    </div>
+                                </div>
+                                <div class="news_data tab-data tab-activity" data-id="activity">
+                                    <div class="activityContainer">
+                                        <div class="statsWrapper">
+                                            {{#ninjaActivityData}}
+                                            <div class="statTypeContainer">
+                                                <div class="statBoxWrapper statBoxFloatLeft">
+                                                    <div class="statText">Messages Received</div>
+                                                    <div class="statValueLeft"></div>
+                                                    <div class="statValue messagesR">{{ninjaActivityData.messages.rec}}</div>
                                                 </div>
-                                                <div class="statTypeContainer">
-                                                    <div class="statHeading">Stickers</div>
-                                                    <div class="statBoxWrapper statBoxFloatLeft">
-                                                        <div class="statValueLeft"></div>
-                                                        <div class="statValue stickersR">{{ninjaActivityData.stickers.rec}}</div>
-                                                        <div class="statText">Stickers Received</div>
-                                                    </div>
-                                                    <div class="statBoxWrapper statBoxFloatRight">
-                                                        <div class="statValueRight"></div>
-                                                        <div class="statValue stickersS">{{ninjaActivityData.stickers.sent}}</div>
-                                                        <div class="statText">Stickers Sent</div>
-                                                    </div>
+                                                <div class="statBoxWrapper statBoxFloatRight">
+                                                    <div class="statText">Messages Sent</div>
+                                                    <div class="statValueRight"></div>
+                                                    <div class="statValue messagesS">{{ninjaActivityData.messages.sent}}</div>
                                                 </div>
-                                                <div class="statTypeContainer">
-                                                    <div class="statHeading">Files</div>
-                                                    <div class="statBoxWrapper statBoxFloatLeft">
-                                                        <div class="statValueLeft"></div>
-                                                        <div class="statValue filesR">{{ninjaActivityData.files.rec}}</div>
-                                                        <div class="statText">Files Received</div>
-                                                    </div>
-                                                    <div class="statBoxWrapper statBoxFloatRight">
-                                                        <div class="statValueRight"></div>
-                                                        <div class="statValue filesS">{{ninjaActivityData.files.sent}}</div>
-                                                        <div class="statText">Files Sent</div>
-                                                    </div>
-                                                </div>
-                                                <div class="statTypeContainer">
-                                                    <div class="statHeading">Chat Themes</div>
-                                                    <div class="statBoxWrapper statBoxFloatLeft">
-                                                        <div class="statValueLeft"></div>
-                                                        <div class="statValue chatThemesR">{{ninjaActivityData.chatThemes.rec}}</div>
-                                                        <div class="statText">Chat Themes Received</div>
-                                                    </div>
-                                                    <div class="statBoxWrapper statBoxFloatRight">
-                                                        <div class="statValueRight"></div>
-                                                        <div class="statValue chatThemesS">{{ninjaActivityData.chatThemes.sent}}</div>
-                                                        <div class="statText">Chat Themes Sent</div>
-                                                    </div>
-                                                </div>
-                                                <div class="statTypeContainer">
-                                                    <div class="statHeading">Timeline</div>
-                                                    <div class="statBoxWrapper statBoxFloatLeft">
-                                                        <div class="statValueLeft"></div>
-                                                        <div class="statValue statusUpdateCount">{{ninjaActivityData.statusUpdates.count}}</div>
-                                                        <div class="statText">Status Updates Posted</div>
-                                                    </div>
-                                                </div>
-                                                {{/ninjaActivityData}}
                                             </div>
+                                            <div class="statTypeContainer">
+                                                <div class="statBoxWrapper statBoxFloatLeft">
+                                                    <div class="statText">Stickers Received</div>
+                                                    <div class="statValueLeft"></div>
+                                                    <div class="statValue stickersR">{{ninjaActivityData.stickers.rec}}</div>
+                                                </div>
+                                                <div class="statBoxWrapper statBoxFloatRight">
+                                                    <div class="statText">Stickers Sent</div>
+                                                    <div class="statValueRight"></div>
+                                                    <div class="statValue stickersS">{{ninjaActivityData.stickers.sent}}</div>
+                                                </div>
+                                            </div>
+                                            <div class="statTypeContainer">
+                                                <div class="statBoxWrapper statBoxFloatLeft">
+                                                    <div class="statText">Files Received</div>
+                                                    <div class="statValueLeft"></div>
+                                                    <div class="statValue filesR">{{ninjaActivityData.files.rec}}</div>
+                                                </div>
+                                                <div class="statBoxWrapper statBoxFloatRight">
+                                                    <div class="statText">Files Sent</div>
+                                                    <div class="statValueRight"></div>
+                                                    <div class="statValue filesS">{{ninjaActivityData.files.sent}}</div>
+                                                </div>
+                                            </div>
+                                            <div class="statTypeContainer">
+                                                <div class="statBoxWrapper statBoxFloatLeft">
+                                                    <div class="statText">Chat Themes Received</div>
+                                                    <div class="statValueLeft"></div>
+                                                    <div class="statValue chatThemesR">{{ninjaActivityData.chatThemes.rec}}</div>
+                                                </div>
+                                                <div class="statBoxWrapper statBoxFloatRight">
+                                                    <div class="statText">Chat Themes Sent</div>
+                                                    <div class="statValueRight"></div>
+                                                    <div class="statValue chatThemesS">{{ninjaActivityData.chatThemes.sent}}</div>
+                                                </div>
+                                            </div>
+                                            <div class="statTypeContainer">
+                                                <div class="statBoxWrapper statBoxFloatLeft">
+                                                    <div class="statText">Status Updates Posted</div>
+                                                    <div class="statValueLeft"></div>
+                                                    <div class="statValue statusUpdateCount">{{ninjaActivityData.statusUpdates.count}}</div>
+                                                </div>
+                                            </div>
+                                            {{/ninjaActivityData}}
                                         </div>
                                     </div>
-                                    <div class="fixtures_data tab-data tab-mysterybox" data-id="gifts">
-                                        <div class="ugcTypesContainer">
-                                            <div class="ugcListContainer">
-                                                <ul class="ugcTypeList">
-                                                    {{#ninjaUgcData}}
-                                                    <li class="ugcTypeRow" data-type="{{type}}">
-                                                        <div class="ugcTypeIcon"></div>
-                                                        <div class="ugcTypeDetails">
-                                                            <p class="ugcTypeHeading">{{title}}</p>
-                                                            <p class="ugcTypeSubheading">{{stitle}}</p>
-                                                        </div>
-                                                    </li>
-                                                    {{/ninjaUgcData}}
-                                                </ul>
-                                            </div>
+                                </div>
+                                <div class="fixtures_data tab-data tab-mysterybox" data-id="gifts">
+                                    <div class="ugcTypesContainer">
+                                        <div class="ugcListContainer">
+                                            <ul class="ugcTypeList">
+                                                {{#ninjaUgcData}}
+                                                <li class="ugcTypeRow" data-type="{{type}}">
+                                                    <div class="ugcTypeIcon"></div>
+                                                    <div class="ugcTypeDetails">
+                                                        <p class="ugcTypeHeading">{{title}}</p>
+                                                        <p class="ugcTypeSubheading">{{stitle}}</p>
+                                                    </div>
+                                                </li>
+                                                {{/ninjaUgcData}}
+                                            </ul>
                                         </div>
                                     </div>
                                 </div>
@@ -147,8 +142,9 @@
                     </div>
                 </div>
             </div>
-            <div class="view details-view">
-            </div>
+        </div>
+        <div class="view details-view">
         </div>
     </div>
+</div>
 </div>
