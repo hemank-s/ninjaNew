@@ -963,7 +963,7 @@ $gap: 65px;
     }
 }
 
-@media screen and (max-height: 505px) {
+@media screen and (min-height: 441px) and (max-height: 505px) {
     .subscribeScreen {
         .title_subscribe {
             padding-top: 16% !important;
@@ -1013,6 +1013,14 @@ $gap: 65px;
         }
         .ftueCta {
             font-size: 10px !important;
+        }
+        @include keyframe(slideFromBottom2) {
+            0% {
+                margin-top: 0%;
+            }
+            100% {
+                margin-top: -70%;
+            }
         }
     }
 }

@@ -56,8 +56,8 @@
             ugcContainer: document.getElementsByClassName('ugcContainer'),
             ugcWrapper: document.getElementsByClassName('ugcWrapper'),
             confirmPopup: document.getElementsByClassName('ugcBackPopupContainer'),
-            dialogPositiveAction: document.getElementsByClassName('dialogPositiveAction'),
-            dialogNegativeAction: document.getElementsByClassName('dialogNegativeAction'),
+            yesAction: document.getElementsByClassName('dialogPositiveAction'),
+            noAction: document.getElementsByClassName('dialogNegativeAction'),
 
 
         };
@@ -66,6 +66,18 @@
         var defHeight = parseInt(window.getComputedStyle(DOMcache.quoteName[0]).height);
         DOMcache.quoteName[0].style.minHeight = defHeight + 'px';
 
+
+        events.subscribe('ugc.backpress', function() {
+            DOMcache.confirmPopup[0].classList.remove('hideClass');
+        });
+
+        DOMcache.yesAction.addEventListener('keyup', function() {
+            App.router.back();
+        });
+
+        DOMcache.noAction.addEventListener('keyup', function() {
+            DOMcache.confirmPopup[0].classList.add('hideClass');
+        });
 
         DOMcache.quoteName[0].addEventListener('keyup', function() {
             DOMcache.userInput[0].innerHTML = this.innerHTML.length;
