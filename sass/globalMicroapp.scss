@@ -341,7 +341,7 @@ a:visited {
 /* Misc Loaders and Elements */
 
 #loader {
-    background-color: #fff;
+    background-color: #1F5EF2;
     display: none;
     height: 100%;
     overflow: hidden;
@@ -673,7 +673,7 @@ body {
 .shadow {
     width: $booSize - $jaggedDistance;
     height: $jaggedDistance / 2;
-    background-color: rgba($booShadow, .75);
+    background-color: rgba($booShadow, .25);
     margin-top: $jaggedDistance * 0.5;
     margin-right: auto;
     margin-left: auto;
@@ -684,7 +684,7 @@ body {
 .ninjaLoaderText {
     text-align: center;
     margin-top: 16px;
-    color: rgba(102, 102, 102, 0.64);
+    color: #fff;
     font-size: 12px;
     font-weight: 400;
     line-height: 14px;

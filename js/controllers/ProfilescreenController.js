@@ -29,7 +29,7 @@
         var containers = document.getElementsByClassName('tab-data');
         var bullets = document.getElementsByClassName('comp__tab');
         var emptyBorder = document.getElementsByClassName('emptyBorder');
-
+        var profileSrc = cacheProvider.getFromCritical('profileSrc');
 
         function defineNinjaHomeScreenTabs() {
 
@@ -59,9 +59,9 @@
             document.getElementById("sliderTabs").style.height = containers[0].offsetHeight + "px";
 
             bullets[0].className = 'comp__tab selected';
-            bullets[1].className = 'comp__tab ';
             bullets[2].className = 'comp__tab ';
-
+            bullets[1].className = 'comp__tab ';
+            
             if (bullets.length) {
                 console.log(bullets);
                 for (var i = 0; i < bullets.length; i++) {
@@ -72,6 +72,10 @@
                         slider.slide(index);
                     });
                 }
+            }
+
+            if(profileSrc && profileSrc == 'ugc'){
+                bullets[2].click();
             }
         }
         var elem = document.getElementsByClassName('rewardRow')
@@ -136,6 +140,7 @@
 
                         // Get Reward related information
                         var ugcType = this.getAttribute('data-type');
+                        cacheProvider.setInCritical('profileSrc', 'ugc');
                         App.router.navigateTo('/ugc', { type: ugcType });
                     });
                 }
