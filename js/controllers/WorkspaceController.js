@@ -97,7 +97,7 @@
 
                 if (target.getAttribute('data-screen') == "subscribe") {
 
-                    
+
                     if (platformSdk.bridgeEnabled) {
                         App.NinjaService.subscribeHandler({}, function(res) {
 
@@ -125,7 +125,7 @@
                                 events.publish('update.notif.toast', { show: true, heading: 'Bamm', details: 'Something went wrong while subscribing', notifType: 'notifNeutral' });
                         }, that);
 
-                    }else{
+                    } else {
                         that.subscribeScreenAnimation(DOMcache, App, that.ftueTemplate);
                     }
 
@@ -134,21 +134,6 @@
                     /* Animation FTUE screen dismiss */
                     that.ftueScreenDismissAnimation(DOMcache, App);
                 }
-
-            } else if (target.classList.contains('crossIcon')) {
-
-                if (platformSdk.bridgeEnabled) {
-                    App.NinjaService.unsubscribeHandler({}, function(res) {
-                        if (res.stat === 'ok')
-                            PlatformBridge.closeWebView();
-                        else
-                            events.publish('update.notif.toast', { show: true, heading: 'Bamm', details: 'Something went wrong while unsubscribing', notifType: 'notifNeutral' });
-                    }, that);
-
-                } else {
-                    console.log('closing miroapp');
-                }
-
 
             }
         });

@@ -6,8 +6,9 @@
     background: linear-gradient(-180deg, #1F5EF2 12%, #33FFE2 100%);
     height: 100%;
     width: 100%;
-    padding-top: 54px; 
+    /*padding-top: 54px;*/
     .subscribeScreen {
+        padding-top: 50px;
         height: 100%;
         .bottomSection {
             margin-top: 100%;
@@ -16,40 +17,21 @@
             opacity: 0;
             @include animation(0s, 1.7s, fadein);
         }
-        .subtitle_subscribe {
-            opacity: 0;
-            @include animation(0s, 1.7s, fadein);
-        }
-    }
-    .crossIcon {
-        background-size: 16px 16px;
-        padding: 24px;
-        background-image: url(images/cross.png);
-        background-position: center;
-        position: absolute;
-        right: 0;
-        z-index: 1000;
     }
     .title_subscribe {
-        padding-top: 80px;
+        /*padding-top: 80px;*/
+        padding: 32px;
         @include fontStyle(28px, 300, #FFFFFF, 34px);
         text-align: center;
-    }
-    .subtitle_subscribe {
-        @include fontStyle(16px, 400, rgba(255, 255, 255, 0.64), 20px);
-        text-align: center;
-        padding-top: 8px;
     }
     .scaleZeroToOneAnim {
         @include animation(0s, 1.5s, scaleZeroToOne);
     }
     .centreIcon {
         height: 163px;
-        margin-top: 30px;
         background-image: url(images/ninjaSubscribe.png);
-        background-size: 114px 163px;
+        background-size: contain;
         background-position: center;
-        margin-bottom: 15px;
     }
     .info {
         @include fontStyle(14px, 400, rgba(61, 71, 91, 0.64), 18px);

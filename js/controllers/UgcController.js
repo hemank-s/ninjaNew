@@ -71,11 +71,11 @@
             DOMcache.confirmPopup[0].classList.remove('hideClass');
         });
 
-        DOMcache.yesAction.addEventListener('keyup', function() {
+        DOMcache.yesAction[0].addEventListener('click', function() {
             App.router.back();
         });
 
-        DOMcache.noAction.addEventListener('keyup', function() {
+        DOMcache.noAction[0].addEventListener('click', function() {
             DOMcache.confirmPopup[0].classList.add('hideClass');
         });
 
@@ -375,7 +375,7 @@
 
             } catch (err) {
                 events.publish('update.notif.toast', { show: true, heading: 'Bamm', details: 'Sorry. Your image couldn’t be updated. Could you try again with another files, please?', notifType: 'notifNeutral' });
-                            
+
             }
 
         } else {

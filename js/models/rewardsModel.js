@@ -30,7 +30,7 @@
                 return '/customSticker';
             }
         },
-        
+
         updateNinjaRewardsIcons: function(data) {
             var that = this;
 
@@ -92,7 +92,32 @@
 
             cacheProvider.setInCritical('ninjaRewards', rewardsData);
 
-            // var oldNinjaCompareRewards = cacheProvider.getFromCritical('oldNinjaCompareRewards');
+
+            var oldRewards = cacheProvider.getFromCritical('oldNinjaRewards');
+
+
+            if (typeof oldRewards == "undefined") {
+                cacheProvider.setInCritical('showAnimation', true);
+            } else {
+                var newRewards = rewardsData;
+                // it will set show animation true or false
+                compare(oldRewards, newRewards);
+            }
+            cacheProvider.setInCritical('oldNinjaRewards', rewardsData);
+
+
+            cacheProvider.setInCritical('ninjaRewards', rewardsData);
+
+            var adhocReward = cacheProvider.getFromCritical('adhocRewardForUser');
+
+            if (adhocReward) {
+                for (var i = 0; i < adhocReward.length; i++) {
+                    rewardsData.rewards.push(adhocReward[i]);
+                }
+            }
+
+            cacheProvider.setInCritical('adhocRewardForUser', adhocReward);
+
 
             // if(typeof oldNinjaCompareRewards === 'undefined'){
             //     cacheProvider.setInCritical('oldNinjaCompareRewards', rewardsData);                 

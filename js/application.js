@@ -322,7 +322,17 @@
         },
 
         backPressTrigger: function() {
-            this.router.back();
+
+            var ugcContainer = document.querySelectorAll('.ugcContainer');
+            if (ugcContainer.length > 0) {
+                events.publish('ugc.backpress');
+            } else {
+                this.router.back();
+            }
+
+
+            var ugcContainer
+
         },
 
         goToNinjaProfilePage: function() {
@@ -443,8 +453,8 @@
             var ftueCompleted = cacheProvider.getFromCritical('ftueCompleted');
 
             if (!subscriptionCompleted || !ftueCompleted) {
+                //self.router.navigateTo('/');
                 self.router.navigateTo('/');
-                //self.router.navigateTo('/ugc', { type: 'jfl' });
             } else {
                 self.NinjaService.getNinjaProfile(function(res) {
                     cacheProvider.setInCritical('userProfileData', res.data);
