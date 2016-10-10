@@ -37,10 +37,10 @@
 <!-- Full Screen Popup for days unlock -->
 <div class="rewardUnlockAnimation centerToScreenContainer">
     <div class="rewardUnlockContainer">
-        <div class="dayDef">Day {{ninjaProfile.streak}}</div>
+        <div class="dayDef">Day</div>
         <div class="streakValueContainer">
             <div class="rewardUnlockStreakIcon">
-                <svg width="29px" height="30px" viewBox="0 0 29 30">
+                <svg width="32px" height="32px" viewBox="0 0 29 30">
                     <g id="Home-Screen" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
                         <g transform="translate(-134.000000, -317.000000)" fill="#23D3DA">
                             <path d="M150.298813,334.816805 C148.693608,335.65418 146.710407,335.037902 145.868855,333.440662 C145.027304,331.843422 145.646655,329.870061 147.25186,329.032686 C148.857065,328.19531 150.840266,328.811588 151.681818,330.408828 C152.523369,332.006068 151.904018,333.979429 150.298813,334.816805 M156.459791,329.47735 C155.139521,326.934591 157.17009,323.348008 155.663133,320.367153 C154.36194,317.792672 150.128727,316.529467 147.308926,317.160441 C150.12821,319.708894 148.842672,323.455643 146.841345,324.441424 C144.580991,325.555124 142.159332,323.718345 139.619615,324.359908 C135.121227,325.497476 134.767859,328.883607 134,333.209761 C137.418111,330.419874 140.888789,331.829998 141.990423,334.808802 C142.874279,337.199105 141.347768,340.197225 142.5127,342.712832 C143.698603,345.273523 147.965062,347.083676 150.959107,346.320482 C148.113084,343.442567 149.372814,340.019093 151.828472,338.951148 C153.733512,338.122421 155.588398,339.331123 157.749527,338.898575 C162.311902,337.986002 164.102212,334.930963 163.551651,330.852723 C161.699392,331.415391 157.842892,332.140869 156.459791,329.47735" id="Fill-1" transform="translate(148.824039, 331.748355) rotate(20.000000) translate(-148.824039, -331.748355) "></path>
@@ -79,8 +79,13 @@
                         {{#ninjaUnlockedRewards}}
                         <li class="unlockedRewardListItem newRewardAppearAnimation upcoming{{state}}card" data-rewardId="{{id}}" data-state="{{state}}" data-rewardtype="{{type}}">
                             <div class="unlockedRewardHeader">
-                                <div class="unlockedRewardIcon"></div>
-                                <div class="unlockedRewardStreak">{{streak}}</div>
+                                <div class="uhContainer">
+                                    <div class="unlockedRewardIcon"></div>
+                                </div>
+                                <div class="uStreakIconContainer">
+                                    <div class="unlockedRewardStreakIcon"></div>
+                                    <div class="unlockedRewardStreak">{{streak}}</div>
+                                </div>
                             </div>
                             <div class="unlockedRewardDetails">
                                 <p class="uRewardHeading">{{title}}</p>
@@ -104,15 +109,17 @@
                     <ul class="lockedRewardList">
                         {{#ninjaLockedRewards}}
                         <li class="rewardRow lockedRewardListItem" data-rewardId="{{id}}" data-state="{{state}}" data-rewardtype="{{type}}">
-                            <div class="rewardIcon"></div>
+                            <div class="riContainer">
+                                <div class="rewardIcon"></div>
+                            </div>
                             <div class="rewardDetails">
-                                <p class="rewardHeading {{^state}}{{#lockedGreyout}}rewardHeadingLocked{{/lockedGreyout}}{{/state}}">{{title}}</p>
-                                <p class="rewardSubheading {{^state}}{{#lockedGreyout}}rewardSubheadingLocked{{/lockedGreyout}}{{/state}}">{{stitle}}</p>
+                                <p class="lrewardHeading {{^state}}{{#lockedGreyout}}rewardHeadingLocked{{/lockedGreyout}}{{/state}}">{{title}}</p>
+                                <p class="lrewardSubheading {{^state}}{{#lockedGreyout}}rewardSubheadingLocked{{/lockedGreyout}}{{/state}}">{{stitle}}</p>
                             </div>
                             {{#streak}}
                             <div class="rewardStreakWrapper">
                                 <div class="rewardStreakIcon"></div>
-                                <div class="rewardStreakValue">{{streak}}</div>
+                                <div class="lrewardStreakValue">{{streak}}</div>
                             </div>
                             {{/streak}}
                         </li>

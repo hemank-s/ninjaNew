@@ -21,10 +21,9 @@
             centerIcon: document.getElementsByClassName('centreIcon')[0],
             info: document.getElementsByClassName('info')[0],
             title: document.getElementsByClassName('title_subscribe')[0],
-            subtitle: document.getElementsByClassName('subtitle_subscribe')[0],
             screenCls: document.getElementsByClassName('screenCls')[0],
             content: document.getElementsByClassName('content')[0],
-            bottomSection: document.getElementsByClassName('bottomSection')[0]
+            bottomSection: document.getElementsByClassName('bottomSection')[0],
         };
 
 
@@ -36,7 +35,7 @@
                 elem2 = DOMcache.subscribeCta;
 
             } else {
-                elem1 = document.getElementsByClassName('infoRow')[3];
+                elem1 = document.getElementsByClassName('infoRow')[2];
                 elem2 = document.getElementsByClassName('ftueCta')[0];
                 ftue = true;
             }
@@ -44,13 +43,13 @@
             if (!ftue)
                 var time = 0;
             else
-                var time = 900;
+                var time = 600;
+
 
             setTimeout(function() {
                 marginTop = (window.innerHeight - elem1.offsetTop - elem1.offsetHeight - elem2.offsetHeight) / 2;
                 elem2.style.marginTop = marginTop + 'px';
                 elem2.style.opacity = "1";
-
 
             }, time);
 
@@ -68,7 +67,7 @@
                 elem2 = DOMcache.subscribeCta;
 
             } else {
-                elem1 = document.getElementsByClassName('infoRow')[3];
+                elem1 = document.getElementsByClassName('infoRow')[2];
                 elem2 = document.getElementsByClassName('ftueCta')[0];
                 ftue = true;
             }
@@ -76,13 +75,13 @@
             if (!ftue)
                 var time = 0;
             else
-                var time = 900;
+                var time = 600;
+
 
             setTimeout(function() {
                 marginTop = (window.innerHeight - elem1.offsetTop - elem1.offsetHeight - elem2.offsetHeight) / 2;
                 elem2.style.marginTop = marginTop + 'px';
                 elem2.style.opacity = "1";
-
 
             }, time);
         });
@@ -141,19 +140,24 @@
 
     WorkspaceController.prototype.subscribeScreenAnimation = function(DOMcache, App, template) {
 
+        DOMcache.centerIcon.classList.remove('scaleZeroToOneAnim');
+        //DOMcache.centerIcon.style.opacity = 0;
+        DOMcache.centerIcon.style.height = "0px";
         DOMcache.screenCls.classList.remove('subscribeScreen');
         DOMcache.screenCls.classList.add('ftueScreen');
         DOMcache.title.classList.add('titleAnimFtueCls');
         DOMcache.title.classList.add('animation_fadeout');
-        DOMcache.subtitle.remove();
         DOMcache.title.innerHTML = "What do you get?";
         DOMcache.content.innerHTML = Mustache.render(unescape(template));
         DOMcache.bottomSection.classList.remove('slideFromBottomCls');
-        DOMcache.bottomSection.classList.add('slideFromBottomCls2');
-        DOMcache.centerIcon.classList.remove('scaleZeroToOneAnim');
-        DOMcache.centerIcon.classList.add('animation_fadeout');
+        //DOMcache.bottomSection.classList.add('slideFromBottomCls2');
         DOMcache.info.classList.add('animation_fadeout');
         DOMcache.subscribeCta.classList.add('animation_fadeout');
+
+
+
+
+
     };
 
     WorkspaceController.prototype.ftueScreenDismissAnimation = function(DOMcache, App) {

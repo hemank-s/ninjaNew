@@ -1,16 +1,14 @@
 /*   Screen Resolution - 120   */
 
-$gap: 65px;
+$gap: 75px;
 @media screen and (max-width: 299px) {
     /***** Subscribe Screen *****/
+    .title_subscribe {
+        font-size: 24px !important;
+    }
     .subscribeScreen {
-        .title_subscribe {
-            /*padding-top: 20% !important;*/
-            padding-top: 10% !important;
-            font-size: 24px !important;
-        }
         .centreIcon {
-            height: 150px !important;
+            height: 144px !important;
         }
         .ninjaWave {
             height: 17.5% !important;
@@ -25,10 +23,6 @@ $gap: 65px;
     /******************/
     /***** FTUE Screen *****/
     .ftueScreen {
-        .title_subscribe {
-            font-size: 24px !important;
-            padding-top: 18%;
-        }
         .ninjaWave {
             height: 100px !important;
         }
@@ -36,34 +30,18 @@ $gap: 65px;
             margin-top: -15px !important;
         }
         .infoRow {
-            margin-bottom: 20px !important;
-            padding-left: 16px !important;
-        }
-        .infoIcon {
-            width: 17px !important;
-            height: 17px !important;
-        }
-        .infoDetails {
-            margin-left: 12px !important;
+            margin-bottom: 24px !important;
         }
         .infoHeading {
-            font-size: 13px !important;
-            line-height: 17px !important;
+            font-size: 14px !important;
+            line-height: 18px !important;
         }
         .infoSubHeading {
-            font-size: 11px !important;
-            line-height: 13px !important;
+            font-size: 12px !important;
+            line-height: 16px !important;
         }
         .ftueCta {
             font-size: 12px !important;
-        }
-        @include keyframe(slideFromBottom2) {
-            0% {
-                margin-top: 0%;
-            }
-            100% {
-                margin-top: -70%;
-            }
         }
     }
     /******************/
@@ -205,14 +183,12 @@ $gap: 65px;
 
 @media screen and (min-width: 300px) and (max-width: 320px) {
     /***** Subscribe Screen *****/
+    .title_subscribe {
+        font-size: 24px !important;
+    }
     .subscribeScreen {
-        .title_subscribe {
-            /*padding-top: 20% !important;*/
-            padding-top: 10% !important;
-            font-size: 24px !important;
-        }
         .centreIcon {
-            height: 150px !important;
+            height: 144px !important;
         }
         .ninjaWave {
             height: 17.5% !important;
@@ -227,10 +203,6 @@ $gap: 65px;
     /******************/
     /***** FTUE Screen *****/
     .ftueScreen {
-        .title_subscribe {
-            font-size: 24px !important;
-            padding-top: 18%;
-        }
         .ninjaWave {
             height: 100px !important;
         }
@@ -238,34 +210,18 @@ $gap: 65px;
             margin-top: -15px !important;
         }
         .infoRow {
-            margin-bottom: 20px !important;
-            padding-left: 16px !important;
-        }
-        .infoIcon {
-            width: 17px !important;
-            height: 17px !important;
-        }
-        .infoDetails {
-            margin-left: 12px !important;
+            margin-bottom: 24px !important;
         }
         .infoHeading {
-            font-size: 13px !important;
-            line-height: 17px !important;
+            font-size: 14px !important;
+            line-height: 18px !important;
         }
         .infoSubHeading {
-            font-size: 11px !important;
-            line-height: 13px !important;
+            font-size: 12px !important;
+            line-height: 16px !important;
         }
         .ftueCta {
             font-size: 12px !important;
-        }
-        @include keyframe(slideFromBottom2) {
-            0% {
-                margin-top: 0%;
-            }
-            100% {
-                margin-top: -63%;
-            }
         }
     }
     /******************/
@@ -405,15 +361,12 @@ $gap: 65px;
 
 @media screen and (min-width: 321px) and (max-width: 340px) {
     /***** Subscribe Screen *****/
+    .title_subscribe {
+        font-size: 26px !important;
+    }
     .subscribeScreen {
-        .title_subscribe {
-            /*padding-top: 55px !important;*/
-            /*padding-top: 20% !important;*/
-            padding-top: 10% !important;
-            font-size: 26px !important;
-        }
         .centreIcon {
-            height: 163px !important;
+            height: 144px !important;
         }
         .ninjaWave {
             /*height: 95px !important;*/
@@ -429,45 +382,22 @@ $gap: 65px;
     /******************/
     /***** FTUE Screen *****/
     .ftueScreen {
-        .title_subscribe {
-            font-size: 24px !important;
-            padding-top: 18%;
-        }
         .ninjaWave {
             height: 100px !important;
         }
         .content {
             margin-top: -15px !important;
         }
-        .infoRow {
-            margin-bottom: 18px !important;
-            padding-left: 16px !important;
-        }
-        .infoIcon {
-            width: 18px !important;
-            height: 18px !important;
-        }
-        .infoDetails {
-            margin-left: 14px !important;
-        }
         .infoHeading {
-            font-size: 13px !important;
+            font-size: 14px !important;
             line-height: 18px !important;
         }
         .infoSubHeading {
-            font-size: 11px !important;
-            line-height: 14px !important;
+            font-size: 12px !important;
+            line-height: 16px !important;
         }
         .ftueCta {
             font-size: 12px !important;
-        }
-        @include keyframe(slideFromBottom2) {
-            0% {
-                margin-top: 0%;
-            }
-            100% {
-                margin-top: -63%;
-            }
         }
     }
     /******************/
@@ -648,32 +578,21 @@ $gap: 65px;
 @media screen and (min-width: 341px) and (max-width: 360px) {
     /***** Subscribe Screen *****/
     .subscribeScreen {
-        .title_subscribe {
-            /*padding-top: 20% !important;*/
-            padding-top: 10% !important;
-        }
         .ninjaWave {
             height: 17.5% !important;
+        }
+        .centreIcon {
+            height: 152px !important;
         }
     }
     /******************/
     /***** FTUE Screen *****/
     .ftueScreen {
-        .title_subscribe {
-            padding-top: 18%;
-        }
         .ninjaWave {
             height: 100px !important;
         }
         .content {
             margin-top: -18px !important;
-        }
-        .infoRow {
-            margin-bottom: 20px !important;
-            padding-left: 18px !important;
-        }
-        .infoDetails {
-            margin-left: 14px !important;
         }
         .infoHeading {
             font-size: 14px !important;
@@ -681,18 +600,10 @@ $gap: 65px;
         }
         .infoSubHeading {
             font-size: 12px !important;
-            line-height: 14px !important;
+            line-height: 16px !important;
         }
         .ftueCta {
-            font-size: 13px !important;
-        }
-        @include keyframe(slideFromBottom2) {
-            0% {
-                margin-top: 0%;
-            }
-            100% {
-                margin-top: -57%;
-            }
+            font-size: 12px !important;
         }
     }
     /******************/
@@ -765,29 +676,22 @@ $gap: 65px;
 @media screen and (min-width: 361px) and (max-width: 380px) {
     /***** Subscribe Screen *****/
     .subscribeScreen {
-        .title_subscribe {
-            /* padding-top: 20% !important;*/
-            padding-top: 10% !important;
-        }
         .ninjaWave {
-            height: 17.5% !important;
+            height: 19.5% !important;
+        }
+        .centreIcon {
+            height: 152px !important;
         }
     }
     /******************/
     /***** FTUE Screen *****/
     /***** FTUE Screen *****/
     .ftueScreen {
-        .title_subscribe {
-            padding-top: 18%;
-        }
         .ninjaWave {
             height: 100px !important;
         }
         .content {
             margin-top: -22px !important;
-        }
-        .infoRow {
-            margin-bottom: 24px !important;
         }
         .infoHeading {
             font-size: 14px !important;
@@ -795,18 +699,10 @@ $gap: 65px;
         }
         .infoSubHeading {
             font-size: 12px !important;
-            line-height: 14px !important;
+            line-height: 16px !important;
         }
         .ftueCta {
-            font-size: 13px !important;
-        }
-        @include keyframe(slideFromBottom2) {
-            0% {
-                margin-top: 0%;
-            }
-            100% {
-                margin-top: -53%;
-            }
+            font-size: 12px !important;
         }
     }
     /******************/
@@ -834,34 +730,15 @@ $gap: 65px;
 @media screen and (min-width: 381px) and (max-width: 400px) {
     /***** Subscribe Screen *****/
     .subscribeScreen {
-        .title_subscribe {
-            /*padding-top: 20% !important;*/
-            padding-top: 10% !important;
-        }
         .ninjaWave {
-            /*height: 100px !important;*/
-            height: 17.5% !important;
+            height: 20% !important;
         }
     }
     /******************/
     /***** FTUE Screen *****/
     .ftueScreen {
-        .title_subscribe {
-            padding-top: 18% !important;
-        }
         .ninjaWave {
             height: 100px !important;
-        }
-        .infoRow {
-            margin-bottom: 26px;
-        }
-        @include keyframe(slideFromBottom2) {
-            0% {
-                margin-top: 0%;
-            }
-            100% {
-                margin-top: -48%;
-            }
         }
     }
     /******************/
@@ -875,18 +752,15 @@ $gap: 65px;
     .infoDetails {
         width: 400px - $gap;
     }
+    .subscribeScreen {
+        .ninjaWave {
+            height: 20% !important;
+        }
+    }
     /***** FTUE Screen *****/
     .ftueScreen {
         .ninjaWave {
-            height: 100px !important;
-        }
-        @include keyframe(slideFromBottom2) {
-            0% {
-                margin-top: 0%;
-            }
-            100% {
-                margin-top: -43%;
-            }
+            height: 110px !important;
         }
     }
     @include mysteryBoxStyling(300px);
@@ -895,6 +769,11 @@ $gap: 65px;
 @media screen and (min-width: 421px) {
     .infoDetails {
         width: 421px - $gap;
+    }
+    .subscribeScreen {
+        .ninjaWave {
+            height: 23% !important;
+        }
     }
     @include mysteryBoxStyling(300px);
     /***** FTUE Screen *****/
@@ -914,38 +793,33 @@ $gap: 65px;
 }
 
 @media screen and (min-width: 450px) {
-    .ftueScreen,
+    .ftueScreen {
+        .ninjaWave {
+            height: 130px !important;
+        }
+    }
     .subscribeScreen {
         .ninjaWave {
-            height: 126px !important;
+            height: 25% !important;
         }
     }
 }
 
-@media screen and (min-height: 601px) {
-    .ftueScreen .infoRow {
-        margin-bottom: 30px !important;
+@media screen and (min-width: 530px) {
+    .ftueScreen {
+        .ninjaWave {
+            height: 150px !important;
+        }
     }
 }
 
 @media screen and (min-height: 441px) and (max-height: 505px) {
     .subscribeScreen {
-        .title_subscribe {
-            /*padding-top: 16% !important;*/
-            padding-top: 10% !important;
-        }
         .centreIcon {
-            height: 140px !important;
-            margin-top: 0px !important;
-            background-size: 80px 115px !important;
-            margin-bottom: 0px !important;
+            height: 130px !important;
         }
     }
     .ftueScreen {
-        .title_subscribe {
-            font-size: 22px !important;
-            padding-top: 18%;
-        }
         .ninjaWave {
             height: 89px !important;
         }
@@ -953,51 +827,30 @@ $gap: 65px;
             margin-top: -20px !important;
         }
         .infoRow {
-            margin-bottom: 18px !important;
-            padding-left: 16px !important;
-        }
-        .infoIcon {
-            width: 16px !important;
-            height: 16px !important;
-        }
-        .infoDetails {
-            margin-left: 12px !important;
+            margin-bottom: 24px !important;
         }
         .infoHeading {
+            font-size: 14px !important;
+            line-height: 18px !important;
+        }
+        .infoSubHeading {
             font-size: 12px !important;
             line-height: 16px !important;
         }
-        .infoSubHeading {
-            font-size: 10px !important;
-            line-height: 12px !important;
-        }
         .ftueCta {
-            font-size: 10px !important;
-        }
-        @include keyframe(slideFromBottom2) {
-            0% {
-                margin-top: 0%;
-            }
-            100% {
-                margin-top: -70%;
-            }
+            font-size: 12px !important;
         }
     }
 }
 
 @media screen and (min-height: 506px) and (max-height: 512px) {
     /***** Subscribe Screen *****/
+    .title_subscribe {
+        font-size: 24px !important;
+    }
     .subscribeScreen {
-        .title_subscribe {
-            /*padding-top: 20% !important;*/
-            padding-top: 10% !important;
-            font-size: 24px !important;
-        }
         .centreIcon {
             height: 150px !important;
-        }
-        .ninjaWave {
-            height: 17.5% !important;
         }
         .info {
             font-size: 12px !important;
@@ -1009,10 +862,6 @@ $gap: 65px;
     /******************/
     /***** FTUE Screen *****/
     .ftueScreen {
-        .title_subscribe {
-            font-size: 24px !important;
-            padding-top: 18%;
-        }
         .ninjaWave {
             height: 100px !important;
         }
@@ -1020,34 +869,18 @@ $gap: 65px;
             margin-top: -15px !important;
         }
         .infoRow {
-            margin-bottom: 20px !important;
-            padding-left: 16px !important;
-        }
-        .infoIcon {
-            width: 17px !important;
-            height: 17px !important;
-        }
-        .infoDetails {
-            margin-left: 12px !important;
+            margin-bottom: 24px !important;
         }
         .infoHeading {
-            font-size: 13px !important;
-            line-height: 17px !important;
+            font-size: 14px !important;
+            line-height: 18px !important;
         }
         .infoSubHeading {
-            font-size: 11px !important;
-            line-height: 13px !important;
+            font-size: 12px !important;
+            line-height: 16px !important;
         }
         .ftueCta {
             font-size: 12px !important;
-        }
-        @include keyframe(slideFromBottom2) {
-            0% {
-                margin-top: 0%;
-            }
-            100% {
-                margin-top: -63%;
-            }
         }
     }
     /******************/

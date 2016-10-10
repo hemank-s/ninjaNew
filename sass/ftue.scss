@@ -1,6 +1,7 @@
 .ftueScreen {
     .title_subscribe {
         padding-bottom: 20px;
+        padding-top: 40px;
     }
     height: 100%;
     .titleAnimFtueCls {
@@ -33,9 +34,6 @@
     .row3 {
         @include animation(0.7s, 0.8s, inforRowAnim);
     }
-    .row4 {
-        @include animation(0.9s, 0.8s, inforRowAnim);
-    }
     .ftueCta {
         opacity: 0;
         /*@include animation(1.7s, 1s, fadeInTranslate);*/
@@ -66,7 +64,7 @@
     }
     .infoDetails {
         display: inline-block;
-        margin-left: 18px;
+        margin-left: 20px;
         vertical-align: middle;
     }
     .infoHeading {
