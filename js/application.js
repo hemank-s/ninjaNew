@@ -330,9 +330,6 @@
                 this.router.back();
             }
 
-
-            var ugcContainer
-
         },
 
         goToNinjaProfilePage: function() {
@@ -453,8 +450,8 @@
             var ftueCompleted = cacheProvider.getFromCritical('ftueCompleted');
 
             if (!subscriptionCompleted || !ftueCompleted) {
-                //self.router.navigateTo('/ugc', { type: 'facts' });
-                self.router.navigateTo('/');
+                self.router.navigateTo('/ugc', { type: 'quotes' });
+                //self.router.navigateTo('/');
 
             } else {
                 self.NinjaService.getNinjaProfile(function(res) {
