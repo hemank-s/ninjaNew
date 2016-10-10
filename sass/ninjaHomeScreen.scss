@@ -20,22 +20,21 @@
 }
 
 .dayDef {
-    font-size: 26px;
+    font-size: 24px;
     color: #FFFFFF;
-    line-height: 13px;
-    font-weight: 300;
-    margin-bottom: 18px;
+    font-weight: 400;
+    margin-bottom: 16px;
     text-align: center;
     display: block;
 }
 
 .rewardUnlockStreakValue {
-    font-weight: 500;
+    font-weight: 400;
     font-size: 48px;
     color: #23D3DA;
-    letter-spacing: 1.5px;
     display: inline-block;
     vertical-align: middle;
+    margin-left: 8px;
 }
 
 .rewardUnlockAnimation {
@@ -43,27 +42,23 @@
     opacity: 0;
     width: 100%;
     height: 100%;
-    background: #1D47F5;
+    background: rgba(31,94,242,0.96);
     z-index: 1000;
-    background: -webkit-linear-gradient(left top, rgba(29, 71, 245, 0.92), rgba(51, 255, 226, 0.92));
-    background: -o-linear-gradient(bottom right, rgba(29, 71, 245, 0.92), rgba(51, 255, 226, 0.92));
-    background: -moz-linear-gradient(bottom right, rgba(29, 71, 245, 0.92), rgba(51, 255, 226, 0.92));
-    background: linear-gradient(to bottom right, rgba(29, 71, 245, 0.92), rgba(51, 255, 226, 0.92));
 }
 
 .streakValueContainer {
     text-align: center;
-    width: 164px;
+    width: 154px;
     margin: 0px auto;
     height: 72px;
     background: #FFFFFF;
-    box-shadow: 0px 0px 44px 0px #4CF3D5;
     border-radius: 100px;
     line-height: 72px;
-    border: 4px solid #7CEDF2;
+    border: 2px solid #7CEDF2;
     opacity: 0;
     -webkit-transform: scale(0);
     transform: scale(0);
+    box-shadow: 0px 0px 16px 0px #4CF3D5;
 }
 
 .streakContainer {
@@ -121,11 +116,10 @@
     background: url(images/ninjaDefaultDp.png);
     background-size: contain;
     background-repeat: no-repeat;
-    width: 36px;
-    height: 36px;
-    position: absolute;
-    -webkit-border-radius: 10px;
-    border-radius: 10px;
+    width: 40px;
+    height: 40px;
+    -webkit-border-radius: 4px;
+    border-radius: 4px;
 }
 
 span.streakDef {
@@ -1084,7 +1078,7 @@ ul.unlockedRewardList > li.unlockedRewardListItem {
 .ninjaDpContainer {
     position: relative;
     float: right;
-    right: 12%;
+    margin-top: 2px;
 }
 
 .spinMysteryBoxBig {

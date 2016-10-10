@@ -699,6 +699,7 @@ body {
     transform: scale(0.5);
     -webkit-transform: scale(0.5);
     position: absolute;
+    z-index: -1; 
 }
 
 .myProfileNotif:after,
