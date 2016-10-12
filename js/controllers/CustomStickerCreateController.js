@@ -4,13 +4,12 @@
     var utils = require('../util/utils'),
         Constants = require('../../constants.js'),
         cacheProvider = require('../util/cacheProvider'),
-        profileModel = require('../models/profileModel'),
-        activityModel = require('../models/activityModel'),
+
 
         CustomStickerCreateController = function(options) {
-            this.ftueTemplate = require('raw!../../templates/customerStickerFtue.html');
-            this.createTemplate = require('raw!../../templates/customerStickerCreate.html');
-           
+            this.ftueTemplate = require('raw!../../templates/customStickerFtue.html');
+            this.createTemplate = require('raw!../../templates/customStickerCreate.html');
+
         };
 
     CustomStickerCreateController.prototype.bind = function(App, data) {
@@ -18,19 +17,59 @@
 
         var that = this;
 
-        var DOMCahe ={
+        var DOMCahe = {
 
-            createSticker:document.getElementsByClassName('createSticker'),
-            createContainer:document.getElementsByClassName('customCreateContainer');
+            createSticker: document.getElementsByClassName('createSticker'),
+            createContainer: document.getElementsByClassName('customCreateContainer'),
+            customImage: document.getElementsByClassName('customImage'),
+            customText: document.getElementsByClassName('customText'),
+            customCta: document.getElementsByClassName('customCta'),
+            learnMore: document.getElementsByClassName('learnMore'),
+            overlayCta: document.getElementsByClassName('overlayCta'),
+            customOverlay: document.getElementsByClassName('customOverlay'),
+
+
         }
 
-        DOMCahe.createSticker.addEventListener('click',function(){
-            cacheProvider.setInCritical('customStickerFtue',true);
-            DOMCahe.createContainer.innerHTML = Mustache.render(unescape(that.createTemplate));
+
+        DOMCahe.createSticker[0].addEventListener('click', function() {
+            cacheProvider.setInCritical('customStickerFtue', true);
+            DOMCahe.createContainer[0].innerHTML = Mustache.render(unescape(that.createTemplate));
         });
 
+        DOMCahe.customImage[0].addEventListener('click', function() {
+
+            utils.openGallery(DOMcache.customImage[0], Constants.IMAGE_SIZE_UGC, function() {
+
+                if (platformSdk.bridgeEnabled)
+                    DOMcache.customImage[0].setAttribute('filePath', fileUrl.filePath);
+            });
+
+
+        });
+
+        DOMCahe.customText[0].addEventListener('keyup', function() {
+            cacheProvider.setInCritical('customStickerFtue', true);
+            DOMCahe.createContainer[0].innerHTML = Mustache.render(unescape(that.createTemplate));
+        });
+
+        DOMCahe.customCta[0].addEventListener('click', function() {
+            cacheProvider.setInCritical('customStickerFtue', true);
+            DOMCahe.createContainer[0].innerHTML = Mustache.render(unescape(that.createTemplate));
+        });
+
+        DOMCahe.learnMore[0].addEventListener('click', function() {
+            cacheProvider.setInCritical('customStickerFtue', true);
+            DOMCahe.createContainer[0].innerHTML = Mustache.render(unescape(that.createTemplate));
+        });
+        DOMCahe.overlayCta[0].addEventListener('click', function() {
+            cacheProvider.setInCritical('customStickerFtue', true);
+            DOMCahe.createContainer[0].innerHTML = Mustache.render(unescape(that.createTemplate));
+        });
+
+
     };
-    
+
 
     CustomStickerCreateController.prototype.render = function(ctr, App, data) {
 
@@ -39,12 +78,12 @@
         that.el.className = 'customCreateContainer animation_fadein noselect';
         var customFtue = cacheProvider.getFromCritical('customStickerFtue');
         var template;
-        if(customFtue)
+        if (customFtue)
             template = that.createTemplate;
         else
-            template = that.ftueTemplate;    
+            template = that.ftueTemplate;
 
-        that.el.innerHTML = Mustache.render(unescape(that.template));
+        that.el.innerHTML = Mustache.render(unescape(template));
         ctr.appendChild(that.el);
         events.publish('update.loader', { show: false });
         that.bind(App, data);

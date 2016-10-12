@@ -259,6 +259,41 @@
                 timeout = setTimeout(later, wait);
                 if (callNow) func.apply(context, args);
             };
+        },
+
+        openGallery: function(element, size, callback) {
+            if (platformSdk.bridgeEnabled) {
+                try {
+                    platformSdk.nativeReq({
+                        ctx: self,
+                        fn: 'chooseFile',
+                        success: function(fileUrl) {
+
+                            fileUrl = decodeURIComponent(fileUrl);
+                            fileUrl = JSON.parse(fileUrl);
+
+                            if (!fileUrl.filesize || fileUrl.filesize === 0) {
+                                events.publish('update.notif.toast', { show: true, heading: 'Bamm', details: 'Sorry. Your image couldn’t be updated. Could you try again with another files, please?', notifType: 'notifNeutral' });
+                                return;
+                            }
+
+                            // Check Max Upload Size :: To Be Decided
+                            if (fileUrl.filesize > size) {
+                                events.publish('update.notif.toast', { show: true, heading: 'Bamm', details: 'Max file upload size is 10 Mb', notifType: 'notifNeutral' });
+                                return;
+                            }
+                            element.style.backgroundImage = 'url(\'file://' + fileUrl.filePath + '\')';
+                            callback(fileUrl.filePath);
+                        }
+                    });
+
+                } catch (err) {
+                    events.publish('update.notif.toast', { show: true, heading: 'Bamm', details: 'Sorry. Your image couldn’t be updated. Could you try again with another files, please?', notifType: 'notifNeutral' });
+                }
+
+            } else {
+                element.classList.add('test');
+            }
         }
     };
 

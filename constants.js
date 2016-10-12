@@ -56,6 +56,9 @@
         INVOKE_MODE_THREE_DOT: 2,
         MAX_LENGTH_QUOTE: 250,
 
+        IMAGE_SIZE_UGC: 1000000,
+
+
         UGC_TYPE: {
             JFL: 'jfl',
             QUOTE: 'quotes',
