@@ -380,12 +380,8 @@ ul.unlockedRewardList > li.unlockedRewardListItem {
 }
 
 .rewardStreakIcon {
-    background: url(images/lockedStreakIcon.png);
-    background-size: contain;
-    background-repeat: no-repeat;
-    width: 10px;
     display: inline-block;
-    height: 10px;
+    vertical-align: middle;
 }
 
 .lrewardStreakIcon {
@@ -891,12 +887,13 @@ ul.unlockedRewardList > li.unlockedRewardListItem {
     border-radius: 50%;
 }
 
-.statsWrapper{
-    padding: 34px 24px 0px 24px; 
+.statsWrapper {
+    padding: 34px 24px 0px 24px;
 }
 
 .statTypeContainer {
     overflow: hidden;
+    margin-bottom: 32px;
 }
 
 .statHeading {
@@ -908,7 +905,7 @@ ul.unlockedRewardList > li.unlockedRewardListItem {
 .statBoxWrapper {
     width: 40%;
     display: inline-block;
-    padding: 12px 0px 28px 8px;
+    padding: 12px 8px;
 }
 
 .statBoxFloatLeft {
@@ -919,9 +916,33 @@ ul.unlockedRewardList > li.unlockedRewardListItem {
     float: right;
 }
 
+.barColorChatTheme {
+    opacity: 0.72;
+    background-image: linear-gradient(44deg, #FA4454 0%, #F6876C 100%);
+}
+
+.barColorFiles {
+    background-image: linear-gradient(44deg, #2BE7A9 0%, #1DA8E8 100%);
+}
+
+.barColorMessages {
+    opacity: 0.72;
+    background-image: linear-gradient(44deg, #FA4454 0%, #F6876C 100%);
+}
+
+.barColorStickers {
+    opacity: 0.72;
+    background-image: linear-gradient(44deg, #B52E84 0%, #7026FF 100%);
+}
+
+.barColorStatus {
+    opacity: 0.72;
+    background-image: linear-gradient(44deg, #B52E84 0%, #7026FF 100%);
+}
+
 .statValue {
     font-size: 40px;
-    color: rgba(33,62,112,0.72);
+    color: rgba(33, 62, 112, 0.72);
     font-weight: 600;
     display: inline-block;
     vertical-align: baseline;
@@ -929,7 +950,6 @@ ul.unlockedRewardList > li.unlockedRewardListItem {
 }
 
 .statValueLeft {
-    background-image: linear-gradient(44deg, #FA4454 0%, #F6876C 100%);
     border-radius: 97px;
     width: 2px;
     height: 28px;
@@ -937,7 +957,6 @@ ul.unlockedRewardList > li.unlockedRewardListItem {
 }
 
 .statValueRight {
-    background-image: linear-gradient(44deg, #FA4454 0%, #F6876C 100%);
     border-radius: 97px;
     width: 2px;
     height: 28px;

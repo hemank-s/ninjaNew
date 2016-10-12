@@ -1,5 +1,8 @@
-.profileScreenWrapper {
+.profileScreenContainer {
     height: 100%;
+}
+
+.profileScreenWrapper {
     background: #1F5EF2;
     background: -webkit-linear-gradient(-180deg, #1F5EF2 12%, #33FFE2 100%);
     background: -o-linear-gradient(-180deg, #1F5EF2 12%, #33FFE2 100%);
@@ -118,8 +121,8 @@
     margin-top: 92px;
 }
 
-.emptyBorderContainer{
-    padding: 0px 12px; 
+.emptyBorderContainer {
+    padding: 0px 12px;
 }
 
 .emptyBorder {
@@ -133,56 +136,94 @@
 }
 
 .redeemedRewardListContainer {
-    margin-left: 16px;
-    margin-right: 16px;
     height: 100%;
 }
 
-.ugcTypeIcon {
-    background: url(images/defaultRewardIcon.png);
+.ugcHistoryIcon {
+    background: url(images/ugcHistory.png);
     background-size: contain;
     background-repeat: no-repeat;
-    width: 26px;
-    height: 26px;
+    width: 36px;
+    height: 36px;
     display: inline-block;
-    background-position: center;
+    border-radius: 4px;
+    vertical-align: middle;
+}
+
+.ugcTypeIcon {
+    background: url(images/ugcHistory.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 36px;
+    height: 36px;
+    display: inline-block;
+    border-radius: 4px;
+    vertical-align: middle;
+}
+
+.ugcHistoryDetails {
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 12px;
+    width: 84%;
 }
 
 .ugcTypeDetails {
     display: inline-block;
+    vertical-align: middle;
     margin-left: 12px;
+    width: 84%;
+}
+
+.ugcHistorySubheading {
+    font-size: 14px;
+    font-weight: 400;
+    color: rgba(61, 71, 91, 0.48);
+    line-height: 18px;
 }
 
 .ugcTypeSubheading {
-    font-size: 12px;
+    font-size: 14px;
     font-weight: 400;
-    color: rgba(61, 71, 91, 0.64);
-    line-height: 14px;
+    color: rgba(61, 71, 91, 0.48);
+    line-height: 18px;
+}
+
+.ugcHistoryHeading {
+    font-size: 14px;
+    font-weight: 400;
+    color: #3D475B;
+    margin-bottom: 4px;
 }
 
 .ugcTypeHeading {
     font-size: 14px;
-    font-weight: 500;
+    font-weight: 400;
     color: #3D475B;
-    width: 95%;
-    line-height: 16px;
     margin-bottom: 4px;
+}
+
+.rediContainer {
+    padding: 8px;
+    display: inline-block;
 }
 
 .redeemedRewardIcon {
     background: url(images/defaultRewardIcon.png);
     background-size: contain;
     background-repeat: no-repeat;
-    width: 26px;
-    height: 26px;
+    width: 30px;
+    height: 30px;
     display: inline-block;
     background-position: center;
+    vertical-align: middle;
 }
 
 .redeemedRewardDetails {
     display: inline-block;
     margin-left: 12px;
     vertical-align: middle;
+    width: 65%;
 }
 
 .redeemedRewardSubheading {
@@ -193,11 +234,13 @@
 }
 
 .redeemedRewardRow {
-    margin: 0px 0px 18px 0px;
+    list-style: none;
+    padding: 12px 12px;
 }
 
 .ugcTypeRow {
-    margin: 0px 0px 22px 0px;
+    padding: 16px 18px;
+    margin-bottom: 8px;
 }
 
 .emptyLine {
@@ -213,22 +256,18 @@
 }
 
 .ugcTypesContainer {
-    margin-top: 16px;
+    margin-top: 10px;
 }
 
 .ugcTypeList {}
 
-.ugcListContainer {
-    margin-left: 20px;
-    margin-right: 12px;
-    height: 100%;
-}
+.ugcListContainer {}
 
 .mysteryBoxHistoryIcon {
     background: url(images/mysteryBoxHistoryIcon.png);
     background-size: contain;
     background-repeat: no-repeat;
-    width: 18px;
-    height: 16px;
+    width: 22px;
+    height: 20px;
     display: inline-block;
 }
