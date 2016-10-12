@@ -76,6 +76,7 @@
 
             if(profileSrc && profileSrc == 'ugc'){
                 bullets[2].click();
+                cacheProvider.setInCritical('profileSrc', '');
             }
         }
         var elem = document.getElementsByClassName('rewardRow')

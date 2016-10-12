@@ -279,7 +279,7 @@
 
         var that = this;
         var rewardsData = {};
-        var showNewRewardAnimation = true;
+        var showNewRewardAnimation = cacheProvider.getFromCritical('showRewardAnimation');
 
         // Get Data From Cache Always :: Cache updated in all cases before rendering data
         var profile_data = cacheProvider.getFromCritical('userProfileData');
@@ -302,12 +302,12 @@
             rewardsData = that.filterRewards(data.rewards);
         }
 
-        // showNewRewardAnimation = compareForAnimation(rewardsData.unlockedRewards,oldNinjaCompareRewards);
 
         // For No Unlocked Rewards :: Show First locked reward
         if (rewardsData.unlockedRewards.length === 0) {
-            showNewRewardAnimation = false;
+            //showNewRewardAnimation = false;
             rewardsData.unlockedRewards.push(rewardsData.lockedRewards[0]);
+            rewardsData.lockedRewards.shift();
         }
 
         utils.changeBotTitle('Hike Ninja');

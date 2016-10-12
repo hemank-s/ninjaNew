@@ -33,9 +33,10 @@
             that.bindHandlersJfl(App, data);
 
 
-        events.subscribe('ugc.backpress', function() {
-            that.backpressHandler(App, data);
+        that.backPressEvent = events.subscribe('ugc.backpress', function() {
+            that.backpressHandler(App, data, parentCache);
         });
+
 
         parentCache.yesAction[0].addEventListener('click', function() {
             App.router.back();
@@ -48,17 +49,19 @@
     };
 
 
-    UgcController.prototype.backpressHandler = function(App, data) {
+    UgcController.prototype.backpressHandler = function(App, data, parentCache) {
 
         var quoteName = document.querySelectorAll('.quoteName');
         var quoteAuthor = document.querySelectorAll('.quoteAuthor');
         var jflImage = document.querySelectorAll('.jflImage');
+        var that = this;
 
         if (data.type == Constants.UGC_TYPE.QUOTE) {
 
             if ((quoteName.length > 0 && quoteName[0].innerHTML.length > 0) || (quoteAuthor.length > 0 && quoteAuthor[0].innerHTML.length > 0)) {
                 parentCache.confirmPopup[0].classList.remove('hideClass');
             } else {
+                that.backPressEvent.remove();
                 App.router.back();
             }
 
@@ -67,20 +70,21 @@
             if (quoteName.length > 0 && quoteName[0].innerHTML.length > 0) {
                 parentCache.confirmPopup[0].classList.remove('hideClass');
             } else {
+                that.backPressEvent.remove();
                 App.router.back();
             }
 
         } else {
 
-            if (jflImage.getAttribute('filePath'))
+            if (jflImage[0].getAttribute('filePath'))
                 parentCache.confirmPopup[0].classList.remove('hideClass');
-            else
+            else {
+                that.backPressEvent.remove();
                 App.router.back();
+            }
         }
 
-    }
-
-
+    };
 
     UgcController.prototype.bindHandlersQuote = function(App, data) {
 
@@ -490,12 +494,22 @@
         that.el.className = 'ugcContainer animation_fadein noselect';
 
         if (data.type == Constants.UGC_TYPE.QUOTE || data.type == Constants.UGC_TYPE.FACT) {
+
+            var isQuote = false;
+            if (data.type == Constants.UGC_TYPE.QUOTE) {
+                utils.changeBotTitle('QUOTES');
+                isQuote = true;
+            } else
+                utils.changeBotTitle('FACTS');
+
             template = that.quoteTemplate;
-            that.el.innerHTML = Mustache.render(unescape(template), { isQuote: (data.type == Constants.UGC_TYPE.QUOTE) ? true : false, length: Constants.MAX_LENGTH_QUOTE });
+            that.el.innerHTML = Mustache.render(unescape(template), { isQuote: isQuote, length: Constants.MAX_LENGTH_QUOTE });
         } else if (data.type == Constants.UGC_TYPE.JFL) {
             template = that.jflTemplate;
             that.el.innerHTML = Mustache.render(unescape(template));
+            utils.changeBotTitle('JUST FOR LAUGH');
         }
+
 
         var backButtonTemplate = document.createElement('div');
         backButtonTemplate.classList.add('ugcBackPopupContainer');

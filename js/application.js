@@ -8,6 +8,8 @@
         StickerRewardController = require('./controllers/StickerRewardController'),
         ExclusiveFeatureController = require('./controllers/ExclusiveFeatureController'),
         UgcController = require('./controllers/UgcController'),
+        CustomStickerCreateController = require('./controllers/CustomStickerCreateController'),
+        CustomStickerHistoryController = require('./controllers/CustomStickerHistoryController'),
 
 
         Router = require('./util/router'),
@@ -137,6 +139,10 @@
         this.stickerRewardController = new StickerRewardController();
         this.exclusiveFeatureController = new ExclusiveFeatureController();
         this.ugcController = new UgcController();
+        this.customCreateController = new CustomStickerCreateController();
+        this.customHistoryController = new CustomStickerHistoryController();
+        
+        
         // Communication Controller
         this.TxService = new TxService();
         this.NinjaService = new NinjaService(this.TxService); //communication layer
@@ -444,6 +450,20 @@
                 self.ugcController.render(self.container, self, data);
                 utils.toggleBackNavigation(true);
             });
+
+              this.router.route('/customCreate', function(data) {
+                self.container.innerHTML = '';
+                self.customCreateController.render(self.container, self, data);
+                utils.toggleBackNavigation(true);
+            });
+
+                this.router.route('/customHistory', function(data) {
+                self.container.innerHTML = '';
+                self.customHistoryController.render(self.container, self, data);
+                utils.toggleBackNavigation(true);
+            });
+
+      
 
             var subscriptionCompleted = cacheProvider.getFromCritical('subscriptionCompleted');
             var ftueCompleted = cacheProvider.getFromCritical('ftueCompleted');

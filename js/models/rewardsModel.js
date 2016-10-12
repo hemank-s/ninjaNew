@@ -84,29 +84,53 @@
             }
         },
 
+
+        rewardsCompare: function(oldR, newR) {
+
+            var oldRewards = oldR.rewards;
+            var newRewards = newR.rewards;
+            var temp, setAnim = false;
+
+            for (var key in newRewards) {
+
+                if (newRewards[key].state == Constants.REWARD_STATE.UNLOCKED) {
+
+                    temp = oldRewards.filter(function(obj) {
+                        return obj.id === newRewards[key].id && obj.state == Constants.REWARD_STATE.UNLOCKED;
+                    })[0];
+
+                    if (typeof temp === 'undefined') {
+                        setAnim = true;
+                        break;
+                    }
+                }
+            }
+            cacheProvider.setInCritical('showRewardAnimation', setAnim);
+
+        },
+
         // Update Ninja Rewards HTML
         updateNinjaRewards: function(rewardsData, App, existingUser) {
+
+            var that = this;
 
             console.log('Updating the Ninja Rewards Old By New Ninja Rewards');
             console.log(rewardsData);
 
             cacheProvider.setInCritical('ninjaRewards', rewardsData);
 
-
+            ////
             var oldRewards = cacheProvider.getFromCritical('oldNinjaRewards');
 
-
             if (typeof oldRewards == "undefined") {
-                cacheProvider.setInCritical('showAnimation', true);
+                cacheProvider.setInCritical('showRewardAnimation', true);
             } else {
                 var newRewards = rewardsData;
-                // it will set show animation true or false
-                compare(oldRewards, newRewards);
+                that.rewardsCompare(oldRewards, newRewards);
             }
             cacheProvider.setInCritical('oldNinjaRewards', rewardsData);
+            ///
 
-
-            cacheProvider.setInCritical('ninjaRewards', rewardsData);
 
             var adhocReward = cacheProvider.getFromCritical('adhocRewardForUser');
 
