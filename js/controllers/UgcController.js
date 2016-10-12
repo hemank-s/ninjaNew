@@ -145,7 +145,10 @@
 
         DOMcache.addPhotoCta[0].addEventListener('click', function() {
 
-            that.openGallery(DOMcache.card[0], function() {
+            utils.openGallery(DOMcache.card[0], Constants.IMAGE_SIZE_UGC, function(path) {
+
+                if (platformSdk.bridgeEnabled)
+                    DOMcache.card[0].setAttribute('filePath', fileUrl.filePath);
 
 
                 DOMcache.quoteName[0].classList.add('overlayQuoteName');
@@ -200,14 +203,22 @@
 
 
         DOMcache.uploadIcon[0].addEventListener('click', function() {
-            that.openGallery(DOMcache.jflImage[0], function() {
+            utils.openGallery(DOMcache.jflImage[0], Constants.IMAGE_SIZE_UGC, function() {
+
+                if (platformSdk.bridgeEnabled)
+                    DOMcache.jflImage[0].setAttribute('filePath', fileUrl.filePath);
+
                 that.chooseFileSuccess(DOMcache);
             });
         });
 
 
         DOMcache.replacePhotoCta[0].addEventListener('click', function() {
-            that.openGallery(DOMcache.jflImage[0], function() {
+            utils.openGallery(DOMcache.jflImage[0], Constants.IMAGE_SIZE_UGC, function() {
+
+                if (platformSdk.bridgeEnabled)
+                    DOMcache.jflImage[0].setAttribute('filePath', fileUrl.filePath);
+
                 that.chooseFileSuccess(DOMcache);
             });
         });
@@ -385,7 +396,7 @@
     };
 
 
-    UgcController.prototype.openGallery = function(element, callback) {
+    UgcController.prototype.openGallery = function(size, callback) {
 
         if (platformSdk.bridgeEnabled) {
             try {
@@ -403,13 +414,12 @@
                         }
 
                         // Check Max Upload Size :: To Be Decided
-                        if (fileUrl.filesize > 10000000) {
+                        if (fileUrl.filesize > size) {
                             events.publish('update.notif.toast', { show: true, heading: 'Bamm', details: 'Max file upload size is 10 Mb', notifType: 'notifNeutral' });
                             return;
                         }
 
-                        element.setAttribute('filePath', fileUrl.filePath);
-                        element.style.backgroundImage = 'url(\'file://' + fileUrl.filePath + '\')';
+
                         callback();
                     }
                 });
@@ -418,10 +428,6 @@
                 events.publish('update.notif.toast', { show: true, heading: 'Bamm', details: 'Sorry. Your image couldn’t be updated. Could you try again with another files, please?', notifType: 'notifNeutral' });
 
             }
-
-        } else {
-            element.classList.add('test');
-            callback();
 
         }
 

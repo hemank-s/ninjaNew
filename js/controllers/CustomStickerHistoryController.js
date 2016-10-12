@@ -8,7 +8,7 @@
         activityModel = require('../models/activityModel'),
 
         CustomStickerHistoryController = function(options) {
-            this.template = require('raw!../../templates/customerStickerHistory.html');
+            this.template = require('raw!../../templates/customStickerHistory.html');
            
         };
 
