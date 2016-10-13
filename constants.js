@@ -57,6 +57,14 @@
         MAX_LENGTH_QUOTE: 250,
 
         IMAGE_SIZE_UGC: 1000000,
+        CUSTOM_STICKER_TITLE_LENGTH: 120,
+
+        CUSTOM_STICKER_STATUS: {
+            FAILED: 'failed',
+            PROGRESS: 'inProgress',
+            DONE: 'completed'
+
+        },
 
 
         UGC_TYPE: {

@@ -11,6 +11,9 @@
         CustomStickerCreateController = require('./controllers/CustomStickerCreateController'),
         CustomStickerHistoryController = require('./controllers/CustomStickerHistoryController'),
         UpgradeController = require('./controllers/upgradeController'),
+        CustomStickerStatusController = require('./controllers/CustomStickerStatusController'),
+
+
 
         Router = require('./util/router'),
         utils = require('./util/utils'),
@@ -142,6 +145,7 @@
         this.customCreateController = new CustomStickerCreateController();
         this.customHistoryController = new CustomStickerHistoryController();
         this.upgradeController = new UpgradeController();
+        this.customStatusController = new CustomStickerStatusController();
 
         // Communication Controller
         this.TxService = new TxService();
@@ -467,9 +471,15 @@
                 utils.toggleBackNavigation(true);
             });
 
+
             this.router.route('/upgrade', function(data) {
                 self.container.innerHTML = '';
                 self.upgradeController.render(self.container, self, data);
+                utils.toggleBackNavigation(true);
+            });
+            this.router.route('/customStatus', function(data) {
+                self.container.innerHTML = '';
+                self.customStatusController.render(self.container, self, data);
                 utils.toggleBackNavigation(true);
             });
 
@@ -477,7 +487,42 @@
             var ftueCompleted = cacheProvider.getFromCritical('ftueCompleted');
 
             if (!subscriptionCompleted || !ftueCompleted) {
-                self.router.navigateTo('/home');
+
+
+                // var data = {
+                //     "data": {
+                //         "custom_sticker": [{
+                //             "id": ":id",
+                //             "ts": 123534546,
+                //             "status": "inProgress",
+                //             "phrase": "In progress sticker",
+                //             "url": "http://ih1.redbubble.net/image.120480953.2435/sticker,375x360.png"
+                //         }, {
+                //             "id": ":id",
+                //             "ts": 123534546,
+                //             "status": "completed",
+                //             "phrase": "Completed Sticker",
+                //             "url": "https://ih0.redbubble.net/image.188280585.5318/sticker,220x200-pad,220x200,ffffff.u1.jpg"
+                //         }, {
+                //             "id": ":id",
+                //             "ts": 123534546,
+                //             "status": "failed",
+                //             "phrase": "Failed Sticker",
+                //             "url": "http://www.insightsquared.com/wp-content/uploads/2014/05/failure.png",
+                //             "reason": 'Invalid Content'
+                //         }],
+                //         "eligible": true
+                //     }
+                // }
+
+                // if (data.data.custom_sticker.length > 0)
+                //     self.router.navigateTo('/customHistory', { stickerList: data.data.custom_sticker, eligible: data.data.eligible });
+                // else if (data.data.eligible == true)
+                //     self.router.navigateTo('/customCreate');
+                self.router.navigateTo('/');
+
+
+
             } else {
                 self.NinjaService.getNinjaProfile(function(res) {
                     cacheProvider.setInCritical('userProfileData', res.data);

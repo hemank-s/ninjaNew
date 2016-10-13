@@ -293,6 +293,8 @@
 
             } else {
                 element.classList.add('test');
+                callback();
+
             }
         }
     };

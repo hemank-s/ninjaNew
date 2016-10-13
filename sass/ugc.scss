@@ -42,13 +42,14 @@
         text-align: right;
         margin: 12px;
     }
-    .inputExceeded {
-        color: #F35F5F !important;
-    }
     [contenteditable=true]:empty:before {
         content: attr(placeholder);
         opacity: 0.4;
     }
+}
+
+.inputExceeded {
+    color: #F35F5F !important;
 }
 
 .cardNote,

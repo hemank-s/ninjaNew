@@ -1,0 +1,28 @@
+.customStatusContainer {
+    div {
+        padding: 15px;
+        text-align: center;
+    }
+    .customStatusTitle {}
+    .customStatusImage {}
+    .customStatusSubtitle {}
+    .stickerStatus_inProgress {
+        background: url(images/custom_progress.png);
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center;
+        height: 184px;
+        width: 100%;
+    }
+    .stickerStatus_completed {
+        background: url(images/custom_success.png);
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center;
+        height: 184px;
+        width: 100%;
+    }
+    .customStatusCta {
+        color: #1DA8E8;
+    }
+}
