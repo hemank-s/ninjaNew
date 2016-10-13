@@ -10,7 +10,7 @@
         UgcController = require('./controllers/UgcController'),
         CustomStickerCreateController = require('./controllers/CustomStickerCreateController'),
         CustomStickerHistoryController = require('./controllers/CustomStickerHistoryController'),
-
+        UpgradeController = require('./controllers/upgradeController'),
 
         Router = require('./util/router'),
         utils = require('./util/utils'),
@@ -141,8 +141,8 @@
         this.ugcController = new UgcController();
         this.customCreateController = new CustomStickerCreateController();
         this.customHistoryController = new CustomStickerHistoryController();
-        
-        
+        this.upgradeController = new UpgradeController();
+
         // Communication Controller
         this.TxService = new TxService();
         this.NinjaService = new NinjaService(this.TxService); //communication layer
@@ -200,7 +200,7 @@
 
             //Help
             platformSdk.events.subscribe('app.menu.om.help', function(id) {
-                //that.checkAndDownloadBot('+hikecs+', Constants.INVOKE_MODE_THREE_DOT);
+                that.checkAndDownloadBot('+hikecs+', Constants.INVOKE_MODE_THREE_DOT);
             });
         },
 
@@ -314,7 +314,7 @@
 
             that.OverflowEvents();
             platformSdk.setOverflowMenu(omList);
-            //that.checkAndDownloadBot('+hikecs+', Constants.INVOKE_MODE_APP_START);
+            that.checkAndDownloadBot('+hikecs+', Constants.INVOKE_MODE_APP_START);
 
         },
 
@@ -390,6 +390,10 @@
                 self.start();
             }, false);
 
+            document.querySelector('.goToSettings').addEventListener('click', function() {
+                PlatformBridge.openIntent('android.settings.SETTINGS');
+            }, false);
+
             // No Internet Connection Tab
             var noInternet = document.getElementById('nointernet');
             var noInternetObject = events.subscribe('app/offline', function(params) {
@@ -451,25 +455,29 @@
                 utils.toggleBackNavigation(true);
             });
 
-              this.router.route('/customCreate', function(data) {
+            this.router.route('/customCreate', function(data) {
                 self.container.innerHTML = '';
                 self.customCreateController.render(self.container, self, data);
                 utils.toggleBackNavigation(true);
             });
 
-                this.router.route('/customHistory', function(data) {
+            this.router.route('/customHistory', function(data) {
                 self.container.innerHTML = '';
                 self.customHistoryController.render(self.container, self, data);
                 utils.toggleBackNavigation(true);
             });
 
-      
+            this.router.route('/upgrade', function(data) {
+                self.container.innerHTML = '';
+                self.upgradeController.render(self.container, self, data);
+                utils.toggleBackNavigation(true);
+            });
 
             var subscriptionCompleted = cacheProvider.getFromCritical('subscriptionCompleted');
             var ftueCompleted = cacheProvider.getFromCritical('ftueCompleted');
 
             if (!subscriptionCompleted || !ftueCompleted) {
-                self.router.navigateTo('/customCreate');
+                self.router.navigateTo('/home');
             } else {
                 self.NinjaService.getNinjaProfile(function(res) {
                     cacheProvider.setInCritical('userProfileData', res.data);

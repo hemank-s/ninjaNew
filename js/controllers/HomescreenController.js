@@ -112,7 +112,7 @@
 
         // Reward Links :: Unlocked Rewards
         if (DOMcache.unlockedRewardListItem.length) {
-            rewardsModel.updateNinjaRewardsLinks(App, DOMcache);
+            rewardsModel.updateNinjaRewardsLinks(App, DOMcache, profileData);
         }
 
         // Rewards Link :: Locked Rewards
@@ -288,7 +288,7 @@
 
         if (platformSdk.bridgeEnabled) {
             if (utils.upgradeRequired(profile_data.hike_version, platformSdk.appData.appVersion)) {
-                // App.router.navigateTo('/upgrade');
+                App.router.navigateTo('/upgrade');
             } else if (profile_data.status == 'inactive' || profile_data.status == 'locked') {
                 // App.router.navigateTo('/userState', profile_data.data);
             } else {

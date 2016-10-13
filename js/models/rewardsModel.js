@@ -46,7 +46,7 @@
         },
 
         // Update the ninja Click Events For rewards
-        updateNinjaRewardsLinks: function(App, DOMcache) {
+        updateNinjaRewardsLinks: function(App, DOMcache, profileData) {
 
             var that = this;
 
@@ -61,6 +61,29 @@
                         var rewardType = this.getAttribute('data-rewardtype');
                         var rewardRouter = that.getRewardRouter(rewardType);
                         var rewardId = this.getAttribute('data-rewardId');
+
+                        if (rewardState == Constants.REWARD_STATE.LOCKED) {
+                            DOMcache.batteryStreakInfoContainer.classList.remove('hideClass');
+                            var batteryIconContainer = document.getElementsByClassName('batteryIconContainer')[0];
+                            batteryIconContainer.innerHTML = "";
+
+                            if (!platformSdk.bridgeEnabled) {
+                                profileData = { "battery": 2, "maxBattery": 7, "hike_version": "4.2.2.2", "rewards_hash": "1474970960", "status": "active", "streak": 10 };
+                            }
+
+                            for (var i = 1; i <= profileData.battery; i++) {
+                                var iDiv = document.createElement('div');
+                                iDiv.className = 'batteryIconFilled';
+                                batteryIconContainer.appendChild(iDiv);
+                            }
+
+                            for (var j = 1; j <= (profileData.maxBattery - profileData.battery); j++) {
+                                var jDiv = document.createElement('div');
+                                jDiv.className = 'batteryIconEmpty';
+                                batteryIconContainer.appendChild(jDiv);
+                            }
+                            return;
+                        }
 
                         var data = {};
                         data.rewardId = rewardId;
@@ -105,6 +128,8 @@
                     }
                 }
             }
+
+            console.log("SET ANIM IS", setAnim);
             cacheProvider.setInCritical('showRewardAnimation', setAnim);
 
         },
@@ -119,19 +144,14 @@
 
             cacheProvider.setInCritical('ninjaRewards', rewardsData);
 
-            ////
             var oldRewards = cacheProvider.getFromCritical('oldNinjaRewards');
 
             if (typeof oldRewards == "undefined") {
                 cacheProvider.setInCritical('showRewardAnimation', true);
             } else {
-                var newRewards = rewardsData;
-                that.rewardsCompare(oldRewards, newRewards);
+                that.rewardsCompare(oldRewards, rewardsData);
             }
             cacheProvider.setInCritical('oldNinjaRewards', rewardsData);
-            ///
-
-
             var adhocReward = cacheProvider.getFromCritical('adhocRewardForUser');
 
             if (adhocReward) {
@@ -141,11 +161,6 @@
             }
 
             cacheProvider.setInCritical('adhocRewardForUser', adhocReward);
-
-
-            // if(typeof oldNinjaCompareRewards === 'undefined'){
-            //     cacheProvider.setInCritical('oldNinjaCompareRewards', rewardsData);                 
-            // }
 
             if (existingUser) {
                 App.router.navigateTo('/home');

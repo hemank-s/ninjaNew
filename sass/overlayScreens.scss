@@ -1,7 +1,67 @@
+.upgradeContainer {
+    opacity: 0.95;
+    background: #1F5EF2;
+}
+
+.upgradeWrapper {
+    padding: 0px 32px;
+}
+
+.upgradeTitle {
+    font-size: 24px;
+    color: #FFF;
+    font-weight: 400;
+    margin-bottom: 48px;
+}
+
+.upgradeIconContainer {
+    width: 200px;
+    height: 200px;
+    margin: 0px auto;
+}
+
+.upgradeIcon {
+    background: url(images/upgradeIllustration.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 200px;
+    height: 200px;
+    margin: 0px auto;
+}
+
+.upgradeSubtitle {
+    font-size: 16px;
+    color: rgba(255, 255, 255, 0.80);
+    line-height: 19px;
+    font-weight: 400;
+    margin: 28px 0px 46px 0px;
+    padding: 0px 32px;
+}
+
+.upgradeAction {
+    color: #1F5EF2;
+    font-weight: 500;
+    background: #fff;
+    font-size: 14px;
+    margin: 0px auto;
+    text-align: center;
+    text-transform: uppercase;
+    border-radius: 4px;
+    padding: 12px 34px;
+    display: inline-block;
+}
+
+
 /* No Internet and Block Screen */
 
+#nointernet.no-internet-msg {
+    display: table-cell;
+    vertical-align: middle;
+}
+
 #nointernet {
-    background-color: #242739;
+    opacity: 0.95;
+    background: #1F5EF2;
     width: 100%;
     height: 100%;
     color: white;
@@ -14,101 +74,63 @@
     z-index: 101;
 }
 
-.exploreContainer {
-    width: 90%;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    -webkit-transform: translate(-50%, -50%);
+.noInternetWrapper {
+    padding: 0px 32px;
 }
 
-.exploreMatchBtn {
-    background: none;
-    border: 1px solid #fff;
-    border-radius: 4px;
-    color: #fff;
-    width: 120px;
-    padding: 15px;
-    text-transform: uppercase;
+.noInternetTitle {
+    font-size: 24px;
+    color: #FFF;
+    font-weight: 400;
+    margin-bottom: 48px;
+}
+
+.noInternetIconContainer {
+    width: 200px;
+    height: 200px;
     margin: 0px auto;
 }
 
-.exploreText .heading {
-    color: #FA5643;
-    font-size: 20px;
-    line-height: 24px;
-    font-weight: 400;
-}
-
-.exploreText .subheading {
-    color: #808080;
-    font-size: 14px;
-    line-height: 24px;
-    font-weight: 400;
-    padding-top: 3px;
-}
-
-.exploreText {
-    margin: 40px 20px;
-}
-
-
-.no-internet-msg .bellIcon {
-    background: url(images/nointernet.png);
+.noInternetIcon {
+    background: url(images/noInternetIllustration.png);
     background-size: contain;
     background-repeat: no-repeat;
-    width: 100px;
-    height: 78px;
+    width: 200px;
+    height: 200px;
     margin: 0px auto;
 }
 
-#nointernet.no-internet-msg {
+.noInternetSubtitle {
+    font-size: 16px;
+    color: rgba(255, 255, 255, 0.80);
+    line-height: 19px;
+    font-weight: 400;
+    margin: 28px 0px 46px 0px;
+    padding: 0px 32px;
+}
+
+.noInternetAction {
+    color: #1F5EF2;
+    font-weight: 500;
+    background: #fff;
+    font-size: 14px;
+    margin: 0px auto;
+    text-align: center;
+    text-transform: uppercase;
+    border-radius: 4px;
+    padding: 12px 34px;
+    display: inline-block;
+}
+
+// block Screen
+#blockScreen.block-msg {
     display: table-cell;
     vertical-align: middle;
 }
 
-.noInternetWrapper h3 {
-    color: #FA5643;
-    font-size: 21px;
-    font-weight: 400;
-    margin-top: 34px;
-    margin-bottom: 12px;
-}
-
-.noInternetWrapper p {
-    color: #999999;
-    font-size: 16px;
-    font-weight: 400;
-    line-height: 21px;
-}
-
-.noInternetWrapper,
-.blockScreenWrapper {
-    width: 90%;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    -webkit-transform: translate(-50%, -50%);
-}
-
-.blockScreenWrapper h3 {
-    font-size: 24px;
-    font-weight: 500;
-    color: #fff;
-    margin-top: 32px;
-    margin-bottom: 16px;
-}
-
-.blockScreenWrapper p {
-    font-size: 16px;
-    font-weight: 400;
-    color: #fff;
-    line-height: 23px;
-    margin-bottom: 81px;
-}
-
 #blockScreen {
-    background-color: #242739;
+    opacity: 0.95;
+    background: #1F5EF2;
     width: 100%;
     height: 100%;
     display: none;
@@ -119,16 +141,50 @@
     z-index: 101;
 }
 
-.block-msg .blockIcon {
-    background: url(images/block.png);
-    background-size: contain;
-    background-repeat: no-repeat;
-    width: 108px;
-    height: 108px;
+.blockWrapper {
+    padding: 0px 32px;
+}
+
+.blockTitle {
+    font-size: 24px;
+    color: #FFF;
+    font-weight: 400;
+    margin-bottom: 48px;
+}
+
+.blockIconContainer {
+    width: 200px;
+    height: 200px;
     margin: 0px auto;
 }
 
-#blockScreen.block-msg {
-    display: table-cell;
-    vertical-align: middle;
+.blockIcon {
+    background: url(images/blockIllustration.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 200px;
+    height: 200px;
+    margin: 0px auto;
+}
+
+.blockSubtitle {
+    font-size: 16px;
+    color: rgba(255, 255, 255, 0.80);
+    line-height: 19px;
+    font-weight: 400;
+    margin: 28px 0px 46px 0px;
+    padding: 0px 32px;
+}
+
+.blockAction {
+    color: #1F5EF2;
+    font-weight: 500;
+    background: #fff;
+    font-size: 14px;
+    margin: 0px auto;
+    text-align: center;
+    text-transform: uppercase;
+    border-radius: 4px;
+    padding: 12px 34px;
+    display: inline-block;
 }
