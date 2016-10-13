@@ -1,4 +1,4 @@
-(function(W, undefined) {
+(function(W, platformSdk, events) {
     'use strict';
 
     var cacheProvider = require('./cacheProvider.js');
@@ -299,4 +299,4 @@
         }
     };
 
-})(window);
+})(window, platformSdk, platformSdk.events);

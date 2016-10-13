@@ -199,30 +199,59 @@ $gap: 75px;
         font-size: 14px !important;
         padding: 8px 16px !important;
     }
+    // Ninja Profile Screen Media
+    .ninjaProfileBottomContainer {
+        padding-top: 78px;
+    }
     .comp__tabs .comp__tab,
     .comp__tabs .selected {
-        font-size: 10px !important;
+        font-size: 12px !important;
+    }
+    .sliderTabs {
+        margin-top: 72px;
     }
     .redeemedRewardsContainer {}
     .redeemedRewardListContainer {}
-    .redeemedRewardRow {}
-    .redeemedRewardIcon {}
-    .redeemedRewardDetails {}
-    .rewardHeading {}
-    .redeemedRewardSubheading {}
+    .redeemedRewardRow {
+        padding: 10px 12px;
+    }
+    .rediContainer {
+        padding: 6px;
+    }
+    .redeemedRewardIcon {
+        width: 26px;
+        height: 26px;
+    }
+    .redeemedRewardDetails {
+        margin-left: 10px !important;
+    }
+    .rewardHeading {
+        font-size: 12px !important;
+    }
+    .redeemedRewardSubheading {
+        font-size: 12px !important;
+    }
     .rewardStreakIcon {}
     .rewardStreakValue {}
     .ugcTypeIcon {
-        width: 24px !important;
-        height: 24px !important;
+        width: 32px !important;
+        height: 32px !important;
     }
-    .ugcTypeHeading {
+    .ugcTypeRow {
+        padding: 8px 18px !important;
+    }
+    .ugcTypeHeading,
+    .ugchistoryHeading {
         font-size: 12px !important;
         width: 91% !important;
         line-height: 14px !important;
         margin-bottom: 2px !important;
     }
-    .ugcTypeSubheading {
+    .ugcTypeDetails {
+        width: 80%;
+    }
+    .ugcTypeSubheading,
+    .ugcHistorySubheading {
         font-size: 10px !important;
     }
     .statTypeContainer {
@@ -243,6 +272,7 @@ $gap: 75px;
         font-size: 10px !important;
         margin-top: 4px !important;
     }
+    // Ninja Profile Screen Media
 }
 
 @media screen and (min-width: 300px) and (max-width: 320px) {

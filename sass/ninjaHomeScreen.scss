@@ -231,6 +231,8 @@ span.streakDefInfo {
 .unlockedRewardDetails {
     padding: 0px 0px 16px 16px;
     width: 87%;
+    min-height: 100px;
+    overflow: hidden;
 }
 
 .uRewardHeading {
