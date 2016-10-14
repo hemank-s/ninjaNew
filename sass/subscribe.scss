@@ -1,9 +1,5 @@
 .workspaceContainer {
-    background: #1F5EF2;
-    background: -webkit-linear-gradient(-180deg, #1F5EF2 12%, #33FFE2 100%);
-    background: -o-linear-gradient(-180deg, #1F5EF2 12%, #33FFE2 100%);
-    background: -moz-linear-gradient(-180deg, #1F5EF2 12%, #33FFE2 100%);
-    background: linear-gradient(-180deg, #1F5EF2 12%, #33FFE2 100%);
+    @include setGradient($stCol, $endCol);
     height: 100%;
     width: 100%;
     /*padding-top: 54px;*/
@@ -40,7 +36,7 @@
         margin-left: 10%;
     }
     .workspaceCta {
-        @include fontStyle(14px, 500, #17B197, 20px);
+        @include fontStyle(14px, 500, #46478D, 20px);
         text-align: center;
         margin-top: 100px;
         opacity: 0;
