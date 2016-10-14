@@ -135,22 +135,18 @@ $gap: 75px;
         width: 299px - $gap;
     }
     @include mysteryBoxStyling(225px);
-    .spinScrTitle {
-        margin-top: 120px !important;
-    }
+  
     .spinScrSubtitle {
-        margin-top: 160px !important;
+        margin-top: 150px !important;
     }
-    .mysteryBoxScr_title {
-        font-size: 24px !important;
-    }
+    
     .mysteryBoxScr_subtitle {
         font-size: 12px !important;
     }
     .spin {
         font-size: 12px !important;
         top: 44% !important;
-        left: 39% !important;
+        left: 40% !important;
     }
     .ctaWinner {
         font-size: 12px !important;
@@ -191,7 +187,6 @@ $gap: 75px;
         font-size: 14px !important;
     }
     .informationAction {}
-    // Ninja Profile Screen Media
     .ninjaProfileBottomContainer {
         padding-top: 78px;
     }
@@ -265,7 +260,6 @@ $gap: 75px;
     .statText {
         font-size: 10px !important;
     }
-    // Ninja Profile Screen Media
 }
 
 @media screen and (min-width: 300px) and (max-width: 320px) {
@@ -390,16 +384,12 @@ $gap: 75px;
     .infoDetails {
         width: 300px - $gap;
     }
-    @include mysteryBoxStyling(250px);
+    @include mysteryBoxStyling(225px);
     .spinScrSubtitle {
-        margin-top: 160px !important;
+        margin-top: 150px !important;
     }
-    .spinScrTitle {
-        margin-top: 120px !important;
-    }
-    .mysteryBoxScr_title {
-        font-size: 26px !important;
-    }
+   
+
     .mysteryBoxScr_subtitle {
         font-size: 14px !important;
     }
@@ -407,7 +397,7 @@ $gap: 75px;
         font-size: 14px !important;
     }
     .spin {
-        left: 40% !important;
+        left: 39% !important;
     }
     .mysteryBoxRetryIcon {
         width: 140px !important;
@@ -645,12 +635,8 @@ $gap: 75px;
     .spinScrSubtitle {
         margin-top: 160px !important;
     }
-    .spinScrTitle {
-        margin-top: 120px !important;
-    }
-    .mysteryBoxScr_title {
-        font-size: 26px !important;
-    }
+  
+   
     .mysteryBoxScr_subtitle {
         font-size: 14px !important;
     }
@@ -803,14 +789,10 @@ $gap: 75px;
     }
     @include mysteryBoxStyling(275px);
     .spinScrSubtitle {
-        margin-top: 170px !important;
+            margin-top: 180px !important;
     }
-    .spinScrTitle {
-        margin-top: 130px !important;
-    }
-    .mysteryBoxScr_title {
-        font-size: 28px !important;
-    }
+   
+   
     .mysteryBoxScr_subtitle {
         font-size: 14px !important;
     }
@@ -875,14 +857,10 @@ $gap: 75px;
     }
     @include mysteryBoxStyling(275px);
     .spinScrSubtitle {
-        margin-top: 170px !important;
+            margin-top: 180px !important;
     }
-    .spinScrTitle {
-        margin-top: 130px !important;
-    }
-    .mysteryBoxScr_title {
-        font-size: 28px !important;
-    }
+   
+
     .mysteryBoxScr_subtitle {
         font-size: 14px !important;
     }

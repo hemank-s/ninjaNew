@@ -89,6 +89,10 @@
 
                     var congratsIcon = document.getElementsByClassName('mysteryBoxCongratsIcon')[0];
 
+                    if (!platformSdk.bridgeEnabled)
+                        rewardData.icon = "http://memecrunch.com/meme/13RGH/fudu/image.png";
+
+
 
                     congratsIcon.style.backgroundImage = "url('" + rewardData.icon + "')";
                     window.setTimeout(function() {
@@ -167,9 +171,15 @@
         },
 
         removeMysteryBoxToast: function() {
-            var mBoxCacheData = cacheProvider.getFromCritical('ninjaMysteryBoxData');
-            mBoxCacheData.mstatus = '';
-            cacheProvider.setInCritical('ninjaMysteryBoxData', mBoxCacheData);
+
+            if (platformSdk.bridgeEnabled) {
+                var mBoxCacheData = cacheProvider.getFromCritical('ninjaMysteryBoxData');
+                mBoxCacheData.mstatus = '';
+                cacheProvider.setInCritical('ninjaMysteryBoxData', mBoxCacheData);
+            } else {
+
+            }
+
         },
 
         getRewardMapping: function(resultId, mysteryBoxData) {
@@ -235,6 +245,7 @@
                     rewardData = {};
                     rewardData.value = 'HIGH';
                     rewardData.title = 'My Sticker';
+                    rewardData.stitle = 'Subtitle blah blah Subtitle blah blah Subtitle blah blah Subtitle blah blah Subtitle blah blah';
                     console.log('stop is', stop);
                     var rotationFix = 360 / 16 + 360 / 8 + rotations * 720;
                     deg = 360 / 8 * stop + rotationFix;

@@ -4,10 +4,9 @@
     @include setGradient($stCol, $endCol);
 }
 
-.homeScreenParentContainer{
-     height: 100%;
+.homeScreenParentContainer {
+    height: 100%;
     overflow: scroll;
-
 }
 
 .hideClass {
@@ -203,7 +202,7 @@ span.streakDefInfo {
     height: 1000px;
 }
 
-.mBoxPadding{
+.mBoxPadding {
     padding-bottom: 70px;
 }
 
@@ -267,7 +266,7 @@ li.unlockedRewardListItem:first-child {
 
 li.unlockedRewardListItem:nth-child(4n-3) {
     /* Rectangle Copy 2: */
-    background: #FE626D !important;
+    background: #FE626D;
 }
 
 li.unlockedRewardListItem:nth-child(4n-2) {
@@ -592,7 +591,6 @@ ul.unlockedRewardList > li.unlockedRewardListItem {
         -ms-transform: translate(0px, 200px);
         -webkit-transform: translate(0px, 200px);
         transform: translate(0px, 200px);
-       
     }
 }
 

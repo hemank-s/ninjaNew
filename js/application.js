@@ -435,7 +435,7 @@
             });
             // Ninja Home screen
             this.router.route('/mysteryBox', function(data) {
-                self.container.innerHTML = '';
+                // self.container.innerHTML = '';
                 self.mysteryBoxController.render(self.container, self, data);
                 utils.toggleBackNavigation(true);
             });

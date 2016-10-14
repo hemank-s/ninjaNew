@@ -1,16 +1,14 @@
 .mysteryBoxContainer {
     height: 100%;
     width: 100%;
-    background: #1D47F5;
-    background: -webkit-linear-gradient(left top, #1D47F5, #33FFE2);
-    background: -o-linear-gradient(bottom left, #1D47F5, #33FFE2);
-    background: -moz-linear-gradient(bottom left, #1D47F5, #33FFE2);
-    background: linear-gradient(to bottom left, #1D47F5, #33FFE2);
+    background: rgba(74, 79, 147, 0.96);
+    position: absolute;
+    top: 0;
 }
 
 .wheel-wrapper {
     position: absolute;
-    top: 45%;
+    top: 52%;
     left: 50%;
 }
 
@@ -21,7 +19,7 @@
     width: 27px;
     z-index: 4;
     left: 50%;
-    margin: -38px -13px;
+    margin: -30px -13px;
     border: 0 solid transparent;
 }
 
@@ -61,8 +59,6 @@
     border-radius: inherit;
     background: #FFFFFF;
     pointer-events: none;
-    box-shadow: 0 0 100px 0px rgba(255, 255, 255, 1);
-    -webkit-box-shadow: 0 0 100px 0px rgba(255, 255, 255, 0.72);
 }
 
 .wheel .cutter {
@@ -81,8 +77,9 @@
     transform: rotate3d(0, 0, 1, 0deg);
 }
 
-.wheel .cutter:nth-child(1) .slicer {
-    @include setGradient(#FBD249, #F5A623);
+.wheel .cutter:nth-child(1) .slicer,
+.wheel .cutter:nth-child(5) .slicer {
+    @include setGradient(#00C3E2, #00C3E2);
 }
 
 .wheel .cutter:nth-child(2) {
@@ -90,8 +87,9 @@
     transform: rotate3d(0, 0, 1, 45deg);
 }
 
-.wheel .cutter:nth-child(2) .slicer {
-    @include setGradient(#F279FC, #CC44F7);
+.wheel .cutter:nth-child(2) .slicer,
+.wheel .cutter:nth-child(6) .slicer {
+    @include setGradient(#FCC04D, #FCC04D);
 }
 
 .wheel .cutter:nth-child(3) {
@@ -99,8 +97,9 @@
     transform: rotate3d(0, 0, 1, 90deg);
 }
 
-.wheel .cutter:nth-child(3) .slicer {
-    @include setGradient(#CDED57, #9ED62C);
+.wheel .cutter:nth-child(3) .slicer,
+.wheel .cutter:nth-child(7) .slicer {
+    @include setGradient(#7B67CF, #7B67CF);
 }
 
 .wheel .cutter:nth-child(4) {
@@ -108,8 +107,9 @@
     transform: rotate3d(0, 0, 1, 135deg);
 }
 
-.wheel .cutter:nth-child(4) .slicer {
-    @include setGradient(#7987FC, #4451F7);
+.wheel .cutter:nth-child(4) .slicer,
+.wheel .cutter:nth-child(8) .slicer {
+    @include setGradient(#FE626D, #FE626D);
 }
 
 .wheel .cutter:nth-child(5) {
@@ -117,17 +117,9 @@
     transform: rotate3d(0, 0, 1, 180deg);
 }
 
-.wheel .cutter:nth-child(5) .slicer {
-    @include setGradient(#FCF679, #F7D144);
-}
-
 .wheel .cutter:nth-child(6) {
     -webkit-transform: rotate3d(0, 0, 1, 225deg);
     transform: rotate3d(0, 0, 1, 225deg);
-}
-
-.wheel .cutter:nth-child(6) .slicer {
-    @include setGradient(#C398E4, #8F5FC4);
 }
 
 .wheel .cutter:nth-child(7) {
@@ -135,17 +127,9 @@
     transform: rotate3d(0, 0, 1, 270deg);
 }
 
-.wheel .cutter:nth-child(7) .slicer {
-    @include setGradient(#FC7981, #F7444A);
-}
-
 .wheel .cutter:nth-child(8) {
     -webkit-transform: rotate3d(0, 0, 1, 315deg);
     transform: rotate3d(0, 0, 1, 315deg);
-}
-
-.wheel .cutter:nth-child(8) .slicer {
-    @include setGradient(#50E3A2, #44D6F7);
 }
 
 .wheel .cutter .slicer {
@@ -347,25 +331,24 @@
 }
 
 .mysteryBoxScr_title {
-    @include fontStyle(32px, 300, #FFFFFF, 43px);
+    @include fontStyle(22px, 400, #FFFFFF, 24px);
     text-align: center;
 }
 
 .spinScrTitle {
     position: absolute;
-    top: 50%;
-    margin-top: 140px;
+    margin-top: 40px;
     width: 100%;
 }
 
 .spinScrSubtitle {
     position: absolute;
     top: 50%;
-    margin-top: 190px;
+    margin-top: 210px;
 }
 
 .mysteryBoxScr_subtitle {
-    @include fontStyle(16px, 400, rgba(255, 255, 255, 0.72), 20px);
+    @include fontStyle(16px, 400, rgba(255, 255, 255, 0.70), 20px);
     text-align: center;
     padding-top: 11px;
     max-width: 80%;
@@ -393,19 +376,34 @@
     margin: 42px auto 42px auto;
 }
 
+.congratsSubtitle {
+    padding-bottom: 48px;
+}
+
 .mysteryBoxCongratsIcon {
     background-image: url(images/mysteryBox_Congrats.png);
     background-size: contain;
     background-position: center;
     background-repeat: no-repeat;
-    width: 210px;
-    height: 171px;
-    margin: 42px auto 42px auto;
+    width: 150px;
+    height: 150px;
+    margin: 24px auto 24px auto;
     -ms-transform: scale(0);
     -webkit-transform: scale(0);
     transform: scale(0);
     opacity: 0;
     background-position: center;
+}
+
+.ctaCongrats {
+    text-transform: uppercase;
+    font-size: 14px;
+    color: #396BE1;
+    font-weight: 500;
+    display: inline-block;
+    padding: 14px 26px;
+    border-radius: 4px;
+    background: #fff;
 }
 
 .mysteryBoxRetryIcon {
