@@ -179,6 +179,16 @@
             }
         },
 
+        rgba2hex: function(rgb) {
+
+            rgb = rgb.match(/^rgba?[\s+]?\([\s+]?(\d+)[\s+]?,[\s+]?(\d+)[\s+]?,[\s+]?(\d+)[\s+]?/i);
+            return (rgb && rgb.length === 4) ? "#" +
+                ("0" + parseInt(rgb[1], 10).toString(16)).slice(-2) +
+                ("0" + parseInt(rgb[2], 10).toString(16)).slice(-2) +
+                ("0" + parseInt(rgb[3], 10).toString(16)).slice(-2) : '';
+
+        },
+
         upgradeRequired: function(minVersion, appVersion) {
 
             minVersion = minVersion.match(/\d/g);
@@ -221,8 +231,10 @@
 
         // Sets action bar and status bar color
         changeBarColors: function(scolor, acolor) {
-            PlatformBridge.setStatusBarColor(scolor);
-            PlatformBridge.setActionBarColor(acolor);
+            if (platformSdk.bridgeEnabled) {
+                PlatformBridge.setStatusBarColor(scolor);
+                PlatformBridge.setActionBarColor(acolor);
+            }
         },
 
         hashCheck: function(oldHash, newHash) {
@@ -246,20 +258,20 @@
         },
 
 
-        restartApp : function(App){
+        restartApp: function(App) {
 
-             var that = this;
-             var profileModel = require('../models/profileModel');
-             App.NinjaService.getNinjaProfile(function(res) {
+            var that = this;
+            var profileModel = require('../models/profileModel');
+            App.NinjaService.getNinjaProfile(function(res) {
 
-                    cacheProvider.setInCritical('userProfileData', res.data);
-                    var oldHash = cacheProvider.getFromCritical('oldHash');
-                    var newHash = res.data.rewards_hash;
-                    that.hashCheck(oldHash, newHash);
-                    if (res.data.status != 'inactive' && res.data.status != 'locked') {
-                        profileModel.updateNinjaData(res.data, App, true);
-                    }
-                }, App);
+                cacheProvider.setInCritical('userProfileData', res.data);
+                var oldHash = cacheProvider.getFromCritical('oldHash');
+                var newHash = res.data.rewards_hash;
+                that.hashCheck(oldHash, newHash);
+                if (res.data.status != 'inactive' && res.data.status != 'locked') {
+                    profileModel.updateNinjaData(res.data, App, true);
+                }
+            }, App);
 
         },
 

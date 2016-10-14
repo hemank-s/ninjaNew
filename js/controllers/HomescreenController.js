@@ -72,7 +72,6 @@
         that.checkMysteryBoxStatus(mysteryBoxData, DOMcache, App);
         that.checkBatteryStatus(profileData, DOMcache);
 
-        showNewRewardAnimation = true;
         if (showNewRewardAnimation) {
             that.newRewardUnlockAnimation(DOMcache);
         } else {
@@ -100,7 +99,7 @@
             DOMcache.rewardUnlockAnimation.classList.add('newRewardBgRemove');
             DOMcache.rewardUnlockContainer.classList.add('newStreakAnimation');
             DOMcache.lockedRewards.classList.add('moveLockedRewardsAnimation');
-            that.setLockedRewardsH(); 
+            that.setLockedRewardsH();
             DOMcache.unlockedRewardListContainer.classList.add('unlockedRewardListUl');
         });
 
@@ -108,20 +107,20 @@
             DOMcache.unlockedReward.classList.remove('hideClass');
             DOMcache.lockedRewards.classList.remove('moveLockedRewardsAnimation');
             DOMcache.rewardUnlockAnimation.classList.add('hideClass');
-             DOMcache.lockedRewards.style.height = 'auto';
-             that.setLockedRewardsH(); 
-                    
+            DOMcache.lockedRewards.style.height = 'auto';
+            that.setLockedRewardsH();
+
         });
 
         DOMcache.lockedRewards.addEventListener('animationend', function() {
             DOMcache.unlockedReward.classList.remove('hideClass');
             DOMcache.lockedRewards.classList.remove('moveLockedRewardsAnimation');
             DOMcache.rewardUnlockAnimation.classList.add('hideClass');
-             DOMcache.lockedRewards.style.height = 'auto';
-             that.setLockedRewardsH(); 
-                    
+            DOMcache.lockedRewards.style.height = 'auto';
+            that.setLockedRewardsH();
+
         });
-        
+
 
         // Reward Links :: Unlocked Rewards
         if (DOMcache.unlockedRewardListItem.length) {
@@ -143,12 +142,12 @@
     };
 
 
-    HomescreenController.prototype.setLockedRewardsH= function(){
+    HomescreenController.prototype.setLockedRewardsH = function() {
 
         var tl = document.getElementsByClassName('dummyDiv')[0];
         var el = document.getElementsByClassName('ninjaRewards')[0];
         var rect = el.getBoundingClientRect();
-        tl.style.height = window.innerHeight -   rect.bottom + 'px';
+        tl.style.height = window.innerHeight - rect.bottom + 'px';
     };
 
 

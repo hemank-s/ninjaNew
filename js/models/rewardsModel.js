@@ -30,11 +30,11 @@
 
                 if (src == "create")
                     return "/customCreate";
-                else if(typeof data === "undefined")
-                     return "/customCreate";
+                else if (typeof data === "undefined")
+                    return "/customCreate";
                 else if (data.custom_stickers.length > 0)
                     return "/customHistory";
-                else if (data.eligible == true)
+                else if (data.eligible === true)
                     return "/customCreate";
             }
         },
@@ -51,6 +51,22 @@
                     icon.style.backgroundImage = 'url(\'' + data[i].icon + '\')';
                 }
             }
+        },
+
+        mapColorToReward: function(color, rid) {
+
+            var c = utils.rgba2hex(color);
+
+            var rewardColorMapping = cacheProvider.getFromCritical('rewardColorMapping');
+            if (!rewardColorMapping) {
+                rewardColorMapping = {};
+                rewardColorMapping[rid] = c;
+            } else {
+                rewardColorMapping[rid] = c;
+            }
+
+            cacheProvider.setInCritical('rewardColorMapping', rewardColorMapping);
+
         },
 
         // Update the ninja Click Events For rewards
@@ -71,6 +87,7 @@
                         var rewardId = this.getAttribute('data-rewardId');
 
                         var cardColor = window.getComputedStyle(this).backgroundColor;
+                        that.mapColorToReward(cardColor, rewardId);
 
                         if (rewardState == Constants.REWARD_STATE.LOCKED) {
                             DOMcache.batteryStreakInfoContainer.classList.remove('hideClass');
@@ -110,7 +127,7 @@
                                 "desc": "Another way of expressing inside chats.",
                                 "sanctioned": false
                             };
-                            App.router.navigateTo(rewardRouter, { "rewardDetails": res, "rewardId": rewardId, "rewardRouter": rewardRouter });
+                            App.router.navigateTo(rewardRouter, { "rewardDetails": res, "rewardId": rewardId, "rewardRouter": rewardRouter, "cardColor": cardColor });
                         }
                     });
                 }

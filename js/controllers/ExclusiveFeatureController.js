@@ -62,7 +62,7 @@
                 console.log(res);
                 if (res.stat == "ok") {
                     if (retry) {
-                        events.publish('update.notif.toast', { show: true, text: res2.rewardDetails.title + ' ' + 'Reactivated!' });
+                        events.publish('update.notif.toast', { show: true, text: 'The feature has been reactivated!' });
                     } else {
                         that.template = require('raw!../../templates/exclusiveFeatureDetails.html');
                         DOMcache.exclusiveFeatureContainer.innerHTML = Mustache.render(that.template, {
@@ -70,18 +70,38 @@
                             rewardSubtitle: res2.rewardDetails.desc
                         });
 
+                        that.setExclusiveFeatureImage(res2.rewardDetails, DOMcache);
+
                         if (firstTime) {
                             DOMcache.exclusiveFeatureRetry = document.getElementsByClassName('exclusiveFeatureRetry')[0];
                             DOMcache.exclusiveFeatureRetry.classList.add('hideClass');
                         }
 
-                        DOMcache.exclusiveFeatureSubtitle = document.getElementsByClassName('exclusiveFeatureSubtitle')[0];
+                        DOMcache.exclusiveFeatureDetailSubtitle = document.getElementsByClassName('exclusiveFeatureDetailSubtitle')[0];
 
-                        DOMcache.exclusiveFeatureSubtitle.classList.remove('hideClass');
-                        DOMcache.exclusiveFeatureSubtitle.innerHTML = 'You can now send GIFs from the attachement panel';
+                        DOMcache.exclusiveFeatureDetailSubtitle.classList.remove('hideClass');
+                        DOMcache.exclusiveFeatureDetailSubtitle.innerHTML = res2.rewardDetails.desc;
                     }
                 }
             }, this);
+        } else {
+            that.template = require('raw!../../templates/exclusiveFeatureDetails.html');
+            DOMcache.exclusiveFeatureContainer.innerHTML = Mustache.render(that.template, {
+                rewardTitle: res2.rewardDetails.title + ' ' + 'Activated',
+                rewardSubtitle: res2.rewardDetails.desc
+            });
+
+            that.setExclusiveFeatureImage(res2.rewardDetails, DOMcache);
+
+            if (firstTime) {
+                DOMcache.exclusiveFeatureRetry = document.getElementsByClassName('exclusiveFeatureRetry')[0];
+                DOMcache.exclusiveFeatureRetry.classList.add('hideClass');
+            }
+
+            DOMcache.exclusiveFeatureDetailSubtitle = document.getElementsByClassName('exclusiveFeatureDetailSubtitle')[0];
+
+            DOMcache.exclusiveFeatureDetailSubtitle.classList.remove('hideClass');
+            DOMcache.exclusiveFeatureDetailSubtitle.innerHTML = res2.rewardDetails.desc;
         }
 
     };
@@ -94,11 +114,35 @@
         } else {
             console.log("Add a default header");
         }
-
     };
 
-    ExclusiveFeatureController.prototype.setPageStyle = function(color) {
-        utils.changeBarColors(color, color);
+    ExclusiveFeatureController.prototype.setExclusiveFeatureImage = function(data, DOMcache) {
+
+        DOMcache.exclusiveFeatureImage = document.getElementsByClassName('exclusiveFeatureImage')[0];
+
+        // Add header icon for rewards
+        if (data.fimage) {
+            DOMcache.exclusiveFeatureImage.style.backgroundImage = "url('" + data.fimage + "')";
+        } else {
+            console.log("Add a default header");
+        }
+    };
+
+    ExclusiveFeatureController.prototype.setPageStyle = function(color, rid) {
+        var that = this;
+        var hexcolor = null;
+
+        if (!color) {
+            var rewardColorMapping = cacheProvider.getFromCritical('rewardColorMapping');
+            hexcolor = rewardColorMapping[rid];
+        } else {
+            hexcolor = utils.rgba2hex(color);
+        }
+
+        var exclusiveFeatureContainer = document.getElementsByClassName('exclusiveFeatureContainer')[0];
+
+        utils.changeBarColors(hexcolor, hexcolor);
+        exclusiveFeatureContainer.style.backgroundColor = hexcolor;
     };
 
     ExclusiveFeatureController.prototype.render = function(ctr, App, data) {
@@ -112,6 +156,7 @@
         utils.changeBotTitle(data.rewardDetails.title);
         that.el.innerHTML = Mustache.render(unescape(that.template), { rewardTitle: data.rewardDetails.title, rewardSubtitle: data.rewardDetails.desc });
         ctr.appendChild(that.el);
+        that.setPageStyle(data.cardColor, data.rewardId);
         events.publish('update.loader', { show: false });
         that.bind(App, data);
     };

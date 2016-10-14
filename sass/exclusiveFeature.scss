@@ -1,31 +1,43 @@
-.exclusiveFeatureContainer {
-    background-image: linear-gradient(44deg, #448CFA 0%, #8CC6FF 100%);
-}
+.exclusiveFeatureContainer {}
 
 .exclusiveFeatureWrapper {}
 
-.exclusiveFeatureHeader {
-    padding-left: 28px;
-    padding-right: 28px;
-}
+.exclusiveFeatureHeader {}
 
 .exclusiveFeatureTitle {
     color: #fff;
-    font-size: 24px;
+    font-size: 22px;
     font-weight: 400;
-    line-height: 24px;
     text-align: center;
-    margin-bottom: 50px;
-    margin-top: 38px;
+    margin-bottom: 56px;
+    margin-top: 40px;
 }
 
-.exclusiveFeatureSubtitle {
+.exclusiveFeatureDetailTitle {
     color: #fff;
+    font-size: 22px;
+    font-weight: 400;
+    text-align: center;
+    margin-bottom: 8px;
+    margin-top: 32px;
+}
+
+.exclusiveFeatureDetailSubtitle {
+    color: rgba(255, 255, 255, 0.72);
     font-size: 14px;
     font-weight: 400;
     line-height: 16px;
     text-align: center;
-    margin-bottom: 35px;
+    margin-bottom: 32px;
+}
+
+.exclusiveFeatureSubtitle {
+    color: rgba(255, 255, 255, 0.72);
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 16px;
+    text-align: center;
+    margin-bottom: 32px;
     margin-top: 8px;
 }
 
@@ -33,20 +45,20 @@
     background: url(images/gif_header_icon.png);
     background-size: contain;
     background-repeat: no-repeat;
-    width: 201px;
-    height: 201px;
-    margin: 48px auto 24px auto;
+    width: 274px;
+    height: 206px;
+    margin: 0px auto;
     text-align: center;
 }
 
 .exclusiveFeatureDescription {
-    color: rgba(255, 255, 255, 0.72);
-    font-size: 14px;
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 16px;
     font-weight: 400;
-    line-height: 21px;
+    line-height: 20px;
     text-align: center;
     padding: 0px 30px;
-    margin-bottom: 36px;
+    margin: 24px 0px 48px 0px;
 }
 
 .exclusiveFeatureAction {
@@ -66,7 +78,6 @@ span.retryButton {
 }
 
 .exclusiveFeatureRetry {
-    margin-top: 40px;
     text-align: center;
     font-weight: 400;
     color: rgba(255, 255, 255, 0.40);
@@ -76,7 +87,7 @@ span.retryButton {
     background: url(images/gifFeature.png);
     background-size: contain;
     background-repeat: no-repeat;
-    width: 233px;
-    height: 306px;
-    margin: 0px auto;
+    width: 240px;
+    height: 316px;
+    margin: 0px auto 28px auto;
 }
