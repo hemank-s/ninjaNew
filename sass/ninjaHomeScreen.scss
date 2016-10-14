@@ -261,14 +261,21 @@ li.unlockedRewardListItem:first-child {
     margin-left: 16px;
 }
 
-li.unlockedRewardListItem:nth-child(odd) {
+li.unlockedRewardListItem:nth-child(4n-3) {
     /* Rectangle Copy 2: */
-    background: linear-gradient(0deg, #FF8B50 0%, #FF7C86 100%);
-    ;
+    background: #FE626D !important;
 }
 
-li.unlockedRewardListItem:nth-child(even) {
-    background: linear-gradient(44deg, #3A7BD5 0%, #00D2FF 100%);
+li.unlockedRewardListItem:nth-child(4n-2) {
+    background: #7B67CF !important;
+}
+
+li.unlockedRewardListItem:nth-child(4n-1) {
+    background: #FCC04D !important;
+}
+
+li.unlockedRewardListItem:nth-child(4n) {
+    background: #00C3E2 !important;
 }
 
 li.unlockedRewardListItem {
@@ -486,6 +493,7 @@ ul.unlockedRewardList > li.unlockedRewardListItem {
 
 .batteryInformation {
     @include fontStyle(16px, 400, rgba(255, 255, 255, 1), 20px);
+    float: left
 }
 
 .streakInfoWrapper {

@@ -174,31 +174,23 @@ $gap: 75px;
         width: 60px !important;
         height: 60px !important;
     }
-    .streakValueInfo {
-        font-size: 46px !important;
-    }
     .dayHeading {
-        font-size: 16px !important;
-        margin: 30px 0px 8px 0px !important;
+        font-size: 22px !important;
     }
     .dayInformation {
         font-size: 14px !important;
     }
     .batteryStreakInfoContainer hr {
-        margin-top: 24px !important;
-        margin-bottom: 24px !important;
+        margin-bottom: 48px !important;
+        margin-top: 48px !important;
     }
     .batteryHeading {
-        margin-bottom: 8px !important;
-        font-size: 16px !important;
+        font-size: 22px !important;
     }
     .batteryInformation {
         font-size: 14px !important;
     }
-    .informationAction {
-        font-size: 14px !important;
-        padding: 8px 16px !important;
-    }
+    .informationAction {}
     // Ninja Profile Screen Media
     .ninjaProfileBottomContainer {
         padding-top: 78px;
@@ -233,7 +225,8 @@ $gap: 75px;
     }
     .rewardStreakIcon {}
     .rewardStreakValue {}
-    .ugcTypeIcon {
+    .ugcTypeIcon,
+    .ugcHistoryIcon {
         width: 32px !important;
         height: 32px !important;
     }
@@ -247,30 +240,30 @@ $gap: 75px;
         line-height: 14px !important;
         margin-bottom: 2px !important;
     }
-    .ugcTypeDetails {
-        width: 80%;
+    .ugcTypeDetails,
+    .ugcHistoryDetails {
+        width: 80% !important;
+        margin-left: 10px !important;
     }
     .ugcTypeSubheading,
     .ugcHistorySubheading {
         font-size: 10px !important;
     }
+    .statsWrapper {
+        padding: 24px 20px 0px 20px !important;
+    }
     .statTypeContainer {
-        padding: 18px 18px 0 18px !important;
-    }
-    .statHeading {
-        font-size: 12px !important;
-        margin-bottom: 16px !important;
-    }
-    .statBoxWrapper {
         margin-bottom: 24px !important;
     }
+    .statBoxWrapper {
+        padding: 10px 6px !important;
+    }
     .statValue {
-        font-size: 28px !important;
-        margin-bottom: 12px !important;
+        font-size: 36px !important;
+        margin-left: 6px !important;
     }
     .statText {
         font-size: 10px !important;
-        margin-top: 4px !important;
     }
     // Ninja Profile Screen Media
 }
@@ -435,74 +428,96 @@ $gap: 75px;
         width: 60px !important;
         height: 60px !important;
     }
-    .streakValueInfo {
-        font-size: 46px !important;
-    }
     .dayHeading {
-        font-size: 16px !important;
-        margin: 30px 0px 8px 0px !important;
+        font-size: 22px !important;
     }
     .dayInformation {
         font-size: 14px !important;
     }
     .batteryStreakInfoContainer hr {
-        margin-top: 24px !important;
-        margin-bottom: 24px !important;
+        margin-bottom: 48px !important;
+        margin-top: 48px !important;
     }
     .batteryHeading {
-        margin-bottom: 8px !important;
-        font-size: 16px !important;
+        font-size: 22px !important;
     }
     .batteryInformation {
         font-size: 14px !important;
     }
-    .informationAction {
-        font-size: 14px !important;
-        padding: 8px 16px !important;
+    .informationAction {}
+    // Ninja Profile Screen Media
+    .ninjaProfileBottomContainer {
+        padding-top: 78px;
     }
     .comp__tabs .comp__tab,
     .comp__tabs .selected {
-        font-size: 10px !important;
+        font-size: 12px !important;
+    }
+    .sliderTabs {
+        margin-top: 72px;
     }
     .redeemedRewardsContainer {}
     .redeemedRewardListContainer {}
-    .redeemedRewardRow {}
-    .redeemedRewardIcon {}
-    .redeemedRewardDetails {}
-    .rewardHeading {}
-    .redeemedRewardSubheading {}
+    .redeemedRewardRow {
+        padding: 10px 12px;
+    }
+    .rediContainer {
+        padding: 6px;
+    }
+    .redeemedRewardIcon {
+        width: 26px;
+        height: 26px;
+    }
+    .redeemedRewardDetails {
+        margin-left: 10px !important;
+    }
+    .rewardHeading {
+        font-size: 12px !important;
+    }
+    .redeemedRewardSubheading {
+        font-size: 12px !important;
+    }
     .rewardStreakIcon {}
     .rewardStreakValue {}
-    .ugcTypeIcon {
-        width: 24px !important;
-        height: 24px !important;
+    .ugcTypeIcon,
+    .ugcHistoryIcon {
+        width: 32px !important;
+        height: 32px !important;
     }
-    .ugcTypeHeading {
+    .ugcTypeRow {
+        padding: 8px 18px !important;
+    }
+    .ugcTypeHeading,
+    .ugchistoryHeading {
         font-size: 12px !important;
         width: 91% !important;
         line-height: 14px !important;
         margin-bottom: 2px !important;
     }
-    .ugcTypeSubheading {
+    .ugcTypeDetails,
+    .ugcHistoryDetails {
+        width: 80% !important;
+        margin-left: 10px !important;
+    }
+    .ugcTypeSubheading,
+    .ugcHistorySubheading {
         font-size: 10px !important;
     }
+    .statsWrapper {
+        padding: 24px 20px 0px 20px !important;
+    }
     .statTypeContainer {
-        padding: 18px 18px 0 18px !important;
-    }
-    .statHeading {
-        font-size: 12px !important;
-        margin-bottom: 16px !important;
-    }
-    .statBoxWrapper {
         margin-bottom: 24px !important;
     }
+    .statBoxWrapper {
+        padding: 10px 6px !important;
+    }
     .statValue {
-        font-size: 28px !important;
-        margin-bottom: 12px !important;
+        font-size: 36px !important;
+        margin-left: 6px !important;
     }
     .statText {
         font-size: 10px !important;
-        margin-top: 4px !important;
     }
 }
 
@@ -658,98 +673,96 @@ $gap: 75px;
         width: 60px !important;
         height: 60px !important;
     }
-    .streakValueInfo {
-        font-size: 46px !important;
-    }
     .dayHeading {
-        font-size: 16px !important;
-        margin: 30px 0px 8px 0px !important;
+        font-size: 22px !important;
     }
     .dayInformation {
         font-size: 14px !important;
     }
     .batteryStreakInfoContainer hr {
-        margin-top: 24px !important;
-        margin-bottom: 24px !important;
+        margin-bottom: 48px !important;
+        margin-top: 48px !important;
     }
     .batteryHeading {
-        margin-bottom: 8px !important;
-        font-size: 16px !important;
+        font-size: 22px !important;
     }
     .batteryInformation {
         font-size: 14px !important;
     }
-    .informationAction {
-        font-size: 14px !important;
-        padding: 8px 16px !important;
+    .informationAction {}
+    // Ninja Profile Screen Media
+    .ninjaProfileBottomContainer {
+        padding-top: 78px;
     }
-}
-
-@media screen and (min-width: 321px) and (max-width: 330px) {
     .comp__tabs .comp__tab,
     .comp__tabs .selected {
-        font-size: 11px !important;
+        font-size: 12px !important;
+    }
+    .sliderTabs {
+        margin-top: 72px;
     }
     .redeemedRewardsContainer {}
     .redeemedRewardListContainer {}
-    .redeemedRewardRow {}
-    .redeemedRewardIcon {}
-    .redeemedRewardDetails {}
-    .rewardHeading {}
-    .redeemedRewardSubheading {}
+    .redeemedRewardRow {
+        padding: 10px 12px;
+    }
+    .rediContainer {
+        padding: 6px;
+    }
+    .redeemedRewardIcon {
+        width: 26px;
+        height: 26px;
+    }
+    .redeemedRewardDetails {
+        margin-left: 10px !important;
+    }
+    .rewardHeading {
+        font-size: 12px !important;
+    }
+    .redeemedRewardSubheading {
+        font-size: 12px !important;
+    }
     .rewardStreakIcon {}
     .rewardStreakValue {}
-    .statTypeContainer {
-        padding: 18px 18px 0 18px !important;
+    .ugcTypeIcon,
+    .ugcHistoryIcon {
+        width: 32px !important;
+        height: 32px !important;
     }
-    .statHeading {
+    .ugcTypeRow {
+        padding: 8px 18px !important;
+    }
+    .ugcTypeHeading,
+    .ugchistoryHeading {
         font-size: 12px !important;
-        margin-bottom: 16px !important;
+        width: 91% !important;
+        line-height: 14px !important;
+        margin-bottom: 2px !important;
     }
-    .statBoxWrapper {
+    .ugcTypeDetails,
+    .ugcHistoryDetails {
+        width: 80% !important;
+        margin-left: 10px !important;
+    }
+    .ugcTypeSubheading,
+    .ugcHistorySubheading {
+        font-size: 10px !important;
+    }
+    .statsWrapper {
+        padding: 24px 20px 0px 20px !important;
+    }
+    .statTypeContainer {
         margin-bottom: 24px !important;
     }
+    .statBoxWrapper {
+        padding: 10px 6px !important;
+    }
     .statValue {
-        font-size: 28px !important;
-        margin-bottom: 12px !important;
+        font-size: 36px !important;
+        margin-left: 6px !important;
     }
     .statText {
         font-size: 10px !important;
-        margin-top: 4px !important;
-    }
-}
-
-@media screen and (min-width: 331px) and (max-width: 340px) {
-    .comp__tabs .comp__tab,
-    .comp__tabs .selected {
-        font-size: 12px !important;
-    }
-    .redeemedRewardsContainer {}
-    .redeemedRewardListContainer {}
-    .redeemedRewardRow {}
-    .redeemedRewardIcon {}
-    .redeemedRewardDetails {}
-    .rewardHeading {}
-    .redeemedRewardSubheading {}
-    .rewardStreakIcon {}
-    .rewardStreakValue {}
-    .statTypeContainer {
-        padding: 20px 20px 0 20px !important;
-    }
-    .statHeading {
-        font-size: 13px !important;
-        margin-bottom: 18px !important;
-    }
-    .statBoxWrapper {
-        margin-bottom: 26px !important;
-    }
-    .statValue {
-        font-size: 30px !important;
-        margin-bottom: 14px !important;
-    }
-    .statText {
-        font-size: 11px !important;
-        margin-top: 6px !important;
     }
 }
 
@@ -818,15 +831,10 @@ $gap: 75px;
     .comp__tabs .selected {
         font-size: 12px !important;
     }
-    .redeemedRewardsContainer {}
-    .redeemedRewardListContainer {}
-    .redeemedRewardRow {}
-    .redeemedRewardIcon {}
-    .redeemedRewardDetails {}
-    .rewardHeading {}
-    .redeemedRewardSubheading {}
-    .rewardStreakIcon {}
-    .rewardStreakValue {}
+    .ugcTypeDetails,
+    .ugcHistoryDetails {
+        width: 80% !important;
+    }
 }
 
 @media screen and (min-width: 361px) and (max-width: 380px) {

@@ -70,6 +70,8 @@
                         var rewardRouter = that.getRewardRouter(rewardType, 'create');
                         var rewardId = this.getAttribute('data-rewardId');
 
+                        var cardColor = window.getComputedStyle(this).backgroundColor;
+
                         if (rewardState == Constants.REWARD_STATE.LOCKED) {
                             DOMcache.batteryStreakInfoContainer.classList.remove('hideClass');
                             var batteryIconContainer = document.getElementsByClassName('batteryIconContainer')[0];
@@ -99,7 +101,7 @@
                         if (platformSdk.bridgeEnabled) {
                             App.NinjaService.getRewardDetails(data, function(res) {
                                 console.log(res.data);
-                                App.router.navigateTo(rewardRouter, { "rewardDetails": res.data, "rewardId": rewardId, "rewardRouter": rewardRouter });
+                                App.router.navigateTo(rewardRouter, { "rewardDetails": res.data, "rewardId": rewardId, "rewardRouter": rewardRouter, "cardColor": cardColor });
                             }, this);
                         } else {
                             var res = {

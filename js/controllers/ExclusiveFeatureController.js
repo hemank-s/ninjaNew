@@ -75,7 +75,6 @@
                             DOMcache.exclusiveFeatureRetry.classList.add('hideClass');
                         }
 
-
                         DOMcache.exclusiveFeatureSubtitle = document.getElementsByClassName('exclusiveFeatureSubtitle')[0];
 
                         DOMcache.exclusiveFeatureSubtitle.classList.remove('hideClass');
@@ -98,6 +97,10 @@
 
     };
 
+    ExclusiveFeatureController.prototype.setPageStyle = function(color) {
+        utils.changeBarColors(color, color);
+    };
+
     ExclusiveFeatureController.prototype.render = function(ctr, App, data) {
 
         var that = this;
@@ -105,6 +108,8 @@
         that.el.className = 'exclusiveFeatureContainer centerToScreenContainer animation_fadein noselect';
 
         console.log("exclusive feature data is ", data);
+
+        utils.changeBotTitle(data.rewardDetails.title);
         that.el.innerHTML = Mustache.render(unescape(that.template), { rewardTitle: data.rewardDetails.title, rewardSubtitle: data.rewardDetails.desc });
         ctr.appendChild(that.el);
         events.publish('update.loader', { show: false });

@@ -475,7 +475,7 @@
             this.router.route('/upgrade', function(data) {
                 self.container.innerHTML = '';
                 self.upgradeController.render(self.container, self, data);
-                utils.toggleBackNavigation(true);
+                utils.toggleBackNavigation(false);
             });
             this.router.route('/customStatus', function(data) {
                 self.container.innerHTML = '';
@@ -519,7 +519,7 @@
                 //     self.router.navigateTo('/customHistory', { stickerList: data.data.custom_sticker, eligible: data.data.eligible });
                 // else if (data.data.eligible == true)
                 //     self.router.navigateTo('/customCreate');
-                self.router.navigateTo('/');
+                self.router.navigateTo('/home');
 
 
 

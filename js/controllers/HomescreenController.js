@@ -20,6 +20,28 @@
         DOMcache.streakValueContainer.classList.add('newRewardDayScale');
     };
 
+    HomescreenController.prototype.createBatteryUi = function(DOMcache, profileData) {
+
+        var batteryIconContainer = document.getElementsByClassName('batteryIconContainer')[0];
+        batteryIconContainer.innerHTML = "";
+
+        if (!platformSdk.bridgeEnabled) {
+            profileData = { "battery": 2, "maxBattery": 7, "hike_version": "4.2.2.2", "rewards_hash": "1474970960", "status": "active", "streak": 10 };
+        }
+
+        for (var i = 1; i <= profileData.battery; i++) {
+            var iDiv = document.createElement('div');
+            iDiv.className = 'batteryIconFilled';
+            batteryIconContainer.appendChild(iDiv);
+        }
+
+        for (var j = 1; j <= (profileData.maxBattery - profileData.battery); j++) {
+            var jDiv = document.createElement('div');
+            jDiv.className = 'batteryIconEmpty';
+            batteryIconContainer.appendChild(jDiv);
+        }
+    };
+
     HomescreenController.prototype.bind = function(App, data, showNewRewardAnimation) {
 
         var that = this;
@@ -61,25 +83,7 @@
 
         DOMcache.streakContainer.addEventListener('click', function(event) {
             DOMcache.batteryStreakInfoContainer.classList.remove('hideClass');
-
-            var batteryIconContainer = document.getElementsByClassName('batteryIconContainer')[0];
-            batteryIconContainer.innerHTML = "";
-
-            if (!platformSdk.bridgeEnabled) {
-                profileData = { "battery": 2, "maxBattery": 7, "hike_version": "4.2.2.2", "rewards_hash": "1474970960", "status": "active", "streak": 10 };
-            }
-
-            for (var i = 1; i <= profileData.battery; i++) {
-                var iDiv = document.createElement('div');
-                iDiv.className = 'batteryIconFilled';
-                batteryIconContainer.appendChild(iDiv);
-            }
-
-            for (var j = 1; j <= (profileData.maxBattery - profileData.battery); j++) {
-                var jDiv = document.createElement('div');
-                jDiv.className = 'batteryIconEmpty';
-                batteryIconContainer.appendChild(jDiv);
-            }
+            that.createBatteryUi(DOMcache, profileData);
         });
 
         DOMcache.ninjaDp.addEventListener('click', function(event) {
@@ -165,6 +169,8 @@
 
         console.log(pdata);
 
+        var that = this;
+
         //Check if first ever battery lost has occured or not 
 
         var batteryLostFtueDone = cacheProvider.getFromCritical('batteryLostFtueDone');
@@ -199,6 +205,7 @@
 
                 DOMcache.batteryDangerAction.addEventListener('click', function(event) {
                     DOMcache.batteryCriticalAnimation.classList.add('hideClass');
+                    that.createBatteryUi(DOMcache, pdata);
                     DOMcache.batteryStreakInfoContainer.classList.remove('hideClass');
                 });
             }
