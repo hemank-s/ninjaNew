@@ -30,7 +30,7 @@
 }
 
 .exclusiveFeatureIllustration {
-    background: url(images/earlyAccessSticker.png);
+    background: url(images/gif_header_icon.png);
     background-size: contain;
     background-repeat: no-repeat;
     width: 201px;
@@ -50,17 +50,14 @@
 }
 
 .exclusiveFeatureAction {
-    padding: 12px 24px;
-    color: rgba(0, 0, 0, 0.74);
     text-transform: uppercase;
     font-size: 14px;
+    color: #396BE1;
     font-weight: 500;
-    line-height: 16px;
-    text-align: center;
-    margin: 0px auto;
-    background: #fff;
+    display: inline-block;
+    padding: 14px 26px;
     border-radius: 4px;
-    width: 20%;
+    background: #fff;
 }
 
 span.retryButton {
