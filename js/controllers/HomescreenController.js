@@ -100,6 +100,7 @@
             DOMcache.rewardUnlockAnimation.classList.add('newRewardBgRemove');
             DOMcache.rewardUnlockContainer.classList.add('newStreakAnimation');
             DOMcache.lockedRewards.classList.add('moveLockedRewardsAnimation');
+            that.setLockedRewardsH(); 
             DOMcache.unlockedRewardListContainer.classList.add('unlockedRewardListUl');
         });
 
@@ -107,13 +108,20 @@
             DOMcache.unlockedReward.classList.remove('hideClass');
             DOMcache.lockedRewards.classList.remove('moveLockedRewardsAnimation');
             DOMcache.rewardUnlockAnimation.classList.add('hideClass');
+             DOMcache.lockedRewards.style.height = 'auto';
+             that.setLockedRewardsH(); 
+                    
         });
 
         DOMcache.lockedRewards.addEventListener('animationend', function() {
             DOMcache.unlockedReward.classList.remove('hideClass');
             DOMcache.lockedRewards.classList.remove('moveLockedRewardsAnimation');
             DOMcache.rewardUnlockAnimation.classList.add('hideClass');
+             DOMcache.lockedRewards.style.height = 'auto';
+             that.setLockedRewardsH(); 
+                    
         });
+        
 
         // Reward Links :: Unlocked Rewards
         if (DOMcache.unlockedRewardListItem.length) {
@@ -132,12 +140,22 @@
         }
 
         that.updateIcons(DOMcache, data);
-
     };
+
+
+    HomescreenController.prototype.setLockedRewardsH= function(){
+
+        var tl = document.getElementsByClassName('dummyDiv')[0];
+        var el = document.getElementsByClassName('ninjaRewards')[0];
+        var rect = el.getBoundingClientRect();
+        tl.style.height = window.innerHeight -   rect.bottom + 'px';
+    };
+
 
     HomescreenController.prototype.checkMysteryBoxStatus = function(mysteryBoxData, DOMcache, App) {
 
         if (platformSdk.bridgeEnabled) {
+
             if (mysteryBoxData.mstatus == 'active') {
                 console.log("enabling mystery box for you");
 
@@ -149,6 +167,7 @@
                     spinNowText.style.color = setColor;
                 }, 1000);
 
+                DOMcache.lockedRewards.classList.add('mBoxPadding');
                 DOMcache.mysteryBoxAvailable.classList.remove('hideClass');
                 DOMcache.mysteryBoxAvailable.classList.add('slideUp');
                 console.log(DOMcache.mysteryBoxAvailable.getElementsByClassName('mysteryBoxToastIconBig')[0]);
@@ -162,6 +181,7 @@
                 });
             } else {
                 DOMcache.mysteryBoxAvailable.classList.add('hideClass');
+                DOMcache.lockedRewards.classList.remove('mBoxPadding');
             }
         }
     };
@@ -322,7 +342,7 @@
         console.log("rewards before rendering are", rewardsData);
 
         that.el = document.createElement('div');
-        that.el.className = 'homeScreenContainer animation_fadein noselect';
+        that.el.className = 'homeScreenParentContainer animation_fadein noselect';
         that.el.innerHTML = Mustache.render(unescape(that.template), { ninjaProfile: profile_data, ninjaUnlockedRewards: rewardsData.unlockedRewards, ninjaLockedRewards: rewardsData.lockedRewards });
         ctr.appendChild(that.el);
         events.publish('update.loader', { show: false });

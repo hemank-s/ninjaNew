@@ -4,6 +4,12 @@
     @include setGradient($stCol, $endCol);
 }
 
+.homeScreenParentContainer{
+     height: 100%;
+    overflow: scroll;
+
+}
+
 .hideClass {
     display: none !important;
 }
@@ -193,8 +199,12 @@ span.streakDefInfo {
     margin-bottom: 8px;
 }
 
-.lockedRewardListContainer {
-    height: 100%;
+.lockedRewards {
+    height: 1000px;
+}
+
+.mBoxPadding{
+    padding-bottom: 70px;
 }
 
 .unlockedRewardIcon {
@@ -579,9 +589,10 @@ ul.unlockedRewardList > li.unlockedRewardListItem {
         transform: translate(0px, 0%);
     }
     100% {
-        -ms-transform: translate(0px, 38%);
-        -webkit-transform: translate(0px, 38%);
-        transform: translate(0px, 38%);
+        -ms-transform: translate(0px, 200px);
+        -webkit-transform: translate(0px, 200px);
+        transform: translate(0px, 200px);
+       
     }
 }
 
