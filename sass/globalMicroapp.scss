@@ -345,7 +345,8 @@ a:visited {
 /* Misc Loaders and Elements */
 
 #loader {
-    background-color: #1F5EF2;
+    @include setGradient($stCol,
+    $endCol);
     display: none;
     height: 100%;
     overflow: hidden;

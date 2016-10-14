@@ -104,10 +104,10 @@ background: black;
 
 @mixin setGradient($stCol, $endCol) {
     background: $stCol;
-    background: -webkit-linear-gradient(left top, $stCol, $endCol);
-    background: -o-linear-gradient(bottom right, $stCol, $endCol);
-    background: -moz-linear-gradient(bottom right, $stCol, $endCol);
-    background: linear-gradient(to bottom right, $stCol, $endCol);
+    background: linear-gradient(0deg, $stCol 0%, $endCol 100%);
+    //background: -o-linear-gradient(bottom right, $stCol, $endCol);
+    //background: -moz-linear-gradient(bottom right, $stCol, $endCol);
+    //background: linear-gradient(to bottom right, $stCol, $endCol);
 }
 
 @mixin mysteryBoxStyling($spinnerDim) {

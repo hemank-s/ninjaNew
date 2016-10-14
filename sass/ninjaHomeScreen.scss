@@ -1,11 +1,7 @@
 .homeScreenContainer {
     height: 100%;
     overflow: scroll;
-    background: #1F5EF2;
-    background: -webkit-linear-gradient(-180deg, #1F5EF2 12%, #33FFE2 100%);
-    background: -o-linear-gradient(-180deg, #1F5EF2 12%, #33FFE2 100%);
-    background: -moz-linear-gradient(-180deg, #1F5EF2 12%, #33FFE2 100%);
-    background: linear-gradient(-180deg, #1F5EF2 12%, #33FFE2 100%);
+    @include setGradient($stCol, $endCol);
 }
 
 .hideClass {
@@ -32,7 +28,7 @@
 .rewardUnlockStreakValue {
     font-weight: 400;
     font-size: 48px;
-    color: #23D3DA;
+    color: #717BFF;
     display: inline-block;
     vertical-align: middle;
     margin-left: 8px;
@@ -43,7 +39,7 @@
     opacity: 0;
     width: 100%;
     height: 100%;
-    background: rgba(31, 94, 242, 0.96);
+    background: rgba(74, 79, 147, 0.96);
     z-index: 1000;
 }
 
@@ -146,17 +142,15 @@ span.streakDefInfo {
 }
 
 .streakHealthy {
-    border: 1px solid #2BE6AB;
+    border: 1px solid rgba(255, 255, 255, 0.20);
 }
 
 .streakDanger {
     border: 1px solid #FF6D5C;
+    background: #FF6D5C;
 }
 
-.ninjaHomeContainer {
-    //height: 100%;
-    //overflow: scroll;
-}
+.ninjaHomeContainer {}
 
 .profileContainer {
     padding: 32px 16px 0px 16px;
@@ -418,7 +412,7 @@ ul.unlockedRewardList > li.unlockedRewardListItem {
     z-index: 100;
     width: 100%;
     height: 100%;
-    background: rgba(31, 94, 242, 0.96);
+    background: rgba(74, 79, 147, 0.96);
 }
 
 .batteryStreakInfoContainer hr {
