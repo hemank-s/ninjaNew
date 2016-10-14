@@ -32,10 +32,12 @@
         else
             that.bindHandlersJfl(App, data);
 
-
-        that.backPressEvent = events.subscribe('ugc.backpress', function() {
-            that.backpressHandler(App, data, parentCache);
-        });
+        var backEventSubscribed = cacheProvider.getFromCritical('backEventSubscribed');
+        if (backEventSubscribed)
+            that.backPressEvent = events.subscribe('ugc.backpress', function() {
+                cacheProvider.setInCritical('backEventSubscribed', true);
+                that.backpressHandler(App, data, parentCache);
+            });
 
 
         parentCache.yesAction[0].addEventListener('click', function() {
@@ -54,7 +56,11 @@
         var quoteName = document.querySelectorAll('.quoteName');
         var quoteAuthor = document.querySelectorAll('.quoteAuthor');
         var jflImage = document.querySelectorAll('.jflImage');
+        var successCard = document.querySelectorAll('.successCard');
         var that = this;
+
+        if (!quoteName.length && !quoteAuthor.length && !jflImage.length)
+            return;
 
         if (data.type == Constants.UGC_TYPE.QUOTE) {
 
@@ -76,7 +82,7 @@
 
         } else {
 
-            if (jflImage[0].getAttribute('filePath'))
+            if (jflImage[0].getAttribute('filePath') && successCard[0].classList.contains('hideClass'))
                 parentCache.confirmPopup[0].classList.remove('hideClass');
             else {
                 that.backPressEvent.remove();
