@@ -103,14 +103,14 @@
 
                             var tid = this.getAttribute('data-tid');
                             var rewardType = this.getAttribute('data-rewardtype');
-                            var rewardRouter = rewardsModel.getRewardRouter(rewardType);
+                            var rewardRouter = rewardsModel.getRewardRouter(rewardType, 'create');
 
                             var data = {};
                             data.rewardId = tid;
 
                             App.NinjaService.getRewardDetails(data, function(res) {
                                 console.log(res.data);
-                                App.router.navigateTo(rewardRouter, { 'rewardDetails': res.data, 'rewardId': tid, 'rewardRouter': rewardRouter });
+                                App.router.navigateTo(rewardRouter, { 'rewardId': tid });
                             }, this);
                         } else {
 

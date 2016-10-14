@@ -1,13 +1,14 @@
 <div>
     <div class="title"> Add your face and text</div>
-    <div class="customImage" filePath="{{data.url}}" style="{{#isFailedState}}background-image:url({{data.url}}) {{/isFailedState}}"></div>
-    <input class="customText" type='text' placeholder="type something" value="{{#isFailedState}}{{data.phrase}}{{/isFailedState}}" />
+    <div class="customImage" uploadUrl="{{#isFailedState}} {{url}}{{/isFailedState}}" style="{{#isFailedState}}background-image:url({{url}}) {{/isFailedState}}">
+    </div>
+    <input class="customText" type='text' placeholder="type something" value="{{#isFailedState}}{{phrase}}{{/isFailedState}}" />
     <div class="charLimit">
-        <div class="userInput inlineBlock">{{#isFailedState}} {{data.phraseLength}} {{/isFailedState}} {{^isFailedState}}0{{/isFailedState}} </div>
+        <div class="userInput inlineBlock">{{#isFailedState}} {{phraseLength}} {{/isFailedState}} {{^isFailedState}}0{{/isFailedState}} </div>
         <div class="allowedInput inlineBlock">/{{textLength}} </div>
     </div>
     {{#isFailedState}}
-    <div class="reason"> {{data.reason}}
+    <div class="reason"> {{reason}}
     </div>
     {{/isFailedState}}
     <div class="customCta createSticker">Done

@@ -163,6 +163,7 @@
                         if (platformSdk.bridgeEnabled) {
                             App.NinjaService.getRewardDetails(data, function(res) {
                                 console.log(res.data);
+                                rewardRouter = rewardsModel.getRewardRouter(rewardType,'',res.data);
                                 App.router.navigateTo(rewardRouter, { "rewardDetails": res.data, "rewardId": rewardId, "rewardRouter": rewardRouter });
                             }, this);
                         } else {

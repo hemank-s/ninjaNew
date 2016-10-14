@@ -2,7 +2,7 @@
     <div class="customHistoryTitle textCls"> My Sticker list </div>
     <div class="customHistorySubtitle textCls"> We are reviewing your photo and phrase if they are suitable for creating your sticker </div>
     <div class="customHistoryList">
-        {{#stickerList}}
+        {{#rewardDetails.custom_stickers}}
         <div class="stickerHistoryRow" data-phrase="{{phrase}}" data-status="{{status}}" data-sid="{{sid}}" data-url="{{url}}" data-reason="{{reason}}">
             <div class="custHistoryIcon inlineBlock" style="background-image:url({{url}})"></div>
             <div class="contentSection inlineBlock">
@@ -11,7 +11,7 @@
             </div>
             <div class="statusSection inlineBlock" data-status="{{status}}"></div>
         </div>
-        {{/stickerList}}
+        {{/rewardDetails.custom_stickers}}
     </div>
     {{#eligible}}
     <div class="createCutomSticker_history">

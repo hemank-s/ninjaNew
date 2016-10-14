@@ -29,34 +29,44 @@
 
 
         DOMCahe.customStatusCta[0].addEventListener('click', function() {
-            if (this.getAttribute('data-src') === 'create')
-                App.router.navigateTo('/home');
-            else if (this.getAttribute('data-src') === 'history')
+            if (this.getAttribute('data-src') === 'create') {
+                utils.restartApp(App);
+            } else if (this.getAttribute('data-src') === 'history')
 
                 if (this.getAttribute('data-status') === Constants.CUSTOM_STICKER_STATUS.PROGRESS)
                     App.router.back();
                 else {
                     //Server Call & open hike chat bot
-                    if (platformSdk.bridgeEnabled) {
+                    var dataToSend = {};
+                    dataToSend.rewardId = data.rewardId;
+                    dataToSend.customStickerId = data.sid;
 
-                        var chatData = {
-                            "screen": "chatthread",
-                            "msisdn": "+hike+",
-                            "isbot": true
-                        };
+                    // Reward Details API :: Send Reward Id As well
+                    App.NinjaService.sendCustomSticker(dataToSend, function(res) {
 
-                        try {
-                            PlatformBridge.openActivity(JSON.stringify(chatData));
-                        } catch (e) {
-                            console.log("Open Activity Not Working");
-                            utils.showToast('Something went wrong. Try again in sometime please :)');
+                        if (res.stat == "ok") {
+                            events.publish('update.notif.toast', { show: true, heading: 'Yay', details: "You will receive your sticker via the team hike bot shortly, start sharing", notifType: 'notifNeutral' });
+                            /*
+                            var chatData = {
+                                "screen": "chatthread",
+                                "msisdn": "+hike+",
+                                "isbot": true
+                            };
+                            try {
+                                PlatformBridge.openActivity(JSON.stringify(chatData));
+                            } catch (e) {
+                                console.log("Open Activity Not Working");
+                                events.publish('update.notif.toast', { show: true, heading: 'Bamm', details: "Something went wrong. Try again in sometime please :)", notifType: 'notifNeutral' });
+                            }
+                            */
+
+                        } else if (res.stat == 'fail') {
+                            events.publish('update.notif.toast', { show: true, heading: 'Bamm', details: res.data.reason, notifType: 'notifNeutral' });
+                        } else {
+                            events.publish('update.notif.toast', { show: true, heading: 'Bamm', details: res.data.reason, notifType: 'notifNeutral' });
                         }
-
-                    } else {
-                        console.log('Server Call')
-                    }
+                    }, this);
                 }
-
         });
 
     };

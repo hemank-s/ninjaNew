@@ -6,7 +6,7 @@
     .customStatusTitle {}
     .customStatusImage {}
     .customStatusSubtitle {}
-    .stickerStatus_inProgress {
+    .stickerStatus_inprogress {
         background: url(images/custom_progress.png);
         background-size: contain;
         background-repeat: no-repeat;
@@ -14,7 +14,7 @@
         height: 184px;
         width: 100%;
     }
-    .stickerStatus_completed {
+    .stickerStatus_redeemed {
         background: url(images/custom_success.png);
         background-size: contain;
         background-repeat: no-repeat;

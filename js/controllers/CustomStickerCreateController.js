@@ -29,7 +29,6 @@
         };
 
         var customFtue = cacheProvider.getFromCritical('customStickerFtue');
-        customFtue = true;
         if (customFtue)
             that.bindCreateHandlers(App, data, DOMCache);
         else {
@@ -47,9 +46,9 @@
         var that = this;
 
         DOMCache.customImage[0].addEventListener('click', function() {
-            utils.openGallery(DOMCache.customImage[0], Constants.IMAGE_SIZE_UGC, function() {
+            utils.openGallery(DOMCache.customImage[0], Constants.IMAGE_SIZE_UGC, function(filePath) {
                 if (platformSdk.bridgeEnabled)
-                    DOMCache.customImage[0].setAttribute('filePath', fileUrl.filePath);
+                    DOMCache.customImage[0].setAttribute('filePath', filePath);
                 else {
                     DOMCache.customImage[0].setAttribute('filePath', 'blah');
                 }
@@ -63,9 +62,9 @@
                 DOMCache.userInput[0].classList.add('inputExceeded')
             else
                 DOMCache.userInput[0].classList.remove('inputExceeded');
-
-
         });
+
+
 
         DOMCache.customCta[0].addEventListener('click', function() {
 
@@ -74,19 +73,22 @@
             if (DOMCache.screenH > window.innerHeight)
                 toastType = 0; // andriod toast
 
-            if (!DOMCache.customImage[0].getAttribute('filePath') && DOMCache.customText[0].value.length == 0)
-                that.showToast('Please upload image and type title', toastType)
-            else if (DOMCache.customImage[0].getAttribute('filePath') && DOMCache.customText[0].value.length == 0)
-                that.showToast('Please type title', toastType);
-            else if (!DOMCache.customImage[0].getAttribute('filePath') && DOMCache.customText[0].value.length != 0)
-                that.showToast('Please upload image', toastType);
-            else {
+            if (DOMCache.customImage[0].getAttribute('filePath') && DOMCache.customText[0].value.length > 0 && DOMCache.customText[0].value.length < Constants.CUSTOM_STICKER_TITLE_LENGTH) {
+                that.postCustomSticker(App, data, DOMCache, 2, toastType)
+            } else if (DOMCache.customImage[0].getAttribute('uploadUrl') && DOMCache.customText[0].value.length > 0 && DOMCache.customText[0].value.length < Constants.CUSTOM_STICKER_TITLE_LENGTH) {
+                that.postCustomSticker(App, data, DOMCache, 1, toastType)
+            } else {
+                // Show Error Messages
 
-                if (DOMCache.customText[0].value.length > Constants.CUSTOM_STICKER_TITLE_LENGTH)
-                    that.showToast('Input characters exceeeded', toastType);
-                else
-                    App.router.navigateTo('/customStatus', { src: 'create', 'status': Constants.CUSTOM_STICKER_STATUS.PROGRESS });
+                if (DOMCache.customText[0].value.length > Constants.CUSTOM_STICKER_TITLE_LENGTH) {
+                    that.showToast('Input limit inputExceeded', toastType);
+                } else if (DOMCache.customText[0].value.length == 0) {
+                    that.showToast('Please type Title', toastType);
+                } else {
+                    that.showToast('Please upload image', toastType);
+                }
             }
+
         });
 
 
@@ -100,7 +102,94 @@
 
     };
 
+    CustomStickerCreateController.prototype.postCustomSticker = function(App, data, DOMCache, flowType, toastType) {
+
+        var that = this;
+
+        if (platformSdk.bridgeEnabled) {
+            var serverPath;
+
+            if (data.status == Constants.CUSTOM_STICKER_STATUS.FAILED)
+                serverPath = appConfig.API_URL + '/rewards/' + data.rewardId + '?sid=' + data.sid + '&t=' + DOMCache.customText[0].value;
+            else
+                serverPath = appConfig.API_URL + '/rewards/' + data.rewardId + '?t=' + DOMCache.customText[0].value;
+
+            events.publish('update.loader', { show: true });
+
+            if (flowType == 1) {
+
+                //Without Image
+                App.NinjaService.postUgcContent(serverPath, function(res) {
+
+                    if (res.stat == "ok") {
+                        App.router.navigateTo('/customStatus', { src: 'create', 'status': Constants.CUSTOM_STICKER_STATUS.PROGRESS });
+                    } else if (res.stat == 'fail') {
+                        that.showToast(res.data.reason, toastType);
+
+                    } else {
+                        that.showToast('Sorry. Your image couldn’t be updated. Could you try again with another files, please?', toastType);
+                    }
+
+                }, App);
+
+
+
+            } else {
+                var customStickerData = {
+                    uploadUrl: serverPath,
+                    doCompress: true,
+                    filePath: DOMCache.customImage[0].getAttribute('filePath')
+                };
+
+                try {
+                    platformSdk.nativeReq({
+                        ctx: self,
+                        fn: 'uploadFile',
+                        data: platformSdk.utils.validateStringifyJson(customStickerData),
+                        success: function(res) {
+                            try {
+                                res = JSON.parse(decodeURIComponent(res));
+                                console.log(res);
+                                events.publish('update.loader', { show: false });
+
+                                if (res.stat == 'ok') {
+                                    App.router.navigateTo('/customStatus', { src: 'create', 'status': Constants.CUSTOM_STICKER_STATUS.PROGRESS });
+
+                                } else if (res.stat == 'fail') {
+                                    that.showToast(res.data.reason, toastType);
+
+                                } else {
+                                    that.showToast('Sorry. Your image couldn’t be updated. Could you try again with another files, please?', toastType);
+                                }
+                            } catch (err) {
+                                events.publish('update.loader', { show: false });
+                                that.showToast('Sorry. Your image couldn’t be updated. Could you try again with another files, please?', toastType);
+                            }
+                        }
+                    });
+
+                } catch (err) {
+                    events.publish('update.loader', { show: false });
+                    that.showToast('Sorry. Your image couldn’t be updated. Could you try again with another files, please?', toastType);
+                }
+            }
+
+        } else {
+
+            console.log('Server Call');
+            App.router.navigateTo('/customStatus', { src: 'create', 'status': Constants.CUSTOM_STICKER_STATUS.PROGRESS });
+        }
+
+    };
+
+
     CustomStickerCreateController.prototype.showToast = function(text, type) {
+
+        if (type == 1)
+            events.publish('update.notif.toast', { show: true, heading: 'Bamm', details: text, notifType: 'notifNeutral' });
+        else
+            utils.showToast('text')
+
         console.log(text);
     };
 
@@ -112,7 +201,9 @@
         that.el.className = 'customCreateContainer animation_fadein noselect';
         var customFtue = cacheProvider.getFromCritical('customStickerFtue');
         var template;
-        customFtue = true;
+
+        data.textLength = Constants.CUSTOM_STICKER_TITLE_LENGTH;
+        data.isFailedState = false;
 
         if (customFtue)
             template = that.createTemplate;
@@ -120,10 +211,12 @@
             template = that.ftueTemplate;
 
 
-        if (data && data.status == Constants.CUSTOM_STICKER_STATUS.FAILED)
-            that.el.innerHTML = Mustache.render(unescape(template), { textLength: Constants.CUSTOM_STICKER_TITLE_LENGTH, isFailedState: true, data: data });
-        else
-            that.el.innerHTML = Mustache.render(unescape(template), { textLength: Constants.CUSTOM_STICKER_TITLE_LENGTH, isFailedState: false });
+        if (data && data.status == Constants.CUSTOM_STICKER_STATUS.FAILED) {
+            data.isFailedState = true;
+            that.el.innerHTML = Mustache.render(unescape(template), data);
+        } else
+            that.el.innerHTML = Mustache.render(unescape(template), data);
+
         ctr.appendChild(that.el);
         events.publish('update.loader', { show: false });
         that.bind(App, data);

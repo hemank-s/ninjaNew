@@ -145,10 +145,10 @@
 
         DOMcache.addPhotoCta[0].addEventListener('click', function() {
 
-            utils.openGallery(DOMcache.card[0], Constants.IMAGE_SIZE_UGC, function(path) {
+            utils.openGallery(DOMcache.card[0], Constants.IMAGE_SIZE_UGC, function(filePath) {
 
                 if (platformSdk.bridgeEnabled)
-                    DOMcache.card[0].setAttribute('filePath', fileUrl.filePath);
+                    DOMcache.card[0].setAttribute('filePath', filePath);
 
 
                 DOMcache.quoteName[0].classList.add('overlayQuoteName');
@@ -203,21 +203,21 @@
 
 
         DOMcache.uploadIcon[0].addEventListener('click', function() {
-            utils.openGallery(DOMcache.jflImage[0], Constants.IMAGE_SIZE_UGC, function() {
+            utils.openGallery(DOMcache.jflImage[0], Constants.IMAGE_SIZE_UGC, function(filePath) {
 
                 if (platformSdk.bridgeEnabled)
-                    DOMcache.jflImage[0].setAttribute('filePath', fileUrl.filePath);
+                    DOMcache.jflImage[0].setAttribute('filePath', filePath);
 
                 that.chooseFileSuccess(DOMcache);
             });
         });
 
 
-        DOMcache.replacePhotoCta[0].addEventListener('click', function() {
-            utils.openGallery(DOMcache.jflImage[0], Constants.IMAGE_SIZE_UGC, function() {
+        DOMcache.replacePhotoCta[0].addEventListener('click', function(filePath) {
+            utils.openGallery(DOMcache.jflImage[0], Constants.IMAGE_SIZE_UGC, function(filePath) {
 
                 if (platformSdk.bridgeEnabled)
-                    DOMcache.jflImage[0].setAttribute('filePath', fileUrl.filePath);
+                    DOMcache.jflImage[0].setAttribute('filePath', filePath);
 
                 that.chooseFileSuccess(DOMcache);
             });

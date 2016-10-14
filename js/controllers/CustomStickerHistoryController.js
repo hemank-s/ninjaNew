@@ -21,31 +21,36 @@
             stickerHistoryRow: document.getElementsByClassName('stickerHistoryRow')
         }
 
-        DOMCache.createSticker[0].addEventListener('click', function() {
-            App.router.navigateTo('/customCreate');
-        });
+        if (DOMCache.createSticker.length > 0)
+            DOMCache.createSticker[0].addEventListener('click', function() {
+                App.router.navigateTo('/customCreate', { rewardId: data.rewardId });
+            });
 
         for (var i = 0; i < DOMCache.stickerHistoryRow.length; i++)
-            DOMCache.stickerHistoryRow[i].addEventListener('click', that.bindHandlerStickerRow(App))
+            DOMCache.stickerHistoryRow[i].addEventListener('click', that.bindHandlerStickerRow(App, data))
 
     };
 
 
-    CustomStickerHistoryController.prototype.bindHandlerStickerRow = function(App) {
+    CustomStickerHistoryController.prototype.bindHandlerStickerRow = function(App, data) {
         return function() {
 
-            var data = {
+            var dataToSend = {
                 status: this.getAttribute('data-status'),
                 url: this.getAttribute('data-url'),
                 reason: this.getAttribute('data-reason'),
                 phrase: this.getAttribute('data-phrase'),
-                phraseLength: this.getAttribute('data-phrase').length
-            }
+                sid: this.getAttribute('data-sid'),
+                phraseLength: this.getAttribute('data-phrase').length,
+                rewardId: data.rewardId
+            };
 
-            if (data.status === Constants.CUSTOM_STICKER_STATUS.FAILED)
-                App.router.navigateTo('/customCreate', data);
-            else
-                App.router.navigateTo('/customStatus', { src: 'history', 'status': data.status, url: data.url });
+            if (dataToSend.status === Constants.CUSTOM_STICKER_STATUS.FAILED)
+                App.router.navigateTo('/customCreate', dataToSend);
+            else {
+                dataToSend.src = "history";
+                App.router.navigateTo('/customStatus', dataToSend);
+            }
 
         }
     };

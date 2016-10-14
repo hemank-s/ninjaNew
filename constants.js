@@ -61,8 +61,8 @@
 
         CUSTOM_STICKER_STATUS: {
             FAILED: 'failed',
-            PROGRESS: 'inProgress',
-            DONE: 'completed'
+            PROGRESS: 'inprogress',
+            DONE: 'redeemed'
 
         },
 

@@ -245,6 +245,24 @@
 
         },
 
+
+        restartApp : function(App){
+
+             var that = this;
+             var profileModel = require('../models/profileModel');
+             App.NinjaService.getNinjaProfile(function(res) {
+
+                    cacheProvider.setInCritical('userProfileData', res.data);
+                    var oldHash = cacheProvider.getFromCritical('oldHash');
+                    var newHash = res.data.rewards_hash;
+                    that.hashCheck(oldHash, newHash);
+                    if (res.data.status != 'inactive' && res.data.status != 'locked') {
+                        profileModel.updateNinjaData(res.data, App, true);
+                    }
+                }, App);
+
+        },
+
         debounce: function(func, wait, immediate) {
             var timeout;
             return function() {
@@ -262,6 +280,7 @@
         },
 
         openGallery: function(element, size, callback) {
+            size = 100000000;
             if (platformSdk.bridgeEnabled) {
                 try {
                     platformSdk.nativeReq({

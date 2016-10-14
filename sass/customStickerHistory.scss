@@ -18,7 +18,7 @@
         text-align: center;
         padding: 20px;
     }
-    .statusSection[data-status="inProgress"] {
+    .statusSection[data-status="inprogress"] {
         background: url(images/progressStatus.png);
         background-size: contain;
         background-repeat: no-repeat;
@@ -26,7 +26,7 @@
         height: 20px;
         background-position: center;
     }
-    .statusSection[data-status="completed"] {
+    .statusSection[data-status="redeemed"] {
         background: url(images/successStatus.png);
         background-size: contain;
         background-repeat: no-repeat;

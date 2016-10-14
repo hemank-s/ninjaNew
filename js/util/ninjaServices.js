@@ -182,14 +182,28 @@
 
         postUgcContent: function(url, fn, x) {
             var params = {
-                'url': url + '?random=' + Math.round(Math.random() * 999999999),
+                'url': url + '&random=' + Math.round(Math.random() * 999999999),
                 'type': 'POST',
                 'data': {}
             };
             if (typeof fn === "function") return this.ninjaService.communicate(params, fn, x);
             else this.ninjaService.communicate(params);
 
-        }
+        },
+
+
+        postCustomSticker: function(url, fn, x) {
+            var params = {
+                'url': url + '&random=' + Math.round(Math.random() * 999999999),
+                'type': 'POST',
+                'data': {}
+            };
+            if (typeof fn === "function") return this.ninjaService.communicate(params, fn, x);
+            else this.ninjaService.communicate(params);
+
+        },
+
+
 
         // Rewards Service For Ninja 
 

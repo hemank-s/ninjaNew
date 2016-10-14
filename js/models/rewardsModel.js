@@ -19,7 +19,7 @@
     RewardsModel.prototype = {
 
         // Get Reward Router Associated To Type Of Reward
-        getRewardRouter: function(rewardType) {
+        getRewardRouter: function(rewardType, src, data) {
             if (rewardType == 'sticker_reward') {
                 return '/stickerReward';
             } else if (rewardType == 'exclusive_feature') {
@@ -27,11 +27,19 @@
             } else if (rewardType == 'user_generated_content') {
                 return '/ugc';
             } else if (rewardType == 'custom_sticker') {
-                return '/customSticker';
+
+                if (src == "create")
+                    return "/customCreate";
+                else if(typeof data === "undefined")
+                     return "/customCreate";
+                else if (data.custom_stickers.length > 0)
+                    return "/customHistory";
+                else if (data.eligible == true)
+                    return "/customCreate";
             }
         },
 
-        updateNinjaRewardsIcons: function(data) {
+        updateNinjaRewardsIcons: function(dat) {
             var that = this;
 
             var allRewards = document.getElementsByClassName('rewardRow');
@@ -59,7 +67,7 @@
                         // Get Reward related information
                         var rewardState = this.getAttribute('data-state');
                         var rewardType = this.getAttribute('data-rewardtype');
-                        var rewardRouter = that.getRewardRouter(rewardType);
+                        var rewardRouter = that.getRewardRouter(rewardType, 'create');
                         var rewardId = this.getAttribute('data-rewardId');
 
                         if (rewardState == Constants.REWARD_STATE.LOCKED) {
