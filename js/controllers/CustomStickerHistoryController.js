@@ -19,7 +19,7 @@
         var DOMCache = {
             createSticker: document.getElementsByClassName('createCutomSticker_history'),
             stickerHistoryRow: document.getElementsByClassName('stickerHistoryRow')
-        }
+        };
 
         if (DOMCache.createSticker.length > 0)
             DOMCache.createSticker[0].addEventListener('click', function() {
@@ -27,7 +27,7 @@
             });
 
         for (var i = 0; i < DOMCache.stickerHistoryRow.length; i++)
-            DOMCache.stickerHistoryRow[i].addEventListener('click', that.bindHandlerStickerRow(App, data))
+            DOMCache.stickerHistoryRow[i].addEventListener('click', that.bindHandlerStickerRow(App, data));
 
     };
 
@@ -52,7 +52,7 @@
                 App.router.navigateTo('/customStatus', dataToSend);
             }
 
-        }
+        };
     };
 
     CustomStickerHistoryController.prototype.render = function(ctr, App, data) {

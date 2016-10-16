@@ -62,7 +62,7 @@
                 console.log(res);
                 if (res.stat == "ok") {
                     if (retry) {
-                        events.publish('update.notif.toast', { show: true, text: 'The feature has been reactivated!' });
+                        events.publish('update.notif.toast', { show: true, heading: 'Yey!', details: 'The feature has been reactivated as per your request.', notifType: 'notifSuccess' });
                     } else {
                         that.template = require('raw!../../templates/exclusiveFeatureDetails.html');
                         DOMcache.exclusiveFeatureContainer.innerHTML = Mustache.render(that.template, {
@@ -156,6 +156,7 @@
         utils.changeBotTitle(data.rewardDetails.title);
         that.el.innerHTML = Mustache.render(unescape(that.template), { rewardTitle: data.rewardDetails.title, rewardSubtitle: data.rewardDetails.desc });
         ctr.appendChild(that.el);
+        utils.changeBotTitle(data.rewardDetails.title);
         that.setPageStyle(data.cardColor, data.rewardId);
         events.publish('update.loader', { show: false });
         that.bind(App, data);

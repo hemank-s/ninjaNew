@@ -118,14 +118,48 @@
                         if (platformSdk.bridgeEnabled) {
                             App.NinjaService.getRewardDetails(data, function(res) {
                                 console.log(res.data);
-                                App.router.navigateTo(rewardRouter, { "rewardDetails": res.data, "rewardId": rewardId, "rewardRouter": rewardRouter, "cardColor": cardColor });
+                                App.router.navigateTo(rewardRouter, { "rewardDetails": res.data, "rewardId": rewardId, "rewardRouter": rewardRouter, "cardColor": cardColor, "ftue": true });
                             }, this);
                         } else {
                             var res = {
                                 "hicon": "",
-                                "title": "GIF Sharing",
-                                "desc": "Another way of expressing inside chats.",
-                                "sanctioned": false
+                                "title": "Early Access Stickers",
+                                "cooldown": 146,
+                                "desc": "Get all the hike sticker 2 weeks before everyone else does. Enjoy the benefit to the fullest.",
+                                "packs": [{
+                                    "catId": "bengalibabu",
+                                    "copyright": "Copyright \u00a92016 Hike Limited",
+                                    "desc": "Check out these funny Bong Babu stickers!",
+                                    "name": "Bong Babu",
+                                    "new": 1,
+                                    "nos": 30,
+                                    "size": 864090,
+                                    "status": "downloaded",
+                                    "act_stickers": [
+                                        "030_benbabu_humkiptenahihai.png",
+                                        "029_benbabu_matlab.png",
+                                        "028_benbabu_bahutburahua.png",
+                                        "027_benbabu_sobshottihai.png",
+                                        "026_benbabu_kisikobolnamat.png"
+                                    ]
+                                }, {
+                                    "catId": "bengalibabu",
+                                    "copyright": "Copyright \u00a92016 Hike Limited",
+                                    "desc": "Check out these funny Bong Babu stickers!",
+                                    "name": "Bong Babu",
+                                    "new": 1,
+                                    "nos": 30,
+                                    "size": 864090,
+                                    "status": "downloaded",
+                                    "act_stickers": [
+                                        "030_benbabu_humkiptenahihai.png",
+                                        "029_benbabu_matlab.png",
+                                        "028_benbabu_bahutburahua.png",
+                                        "027_benbabu_sobshottihai.png",
+                                        "026_benbabu_kisikobolnamat.png"
+                                    ]
+                                }]
+
                             };
                             App.router.navigateTo(rewardRouter, { "rewardDetails": res, "rewardId": rewardId, "rewardRouter": rewardRouter, "cardColor": cardColor });
                         }

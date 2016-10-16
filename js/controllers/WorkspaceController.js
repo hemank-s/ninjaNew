@@ -131,10 +131,6 @@
         DOMcache.info.classList.add('animation_fadeout');
         DOMcache.subscribeCta.classList.add('animation_fadeout');
 
-
-
-
-
     };
 
     WorkspaceController.prototype.ftueScreenDismissAnimation = function(DOMcache, App) {

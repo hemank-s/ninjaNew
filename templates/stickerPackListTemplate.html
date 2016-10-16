@@ -1,25 +1,50 @@
-<div class="stickerRewardWrapper">
+<div class="stickerRewardWrapper scrollWrapper">
     <div class="stickerRewardHeader">
         <div class="stickerRewardSelectTitle">{{rewardTitle}}</div>
         <div class="stickerRewardSelectSubtitle">{{sub}}</div>
+        {{#cooldown}}
+        <div class="align-center clockContainer">
+            <div id="clockdiv">
+                <div>
+                    <span class="days"></span><span class="clockTextDays hideClass">day</span>
+                </div>
+                <div>
+                    <span class="hours"></span><span class="clockTextHours hideClass">hr</span>
+                </div>
+                <div>
+                    <span class="minutes"></span><span class="clockTextMins hideClass">min</span>
+                </div>
+                <div>
+                    <span class="seconds"></span><span class="clockTextSecs hideClass">sec</span>
+                </div>
+            </div>
+        </div>
+        {{/cooldown}}
     </div>
     <div class="stickerRewardBody">
         <div class="stickerDownloadList">
             <ul>
                 {{#stickerPacks}}
                 <li class="stickerDownloadRow" data-cooldown="{{cooldown}}" data-status="{{downloaded}}" data-catId="{{catId}}" data-rewardid="{{rewardId}}">
-                    <div class="stickerPackIcon"></div>
+                    <div class="stickerPackIconContainer">
+                        <div class="stickerPackIcon"></div>
+                    </div>
                     <div class="stickerPackText">
                         <div class="stickerPackName">{{name}}</div>
                         <div class="stickerPackCount">{{nos}} Stickers</div>
                     </div>
-                    {{#cooldown}}
-                    <div class="stickerPackStatecooldown"> {{/cooldown}} {{^cooldown}} {{#downloaded}}
-                        <div class="stickerPackStatedownloaded"></div>{{/downloaded}} {{^downloaded}}
-                        <div class="stickerPackStatenotdownloaded"></div>{{/downloaded}} {{/cooldown}}
+                    {{#cooldown}} {{#downloaded}}
+                    <div class="stickerPackStatedownloaded"></div>
+                    {{/downloaded}} {{^downloaded}}
+                    <div class="stickerPackStatecooldown"></div>
+                    {{/downloaded}} {{/cooldown}} {{^cooldown}} {{#downloaded}}
+                    <div class="stickerPackStatedownloaded"></div>
+                    {{/downloaded}} {{^downloaded}}
+                    <div class="stickerPackStatenotdownloaded"></div>
+                    {{/downloaded}} {{/cooldown}}
                 </li>
                 {{/stickerPacks}}
             </ul>
-            </div>
         </div>
     </div>
+</div>

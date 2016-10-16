@@ -7,7 +7,7 @@
         Constants = require('../../constants.js'),
         cacheProvider = require('../util/cacheProvider'),
         rewardsModel = require('../models/rewardsModel'),
-        
+
         ProfilescreenController = function(options) {
             this.template = require('raw!../../templates/ninjaProfileScreen.html');
         };
@@ -51,7 +51,7 @@
                             bullets[i].className = ' comp__tab';
                         }
                         bullets[pos].className = 'comp__tab selected';
-                        emptyBorder[0].style.marginLeft = 33.33*pos+13.5+"%";
+                        emptyBorder[0].style.marginLeft = 33.33 * pos + 13.5 + "%";
                         document.getElementById("sliderTabs").style.height = containers[pos].offsetHeight + "px";
                         that.setPageScroll();
 
@@ -64,7 +64,7 @@
             bullets[0].className = 'comp__tab selected';
             bullets[2].className = 'comp__tab ';
             bullets[1].className = 'comp__tab ';
-            
+
             if (bullets.length) {
                 console.log(bullets);
                 for (var i = 0; i < bullets.length; i++) {
@@ -77,7 +77,7 @@
                 }
             }
 
-            if(profileSrc && profileSrc == 'ugc'){
+            if (profileSrc && profileSrc == 'ugc') {
                 bullets[2].click();
                 cacheProvider.setInCritical('profileSrc', '');
             }
@@ -97,111 +97,111 @@
     };
 
 
-     ProfilescreenController.prototype.setPageScroll = function() {
+    ProfilescreenController.prototype.setPageScroll = function() {
 
-            var clsName = document.getElementsByClassName('comp__tab selected')[0].getAttribute('data-tab');
-            var el = document.getElementsByClassName(clsName)[0];   
-            var rect = el.getBoundingClientRect();
+        var clsName = document.getElementsByClassName('comp__tab selected')[0].getAttribute('data-tab');
+        var el = document.getElementsByClassName(clsName)[0];
+        var rect = el.getBoundingClientRect();
 
-            var result =  (
-                rect.top + rect.height > (window.innerHeight || document.documentElement.clientHeight) 
-            );
+        var result = (
+            rect.top + rect.height > (window.innerHeight || document.documentElement.clientHeight)
+        );
 
-            if(result)
-                document.getElementsByClassName('parentProfileContainer')[0].classList.add('overScroll');
-            else
-                document.getElementsByClassName('parentProfileContainer')[0].classList.remove('overScroll');
+        if (result)
+            document.getElementsByClassName('parentProfileContainer')[0].classList.add('overScroll');
+        else
+            document.getElementsByClassName('parentProfileContainer')[0].classList.remove('overScroll');
 
     };
 
 
-    ProfilescreenController.prototype.updateIcons = function (DOMcache,data, mBoxHistory){
-        
+    ProfilescreenController.prototype.updateIcons = function(DOMcache, data, mBoxHistory) {
+
         // UGC ICONS
 
         console.log(data);
-        if(data.ugcList){
-            for(var i= 0;i<data.ugcList.length;i++){
-            if(data.ugcList[i].icon){
-                DOMcache.ugcTypeRow[i].getElementsByClassName('ugcTypeIcon')[0].style.backgroundImage = "url('" + data.ugcList[i].icon + "')";
-            }else{
-                console.log("Set a default icon for ugc");
+        if (data.ugcList) {
+            for (var i = 0; i < data.ugcList.length; i++) {
+                if (data.ugcList[i].icon) {
+                    DOMcache.ugcTypeRow[i].getElementsByClassName('ugcTypeIcon')[0].style.backgroundImage = "url('" + data.ugcList[i].icon + "')";
+                } else {
+                    console.log("Set a default icon for ugc");
+                }
             }
-        }    
         }
-        
+
         // REWARD ICONS
-        if(data.rewardsData.redeemedRewards){
-            for(var j=0;j<data.rewardsData.redeemedRewards.length;j++){
-                if(data.rewardsData.redeemedRewards[j].icon){
+        if (data.rewardsData.redeemedRewards) {
+            for (var j = 0; j < data.rewardsData.redeemedRewards.length; j++) {
+                if (data.rewardsData.redeemedRewards[j].icon) {
                     DOMcache.redeemedRewardRow[j].getElementsByClassName('redeemedRewardIcon')[0].style.backgroundImage = "url('" + data.rewardsData.redeemedRewards[j].icon + "')";
-                }else{
+                } else {
                     console.log("Set a default icon for rewards");
                 }
-            }    
+            }
         }
 
         // Mboxhostory icon
 
-        if(mBoxHistory){
-            for(var z=0;z<mBoxHistory.length;z++){
-                if(mBoxHistory[z].icon){
+        if (mBoxHistory) {
+            for (var z = 0; z < mBoxHistory.length; z++) {
+                if (mBoxHistory[z].icon) {
                     DOMcache.mysteryRedeemedRewardRow[z].getElementsByClassName('redeemedRewardIcon')[0].style.backgroundImage = "url('" + mBoxHistory[z].icon + "')";
-                }else{
+                } else {
                     console.log("Set a default icon for rewards");
                 }
             }
         }
-        
+
     };
 
-    ProfilescreenController.prototype.updateLinks = function (DOMcache,data, App){
-        
+    ProfilescreenController.prototype.updateLinks = function(DOMcache, data, App) {
+
         // UGC LINKS
-            if (DOMcache.ugcTypeRow.length) {
-                for (var i = 0; i < DOMcache.ugcTypeRow.length; i++) {
-                    DOMcache.ugcTypeRow[i].addEventListener('click', function(event) {
+        if (DOMcache.ugcTypeRow.length) {
+            for (var i = 0; i < DOMcache.ugcTypeRow.length; i++) {
+                DOMcache.ugcTypeRow[i].addEventListener('click', function(event) {
 
-                        // Get Reward related information
-                        var ugcType = this.getAttribute('data-type');
-                        cacheProvider.setInCritical('profileSrc', 'ugc');
-                        App.router.navigateTo('/ugc', { type: ugcType });
-                    });
-                }
+                    // Get Reward related information
+                    var ugcType = this.getAttribute('data-type');
+                    cacheProvider.setInCritical('profileSrc', 'ugc');
+                    App.router.navigateTo('/ugc', { type: ugcType });
+                });
             }
+        }
         // REWARD LINKS
-            if (DOMcache.redeemedRewardRow.length) {
-                for (var i = 0; i < DOMcache.redeemedRewardRow.length; i++) {
-                    DOMcache.redeemedRewardRow[i].addEventListener('click', function(event) {
+        if (DOMcache.redeemedRewardRow.length) {
+            for (var i = 0; i < DOMcache.redeemedRewardRow.length; i++) {
+                DOMcache.redeemedRewardRow[i].addEventListener('click', function(event) {
 
-                        // Get Reward related information
-                        var rewardState = this.getAttribute('data-state');
-                        var rewardType = this.getAttribute('data-rewardtype');
-                        var rewardRouter = rewardsModel.getRewardRouter(rewardType);
-                        var rewardId = this.getAttribute('data-rewardId');
+                    // Get Reward related information
+                    var rewardState = this.getAttribute('data-state');
+                    var rewardType = this.getAttribute('data-rewardtype');
+                    var rewardRouter = rewardsModel.getRewardRouter(rewardType);
+                    var rewardId = this.getAttribute('data-rewardId');
 
-                        var data = {};
-                        data.rewardId = rewardId;
+                    var data = {};
+                    data.rewardId = rewardId;
 
-                        if (platformSdk.bridgeEnabled) {
-                            App.NinjaService.getRewardDetails(data, function(res) {
-                                console.log(res.data);
-                                rewardRouter = rewardsModel.getRewardRouter(rewardType,'',res.data);
-                                App.router.navigateTo(rewardRouter, { "rewardDetails": res.data, "rewardId": rewardId, "rewardRouter": rewardRouter });
-                            }, this);
-                        } else {
-                            var res = {
-                                "hicon": "",
-                                "title": "GIF Sharing",
-                                "desc": "Another way of expressing inside chats.",
-                                "sanctioned": false
-                            };
-                            App.router.navigateTo(rewardRouter, { "rewardDetails": res, "rewardId": rewardId, "rewardRouter": rewardRouter });
-                        }
-                    });
-                }
+                    if (platformSdk.bridgeEnabled) {
+                        App.NinjaService.getRewardDetails(data, function(res) {
+                            console.log(res.data);
+                            rewardRouter = rewardsModel.getRewardRouter(rewardType, '', res.data);
+                            App.router.navigateTo(rewardRouter, { "rewardDetails": res.data, "rewardId": rewardId, "rewardRouter": rewardRouter , "ftue": false});
+                        }, this);
+                    } else {
+                        var res = {
+                            "hicon": "",
+                            "title": "GIF Sharing",
+                            "desc": "Another way of expressing inside chats.",
+                            "sanctioned": false
+                        };
+                        App.router.navigateTo(rewardRouter, { "rewardDetails": res, "rewardId": rewardId, "rewardRouter": rewardRouter });
+                    }
+                });
             }
-        };
+        }
+    };
 
     ProfilescreenController.prototype.render = function(ctr, App, data) {
 
@@ -211,27 +211,29 @@
         var ninjaUgc = cacheProvider.getFromCritical('ninjaUgc');
         var ninjaMysteryBoxData = cacheProvider.getFromCritical('ninjaMysteryBoxData');
         var boxHistory = [];
-        
+
         data.ugcList = ninjaUgc;
         console.log("reward data recieved is ", data);
 
-        if(ninjaMysteryBoxData && ninjaMysteryBoxData.history.length > 0){
+        if (ninjaMysteryBoxData && ninjaMysteryBoxData.history.length > 0) {
             boxHistory = ninjaMysteryBoxData.history;
         }
 
-        if(!platformSdk.bridgeEnabled){
-            ninjaStats = {  'chatThemes': { 'rec': 10, 'sent': 10 }, 'files': { 'rec': 155, 'sent': 139 }, 'messages': { 'rec': 1203, 'sent': 187 }, 'statusUpdates': { 'count': 10 }, 'stickers': { 'rec': 133, 'sent': 17 } } ;
-            ninjaUgc = {"stat":"ok","data":{"content":[{"type":"jfl","title":"Just for Laugh","stitle":"Submit funny new memes and get recognized","icon":"s3 url here"},{"type":"quotes","title":"Daily quotes","stitle":"Submit famous quotes and get recognized","icon":"s3 url here"},{"type":"facts","title":"Facts","stitle":"Submit fun and new facts and get recognized","icon":"s3 url here"}]}};
+        if (!platformSdk.bridgeEnabled) {
+            ninjaStats = { 'chatThemes': { 'rec': 10, 'sent': 10 }, 'files': { 'rec': 155, 'sent': 139 }, 'messages': { 'rec': 1203, 'sent': 187 }, 'statusUpdates': { 'count': 10 }, 'stickers': { 'rec': 133, 'sent': 17 } };
+            ninjaUgc = { "stat": "ok", "data": { "content": [{ "type": "jfl", "title": "Just for Laugh", "stitle": "Submit funny new memes and get recognized", "icon": "s3 url here" }, { "type": "quotes", "title": "Daily quotes", "stitle": "Submit famous quotes and get recognized", "icon": "s3 url here" }, { "type": "facts", "title": "Facts", "stitle": "Submit fun and new facts and get recognized", "icon": "s3 url here" }] } };
             ninjaUgc = ninjaUgc.data.content;
-        }   
-
+        }
+        if (platformSdk.bridgeEnabled) {
+            utils.changeBarColors('#3C367C','#4A4F93');
+        }
         utils.changeBotTitle('My Profile');
-        
+
         that.parentContainer = document.createElement('div');
-        that.parentContainer.className = 'parentProfileContainer';   
+        that.parentContainer.className = 'parentProfileContainer';
         that.el = document.createElement('div');
         that.el.className = 'profileScreenContainer animation_fadein noselect';
-        that.el.innerHTML = Mustache.render(unescape(that.template), {ninjaMysteryBoxRewards: boxHistory,ninjaRedeemedRewards: data.rewardsData.redeemedRewards, ninjaActivityData:ninjaStats, ninjaUgcData:ninjaUgc});
+        that.el.innerHTML = Mustache.render(unescape(that.template), { ninjaMysteryBoxRewards: boxHistory, ninjaRedeemedRewards: data.rewardsData.redeemedRewards, ninjaActivityData: ninjaStats, ninjaUgcData: ninjaUgc });
         that.parentContainer.appendChild(that.el);
         ctr.appendChild(that.parentContainer);
         events.publish('update.loader', { show: false });

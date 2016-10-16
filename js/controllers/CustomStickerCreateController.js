@@ -59,7 +59,7 @@
             DOMCache.userInput[0].innerHTML = this.value.length;
 
             if (this.value.length > Constants.CUSTOM_STICKER_TITLE_LENGTH)
-                DOMCache.userInput[0].classList.add('inputExceeded')
+                DOMCache.userInput[0].classList.add('inputExceeded');
             else
                 DOMCache.userInput[0].classList.remove('inputExceeded');
         });
@@ -74,15 +74,15 @@
                 toastType = 0; // andriod toast
 
             if (DOMCache.customImage[0].getAttribute('filePath') && DOMCache.customText[0].value.length > 0 && DOMCache.customText[0].value.length < Constants.CUSTOM_STICKER_TITLE_LENGTH) {
-                that.postCustomSticker(App, data, DOMCache, 2, toastType)
+                that.postCustomSticker(App, data, DOMCache, 2, toastType);
             } else if (DOMCache.customImage[0].getAttribute('uploadUrl') && DOMCache.customText[0].value.length > 0 && DOMCache.customText[0].value.length < Constants.CUSTOM_STICKER_TITLE_LENGTH) {
-                that.postCustomSticker(App, data, DOMCache, 1, toastType)
+                that.postCustomSticker(App, data, DOMCache, 1, toastType);
             } else {
                 // Show Error Messages
 
                 if (DOMCache.customText[0].value.length > Constants.CUSTOM_STICKER_TITLE_LENGTH) {
                     that.showToast('Input limit inputExceeded', toastType);
-                } else if (DOMCache.customText[0].value.length == 0) {
+                } else if (DOMCache.customText[0].value.length === 0) {
                     that.showToast('Please type Title', toastType);
                 } else {
                     that.showToast('Please upload image', toastType);
@@ -188,7 +188,7 @@
         if (type == 1)
             events.publish('update.notif.toast', { show: true, heading: 'Bamm', details: text, notifType: 'notifNeutral' });
         else
-            utils.showToast('text')
+            utils.showToast('text');
 
         console.log(text);
     };

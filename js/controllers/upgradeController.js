@@ -27,6 +27,9 @@
     UpgradeController.prototype.render = function(ctr, App, data) {
 
         var that = this;
+        if (platformSdk.bridgeEnabled) {
+            utils.changeBarColors('#3C367C', '#4A4F93');
+        }
         that.el = document.createElement('div');
         that.el.className = 'upgradeContainer centerToScreenContainer animation_fadein noselect';
         that.el.innerHTML = Mustache.render(unescape(that.template));

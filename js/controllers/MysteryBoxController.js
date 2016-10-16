@@ -35,6 +35,9 @@
         var that = this;
 
         utils.changeBotTitle('Lucky Box');
+        if (platformSdk.bridgeEnabled) {
+            utils.changeBarColors('#3C367C', '#4A4F93');
+        }
 
         that.el = document.createElement('div');
         that.el.className = 'mysteryBoxContainer animation_fadein noselect';

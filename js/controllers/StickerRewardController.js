@@ -5,12 +5,13 @@
 
     var utils = require('../util/utils'),
         Constants = require('../../constants.js'),
+        cacheProvider = require('../util/cacheProvider'),
 
         StickerRewardController = function(options) {
             this.template = require('raw!../../templates/stickerReward.html');
         };
 
-    StickerRewardController.prototype.bind = function(App, data, router, rewardId) {
+    StickerRewardController.prototype.bind = function(App, data, router, rewardId, ftue) {
 
         var that = this;
 
@@ -20,18 +21,22 @@
             stickerRewardSubtitle: document.getElementsByClassName('stickerRewardSubtitle')[0],
             stickerRewardIllustration: document.getElementsByClassName('stickerRewardIllustration')[0],
             stickerPackIcon: document.getElementsByClassName('stickerPackIcon'),
+            stickerRewardWrapper: document.getElementsByClassName('stickerRewardWrapper')[0],
         };
 
-        that.setStickerRewardHeaderImage(data, DOMcache);
-
-        // FTUE ACTION
-        if (DOMcache.stickerRewardAction) {
-            DOMcache.stickerRewardAction.addEventListener('click', function(event) {
-                DOMcache.stickerRewardSubtitle.classList.remove('hideClass');
-                that.showStickerPacksAvailable(App, DOMcache, data, router, rewardId);
-            });
+        if (!ftue) {
+            DOMcache.stickerRewardSubtitle.classList.remove('hideClass');
+            that.showStickerPacksAvailable(App, DOMcache, data, router, rewardId);
+        } else {
+            that.setStickerRewardHeaderImage(data, DOMcache);
+            // FTUE ACTION
+            if (DOMcache.stickerRewardAction) {
+                DOMcache.stickerRewardAction.addEventListener('click', function(event) {
+                    DOMcache.stickerRewardSubtitle.classList.remove('hideClass');
+                    that.showStickerPacksAvailable(App, DOMcache, data, router, rewardId);
+                });
+            }
         }
-
     };
 
     StickerRewardController.prototype.setStickerRewardHeaderImage = function(data, DOMcache) {
@@ -72,7 +77,7 @@
         var that = this;
 
         if (cooldown) {
-            events.publish('update.notif.toast', { show: true, text: 'Under cooldown, please try again later' });
+            events.publish('update.notif.toast', { show: true, heading: 'Oops!', details: 'This pack will only be available after the cooldown has ended. Check back soon', notifType: 'notifNeutral' });
             return;
         }
 
@@ -90,35 +95,31 @@
         if (platformSdk.bridgeEnabled) {
 
             App.NinjaService.getStickerPack(dataToSend, function(res) {
-                console.log(res);
                 if (res.stat == "ok") {
 
                     PlatformBridge.downloadStkPack(stickerJSON);
-                    events.publish('update.notif.toast', { show: true, text: 'You can view your sticker in the sticker palette. Start Sharing' });
-
                     var dataToSend = {};
                     dataToSend.rewardId = rId;
 
-
                     App.NinjaService.recallRewardDetails(dataToSend, function(res2) {
-
-                        that.template = require('raw!../../templates/stickerPackCooldownTemplate.html');
+                        events.publish('update.notif.toast', { show: true, heading: 'Awesome Choice!', details: 'You can view your sticker in the sticker palette. Start Sharing', notifType: 'notifSuccess' });
+                        that.template = require('raw!../../templates/stickerPackListTemplate.html');
 
                         DOMcache.stickerRewardContainer.innerHTML = Mustache.render(that.template, {
                             stickerPacks: res2.data.packs,
                             rewardTitle: 'Select One',
-                            sub: 'You can unlock your next sticker pack in ' + res2.data.cooldown + 'seconds',
+                            sub: 'You can only unlock your next sticker pack after the cooldown.',
                             rewardId: rId,
                             cooldown: res2.data.cooldown
                         });
-
+                        that.defineCooldown(App, res2.data.cooldown, rId, router, DOMcache);
                         that.assignStickerCatImages(res2.data.packs, DOMcache);
                         // Set Sticker Row inside DOM Cache
                         DOMcache.stickerDownloadRow = document.getElementsByClassName('stickerDownloadRow');
                         that.setStickerDownloadLinks(App, DOMcache, res2.data.packs, router, res2.data);
                     }, this);
                 } else {
-                    events.publish('update.notif.toast', { show: true, text: 'Sticker pack cannot be downloaded right now, please try again after some time!' });
+                    events.publish('update.notif.toast', { show: true, heading: 'Sorry buddy!', details: 'Sticker pack cannot be downloaded right now, please try again after some time!', notifType: 'notifError' });
                 }
             }, this);
         }
@@ -144,6 +145,88 @@
             var cooldown = this.getAttribute('data-cooldown');
             that.downloadStickerPack(App, DOMcache, catId, rId, stickerDetails, router, cooldown);
         });
+    };
+
+    StickerRewardController.prototype.defineCooldown = function(App, timeleft, rId, rewardRouter, DOMcache) {
+
+        var that = this;
+
+        function getTimeRemaining(timeRemaining) {
+            var t = timeRemaining;
+            var seconds = Math.floor((t / 1000) % 60);
+            var minutes = Math.floor((t / 1000 / 60) % 60);
+            var hours = Math.floor((t / (1000 * 60 * 60)) % 24);
+            var days = Math.floor(t / (1000 * 60 * 60 * 24));
+            return {
+                'total': t,
+                'days': days,
+                'hours': hours,
+                'minutes': minutes,
+                'seconds': seconds
+            };
+        }
+
+        function initializeClock(id, timeRemaining) {
+            var clock = document.getElementById(id);
+            var daysSpan = clock.querySelector('.days');
+            var hoursSpan = clock.querySelector('.hours');
+            var minutesSpan = clock.querySelector('.minutes');
+            var secondsSpan = clock.querySelector('.seconds');
+
+            function updateClock() {
+                var t = getTimeRemaining(timeRemaining);
+
+                if (t.days > 0) {
+                    daysSpan.innerHTML = t.days;
+                    clock.querySelector('.clockTextDays').classList.remove('hideClass');
+                }
+                if (t.hours > 0) {
+                    hoursSpan.innerHTML = ('0' + t.hours).slice(-2);
+                    clock.querySelector('.clockTextHours').classList.remove('hideClass');
+                }
+                if (t.minutes > 0) {
+                    minutesSpan.innerHTML = ('0' + t.minutes).slice(-2);
+                    clock.querySelector('.clockTextMins').classList.remove('hideClass');
+                }
+                if (t.seconds > 0) {
+                    secondsSpan.innerHTML = ('0' + t.seconds).slice(-2);
+                    clock.querySelector('.clockTextSecs').classList.remove('hideClass');
+                }
+
+                if (t.total <= 0) {
+                    clearInterval(timeinterval);
+                    console.log("Getting available rewards");
+
+                    var dataToSend = {};
+                    dataToSend.rewardId = rId;
+
+                    App.NinjaService.recallRewardDetails(dataToSend, function(res2) {
+
+                        that.template = require('raw!../../templates/stickerPackListTemplate.html');
+
+                        DOMcache.stickerRewardContainer.innerHTML = Mustache.render(that.template, {
+                            stickerPacks: res2.data.packs,
+                            rewardTitle: 'Select One',
+                            sub: 'You can only redeem one sticker pack at a time so choose wisely',
+                            rewardId: rId,
+                            cooldown: res2.data.cooldown
+                        });
+
+                        that.assignStickerCatImages(res2.data.packs, DOMcache);
+                        // Set Sticker Row inside DOM Cache
+                        DOMcache.stickerDownloadRow = document.getElementsByClassName('stickerDownloadRow');
+                        that.setStickerDownloadLinks(App, DOMcache, res2.data.packs, rewardRouter, res2.data);
+                    }, this);
+                }
+                timeRemaining = timeRemaining - 1000;
+            }
+
+            updateClock();
+            var timeinterval = setInterval(updateClock, 1000);
+        }
+
+        initializeClock('clockdiv', timeleft * 1000);
+
     };
 
     StickerRewardController.prototype.setStickerDownloadLinks = function(App, DOMcache, stickerPacks, router, data) {
@@ -178,17 +261,20 @@
 
         var that = this;
 
-        DOMcache.stickerRewardSubtitle.innerHTML = 'You can only redeem one sticker at a time so choose wisely';
         DOMcache.stickerRewardContainer.innerHTML = '';
 
         that.template = require('raw!../../templates/stickerPackListTemplate.html');
         DOMcache.stickerRewardContainer.innerHTML = Mustache.render(that.template, {
             stickerPacks: data.packs,
             rewardTitle: 'Select One',
-            sub: 'You can only redeem one sticker at a time so choose wisely',
+            sub: 'You can only redeem one sticker pack at a time so choose wisely',
             rewardId: rId,
             cooldown: data.cooldown
         });
+
+        if (data.cooldown) {
+            that.defineCooldown(App, data.cooldown, rId, router, DOMcache);
+        }
 
         that.assignStickerCatImages(data.packs, DOMcache);
         // Set Sticker Row inside DOM Cache
@@ -207,6 +293,23 @@
             }
         }
 
+    };
+
+    StickerRewardController.prototype.setPageStyle = function(color, rid) {
+        var that = this;
+        var hexcolor = null;
+
+        if (!color) {
+            var rewardColorMapping = cacheProvider.getFromCritical('rewardColorMapping');
+            hexcolor = rewardColorMapping[rid];
+        } else {
+            hexcolor = utils.rgba2hex(color);
+        }
+
+        var StickerRewardContainer = document.getElementsByClassName('stickerRewardContainer')[0];
+
+        utils.changeBarColors(hexcolor, hexcolor);
+        StickerRewardContainer.style.backgroundColor = hexcolor;
     };
 
     StickerRewardController.prototype.render = function(ctr, App, data) {
@@ -229,9 +332,12 @@
             rewardSubtitle: data.rewardDetails.desc,
             stickerPacks: data.rewardDetails.packs,
         });
+
         ctr.appendChild(that.el);
+        utils.changeBotTitle(data.rewardDetails.title);
+        that.setPageStyle(data.cardColor, data.rewardId);
         events.publish('update.loader', { show: false });
-        that.bind(App, data.rewardDetails, data.rewardRouter, data.rewardId);
+        that.bind(App, data.rewardDetails, data.rewardRouter, data.rewardId, data.ftue);
     };
 
     StickerRewardController.prototype.destroy = function() {
