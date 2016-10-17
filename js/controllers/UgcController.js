@@ -169,21 +169,22 @@
 
         window.addEventListener("resize", function() {
 
-            if (DOMcache.screenH > window.innerHeight) {
-                DOMcache.cardNote[0].classList.remove('animation_fadein');
-                DOMcache.cardNote[0].classList.add('animation_fadeout');
-                DOMcache.ugcContainer[0].classList.add('overscroll');
-                DOMcache.ugcWrapper[0].classList.add('marB_30');
+            if (document.querySelectorAll('.ugcContainer').length > 0) {
+                if (DOMcache.screenH > window.innerHeight) {
+                    DOMcache.cardNote[0].classList.remove('animation_fadein');
+                    DOMcache.cardNote[0].classList.add('animation_fadeout');
+                    DOMcache.ugcContainer[0].classList.add('overscroll');
+                    DOMcache.ugcWrapper[0].classList.add('marB_30');
 
-            } else {
-                DOMcache.cardNote[0].classList.remove('animation_fadeout');
-                DOMcache.cardNote[0].classList.add('animation_fadein');
-                DOMcache.ugcContainer[0].classList.remove('overscroll');
-                DOMcache.ugcWrapper[0].classList.remove('marB_30');
+                } else {
+                    DOMcache.cardNote[0].classList.remove('animation_fadeout');
+                    DOMcache.cardNote[0].classList.add('animation_fadein');
+                    DOMcache.ugcContainer[0].classList.remove('overscroll');
+                    DOMcache.ugcWrapper[0].classList.remove('marB_30');
 
+                }
             }
         });
-
     };
 
     UgcController.prototype.bindHandlersJfl = function(App, data) {

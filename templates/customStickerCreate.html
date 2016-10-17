@@ -1,31 +1,37 @@
-<div>
-    <div class="title"> Add your face and text</div>
-    <div class="customImage" uploadUrl="{{#isFailedState}} {{url}}{{/isFailedState}}" style="{{#isFailedState}}background-image:url({{url}}) {{/isFailedState}}">
+<div class="customCreateWrapper">
+    <div class="scrollContent">
+        <div class="title"> Add your face and text</div>
+        <div class="customImage">
+            <div class="cameraIcon"> </div>
+        </div>
+        <div class="align-center">
+            <input class="customText" type='text' placeholder="type something" />
+        </div>
+        <div class="charLimit">
+            <div class="userInput inlineBlock">0 </div>
+            <div class="allowedInput inlineBlock">/{{textLength}} </div>
+        </div>
+        {{#isFailedState}}
+        <div class="reason"> {{reason}}
+        </div>
+        {{/isFailedState}}
+        <div class="align-center">
+            <div class="customCta createSticker zeroOpacity">Done
+            </div>
+        </div>
     </div>
-    <input class="customText" type='text' placeholder="type something" value="{{#isFailedState}}{{phrase}}{{/isFailedState}}" />
-    <div class="charLimit">
-        <div class="userInput inlineBlock">{{#isFailedState}} {{phraseLength}} {{/isFailedState}} {{^isFailedState}}0{{/isFailedState}} </div>
-        <div class="allowedInput inlineBlock">/{{textLength}} </div>
-    </div>
-    {{#isFailedState}}
-    <div class="reason"> {{reason}}
-    </div>
-    {{/isFailedState}}
-    <div class="customCta createSticker">Done
-    </div>
-    <div class="learnMore">Learn More
+    <div class="learnMore"><u>Learn more</u> about adding right content
     </div>
 </div>
 <div class="customOverlay hideClass">
     <div class="contentInfo">
-        <div class="titleOverlay"> Add your face and text</div>
+        <div class="titleOverlay"> How to send custom sticker?</div>
         <ul>
-            <li> test1 </li>
-            <li> test1 </li>
-            <li> test1 </li>
-            <li> test1 </li>
+            <li><span> Sticker image should contain single person full face photo. </span></li>
+            <li><span>  Photo shoudn’t be pixelated. </span> </li>
+            <li><span>  Send only appropriate content. </span> </li>
         </ul>
-        <div class="overlayCta">Done</span>
+        <div class="overlayCta">GOT IT</span>
         </div>
     </div>
 </div>

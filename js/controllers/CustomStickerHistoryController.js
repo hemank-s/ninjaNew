@@ -17,7 +17,7 @@
         var that = this;
 
         var DOMCache = {
-            createSticker: document.getElementsByClassName('createCutomSticker_history'),
+            createSticker: document.getElementsByClassName('createCustomSticker_history'),
             stickerHistoryRow: document.getElementsByClassName('stickerHistoryRow')
         };
 

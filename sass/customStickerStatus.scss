@@ -1,28 +1,56 @@
 .customStatusContainer {
-    div {
-        padding: 15px;
+    background: #5C6BC0;
+    height: 100%;
+    width: 100%;
+    .customStatusTitle {
+        @include fontStyle(22px, 400, #ffffff, 24px);
+        padding-top: 40px;
+        padding-bottom: 52px;
         text-align: center;
     }
-    .customStatusTitle {}
     .customStatusImage {}
-    .customStatusSubtitle {}
+    .customStatusSubtitle {
+        @include fontStyle(16px, 400, #ffffff, 20px);
+        margin: 0 auto;
+        width: 80%;
+        text-align: center;
+        text-align: center;
+        margin-top: 24px;
+        margin-bottom: 20px;
+    }
     .stickerStatus_inprogress {
         background: url(images/custom_progress.png);
         background-size: contain;
         background-repeat: no-repeat;
         background-position: center;
-        height: 184px;
         width: 100%;
     }
     .stickerStatus_redeemed {
-        background: url(images/custom_success.png);
+        background: url(images/custom_progress.png);
         background-size: contain;
         background-repeat: no-repeat;
         background-position: center;
-        height: 184px;
         width: 100%;
     }
+    .stickerStatus_redeemed,
+    .stickerStatus_inprogress {
+        height: 184px;
+    }
     .customStatusCta {
-        color: #1DA8E8;
+        @include fontStyle(14px, 500, #ffffff, 14px);
+        position: absolute;
+        text-align: center;
+        width: 100%;
+        bottom: 53px;
+    }
+    .sendStickerCta {
+        text-transform: uppercase;
+        padding: 14px 10px;
+        border-radius: 4px;
+        background: #fff;
+        width: 30%;
+        margin-left: 32%;
+        color: #5C6BC0;
+        bottom: 40px;
     }
 }

@@ -3,74 +3,83 @@
     color: white;
     height: 100%;
     width: 100%;
-    background: #1F5EF2;
-    background: -webkit-linear-gradient(-180deg, #1F5EF2 12%, #33FFE2 100%);
-    background: -o-linear-gradient(-180deg, #1F5EF2 12%, #33FFE2 100%);
-    background: -moz-linear-gradient(-180deg, #1F5EF2 12%, #33FFE2 100%);
-    background: linear-gradient(-180deg, #1F5EF2 12%, #33FFE2 100%);
+    background: #5C6BC0;
     .stickerHistoryRow {
         background: white;
         color: #000;
-        margin: 20px;
+        margin: 0 24px 8px;
         border-radius: 4px;
     }
-    .textCls {
+    .customHistoryTitle {
         text-align: center;
-        padding: 20px;
+        @include fontStyle(22px, 400, #fff, 24px);
+        margin: 32px 8px;
+    }
+    .customHistorySubtitle {
+        text-align: center;
+        @include fontStyle(14px, 400, rgba(255, 255, 255, 0.8), 19px);
+        margin: 32px auto;
+        max-width: 80%;
     }
     .statusSection[data-status="inprogress"] {
         background: url(images/progressStatus.png);
         background-size: contain;
         background-repeat: no-repeat;
+        height: 80px;
         background-position: center;
-        height: 20px;
-        background-position: center;
+        width: 20px;
+        float: right;
+        margin-right: 24px;
     }
     .statusSection[data-status="redeemed"] {
         background: url(images/successStatus.png);
         background-size: contain;
         background-repeat: no-repeat;
+        height: 80px;
         background-position: center;
-        height: 20px;
-        background-position: center;
+        width: 20px;
+        float: right;
+        margin-right: 24px;
     }
     .statusSection[data-status="failed"] {
         background: url(images/failedStatus.png);
         background-size: contain;
         background-repeat: no-repeat;
+        height: 80px;
         background-position: center;
-        height: 20px;
-        background-position: center;
+        width: 20px;
+        float: right;
+        margin-right: 24px;
     }
-    .stickerHistoryRow div {}
     .custHistoryIcon {
-        background-size: cover;
         vertical-align: middle;
-        width: 32.5%;
+        width: 54px;
         background-size: 100% 100%;
-        height: 80px;
+        height: 54px;
+        border-radius: 50%;
+        margin: 13px;
     }
-    .contentSection,
-    .statusSection {
-        width: 32.5%;
-        height: 80px;
+    .contentSection {
+        vertical-align: middle;
     }
-    .statusSection {}
     .customHistoryList {
-        margin-bottom: 60px;
+        margin-bottom: 80px;
     }
-    .createCutomSticker_history {
-        border-top: 1px solid rgba(15, 14, 14, 0.32);
-        padding: 15px 0;
+    .createCustomSticker_history {
+        @include fontStyle(14px, 500, #ffffff, 14px);
+        padding: 17px 0;
         position: fixed;
         width: 100%;
         text-align: center;
-        bottom: 0;
-        font-size: 16px;
-        color: #3a3737;
-        line-height: 21px;
-        font-weight: 400;
         z-index: 1008;
-        background: #cababa;
+        background: #8B9DFF;
+        bottom: 0;
+    }
+    .rowStatus {
+        @include fontStyle(12px, 400, #808080, 12px);
+        margin-top: 8px;
+    }
+    .rowTitle {
+        @include fontStyle(16px, 400, #1E1D3A, 16px);
     }
 }

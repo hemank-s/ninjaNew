@@ -13,6 +13,96 @@
 
 $gap: 75px;
 @media screen and (max-width: 299px) {
+    /************Customer Sticker*************/
+    .customHistoryContainer {
+        .customHistoryTitle {
+            font-size: 16px !important;
+            margin: 24px 8px !important;
+        }
+        .customHistorySubtitle {
+            font-size: 12px !important;
+            margin: 24px auto !important;
+        }
+        .rowTitle {
+            font-size: 12px !important;
+        }
+        .rowStatus {
+            font-size: 10px !important;
+            margin-top: 6px;
+        }
+        .createCustomSticker_history {
+            font-size: 12px !important;
+        }
+    }
+    .customStickerFtue {
+        .title {
+            font-size: 16px !important;
+        }
+        .subtitle {
+            font-size: 12px !important;
+        }
+        .createSticker {
+            font-size: 10px !important;
+        }
+    }
+    .customCreateWrapper {
+        .title {
+            font-size: 16px !important;
+            padding-bottom: 26px !important;
+        }
+        .customImage {
+            margin-bottom: 30px !important;
+        }
+        .customCta {
+            font-size: 12px !important;
+        }
+        .customText {
+            font-size: 12px !important;
+        }
+        ::-webkit-input-placeholder {
+            font-size: 12px !important;
+        }
+        :-moz-placeholder {
+            font-size: 12px !important;
+        }
+        ::-moz-placeholder {
+            font-size: 12px !important;
+        }
+        :-ms-input-placeholder {
+            font-size: 12px !important;
+        }
+        .learnMore {
+            font-size: 12px !important;
+        }
+    }
+    .customOverlay {
+        .titleOverlay {
+            font-size: 16px !important;
+        }
+        ul li {
+            font-size: 12px !important;
+        }
+        .overlayCta {
+            font-size: 12px !important;
+        }
+    }
+    .customStatusContainer {
+        .customStatusTitle {
+            font-size: 16px !important;
+            padding-bottom: 40px !important;
+        }
+        .customStatusSubtitle {
+            font-size: 12px !important;
+        }
+        .stickerStatus_redeemed,
+        .stickerStatus_inprogress {
+            height: 160px !important;
+        }
+        .customStatusCta {
+            font-size: 12px !important;
+        }
+    }
+    /*****************************************/
     /***** Ninja home Screen Screen *****/
     .profileContainer {
         padding: 28px 16px 0px 16px !important;
@@ -253,6 +343,96 @@ $gap: 75px;
 }
 
 @media screen and (min-width: 300px) and (max-width: 320px) {
+    /************Customer Sticker*************/
+    .customHistoryContainer {
+        .customHistoryTitle {
+            font-size: 16px !important;
+            margin: 24px 8px !important;
+        }
+        .customHistorySubtitle {
+            font-size: 12px !important;
+            margin: 24px auto !important;
+        }
+        .rowTitle {
+            font-size: 12px !important;
+        }
+        .rowStatus {
+            font-size: 10px !important;
+            margin-top: 6px;
+        }
+        .createCustomSticker_history {
+            font-size: 12px !important;
+        }
+    }
+    .customStickerFtue {
+        .title {
+            font-size: 16px !important;
+        }
+        .subtitle {
+            font-size: 12px !important;
+        }
+        .createSticker {
+            font-size: 10px !important;
+        }
+    }
+    .customCreateWrapper {
+        .title {
+            font-size: 16px !important;
+            padding-bottom: 26px !important;
+        }
+        .customImage {
+            margin-bottom: 30px !important;
+        }
+        .customText {
+            font-size: 12px !important;
+        }
+        .customCta {
+            font-size: 12px !important;
+        }
+        ::-webkit-input-placeholder {
+            font-size: 12px !important;
+        }
+        :-moz-placeholder {
+            font-size: 12px !important;
+        }
+        ::-moz-placeholder {
+            font-size: 12px !important;
+        }
+        :-ms-input-placeholder {
+            font-size: 12px !important;
+        }
+        .learnMore {
+            font-size: 12px !important;
+        }
+    }
+    .customOverlay {
+        .titleOverlay {
+            font-size: 16px !important;
+        }
+        ul li {
+            font-size: 12px !important;
+        }
+        .overlayCta {
+            font-size: 12px !important;
+        }
+    }
+    .customStatusContainer {
+        .customStatusTitle {
+            font-size: 16px !important;
+            padding-bottom: 40px !important;
+        }
+        .customStatusSubtitle {
+            font-size: 12px !important;
+        }
+        .stickerStatus_redeemed,
+        .stickerStatus_inprogress {
+            height: 160px !important;
+        }
+        .customStatusCta {
+            font-size: 12px !important;
+        }
+    }
+    /*****************************************/
     /***** Ninja home Screen Screen *****/
     .profileContainer {
         padding: 28px 16px 0px 16px !important;

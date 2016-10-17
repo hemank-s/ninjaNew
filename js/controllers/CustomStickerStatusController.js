@@ -79,15 +79,16 @@
         that.el.className = 'customStatusContainer animation_fadein noselect';
 
         if (data.status == Constants.CUSTOM_STICKER_STATUS.PROGRESS) {
-            data.title = "CUSTOM Sticker IN PROGRESS";
-            data.subtitle = "Your custom sticker is in progress. Please wait";
-            data.ctaText = "COOL";
+            data.title = "Creating Your Sticker";
+            data.subtitle = "Cutting the right shape to set your sticker";
+            data.ctaText = "Cool";
 
         } else if (data.status == Constants.CUSTOM_STICKER_STATUS.DONE) {
 
             data.title = "TADA";
-            data.subtitle = "Your custom sticker is ready it will be sent to you by hike team ";
+            data.subtitle = "Your custom sticker is ready!! It will be sent to you by hike team ";
             data.ctaText = "SEND NOW";
+            data.isSend = true;
         }
 
         that.el.innerHTML = Mustache.render(unescape(that.template), data);

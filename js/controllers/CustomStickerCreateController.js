@@ -25,10 +25,13 @@
             customOverlay: document.getElementsByClassName('customOverlay'),
             userInput: document.getElementsByClassName('userInput'),
             allowedInput: document.getElementsByClassName('allowedInput'),
-            screenH: window.innerHeight
+            screenH: window.innerHeight,
+            scrollContent: document.getElementsByClassName('scrollContent'),
+            cameraIcon: document.getElementsByClassName('cameraIcon')
         };
 
         var customFtue = cacheProvider.getFromCritical('customStickerFtue');
+        customFtue = true;
         if (customFtue)
             that.bindCreateHandlers(App, data, DOMCache);
         else {
@@ -49,19 +52,41 @@
             utils.openGallery(DOMCache.customImage[0], Constants.IMAGE_SIZE_UGC, function(filePath) {
                 if (platformSdk.bridgeEnabled)
                     DOMCache.customImage[0].setAttribute('filePath', filePath);
-                else {
+                else
                     DOMCache.customImage[0].setAttribute('filePath', 'blah');
-                }
+
+                if (DOMCache.customText[0].value.length > 0 && DOMCache.customText[0].value.length < Constants.CUSTOM_STICKER_TITLE_LENGTH) {
+                    DOMCache.customCta[0].classList.remove('zeroOpacity');
+                    DOMCache.scrollContent[0].scrollTop = DOMCache.scrollContent[0].scrollHeight;
+                } else
+                    DOMCache.customCta[0].classList.add('zeroOpacity');
+
+                DOMCache.cameraIcon[0].classList.add('hideClass');
+
             });
         });
+
+
+        DOMCache.scrollContent[0].addEventListener('scroll', function() {
+            DOMCache.learnMore[0].classList.remove('hideClass');
+            DOMCache.scrollContent[0].classList.remove('scrollCls');
+        });
+
 
         DOMCache.customText[0].addEventListener('keyup', function() {
             DOMCache.userInput[0].innerHTML = this.value.length;
 
-            if (this.value.length > Constants.CUSTOM_STICKER_TITLE_LENGTH)
-                DOMCache.userInput[0].classList.add('inputExceeded');
+            if (DOMCache.screenH > window.innerHeight)
+                DOMCache.learnMore[0].classList.add('hideClass');
             else
-                DOMCache.userInput[0].classList.remove('inputExceeded');
+                DOMCache.learnMore[0].classList.remove('hideClass');
+
+            if (this.value.length > 0 && this.value.length < Constants.CUSTOM_STICKER_TITLE_LENGTH && DOMCache.customImage[0].getAttribute('filePath')) {
+                DOMCache.customCta[0].classList.remove('zeroOpacity');
+                DOMCache.scrollContent[0].scrollTop = DOMCache.scrollContent[0].scrollHeight;
+            } else
+                DOMCache.customCta[0].classList.add('zeroOpacity');
+
         });
 
 
@@ -77,15 +102,20 @@
                 that.postCustomSticker(App, data, DOMCache, 2, toastType);
             } else if (DOMCache.customImage[0].getAttribute('uploadUrl') && DOMCache.customText[0].value.length > 0 && DOMCache.customText[0].value.length < Constants.CUSTOM_STICKER_TITLE_LENGTH) {
                 that.postCustomSticker(App, data, DOMCache, 1, toastType);
-            } else {
-                // Show Error Messages
+            }
 
-                if (DOMCache.customText[0].value.length > Constants.CUSTOM_STICKER_TITLE_LENGTH) {
-                    that.showToast('Input limit inputExceeded', toastType);
-                } else if (DOMCache.customText[0].value.length === 0) {
-                    that.showToast('Please type Title', toastType);
+        });
+
+        window.addEventListener("resize", function() {
+
+            if (document.querySelectorAll('.customCreateContainer').length > 0) {
+                if (DOMCache.screenH > window.innerHeight) {
+                    DOMCache.learnMore[0].classList.add('hideClass');
+                    DOMCache.scrollContent[0].classList.add('scrollCls');
+                    DOMCache.scrollContent[0].scrollTop = DOMCache.scrollContent[0].scrollHeight;
                 } else {
-                    that.showToast('Please upload image', toastType);
+                    DOMCache.learnMore[0].classList.remove('hideClass');
+                    DOMCache.scrollContent[0].classList.remove('scrollCls');
                 }
             }
 
@@ -207,6 +237,7 @@
         data.textLength = Constants.CUSTOM_STICKER_TITLE_LENGTH;
         data.isFailedState = false;
 
+        customFtue = true;
         if (customFtue)
             template = that.createTemplate;
         else
