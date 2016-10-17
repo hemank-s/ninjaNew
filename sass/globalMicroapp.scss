@@ -653,6 +653,7 @@ body {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    -webkit-transform: translate(-50%, -50%);
     paddig-top: $jaggedDistance * 2;
     paddig-bottom: $jaggedDistance * 2;
 }

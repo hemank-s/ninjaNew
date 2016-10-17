@@ -1,5 +1,4 @@
-
-.parentProfileContainer{
+.parentProfileContainer {
     position: fixed;
     bottom: 0px;
     left: 0px;
@@ -7,10 +6,10 @@
     top: 0px;
 }
 
-.overScroll{
-    overflow: scroll;
+.overScroll {
+    overflow-x: hidden;
+    overflow-y: scroll;
 }
-
 
 .profileScreenContainer {
     height: 100%;

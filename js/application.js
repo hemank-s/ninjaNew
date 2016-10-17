@@ -183,7 +183,7 @@
                 id = '' + platformSdk.retrieveId('app.menu.om.block');
                 if (platformSdk.appData.block === 'true') {
                     unBlockApp();
-                    that.start();
+                    //that.start();
                 } else {
                     platformSdk.appData.block = 'true';
                     platformSdk.blockChatThread();
@@ -391,7 +391,7 @@
             utils.toggleBackNavigation(false);
             document.querySelector('.unblockButton').addEventListener('click', function() {
                 unBlockApp();
-                self.start();
+                //self.start();
             }, false);
 
             document.querySelector('.goToSettings').addEventListener('click', function() {
@@ -491,6 +491,12 @@
 
             var subscriptionCompleted = cacheProvider.getFromCritical('subscriptionCompleted');
             var ftueCompleted = cacheProvider.getFromCritical('ftueCompleted');
+
+            if (platformSdk.appData.block === 'true') {
+                events.publish('app/block', {
+                    show: true
+                });
+            }
 
             if (!subscriptionCompleted || !ftueCompleted) {
                 self.router.navigateTo('/');
