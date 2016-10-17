@@ -187,7 +187,7 @@
                         App.NinjaService.getRewardDetails(data, function(res) {
                             console.log(res.data);
                             rewardRouter = rewardsModel.getRewardRouter(rewardType, '', res.data);
-                            App.router.navigateTo(rewardRouter, { "rewardDetails": res.data, "rewardId": rewardId, "rewardRouter": rewardRouter , "ftue": false});
+                            App.router.navigateTo(rewardRouter, { "rewardDetails": res.data, "rewardId": rewardId, "rewardRouter": rewardRouter, "ftue": false });
                         }, this);
                     } else {
                         var res = {
@@ -225,7 +225,7 @@
             ninjaUgc = ninjaUgc.data.content;
         }
         if (platformSdk.bridgeEnabled) {
-            utils.changeBarColors('#3C367C','#4A4F93');
+            utils.changeBarColors('#3C367C', '#494D95');
         }
         utils.changeBotTitle('My Profile');
 

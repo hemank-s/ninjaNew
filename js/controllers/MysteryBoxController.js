@@ -36,7 +36,7 @@
 
         utils.changeBotTitle('Lucky Box');
         if (platformSdk.bridgeEnabled) {
-            utils.changeBarColors('#3C367C', '#4A4F93');
+            utils.changeBarColors('#3C367C', '#494D95');
         }
 
         that.el = document.createElement('div');

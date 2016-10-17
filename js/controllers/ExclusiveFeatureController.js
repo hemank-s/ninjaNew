@@ -55,6 +55,7 @@
 
         var dataToSend = {};
         dataToSend.rid = res2.rewardId;
+        dataToSend.userAppVersion = platformSdk.appData.appVersion;
         dataToSend.enable = true;
 
         if (platformSdk.bridgeEnabled) {

@@ -85,6 +85,11 @@
                         var rewardType = this.getAttribute('data-rewardtype');
                         var rewardRouter = that.getRewardRouter(rewardType, 'create');
                         var rewardId = this.getAttribute('data-rewardId');
+                        var isRewardAdhoc = this.getAttribute('data-adhoc');
+
+                        if (isRewardAdhoc) {
+                            cacheProvider.setInCritical('adhocRewardForUser', null);
+                        }
 
                         var cardColor = window.getComputedStyle(this).backgroundColor;
                         that.mapColorToReward(cardColor, rewardId);
@@ -213,15 +218,17 @@
                 that.rewardsCompare(oldRewards, rewardsData);
             }
             cacheProvider.setInCritical('oldNinjaRewards', rewardsData);
-            var adhocReward = cacheProvider.getFromCritical('adhocRewardForUser');
 
-            if (adhocReward) {
-                for (var i = 0; i < adhocReward.length; i++) {
-                    rewardsData.rewards.push(adhocReward[i]);
-                }
-            }
+            // var adhocReward = cacheProvider.getFromCritical('adhocRewardForUser');
 
-            cacheProvider.setInCritical('adhocRewardForUser', adhocReward);
+            // if (adhocReward) {
+            //     for (var i = 0; i < adhocReward.length; i++) {
+            //         adhocReward[i].adhoc = true;
+            //         rewardsData.rewards.push(adhocReward[i]);
+            //     }
+            // }
+
+            //cacheProvider.setInCritical('adhocRewardForUser', adhocReward);
 
             if (existingUser) {
                 App.router.navigateTo('/home');

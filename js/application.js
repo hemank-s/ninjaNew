@@ -486,22 +486,28 @@
             this.router.route('/userState', function(data) {
                 self.container.innerHTML = '';
                 self.userStateController.render(self.container, self, data);
-                utils.toggleBackNavigation(true);
+                utils.toggleBackNavigation(false);
             });
 
             var subscriptionCompleted = cacheProvider.getFromCritical('subscriptionCompleted');
             var ftueCompleted = cacheProvider.getFromCritical('ftueCompleted');
 
             if (!subscriptionCompleted || !ftueCompleted) {
-                self.router.navigateTo('/customCreate');
+                self.router.navigateTo('/');
             } else {
                 self.NinjaService.getNinjaProfile(function(res) {
                     cacheProvider.setInCritical('userProfileData', res.data);
                     var oldHash = cacheProvider.getFromCritical('oldHash');
                     var newHash = res.data.rewards_hash;
                     utils.hashCheck(oldHash, newHash);
-                    if (res.data.status != 'inactive' && res.data.status != 'locked') {
-                        profileModel.updateNinjaData(res.data, self, true);
+                    if (platformSdk.bridgeEnabled) {
+                        if (utils.upgradeRequired(res.data.hike_version, platformSdk.appData.appVersion)) {
+                            self.router.navigateTo('/upgrade');
+                        } else if (res.data.status == 'inactive' || res.data.status == 'locked') {
+                            self.router.navigateTo('/userState', res.data);
+                        } else {
+                            profileModel.updateNinjaData(res.data, self, true);
+                        }
                     }
                 }, self);
             }

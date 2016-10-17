@@ -271,6 +271,7 @@
         // Adds The adhoc Reward Here
         if (adhocReward) {
             for (var j = 0; j < adhocReward.length; j++) {
+                adhocReward[j].adhoc = true;
                 filteredRewards.unlockedRewards.push(adhocReward[j]);
             }
         }
@@ -313,6 +314,8 @@
         var rewards_data = cacheProvider.getFromCritical('ninjaRewards');
         var oldNinjaCompareRewards = cacheProvider.getFromCritical('oldNinjaCompareRewards');
 
+        rewardsData = that.filterRewards(rewards_data.rewards);
+
         if (platformSdk.bridgeEnabled) {
             if (utils.upgradeRequired(profile_data.hike_version, platformSdk.appData.appVersion)) {
                 App.router.navigateTo('/upgrade');
@@ -322,6 +325,7 @@
                 rewardsData = that.filterRewards(rewards_data.rewards);
             }
         }
+
         // Stub 
         if (!platformSdk.bridgeEnabled) {
             data = { "rewards": [{ "desc": "Get the best stickers on hike way before everyone else does. You get these 2 weeks before mere mortals. You're a Ninja!", "hicon": "https://s3-ap-southeast-1.amazonaws.com/hike-giscassets/nixy/secretStickerShopIllustration.png", "icon": "https://s3-ap-southeast-1.amazonaws.com/hike-giscassets/nixy/early_access_sticker_icon.png", "id": "57b56ec17e401ddfe70a9e8f", "state": 1, "stitle": "Get all the hike stickers before everyone else.", "streak": 1, "title": "Early Access Stickers", "type": "sticker_reward", "value": null }, { "icon": "https://s3-ap-southeast-1.amazonaws.com/hike-giscassets/nixy/GIFSharingHeader.png", "id": "57cfce41733265431b98b317", "state": 1, "stitle": "Get the exclusive GIF feature.", "streak": 15, "title": "Exclusive Gif", "type": "exclusive_feature", "value": null }, { "failed_preview_img": "https://staging.im.hike.in/sticker?catId=mumbai&stId=023_mb_badey.png&resId=XHDPI&image=True", "icon": "https://s3-ap-southeast-1.amazonaws.com/hike-giscassets/nixy/custom_sticker_icon.png", "id": "57c554417332654291dc1097", "state": 0, "stitle": "Have an exclusive sticker made just for you", "streak": 7, "title": "My Sticker", "type": "custom_sticker", "value": null }, { "desc": "Share animated stickers with your friends and get krazzy", "hicon": "https://s3-ap-southeast-1.amazonaws.com/hike-giscassets/nixy/animatedStickers.png", "icon": "https://s3-ap-southeast-1.amazonaws.com/hike-giscassets/nixy/animatedStickers.png", "id": "58c563ce7332657fe8d3ca69", "state": 3, "stitle": "Experience the new animated before anyone else", "streak": 0, "title": "Animated Stickers", "type": "exclusive_feature", "value": null }, { "desc": "Share animated stickers with your friends and get krazzy", "hicon": "https://s3-ap-southeast-1.amazonaws.com/hike-giscassets/nixy/animatedStickers.png", "icon": "https://s3-ap-southeast-1.amazonaws.com/hike-giscassets/nixy/animatedStickers.png", "id": "58c563ce7332657fe8d3ca69", "state": 3, "stitle": "Experience the new animated before anyone else", "streak": 0, "title": "Animated Stickers", "type": "exclusive_feature", "value": null }, { "desc": "Share animated stickers with your friends and get krazzy", "hicon": "https://s3-ap-southeast-1.amazonaws.com/hike-giscassets/nixy/animatedStickers.png", "icon": "https://s3-ap-southeast-1.amazonaws.com/hike-giscassets/nixy/animatedStickers.png", "id": "58c563ce7332657fe8d3ca69", "state": 3, "stitle": "Experience the new animated before anyone else", "streak": 0, "title": "Animated Stickers", "type": "exclusive_feature", "value": null }, { "desc": "Share animated stickers with your friends and get krazzy", "hicon": "https://s3-ap-southeast-1.amazonaws.com/hike-giscassets/nixy/animatedStickers.png", "icon": "https://s3-ap-southeast-1.amazonaws.com/hike-giscassets/nixy/animatedStickers.png", "id": "58c563ce7332657fe8d3ca69", "state": 0, "stitle": "Experience the new animated before anyone else", "streak": 0, "title": "Animated Stickers", "type": "exclusive_feature", "value": null }, { "desc": "Share animated stickers with your friends and get krazzy", "hicon": "https://s3-ap-southeast-1.amazonaws.com/hike-giscassets/nixy/animatedStickers.png", "icon": "https://s3-ap-southeast-1.amazonaws.com/hike-giscassets/nixy/animatedStickers.png", "id": "58c563ce7332657fe8d3ca69", "state": 0, "stitle": "Experience the new animated before anyone else", "streak": 0, "title": "Animated Stickers", "type": "exclusive_feature", "value": null }], "rewards_hash": "1474970960" };
@@ -332,14 +336,13 @@
 
         // For No Unlocked Rewards :: Show First locked reward
         if (rewardsData.unlockedRewards.length === 0) {
-            //showNewRewardAnimation = false;
             rewardsData.unlockedRewards.push(rewardsData.lockedRewards[0]);
             rewardsData.lockedRewards.shift();
         }
 
         utils.changeBotTitle('Hike Ninja');
         if (platformSdk.bridgeEnabled) {
-            utils.changeBarColors('#3C367C', '#4A4F93');
+            utils.changeBarColors('#3C367C', '#494D95');
         }
         console.log("rewards before rendering are", rewardsData);
 

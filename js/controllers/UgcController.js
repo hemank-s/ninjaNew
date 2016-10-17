@@ -32,13 +32,9 @@
         else
             that.bindHandlersJfl(App, data);
 
-        var backEventSubscribed = cacheProvider.getFromCritical('backEventSubscribed');
-        if (backEventSubscribed)
-            that.backPressEvent = events.subscribe('ugc.backpress', function() {
-                cacheProvider.setInCritical('backEventSubscribed', true);
-                that.backpressHandler(App, data, parentCache);
-            });
-
+        that.backPressEvent = events.subscribe('ugc.backpress', function() {
+            that.backpressHandler(App, data, parentCache);
+        });
 
         parentCache.yesAction[0].addEventListener('click', function() {
             App.router.back();
@@ -67,8 +63,9 @@
             if ((quoteName.length > 0 && quoteName[0].innerHTML.length > 0) || (quoteAuthor.length > 0 && quoteAuthor[0].innerHTML.length > 0)) {
                 parentCache.confirmPopup[0].classList.remove('hideClass');
             } else {
-                that.backPressEvent.remove();
                 App.router.back();
+                console.log(that.backPressEvent);
+                that.backPressEvent.remove();
             }
 
         } else if (data.type == Constants.UGC_TYPE.FACT) {

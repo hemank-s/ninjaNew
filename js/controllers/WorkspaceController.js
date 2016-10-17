@@ -65,10 +65,15 @@
                                     var newHash = res.data.rewards_hash;
                                     utils.hashCheck(oldHash, newHash);
 
-                                    if (res.data.status != 'inactive' && res.data.status != 'locked') {
-                                        profileModel.updateNinjaData(res.data, App, false);
+                                    if (platformSdk.bridgeEnabled) {
+                                        if (utils.upgradeRequired(res.data.hike_version, platformSdk.appData.appVersion)) {
+                                            App.router.navigateTo('/upgrade');
+                                        } else if (res.data.status == 'inactive' || res.data.status == 'locked') {
+                                            App.router.navigateTo('/userState', res.data);
+                                        } else {
+                                            profileModel.updateNinjaData(res.data, App, false);
+                                        }
                                     }
-
                                 }, that);
                             } else
                                 events.publish('update.notif.toast', { show: true, heading: 'Bamm', details: 'Something went wrong while subscribing', notifType: 'notifNeutral' });
