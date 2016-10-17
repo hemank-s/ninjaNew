@@ -317,7 +317,7 @@
             if (utils.upgradeRequired(profile_data.hike_version, platformSdk.appData.appVersion)) {
                 App.router.navigateTo('/upgrade');
             } else if (profile_data.status == 'inactive' || profile_data.status == 'locked') {
-                // App.router.navigateTo('/userState', profile_data.data);
+                App.router.navigateTo('/userState', profile_data.data);
             } else {
                 rewardsData = that.filterRewards(rewards_data.rewards);
             }

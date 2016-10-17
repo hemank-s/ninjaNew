@@ -12,8 +12,7 @@
         CustomStickerHistoryController = require('./controllers/CustomStickerHistoryController'),
         UpgradeController = require('./controllers/upgradeController'),
         CustomStickerStatusController = require('./controllers/CustomStickerStatusController'),
-
-
+        UserStateController = require('./controllers/UserStateController'),
 
         Router = require('./util/router'),
         utils = require('./util/utils'),
@@ -146,6 +145,7 @@
         this.customHistoryController = new CustomStickerHistoryController();
         this.upgradeController = new UpgradeController();
         this.customStatusController = new CustomStickerStatusController();
+        this.userStateController = new UserStateController();
 
         // Communication Controller
         this.TxService = new TxService();
@@ -471,15 +471,21 @@
                 utils.toggleBackNavigation(true);
             });
 
-
             this.router.route('/upgrade', function(data) {
                 self.container.innerHTML = '';
                 self.upgradeController.render(self.container, self, data);
                 utils.toggleBackNavigation(false);
             });
+
             this.router.route('/customStatus', function(data) {
                 self.container.innerHTML = '';
                 self.customStatusController.render(self.container, self, data);
+                utils.toggleBackNavigation(true);
+            });
+
+            this.router.route('/userState', function(data) {
+                self.container.innerHTML = '';
+                self.userStateController.render(self.container, self, data);
                 utils.toggleBackNavigation(true);
             });
 
@@ -487,7 +493,7 @@
             var ftueCompleted = cacheProvider.getFromCritical('ftueCompleted');
 
             if (!subscriptionCompleted || !ftueCompleted) {
-                self.router.navigateTo('/home');
+                self.router.navigateTo('/');
             } else {
                 self.NinjaService.getNinjaProfile(function(res) {
                     cacheProvider.setInCritical('userProfileData', res.data);

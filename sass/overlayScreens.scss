@@ -188,3 +188,46 @@
     padding: 12px 34px;
     display: inline-block;
 }
+
+.userStateContainer {
+    background: rgba(74, 79, 147, 0.96);
+}
+
+.stateTitle {
+    font-size: 22px;
+    font-weight: 400;
+    color: #FFF;
+}
+
+.stateCta {
+    text-transform: uppercase;
+    font-size: 14px;
+    color: #4A4F93;
+    background: #fff;
+    margin-top: 78px;
+    display: inline-block;
+    font-weight: 500;
+    border-radius: 4px;
+    padding: 14px 28px;
+}
+
+.stateIcon {
+    text-align: center;
+    bottom: 0px;
+    margin: 78px auto 48px auto;
+    left: 0px;
+    right: 0px;
+    display: block;
+    width: 140px;
+    height: 120px;
+    background-size: auto 91px;
+    background-position: -1900px 0px;
+}
+
+.stateSubtitle {
+    font-size: 16px;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.80);
+    line-height: 20px;
+    padding: 0px 32px;
+}
