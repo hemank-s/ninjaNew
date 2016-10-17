@@ -1,18 +1,18 @@
-<div class="mysteryBox_CrossIcon retryScr_Cross"> </div>
+<div class="mysteryBox_CrossIcon retryScr_Cross hideClass"> </div>
 <div class="mysteryBoxWrapper centerToScreenWrapper">
+    <div class="mysteryBoxScr_title retryTitle">Better Luck Next Time </div>
     <div class="mysteryBoxRetryIcon"></div>
-    <div class="mysteryBoxScr_title retryTitle">Oh! no luck </div>
     <div class="mysteryBoxScr_subtitle retrySubtitle">Don’t worry, lets get back tomorrow and see what you win.</div>
 </div>
 <div class="ctaWinner slideUpBtn_lessCls">Who won today?</div>
 {{#previousWinner}}
 <div class="previousWinnerRow align-center">
-    <p class="previousWinnerHeading">Your profile also shown here to others, when you win some exciting prize.</p>
     <div class="winnerWrapper">
         <div class="winnerIcon leftWrapper"></div>
         <div class="rightWrapper">
             <div class="winnerName">{{previousWinner.name}}</div>
         </div>
     </div>
+    <p class="previousWinnerHeading">Your profile also shown here to others, when you win some exciting prize.</p>
 </div>
 {{/previousWinner}}

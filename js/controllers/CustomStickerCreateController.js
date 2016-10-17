@@ -202,6 +202,8 @@
         var customFtue = cacheProvider.getFromCritical('customStickerFtue');
         var template;
 
+        if (!data)
+            data = {};
         data.textLength = Constants.CUSTOM_STICKER_TITLE_LENGTH;
         data.isFailedState = false;
 

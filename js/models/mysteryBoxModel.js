@@ -148,10 +148,11 @@
 
                 ctaWinner.addEventListener('click', function() {
 
+                    document.getElementsByClassName('mysteryBoxWrapper')[0].style.opacity = "0.5";
                     mysteryBoxScr_title.classList.remove('retryTitle');
                     mysteryBoxScr_subtitle.classList.remove('retrySubtitle');
-                    mysteryBoxScr_title.classList.add('animation_fadeout');
-                    mysteryBoxScr_subtitle.classList.add('animation_fadeout');
+                    // mysteryBoxScr_title.classList.add('animation_fadeout');
+                    // mysteryBoxScr_subtitle.classList.add('animation_fadeout');
 
                     this.classList.remove('slideUpBtn_lessCls');
                     this.classList.add('slideUpBtn_highCls');
@@ -243,7 +244,7 @@
                 } else {
                     var stop = 4;
                     rewardData = {};
-                    rewardData.value = 'HIGH';
+                    rewardData.value = 'LOW';
                     rewardData.title = 'My Sticker';
                     rewardData.stitle = 'Subtitle blah blah Subtitle blah blah Subtitle blah blah Subtitle blah blah Subtitle blah blah';
                     console.log('stop is', stop);

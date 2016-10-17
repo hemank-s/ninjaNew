@@ -135,11 +135,9 @@ $gap: 75px;
         width: 299px - $gap;
     }
     @include mysteryBoxStyling(225px);
-  
     .spinScrSubtitle {
         margin-top: 150px !important;
     }
-    
     .mysteryBoxScr_subtitle {
         font-size: 12px !important;
     }
@@ -154,14 +152,6 @@ $gap: 75px;
     .mysteryBoxRetryIcon {
         width: 140px !important;
         height: 130px !important;
-        margin: 0px auto 50px auto !important;
-    }
-    .previousWinnerHeading {
-        font-size: 12px !important;
-        padding: 24px 24px !important;
-    }
-    .previousWinnerRow {
-        padding-bottom: 24px !important;
     }
     .winnerName {
         font-size: 14px !important;
@@ -388,8 +378,6 @@ $gap: 75px;
     .spinScrSubtitle {
         margin-top: 150px !important;
     }
-   
-
     .mysteryBoxScr_subtitle {
         font-size: 14px !important;
     }
@@ -402,14 +390,6 @@ $gap: 75px;
     .mysteryBoxRetryIcon {
         width: 140px !important;
         height: 130px !important;
-        margin: 25px auto 25px auto !important;
-    }
-    .previousWinnerHeading {
-        font-size: 12px !important;
-        padding: 24px 24px !important;
-    }
-    .previousWinnerRow {
-        padding-bottom: 24px !important;
     }
     .winnerName {
         font-size: 14px !important;
@@ -635,8 +615,6 @@ $gap: 75px;
     .spinScrSubtitle {
         margin-top: 160px !important;
     }
-  
-   
     .mysteryBoxScr_subtitle {
         font-size: 14px !important;
     }
@@ -645,15 +623,6 @@ $gap: 75px;
     }
     .spin {
         left: 40% !important;
-    }
-    .mysteryBoxRetryIcon {
-        margin: 30px auto 30px auto !important;
-    }
-    .previousWinnerHeading {
-        padding: 24px 24px !important;
-    }
-    .previousWinnerRow {
-        padding-bottom: 24px !important;
     }
     .winnerIcon {
         width: 60px !important;
@@ -789,21 +758,13 @@ $gap: 75px;
     }
     @include mysteryBoxStyling(275px);
     .spinScrSubtitle {
-            margin-top: 180px !important;
+        margin-top: 180px !important;
     }
-   
-   
     .mysteryBoxScr_subtitle {
         font-size: 14px !important;
     }
     .spin {
         left: 40% !important;
-    }
-    .mysteryBoxRetryIcon {
-        margin: 35px auto 35px auto !important;
-    }
-    .previousWinnerHeading {
-        padding: 24px 24px !important;
     }
     .winnerIcon {
         width: 65px !important;
@@ -857,10 +818,8 @@ $gap: 75px;
     }
     @include mysteryBoxStyling(275px);
     .spinScrSubtitle {
-            margin-top: 180px !important;
+        margin-top: 180px !important;
     }
-   
-
     .mysteryBoxScr_subtitle {
         font-size: 14px !important;
     }

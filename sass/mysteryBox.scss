@@ -428,16 +428,21 @@
     @include animation(0.8s, 1.2s, fadein);
 }
 
+.winnerWrapper {
+    padding: 40px 0 0 0;
+}
+
 .previousWinnerRow {
     opacity: 0;
     border-top: 1px solid rgba(255, 255, 255, 0.24);
     position: absolute;
     bottom: -36%;
-    width: 100%;
-    padding-bottom: 34px;
+    background: #fff;
+    margin: 8px;
+    border-radius: 4px;
     .previousWinnerHeading {
-        @include fontStyle(14px, 400, rgba(255, 255, 255, 0.72), 21px);
-        padding: 32px 24px;
+        @include fontStyle(12px, 400, rgba(30, 29, 58, 0.5), 21px);
+        padding: 24px;
         text-align: center;
     }
     .rightWrapper {
@@ -459,7 +464,7 @@
         float: none !important;
     }
     .winnerName {
-        @include fontStyle(16px, 400, rgba(255, 255, 255, 0.96), 21px);
+        @include fontStyle(16px, 400, #1E1D3A, 21px);
         margin-bottom: 5px;
     }
 }
