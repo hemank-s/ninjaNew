@@ -112,6 +112,8 @@
                             var data = {};
                             data.rewardId = tid;
 
+                            events.publish('update.loader', { show: true, text: 'Taking you to Reward' });
+
                             App.NinjaService.getRewardDetails(data, function(res) {
                                 console.log(res.data);
                                 App.router.navigateTo(rewardRouter, { 'rewardId': tid });
@@ -119,6 +121,9 @@
                         } else {
 
                             var profileModelM = require('../models/profileModel');
+
+                            events.publish('update.loader', { show: true, text: 'Taking you to Reward' });
+
                             App.NinjaService.getNinjaProfile(function(res) {
                                 console.log('REUPDATING THE PROFILE', res.data);
                                 cacheProvider.setInCritical('userProfileData', res.data);
@@ -141,24 +146,32 @@
                     previousWinner: mysteryBoxData.yesterday_winner
                 });
 
+
                 var ctaWinner = document.getElementsByClassName('ctaWinner')[0];
                 var previousWinnerRow = document.getElementsByClassName('previousWinnerRow')[0];
                 var mysteryBoxScr_title = document.getElementsByClassName('mysteryBoxScr_title')[0];
                 var mysteryBoxScr_subtitle = document.getElementsByClassName('mysteryBoxScr_subtitle')[0];
+                var mOverlay = document.getElementsByClassName('mOverlay')[0];
 
                 ctaWinner.addEventListener('click', function() {
 
-                    document.getElementsByClassName('mysteryBoxWrapper')[0].style.opacity = "0.5";
-                    mysteryBoxScr_title.classList.remove('retryTitle');
-                    mysteryBoxScr_subtitle.classList.remove('retrySubtitle');
-                    // mysteryBoxScr_title.classList.add('animation_fadeout');
-                    // mysteryBoxScr_subtitle.classList.add('animation_fadeout');
-
-                    this.classList.remove('slideUpBtn_lessCls');
-                    this.classList.add('slideUpBtn_highCls');
+                    mOverlay.classList.remove('hideClass');
+                    previousWinnerRow.classList.remove('slideDownCtaWinnerRowCls');
                     previousWinnerRow.classList.add('slideUpCtaWinnerRowCls');
 
                 });
+
+                mOverlay.addEventListener('click', function() {
+
+                    mOverlay.classList.add('hideClass');
+                    previousWinnerRow.classList.remove('slideUpCtaWinnerRowCls');
+                    previousWinnerRow.classList.add('slideDownCtaWinnerRowCls');
+
+                });
+
+
+
+
             }
         },
 
@@ -244,7 +257,7 @@
                 } else {
                     var stop = 4;
                     rewardData = {};
-                    rewardData.value = 'LOW';
+                    rewardData.value = 'HIGH';
                     rewardData.title = 'My Sticker';
                     rewardData.stitle = 'Subtitle blah blah Subtitle blah blah Subtitle blah blah Subtitle blah blah Subtitle blah blah';
                     console.log('stop is', stop);

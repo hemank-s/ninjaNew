@@ -48,6 +48,8 @@
 
 
                     if (platformSdk.bridgeEnabled) {
+                        events.publish('update.loader', { show: false, text: 'Getting awesome features for you!!' });
+
                         App.NinjaService.subscribeHandler({}, function(res) {
 
                             if (res.stat === 'ok') {

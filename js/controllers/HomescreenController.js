@@ -153,8 +153,9 @@
 
     HomescreenController.prototype.checkMysteryBoxStatus = function(mysteryBoxData, DOMcache, App) {
 
-        if (platformSdk.bridgeEnabled) {
+        if (!platformSdk.bridgeEnabled) {
 
+            mysteryBoxData = { mstatus: 'active' }
             if (mysteryBoxData.mstatus == 'active') {
                 console.log("enabling mystery box for you");
 

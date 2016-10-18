@@ -32,9 +32,6 @@
         else
             that.bindHandlersJfl(App, data);
 
-        that.backPressEvent = events.subscribe('ugc.backpress', function() {
-            that.backpressHandler(App, data, parentCache);
-        });
 
         parentCache.yesAction[0].addEventListener('click', function() {
             App.router.back();
@@ -46,48 +43,6 @@
 
     };
 
-
-    UgcController.prototype.backpressHandler = function(App, data, parentCache) {
-
-        var quoteName = document.querySelectorAll('.quoteName');
-        var quoteAuthor = document.querySelectorAll('.quoteAuthor');
-        var jflImage = document.querySelectorAll('.jflImage');
-        var successCard = document.querySelectorAll('.successCard');
-        var that = this;
-
-        if (!quoteName.length && !quoteAuthor.length && !jflImage.length)
-            return;
-
-        if (data.type == Constants.UGC_TYPE.QUOTE) {
-
-            if ((quoteName.length > 0 && quoteName[0].innerHTML.length > 0) || (quoteAuthor.length > 0 && quoteAuthor[0].innerHTML.length > 0)) {
-                parentCache.confirmPopup[0].classList.remove('hideClass');
-            } else {
-                App.router.back();
-                console.log(that.backPressEvent);
-                that.backPressEvent.remove();
-            }
-
-        } else if (data.type == Constants.UGC_TYPE.FACT) {
-
-            if (quoteName.length > 0 && quoteName[0].innerHTML.length > 0) {
-                parentCache.confirmPopup[0].classList.remove('hideClass');
-            } else {
-                that.backPressEvent.remove();
-                App.router.back();
-            }
-
-        } else {
-
-            if (jflImage[0].getAttribute('filePath') && successCard[0].classList.contains('hideClass'))
-                parentCache.confirmPopup[0].classList.remove('hideClass');
-            else {
-                that.backPressEvent.remove();
-                App.router.back();
-            }
-        }
-
-    };
 
     UgcController.prototype.bindHandlersQuote = function(App, data) {
 
@@ -120,9 +75,6 @@
         var defHeight = parseInt(window.getComputedStyle(DOMcache.quoteName[0]).height);
         DOMcache.quoteName[0].style.minHeight = defHeight + 'px';
 
-
-
-
         DOMcache.quoteName[0].addEventListener('keyup', function() {
             DOMcache.userInput[0].innerHTML = this.innerHTML.length;
             if (this.innerHTML.length > Constants.MAX_LENGTH_QUOTE) {
@@ -153,7 +105,6 @@
 
                 if (platformSdk.bridgeEnabled)
                     DOMcache.card[0].setAttribute('filePath', filePath);
-
 
                 DOMcache.quoteName[0].classList.add('overlayQuoteName');
                 DOMcache.quoteAuthor[0].classList.add('overlayQuoteAuthor');
@@ -528,7 +479,8 @@
         backButtonTemplate.innerHTML = Mustache.render(unescape(that.backButtonTemplate));
 
         ctr.appendChild(that.el);
-        ctr.appendChild(backButtonTemplate)
+        ctr.appendChild(backButtonTemplate);
+        document.getElementsByClassName('ugcContainer')[0].setAttribute('data-type', data.type);
         events.publish('update.loader', { show: false });
         that.bind(App, data);
     };

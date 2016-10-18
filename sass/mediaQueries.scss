@@ -228,6 +228,9 @@ $gap: 75px;
     .spinScrSubtitle {
         margin-top: 150px !important;
     }
+    .mysteryBoxScr_title {
+        font-size: 18px !important;
+    }
     .mysteryBoxScr_subtitle {
         font-size: 12px !important;
     }
@@ -558,11 +561,14 @@ $gap: 75px;
     .spinScrSubtitle {
         margin-top: 150px !important;
     }
+    .mysteryBoxScr_title {
+        font-size: 18px !important;
+    }
     .mysteryBoxScr_subtitle {
-        font-size: 14px !important;
+        font-size: 12px !important;
     }
     .ctaWinner {
-        font-size: 14px !important;
+        font-size: 12px !important;
     }
     .spin {
         left: 39% !important;
@@ -795,6 +801,9 @@ $gap: 75px;
     .spinScrSubtitle {
         margin-top: 160px !important;
     }
+    .mysteryBoxScr_title {
+        font-size: 20px !important;
+    }
     .mysteryBoxScr_subtitle {
         font-size: 14px !important;
     }
@@ -939,9 +948,6 @@ $gap: 75px;
     @include mysteryBoxStyling(275px);
     .spinScrSubtitle {
         margin-top: 180px !important;
-    }
-    .mysteryBoxScr_subtitle {
-        font-size: 14px !important;
     }
     .spin {
         left: 40% !important;
@@ -1172,9 +1178,45 @@ $gap: 75px;
     /******************/
 }
 
-@media screen and (min-height: 696px) and (max-height: 750px) {
+@media screen and (min-height: 696px) {
     li.unlockedRewardListItem {
         width: 338px !important;
         height: 220px !important;
+    }
+    .slideFromBottomCls {
+        @include animation(0.4s, 0.7s, slideFromBottom);
+    }
+    .subscribeScreen {
+        padding-top: 80px !important;
+    }
+    @include keyframe(slideFromBottom) {
+        0% {
+            margin-top: 100%;
+        }
+        100% {
+            margin-top: 7%;
+        }
+    }
+    .ftueScreen {
+        .infoHeading {
+            font-size: 18px !important;
+            line-height: 22px !important;
+        }
+        .title_subscribe {
+            padding-bottom: 60px !important;
+            padding-top: 80px !important;
+        }
+        .infoSubHeading {
+            font-size: 14px !important;
+            line-height: 20px !important;
+        }
+        .infoRow {
+            margin-bottom: 32px !important;
+        }
+    }
+    .workspaceContainer .workspaceCta,
+    .workspaceContainer .info {
+        font-size: 16px !important;
+        line-height: 22px !important;
     }
 }

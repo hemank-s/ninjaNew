@@ -361,12 +361,54 @@
         backPressTrigger: function() {
 
             var ugcContainer = document.querySelectorAll('.ugcContainer');
+            var customHistoryWrapper = document.querySelectorAll('.customHistoryWrapper');
             if (ugcContainer.length > 0) {
-                events.publish('ugc.backpress');
-            } else {
+                this.ugcBackPressHandler();
+            } else if (customHistoryWrapper.length > 0 && customHistoryWrapper[0].getAttribute('data-src') == "create") {
+                events.publish('update.loader', { show: false, text: 'Refreshing Rewards!!' });
+                utils.restartApp(this, true);
+            } else
                 this.router.back();
-            }
         },
+
+        ugcBackPressHandler: function() {
+
+            var quoteName = document.querySelectorAll('.quoteName');
+            var quoteAuthor = document.querySelectorAll('.quoteAuthor');
+            var jflImage = document.querySelectorAll('.jflImage');
+            var successCard = document.querySelectorAll('.successCard');
+            var ugcType = document.getElementsByClassName('ugcContainer')[0].getAttribute('data-type');
+            var that = this;
+            var confirmPopup = document.getElementsByClassName('ugcBackPopupContainer');
+
+            if (!quoteName.length && !quoteAuthor.length && !jflImage.length)
+                return;
+
+            if (ugcType == Constants.UGC_TYPE.QUOTE) {
+
+                if (((quoteName.length > 0 && quoteName[0].innerHTML.length > 0) ||
+                        (quoteAuthor.length > 0 && quoteAuthor[0].innerHTML.length > 0)) && successCard[0].classList.contains('hideClass'))
+                    confirmPopup[0].classList.remove('hideClass');
+                else
+                    that.router.back();
+
+            } else if (ugcType == Constants.UGC_TYPE.FACT) {
+
+                if (quoteName.length > 0 && quoteName[0].innerHTML.length > 0 && successCard[0].classList.contains('hideClass'))
+                    confirmPopup[0].classList.remove('hideClass');
+                else
+                    that.router.back();
+
+            } else {
+
+                if (jflImage[0].getAttribute('filePath') && successCard[0].classList.contains('hideClass'))
+                    confirmPopup[0].classList.remove('hideClass');
+                else
+                    that.router.back();
+            }
+
+        },
+
 
         goToNinjaProfilePage: function() {
             var that = this;

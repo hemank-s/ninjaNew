@@ -357,13 +357,10 @@
 
 .ctaWinner {
     @include fontStyle(16px, 400, #ffffff, 21px);
-    padding: 14px;
-    position: absolute;
-    bottom: -25%;
-    border-top: 1px solid rgba(255, 255, 255, 0.24);
     width: 100%;
     text-align: center;
     z-index: 1000;
+    margin-top: 48px;
 }
 
 .mysteryBoxIcon {
@@ -428,6 +425,11 @@
     @include animation(0.8s, 1.2s, fadein);
 }
 
+.retryCta {
+    opacity: 0;
+    @include animation(1.5s, 0.5s, fadein);
+}
+
 .winnerWrapper {
     padding: 40px 0 0 0;
 }
@@ -436,9 +438,10 @@
     opacity: 0;
     border-top: 1px solid rgba(255, 255, 255, 0.24);
     position: absolute;
-    bottom: -36%;
+    bottom: -230px;
     background: #fff;
-    margin: 8px;
+    margin: 3%;
+    width: 94%;
     border-radius: 4px;
     .previousWinnerHeading {
         @include fontStyle(12px, 400, rgba(30, 29, 58, 0.5), 21px);
@@ -487,21 +490,25 @@
     @include animation(0s, 1s, congratsIconAnim);
 }
 
-.slideUpBtn_highCls {
-    @include animation(0s, 0.6s, slideUpBtn_high);
-}
-
 .slideUpCtaWinnerRowCls {
-    @include animation(0.2s, 0.5s, slideUpWinnerRow);
+    @include animation(0s, 0.5s, slideUpWinnerRow);
 }
 
-.slideUpBtn_lessCls {
-    @include animation(1.5s, 0.5s, slideUpBtn_less);
+.slideDownCtaWinnerRowCls {
+    @include animation(0s, 0.5s, slideDownWinnerRow);
+}
+
+.mOverlay {
+    position: absolute;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.5);
 }
 
 @include keyframe(slideUpWinnerRow) {
     0% {
-        bottom: -36%;
+        bottom: -230px;
         opacity: 0;
     }
     100% {
@@ -510,22 +517,14 @@
     }
 }
 
-@include keyframe(slideUpBtn_high) {
+@include keyframe(slideDownWinnerRow) {
     0% {
-        bottom: 0;
+        bottom: 0%;
+        opacity: 1;
     }
     100% {
-        bottom: 30%;
-        opacity: 0
-    }
-}
-
-@include keyframe(slideUpBtn_less) {
-    0% {
-        bottom: -25%;
-    }
-    100% {
-        bottom: 0;
+        bottom: -230px;
+        opacity: 0;
     }
 }
 
