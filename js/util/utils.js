@@ -253,12 +253,9 @@
                 cacheProvider.setInCritical('oldHash', newHash);
 
             }
-
-
         },
 
-
-        restartApp: function(App) {
+        restartApp: function(App, existingUser) {
 
             var that = this;
             var profileModel = require('../models/profileModel');
@@ -269,7 +266,7 @@
                 var newHash = res.data.rewards_hash;
                 that.hashCheck(oldHash, newHash);
                 if (res.data.status != 'inactive' && res.data.status != 'locked') {
-                    profileModel.updateNinjaData(res.data, App, true);
+                    profileModel.updateNinjaData(res.data, App, existingUser);
                 }
             }, App);
 

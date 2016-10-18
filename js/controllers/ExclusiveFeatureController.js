@@ -14,6 +14,7 @@
 
         var that = this;
         var data = res.rewardDetails;
+        var ftue = null;
 
         var DOMcache = {
             exclusiveFeatureIllustration: document.getElementsByClassName('exclusiveFeatureIllustration')[0],
@@ -22,9 +23,15 @@
             exclusiveFeatureContainer: document.getElementsByClassName('exclusiveFeatureContainer')[0],
         };
 
-        that.setExclusiveFeatureHeader(data, DOMcache);
+        var rewardFtueMapping = cacheProvider.getFromCritical('rewardFtueMapping');
 
-        if (data.sanctioned) {
+        if (rewardFtueMapping) {
+            ftue = rewardFtueMapping[res.rewardId];
+        } else {
+            ftue = false;
+        }
+
+        if (ftue) {
             that.template = require('raw!../../templates/exclusiveFeatureDetails.html');
             that.el.innerHTML = Mustache.render(unescape(that.template), { rewardTitle: data.title + ' ' + 'activated', rewardSubtitle: data.desc });
             DOMcache.exclusiveFeatureRetry = document.getElementsByClassName('exclusiveFeatureRetry')[0];
@@ -40,11 +47,25 @@
         if (DOMcache.exclusiveFeatureAction) {
             DOMcache.exclusiveFeatureAction.addEventListener('click', function(event) {
                 that.enableExclusiveFeature(App, DOMcache, res, false, true);
+                that.mapRewardFtue(res.rewardId);
+                utils.restartApp(App, false);
             });
         }
 
+    };
 
+    ExclusiveFeatureController.prototype.mapRewardFtue = function(rid) {
 
+        var rewardFtueMapping = cacheProvider.getFromCritical('rewardFtueMapping');
+
+        if (!rewardFtueMapping) {
+            rewardFtueMapping = {};
+            rewardFtueMapping[rid] = true;
+        } else {
+            rewardFtueMapping[rid] = true;
+        }
+
+        cacheProvider.setInCritical('rewardFtueMapping', rewardFtueMapping);
     };
 
     ExclusiveFeatureController.prototype.enableExclusiveFeature = function(App, DOMcache, res2, retry, firstTime) {
@@ -110,11 +131,14 @@
     ExclusiveFeatureController.prototype.setExclusiveFeatureHeader = function(data, DOMcache) {
 
         // Add header icon for rewards
-        if (data.hicon) {
-            DOMcache.exclusiveFeatureIllustration.style.backgroundImage = "url('" + data.hicon + "')";
-        } else {
-            console.log("Add a default header");
+        if (DOMcache.exclusiveFeatureIllustration) {
+            if (data.hicon) {
+                DOMcache.exclusiveFeatureIllustration.style.backgroundImage = "url('" + data.hicon + "')";
+            } else {
+                console.log("Add a default header");
+            }
         }
+
     };
 
     ExclusiveFeatureController.prototype.setExclusiveFeatureImage = function(data, DOMcache) {

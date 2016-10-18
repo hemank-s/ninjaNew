@@ -79,6 +79,8 @@
             if (openRewards.length) {
                 for (var i = 0; i < openRewards.length; i++) {
                     openRewards[i].addEventListener('click', function(event) {
+                        var cardButton = this.getElementsByClassName('unlockedRewardAction')[0];
+                        platformSdk.events.publish('update.threeDotLoader', { elem: cardButton, show: true, text: 'Unwrapping' });
 
                         // Get Reward related information
                         var rewardState = this.getAttribute('data-state');
@@ -123,7 +125,7 @@
                         if (platformSdk.bridgeEnabled) {
                             App.NinjaService.getRewardDetails(data, function(res) {
                                 console.log(res.data);
-                                App.router.navigateTo(rewardRouter, { "rewardDetails": res.data, "rewardId": rewardId, "rewardRouter": rewardRouter, "cardColor": cardColor, "ftue": true });
+                                App.router.navigateTo(rewardRouter, { "rewardDetails": res.data, "rewardId": rewardId, "rewardRouter": rewardRouter, "cardColor": cardColor });
                             }, this);
                         } else {
                             var res = {

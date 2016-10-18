@@ -68,7 +68,34 @@
     // Full Screen Loader
     var loader = document.getElementById('loader');
     var loadObject = events.subscribe('update.loader', function(params) {
+        var loaderText = document.getElementsByClassName('ninjaLoaderText')[0];
+        if (params.text) {
+            loaderText.innerHTML = params.text;
+        }
         loader.toggleClass('loading', params.show);
+    });
+
+    // TO use :- platformSdk.events.publish('update.threeDotLoader', { elem:hemank,show: true, text:'Unwrapping' });
+
+    var threeDotLoadObject = events.subscribe('update.threeDotLoader', function(params) {
+
+        params.elem.innerHTML = params.text;
+        params.elem.style.opacity = 0.6;
+        params.elem.fontWeight = 400;
+
+        var span1 = document.createElement('span');
+        span1.innerHTML = '.';
+        var span2 = document.createElement('span');
+        span2.innerHTML = '.';
+        var span3 = document.createElement('span');
+        span3.innerHTML = '.';
+
+        params.elem.appendChild(span1);
+        params.elem.appendChild(span2);
+        params.elem.appendChild(span3);
+
+        params.elem.toggleClass('threeDotSpan', params.show);
+
     });
 
     // Tap State Events :: Touch Start And Touch End
@@ -499,7 +526,7 @@
             }
 
             if (!subscriptionCompleted || !ftueCompleted) {
-                self.router.navigateTo('/');
+                self.router.navigateTo('/home');
             } else {
                 self.NinjaService.getNinjaProfile(function(res) {
                     cacheProvider.setInCritical('userProfileData', res.data);

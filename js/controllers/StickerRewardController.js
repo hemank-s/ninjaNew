@@ -11,9 +11,10 @@
             this.template = require('raw!../../templates/stickerReward.html');
         };
 
-    StickerRewardController.prototype.bind = function(App, data, router, rewardId, ftue) {
+    StickerRewardController.prototype.bind = function(App, data, router, rewardId) {
 
         var that = this;
+        var ftue = null;
 
         var DOMcache = {
             stickerRewardAction: document.getElementsByClassName('stickerRewardAction')[0],
@@ -24,19 +25,41 @@
             stickerRewardWrapper: document.getElementsByClassName('stickerRewardWrapper')[0],
         };
 
-        if (!ftue) {
+        var rewardFtueMapping = cacheProvider.getFromCritical('rewardFtueMapping');
+
+        if (rewardFtueMapping) {
+            ftue = rewardFtueMapping[rewardId];
+        } else {
+            ftue = false;
+        }
+
+        if (ftue) {
             DOMcache.stickerRewardSubtitle.classList.remove('hideClass');
-            that.showStickerPacksAvailable(App, DOMcache, data, router, rewardId);
+            that.showStickerPacksAvailable(App, DOMcache, data, router, rewardId, ftue);
         } else {
             that.setStickerRewardHeaderImage(data, DOMcache);
             // FTUE ACTION
             if (DOMcache.stickerRewardAction) {
                 DOMcache.stickerRewardAction.addEventListener('click', function(event) {
                     DOMcache.stickerRewardSubtitle.classList.remove('hideClass');
-                    that.showStickerPacksAvailable(App, DOMcache, data, router, rewardId);
+                    that.showStickerPacksAvailable(App, DOMcache, data, router, rewardId, ftue);
+                    that.mapRewardFtue(rewardId);
                 });
             }
         }
+    };
+
+    StickerRewardController.prototype.mapRewardFtue = function(rid) {
+        var rewardFtueMapping = cacheProvider.getFromCritical('rewardFtueMapping');
+
+        if (!rewardFtueMapping) {
+            rewardFtueMapping = {};
+            rewardFtueMapping[rid] = true;
+        } else {
+            rewardFtueMapping[rid] = true;
+        }
+
+        cacheProvider.setInCritical('rewardFtueMapping', rewardFtueMapping);
     };
 
     StickerRewardController.prototype.setStickerRewardHeaderImage = function(data, DOMcache) {
@@ -112,6 +135,7 @@
                             rewardId: rId,
                             cooldown: res2.data.cooldown
                         });
+
                         that.defineCooldown(App, res2.data.cooldown, rId, router, DOMcache);
                         that.assignStickerCatImages(res2.data.packs, DOMcache);
                         // Set Sticker Row inside DOM Cache
@@ -126,7 +150,7 @@
 
     };
 
-    StickerRewardController.prototype.assignStickerPackActions = function(App, DOMcache, catId, rId, stickerDetails, router, data) {
+    StickerRewardController.prototype.assignStickerPackActions = function(App, DOMcache, catId, rId, stickerDetails, router, data, ftue) {
 
         var that = this;
 
@@ -143,6 +167,10 @@
         DOMcache.stickerActionDownload.addEventListener('click', function(ev) {
             console.log("Getting sticker pack for you");
             var cooldown = this.getAttribute('data-cooldown');
+            if (ftue) {
+                console.log("RESTARTING APP");
+                utils.restartApp(App, false);
+            }
             that.downloadStickerPack(App, DOMcache, catId, rId, stickerDetails, router, cooldown);
         });
     };
@@ -229,7 +257,7 @@
 
     };
 
-    StickerRewardController.prototype.setStickerDownloadLinks = function(App, DOMcache, stickerPacks, router, data) {
+    StickerRewardController.prototype.setStickerDownloadLinks = function(App, DOMcache, stickerPacks, router, data, ftue) {
 
         var that = this;
 
@@ -251,13 +279,13 @@
 
                 DOMcache.stickerRow = document.getElementsByClassName('stickerRow');
                 that.assignStickerPreviewImages(stickerDetails.act_stickers, DOMcache, catId);
-                that.assignStickerPackActions(App, DOMcache, catId, rewardId, stickerDetails, router, data);
+                that.assignStickerPackActions(App, DOMcache, catId, rewardId, stickerDetails, router, data, ftue);
 
             });
         }
     };
 
-    StickerRewardController.prototype.showStickerPacksAvailable = function(App, DOMcache, data, router, rId) {
+    StickerRewardController.prototype.showStickerPacksAvailable = function(App, DOMcache, data, router, rId, ftue) {
 
         var that = this;
 
@@ -279,7 +307,7 @@
         that.assignStickerCatImages(data.packs, DOMcache);
         // Set Sticker Row inside DOM Cache
         DOMcache.stickerDownloadRow = document.getElementsByClassName('stickerDownloadRow');
-        that.setStickerDownloadLinks(App, DOMcache, data.packs, router, data);
+        that.setStickerDownloadLinks(App, DOMcache, data.packs, router, data, ftue);
 
     };
 

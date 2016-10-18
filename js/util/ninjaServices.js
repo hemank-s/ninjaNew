@@ -91,7 +91,6 @@
         // Get Speicifc Reward Details For The Reward Router
         getRewardDetails: function(data, fn, x) {
             console.log(data);
-            events.publish('update.loader', { show: true });
             var params = {
                 'url': URL.api_location + '/rewards/' + data.rewardId + '?random=' + Math.round(Math.random() * 999999999),
                 'type': 'GET'

@@ -81,7 +81,7 @@
             DOMcache.rewardUnlockAnimation.classList.add('hideClass');
         }
 
-        DOMcache.streakContainer.addEventListener('click', function(event) {
+        DOMcache.informationAction.addEventListener('click', function(event) {
             DOMcache.batteryStreakInfoContainer.classList.remove('hideClass');
             that.createBatteryUi(DOMcache, profileData);
         });
