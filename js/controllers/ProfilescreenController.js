@@ -46,6 +46,10 @@
                     stopPropagation: false,
                     callback: function(pos) {
 
+                        console.log("scrolling to top");
+                        var parentProfileContainer = document.getElementsByClassName('parentProfileContainer')[0];
+                        parentProfileContainer.scrollTop = 0;
+
                         var i = bullets.length;
                         while (i--) {
                             bullets[i].className = ' comp__tab';

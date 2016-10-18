@@ -1,6 +1,11 @@
 <div class="customCreateWrapper">
     <div class="scrollContent">
         <div class="title"> Add your face and text</div>
+        {{#isFailedState}}
+        <div class="reason"> {{reason}}
+        </div>
+        {{/isFailedState}}
+        
         <div class="customImage">
             <div class="cameraIcon"> </div>
         </div>
@@ -11,10 +16,6 @@
             <div class="userInput inlineBlock">0 </div>
             <div class="allowedInput inlineBlock">/{{textLength}} </div>
         </div>
-        {{#isFailedState}}
-        <div class="reason"> {{reason}}
-        </div>
-        {{/isFailedState}}
         <div class="align-center">
             <div class="customCta createSticker zeroOpacity">Done
             </div>
