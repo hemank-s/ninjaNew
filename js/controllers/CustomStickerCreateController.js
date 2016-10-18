@@ -68,8 +68,8 @@
 
 
         DOMCache.scrollContent[0].addEventListener('scroll', function() {
-            DOMCache.learnMore[0].classList.remove('hideClass');
-            DOMCache.scrollContent[0].classList.remove('scrollCls');
+            // DOMCache.learnMore[0].classList.remove('hideClass');
+            // DOMCache.scrollContent[0].classList.remove('scrollCls');
         });
 
 
@@ -112,6 +112,7 @@
                 if (DOMCache.screenH > window.innerHeight) {
                     DOMCache.learnMore[0].classList.add('hideClass');
                     DOMCache.scrollContent[0].classList.add('scrollCls');
+                    document.getElementsByClassName('scrollCls')[0].style.height = window.innerHeight - 10 + 'px';
                     DOMCache.scrollContent[0].scrollTop = DOMCache.scrollContent[0].scrollHeight;
                 } else {
                     DOMCache.learnMore[0].classList.remove('hideClass');

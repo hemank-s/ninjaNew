@@ -520,7 +520,6 @@
             utils.changeBotTitle('JUST FOR LAUGH');
         }
 
-
         var backButtonTemplate = document.createElement('div');
         backButtonTemplate.classList.add('ugcBackPopupContainer');
         backButtonTemplate.classList.add('centerToScreenContainer');
