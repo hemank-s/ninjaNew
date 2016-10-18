@@ -15,7 +15,6 @@
         .title {
             @include fontStyle(22px, 400, #ffffff, 24px);
             padding-top: 40px;
-            padding-bottom: 56px;
         }
         .cameraIcon {
             background: url(images/cameraIcon.png);
@@ -38,6 +37,7 @@
             border: 1px solid #fff;
             position: relative;
             margin-bottom: 44px;
+            margin-top: 56px;
             background-size: contain;
         }
         .customText {
@@ -90,7 +90,8 @@
 .reason {
     text-align: center;
     font-size: 12px;
-    color: red;
+    color: #FFDB6D;
+    margin-top: 8px;
 }
 
 .customOverlay {
