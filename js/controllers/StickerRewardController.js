@@ -104,9 +104,6 @@
             return;
         }
 
-        DOMcache.stickerActionCancel.classList.add('hideClass');
-        DOMcache.stickerActionDownload.innerHTML = 'Downloading';
-
         var dataToSend = {};
 
         dataToSend.rid = rId;
@@ -166,6 +163,8 @@
 
         DOMcache.stickerActionDownload.addEventListener('click', function(ev) {
             console.log("Getting sticker pack for you");
+            DOMcache.stickerActionCancel.classList.add('hideClass');
+            platformSdk.events.publish('update.threeDotLoader', { elem: DOMcache.stickerActionDownload, show: true, text: 'Downloading' });
             var cooldown = this.getAttribute('data-cooldown');
             if (ftue) {
                 console.log("RESTARTING APP");

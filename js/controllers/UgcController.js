@@ -143,6 +143,7 @@
 
 
         DOMcache.sendCta[0].addEventListener('click', function() {
+            platformSdk.events.publish('update.threeDotLoader', { elem: DOMcache.sendCta[0], show: true, text: 'Uploading' });
             that.sendUgcContent(DOMcache, data, DOMcache.sendCta[0]);
         });
 

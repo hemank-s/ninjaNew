@@ -81,7 +81,7 @@
             DOMcache.rewardUnlockAnimation.classList.add('hideClass');
         }
 
-        DOMcache.informationAction.addEventListener('click', function(event) {
+        DOMcache.streakContainer.addEventListener('click', function(event) {
             DOMcache.batteryStreakInfoContainer.classList.remove('hideClass');
             that.createBatteryUi(DOMcache, profileData);
         });
@@ -90,7 +90,7 @@
             App.router.navigateTo('/profile', { rewardsData: data });
         });
 
-        DOMcache.batteryStreakInfoContainer.addEventListener('click', function(event) {
+        DOMcache.informationAction.addEventListener('click', function(event) {
             DOMcache.batteryStreakInfoContainer.classList.add('hideClass');
         });
 
