@@ -29,7 +29,9 @@
                 "js_inject": "",
                 "sb_color": "#3C367C"
             },
-            "hd": {}
+            "hd": {
+                "env": "prod"
+            }
         }]
     }
 }]

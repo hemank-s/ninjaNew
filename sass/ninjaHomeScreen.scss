@@ -1002,12 +1002,8 @@ ul.unlockedRewardList > li.unlockedRewardListItem {
     opacity: 1;
     width: 100%;
     height: 100%;
-    background: #1D47F5;
     z-index: 1000;
-    background: -webkit-linear-gradient(left top, rgba(29, 71, 245, 0.92), rgba(51, 255, 226, 0.92));
-    background: -o-linear-gradient(bottom right, rgba(29, 71, 245, 0.92), rgba(51, 255, 226, 0.92));
-    background: -moz-linear-gradient(bottom right, rgba(29, 71, 245, 0.92), rgba(51, 255, 226, 0.92));
-    background: linear-gradient(to bottom right, rgba(29, 71, 245, 0.92), rgba(51, 255, 226, 0.92));
+    background: rgba(74, 79, 147, 0.96);
 }
 
 .batteryDangerHeading {

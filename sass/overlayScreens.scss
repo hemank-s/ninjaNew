@@ -231,3 +231,27 @@
     line-height: 20px;
     padding: 0px 32px;
 }
+
+// Media Queries //
+@media screen and (min-width: 299px) and (max-width: 350px) {
+    .blockTitle,
+    .upgradeTitle,
+    .stateTitle,
+    .noInternetTitle {
+        margin-bottom: 24px !important;
+        font-size: 20px !important;
+    }
+    .blockSubtitle,
+    .upgradeSubtitle,
+    .stateSubtitle,
+    .noInternetSubtitle {
+        font-size: 12px !important;
+        margin: 18px 0px 32px 0px !important;
+    }
+    .blockAction,
+    .upgradeAction,
+    .stateAction,
+    .noInternetAction {
+        font-size: 12px !important;
+    }
+}

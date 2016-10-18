@@ -500,31 +500,6 @@
 
             if (!subscriptionCompleted || !ftueCompleted) {
                 self.router.navigateTo('/');
-
-                // var res = {
-                //     "custom_stickers": [{
-                //         "id": "23",
-                //         "ts": 123534546,
-                //         "status": "inprogress",
-                //         "phrase": "Phrase of Sticker",
-                //         "url": "http://media2.giphy.com/media/64zSh1uTE7xxm/100.webp"
-                //     }, {
-                //         "id": "23",
-                //         "ts": 123534546,
-                //         "status": "redeemed",
-                //         "phrase": "Phrase of Sticker",
-                //         "url": "http://media2.giphy.com/media/64zSh1uTE7xxm/100.webp"
-                //     }, {
-                //         "id": "23",
-                //         "ts": 123534546,
-                //         "status": "failed",
-                //         "phrase": "Phrase of Sticker",
-                //         "url": "http://media2.giphy.com/media/64zSh1uTE7xxm/100.webp",
-                //         "reason": "aiven hi"
-                //     }],
-                //     "eligible": true
-                // }
-                // self.router.navigateTo("/customHistory", { "rewardDetails": res, "rewardId": "43534", "rewardRouter": "/customHistory", "cardColor": "red" });
             } else {
                 self.NinjaService.getNinjaProfile(function(res) {
                     cacheProvider.setInCritical('userProfileData', res.data);

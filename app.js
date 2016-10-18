@@ -12,9 +12,16 @@
     };
 
     platformSdk.ready(function() {
-        var environment = document.body.getAttribute('data-env'),
-            config = require('./config')(environment),
-            Constants = require('./constants');
+        var environment = null;
+
+        if (platformSdk.bridgeEnabled) {
+            environment = platformSdk.appData.helperData.env;
+        } else {
+            environment = document.body.getAttribute('data-env');
+        }
+
+        var config = require('./config')(environment);
+        var Constants = require('./constants');
 
         W.appConfig = config;
 

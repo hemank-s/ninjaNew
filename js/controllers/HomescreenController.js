@@ -314,8 +314,6 @@
         var rewards_data = cacheProvider.getFromCritical('ninjaRewards');
         var oldNinjaCompareRewards = cacheProvider.getFromCritical('oldNinjaCompareRewards');
 
-        rewardsData = that.filterRewards(rewards_data.rewards);
-
         if (platformSdk.bridgeEnabled) {
             if (utils.upgradeRequired(profile_data.hike_version, platformSdk.appData.appVersion)) {
                 App.router.navigateTo('/upgrade');
