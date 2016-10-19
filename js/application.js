@@ -526,7 +526,7 @@
             }
 
             if (!subscriptionCompleted || !ftueCompleted) {
-                self.router.navigateTo('/home');
+                self.router.navigateTo('/');
             } else {
                 self.NinjaService.getNinjaProfile(function(res) {
                     cacheProvider.setInCritical('userProfileData', res.data);
