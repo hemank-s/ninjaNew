@@ -365,7 +365,7 @@
             if (ugcContainer.length > 0) {
                 this.ugcBackPressHandler();
             } else if (customHistoryWrapper.length > 0 && customHistoryWrapper[0].getAttribute('data-src') == "create") {
-                events.publish('update.loader', { show: false, text: 'Refreshing Rewards!!' });
+                events.publish('update.loader', { show: true, text: 'Refreshing Rewards!!' });
                 utils.restartApp(this, true);
             } else
                 this.router.back();
@@ -568,7 +568,7 @@
             }
 
             if (!subscriptionCompleted || !ftueCompleted) {
-                self.router.navigateTo('/home');
+                self.router.navigateTo('/');
             } else {
                 self.NinjaService.getNinjaProfile(function(res) {
                     cacheProvider.setInCritical('userProfileData', res.data);

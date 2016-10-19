@@ -30,7 +30,7 @@
 
         DOMCahe.customStatusCta[0].addEventListener('click', function() {
             if (this.getAttribute('data-src') === 'create') {
-                events.publish('update.loader', { show: false, text: 'Refreshing Rewards!!' });
+                events.publish('update.loader', { show: true, text: 'Refreshing Rewards!!' });
                 utils.restartApp(App, true);
             } else if (this.getAttribute('data-src') === 'history')
 

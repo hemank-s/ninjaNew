@@ -145,6 +145,8 @@
             else
                 serverPath = appConfig.API_URL + '/rewards/' + data.rewardId + '?t=' + DOMCache.customText[0].value;
 
+            events.publish('update.loader', { show: true, text: 'Submitting your data!!' });
+
             if (flowType == 1) {
 
                 //Without Image

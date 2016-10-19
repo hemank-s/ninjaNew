@@ -112,7 +112,7 @@
                             var data = {};
                             data.rewardId = tid;
 
-                            events.publish('update.loader', { show: true, text: 'Taking you to Reward' });
+                            platformSdk.events.publish('update.loader', { show: true, text: 'Taking you to Reward' });
 
                             App.NinjaService.getRewardDetails(data, function(res) {
                                 console.log(res.data);
@@ -122,7 +122,7 @@
 
                             var profileModelM = require('../models/profileModel');
 
-                            events.publish('update.loader', { show: true, text: 'Taking you to Reward' });
+                            platformSdk.events.publish('update.loader', { show: true, text: 'Taking you to Reward' });
 
                             App.NinjaService.getNinjaProfile(function(res) {
                                 console.log('REUPDATING THE PROFILE', res.data);
