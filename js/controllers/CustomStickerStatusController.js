@@ -30,7 +30,8 @@
 
         DOMCahe.customStatusCta[0].addEventListener('click', function() {
             if (this.getAttribute('data-src') === 'create') {
-                utils.restartApp(App);
+                events.publish('update.loader', { show: true, text: 'Refreshing Rewards!!' });
+                utils.restartApp(App, true);
             } else if (this.getAttribute('data-src') === 'history')
 
                 if (this.getAttribute('data-status') === Constants.CUSTOM_STICKER_STATUS.PROGRESS)
@@ -46,19 +47,6 @@
 
                         if (res.stat == "ok") {
                             events.publish('update.notif.toast', { show: true, heading: 'Yay', details: "You will receive your sticker via the team hike bot shortly, start sharing", notifType: 'notifNeutral' });
-                            /*
-                            var chatData = {
-                                "screen": "chatthread",
-                                "msisdn": "+hike+",
-                                "isbot": true
-                            };
-                            try {
-                                PlatformBridge.openActivity(JSON.stringify(chatData));
-                            } catch (e) {
-                                console.log("Open Activity Not Working");
-                                events.publish('update.notif.toast', { show: true, heading: 'Bamm', details: "Something went wrong. Try again in sometime please :)", notifType: 'notifNeutral' });
-                            }
-                            */
 
                         } else if (res.stat == 'fail') {
                             events.publish('update.notif.toast', { show: true, heading: 'Bamm', details: res.data.reason, notifType: 'notifNeutral' });

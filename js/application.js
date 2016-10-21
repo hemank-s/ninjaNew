@@ -45,7 +45,7 @@
         notifToast.classList.remove('slideDown');
         notifToast.toggleClass('nToast', params.show);
 
-        toastTime = setTimeout(function() { events.publish('update.notif.toast.remove', { show: false, heading: '', details: '', notifType: 'none' }); }, 2000);
+        toastTime = setTimeout(function() { events.publish('update.notif.toast.remove', { show: false, heading: '', details: '', notifType: 'none' }); }, 2500);
     });
 
     var nToastObject2 = events.subscribe('update.notif.toast.remove', function(params) {
@@ -62,7 +62,7 @@
             notifHeading.innerHTML = params.heading;
             notifDetails.innerHTML = params.details;
             notifHeading.classList.add(params.notifType); //notifSuccess //notifNeutral //notifError
-        }, 1000);
+        }, 2500);
     });
 
     // Full Screen Loader
@@ -207,6 +207,16 @@
 
             // Block Event From The Three Dot
             platformSdk.events.subscribe('app.menu.om.block', function(id) {
+
+                if('activeElement' in document){
+                    document.activeElement.blur();
+                }
+
+                cacheProvider.setInCritical('profileSrc', '');
+                if (platformSdk.bridgeEnabled) {
+                   utils.changeBarColors('#3C367C', '#494D95');
+                }
+
                 id = '' + platformSdk.retrieveId('app.menu.om.block');
                 if (platformSdk.appData.block === 'true') {
                     unBlockApp();
@@ -227,6 +237,7 @@
                     });
 
                 }
+
             });
 
             //Help
@@ -361,12 +372,61 @@
         backPressTrigger: function() {
 
             var ugcContainer = document.querySelectorAll('.ugcContainer');
+            var customHistoryWrapper = document.querySelectorAll('.customHistoryWrapper');
+            var mysteryBoxSpinning = cacheProvider.getFromCritical('mysteryBoxSpinning');
+
             if (ugcContainer.length > 0) {
-                events.publish('ugc.backpress');
-            } else {
+                this.ugcBackPressHandler();
+            } else if (customHistoryWrapper.length > 0 && customHistoryWrapper[0].getAttribute('data-src') == "create") {
+                events.publish('update.loader', { show: true, text: 'Refreshing Rewards!!' });
+                utils.restartApp(this, true);
+            } else if(mysteryBoxSpinning){
+                events.publish('update.notif.toast', { show: true, heading: 'Bazinga!', details: 'Please wait for the wheel of fortune to complete the spin', notifType: 'notifSuccess' });
+                return;
+            } else{
                 this.router.back();
             }
+            
         },
+
+        ugcBackPressHandler: function() {
+
+            var quoteName = document.querySelectorAll('.quoteName');
+            var quoteAuthor = document.querySelectorAll('.quoteAuthor');
+            var jflImage = document.querySelectorAll('.jflImage');
+            var successCard = document.querySelectorAll('.successCard');
+            var ugcType = document.getElementsByClassName('ugcContainer')[0].getAttribute('data-type');
+            var that = this;
+            var confirmPopup = document.getElementsByClassName('ugcBackPopupContainer');
+
+            if (!quoteName.length && !quoteAuthor.length && !jflImage.length)
+                return;
+
+            if (ugcType == Constants.UGC_TYPE.QUOTE) {
+
+                if (((quoteName.length > 0 && quoteName[0].innerHTML.length > 0) ||
+                        (quoteAuthor.length > 0 && quoteAuthor[0].innerHTML.length > 0)) && successCard[0].classList.contains('hideClass'))
+                    confirmPopup[0].classList.remove('hideClass');
+                else
+                    that.router.back();
+
+            } else if (ugcType == Constants.UGC_TYPE.FACT) {
+
+                if (quoteName.length > 0 && quoteName[0].innerHTML.length > 0 && successCard[0].classList.contains('hideClass'))
+                    confirmPopup[0].classList.remove('hideClass');
+                else
+                    that.router.back();
+
+            } else {
+
+                if (jflImage[0].getAttribute('filePath') && successCard[0].classList.contains('hideClass'))
+                    confirmPopup[0].classList.remove('hideClass');
+                else
+                    that.router.back();
+            }
+
+        },
+
 
         goToNinjaProfilePage: function() {
             var that = this;

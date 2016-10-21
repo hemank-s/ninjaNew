@@ -259,6 +259,7 @@
 
             var that = this;
             var profileModel = require('../models/profileModel');
+
             App.NinjaService.getNinjaProfile(function(res) {
 
                 cacheProvider.setInCritical('userProfileData', res.data);

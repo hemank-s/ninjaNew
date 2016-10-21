@@ -117,10 +117,7 @@ $gap: 75px;
         margin-top: 4px!important;
         font-size: 9px!important;
     }
-    .ninjaDp {
-        width: 36px!important;
-        height: 36px!important;
-    }
+    
     .ninjaBottomContainer {
         margin-top: 50px!important;
     }
@@ -227,6 +224,9 @@ $gap: 75px;
     @include mysteryBoxStyling(225px);
     .spinScrSubtitle {
         margin-top: 150px !important;
+    }
+    .mysteryBoxScr_title {
+        font-size: 18px !important;
     }
     .mysteryBoxScr_subtitle {
         font-size: 12px !important;
@@ -343,6 +343,16 @@ $gap: 75px;
 }
 
 @media screen and (min-width: 300px) and (max-width: 320px) {
+
+    .ugcContainer .title{
+        padding-top: 32px !important; 
+    }
+    .uploadJflFtueContainer{
+        margin: 24px auto 24px auto !important; 
+    }
+    .jflContainer .uploadIcon{
+        margin-top: 10% !important ;
+    }
     /************Customer Sticker*************/
     .customHistoryContainer {
         .customHistoryTitle {
@@ -447,10 +457,6 @@ $gap: 75px;
         margin-top: 4px!important;
         font-size: 9px!important;
     }
-    .ninjaDp {
-        width: 36px!important;
-        height: 36px!important;
-    }
     .ninjaBottomContainer {
         margin-top: 50px!important;
     }
@@ -524,6 +530,7 @@ $gap: 75px;
         }
         .subscribeCta {
             font-size: 12px !important;
+            margin-top: 14px !important; 
         }
     }
     /******************/
@@ -548,6 +555,7 @@ $gap: 75px;
         }
         .ftueCta {
             font-size: 12px !important;
+            margin-top: -4px !important;
         }
     }
     /******************/
@@ -558,11 +566,14 @@ $gap: 75px;
     .spinScrSubtitle {
         margin-top: 150px !important;
     }
+    .mysteryBoxScr_title {
+        font-size: 18px !important;
+    }
     .mysteryBoxScr_subtitle {
-        font-size: 14px !important;
+        font-size: 12px !important;
     }
     .ctaWinner {
-        font-size: 14px !important;
+        font-size: 12px !important;
     }
     .spin {
         left: 39% !important;
@@ -686,10 +697,7 @@ $gap: 75px;
         margin-top: 5px!important;
         font-size: 10px!important;
     }
-    .ninjaDp {
-        width: 38px!important;
-        height: 38px!important;
-    }
+    
     .ninjaBottomContainer {
         margin-top: 52px!important;
     }
@@ -794,6 +802,9 @@ $gap: 75px;
     @include mysteryBoxStyling(250px);
     .spinScrSubtitle {
         margin-top: 160px !important;
+    }
+    .mysteryBoxScr_title {
+        font-size: 20px !important;
     }
     .mysteryBoxScr_subtitle {
         font-size: 14px !important;
@@ -918,7 +929,7 @@ $gap: 75px;
             height: 100px !important;
         }
         .content {
-            margin-top: -18px !important;
+            margin-top: -8px !important;
         }
         .infoHeading {
             font-size: 14px !important;
@@ -929,7 +940,7 @@ $gap: 75px;
             line-height: 16px !important;
         }
         .ftueCta {
-            font-size: 12px !important;
+            font-size: 14px !important;
         }
     }
     /******************/
@@ -939,9 +950,6 @@ $gap: 75px;
     @include mysteryBoxStyling(275px);
     .spinScrSubtitle {
         margin-top: 180px !important;
-    }
-    .mysteryBoxScr_subtitle {
-        font-size: 14px !important;
     }
     .spin {
         left: 40% !important;
@@ -978,7 +986,7 @@ $gap: 75px;
             height: 100px !important;
         }
         .content {
-            margin-top: -22px !important;
+            margin-top: -18px !important;
         }
         .infoHeading {
             font-size: 14px !important;
@@ -1110,10 +1118,10 @@ $gap: 75px;
             height: 89px !important;
         }
         .content {
-            margin-top: -20px !important;
+            margin-top: -28px !important;
         }
         .infoRow {
-            margin-bottom: 24px !important;
+            margin-bottom: 22px !important;
         }
         .infoHeading {
             font-size: 14px !important;
@@ -1139,10 +1147,10 @@ $gap: 75px;
             height: 150px !important;
         }
         .info {
-            font-size: 12px !important;
+            font-size: 14px !important;
         }
         .subscribeCta {
-            font-size: 12px !important;
+            font-size: 14px !important;
         }
     }
     /******************/
@@ -1172,9 +1180,45 @@ $gap: 75px;
     /******************/
 }
 
-@media screen and (min-height: 696px) and (max-height: 750px) {
+@media screen and (min-height: 696px) {
     li.unlockedRewardListItem {
         width: 338px !important;
         height: 220px !important;
+    }
+    .slideFromBottomCls {
+        @include animation(0.4s, 0.7s, slideFromBottom);
+    }
+    .subscribeScreen {
+        padding-top: 80px !important;
+    }
+    @include keyframe(slideFromBottom) {
+        0% {
+            margin-top: 100%;
+        }
+        100% {
+            margin-top: 7%;
+        }
+    }
+    .ftueScreen {
+        .infoHeading {
+            font-size: 18px !important;
+            line-height: 22px !important;
+        }
+        .title_subscribe {
+            padding-bottom: 60px !important;
+            padding-top: 80px !important;
+        }
+        .infoSubHeading {
+            font-size: 14px !important;
+            line-height: 20px !important;
+        }
+        .infoRow {
+            margin-bottom: 32px !important;
+        }
+    }
+    .workspaceContainer .workspaceCta,
+    .workspaceContainer .info {
+        font-size: 16px !important;
+        line-height: 22px !important;
     }
 }

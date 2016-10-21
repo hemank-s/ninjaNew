@@ -328,7 +328,11 @@
 
         if (!color) {
             var rewardColorMapping = cacheProvider.getFromCritical('rewardColorMapping');
-            hexcolor = rewardColorMapping[rid];
+            if(rewardColorMapping && rewardColorMapping[rid]){
+                hexcolor = rewardColorMapping[rid];
+            }else{
+                hexcolor = '#3D475B';
+            }
         } else {
             hexcolor = utils.rgba2hex(color);
         }

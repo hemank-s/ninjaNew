@@ -561,7 +561,10 @@ a:visited {
 .notifDetails {
     font-size: 12px;
     font-weight: 400;
-    color: rgba(255, 255, 255, 0.80);
+    color: rgba(255, 255, 255, 0.8);
+    width: 90%;
+    word-break: break-word;
+    line-height: 14px;
 }
 
 #notifToast.nToast {
@@ -691,7 +694,7 @@ body {
     text-align: center;
     margin-top: 16px;
     color: #fff;
-    font-size: 12px;
+    font-size: 14px;
     font-weight: 400;
     line-height: 14px;
 }

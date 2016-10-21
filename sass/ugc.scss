@@ -1,86 +1,125 @@
-.ugcWrapper {
-    padding-top: 12px;
+.quoteCardParentContainer {
+    padding: 8px 12px 0px 12px;
 }
 
+.ugcWrapper {}
+
 .ugcContainer {
-    @include setGradient($stCol, $endCol);
+    background: #3D475B;
     height: 100%;
+    .cta,
+    .ctaContainer {
+        background: #596784;
+        position: fixed !important;
+    }
+    .cta,
+    .ctaContainer,
+    .jflCtaContainer {
+        background: #596784;
+        padding: 13px 0;
+        position: absolute;
+        width: 100%;
+        text-align: center;
+        bottom: 0;
+        font-size: 14px;
+        color: #ffffff;
+        line-height: 21px;
+        font-weight: 400;
+        z-index: 1000;
+    }
+    .ctaContainer div,
+    .jflCtaContainer div {
+        width: 49%;
+    }
     .quoteCardContainer {
         background-color: #ffffff;
         overflow: hidden;
-        margin: 0px 12px;
         position: relative;
         background-position: center;
         background-repeat: no-repeat;
         background-size: cover;
+        border-radius: 4px;
+        -webkit-box-shadow: 0px 2px 14px 0px rgba(0, 0, 0, 0.4);
+        box-shadow: 0px 2px 14px 0px rgba(0, 0, 0, 0.4);
     }
     .quoteCard {
-        padding: 32px 32px 0 32px;
-        .quoteName {
-            @include fontStyle(22px, 300, rgba(0, 0, 0, 0.9), 27px);
-            margin-bottom: 44px;
-            position: relative;
-            z-index: 1000;
-            word-break: break-word;
-        }
-        .quoteAuthor {
-            @include fontStyle(14px, 400, rgba(0, 0, 0, 0.4), 19px);
-            padding-bottom: 4px;
-            position: relative;
-            z-index: 1000;
-        }
-        .quoteAuthor:before {
-            content: '— ';
-        }
+        padding: 32px 12px 0px 32px;
     }
-    .quoteChar {
-        @include fontStyle(12px, 400, #CDCDCD, 16px);
-        text-align: right;
-        margin: 12px;
+    .quoteName {
+        font-size: 20px;
+        color: rgba(0, 0, 0, 0.9);
+        line-height: 28px;
+        font-weight: 300;
+        margin-bottom: 38px;
+        position: relative;
+        z-index: 1000;
+        word-break: break-word;
     }
-    [contenteditable=true]:empty:before {
-        content: attr(placeholder);
-        opacity: 0.4;
+    .quoteAuthor {
+        font-size: 14px;
+        color: rgba(0, 0, 0, 0.4);
+        line-height: 19px;
+        font-weight: 400;
+        position: relative;
+        z-index: 1000;
     }
+    .quoteAuthor:before {
+        content: '— ';
+    }
+    .title {
+        @include fontStyle(20px, 400, #ffffff, 26px);
+        text-align: center;
+        padding-top: 56px;
+    }
+}
+
+.quoteChar {
+    font-size: 12px;
+    color: #CDCDCD;
+    line-height: 16px;
+    font-weight: 400;
+    text-align: right;
+    padding: 0px 12px 12px 0px;
+}
+
+[contenteditable=true]:empty:before {
+    content: attr(placeholder);
+    opacity: 0.4;
 }
 
 .inputExceeded {
     color: #F35F5F !important;
 }
 
-.cardNote,
-.jflNote {
-    padding: 12px 32px 0 32px;
-    @include fontStyle(14px, 400, rgba(255, 255, 255, 0.64), 17px);
+.cardNote {
+    border: 0px;
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.80);
+    line-height: 17px;
+    font-weight: 400;
     text-align: center;
-}
-
-.cta,
-.ctaContainer {
-    background: rgb(110, 160, 233);
-    position: fixed !important;
-}
-
-.cta,
-.ctaContainer,
-.jflCtaContainer {
-    border-top: 1px solid rgba(255, 255, 255, 0.32);
-    padding: 15px 0;
     position: absolute;
-    width: 100%;
-    text-align: center;
-    bottom: 0;
-    @include fontStyle(16px, 400, #ffffff, 21px);
-    z-index: 1000;
+    bottom: 69px;
+    padding: 0px 32px;
 }
 
-.ctaContainer div,
-.jflCtaContainer div {
-    width: 49%;
+.jflNote {
+    border: 0px;
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.80);
+    line-height: 17px;
+    font-weight: 400;
+    text-align: center;
+    padding: 0px 32px;
+}
+
+.jflNotePostionChange {
+    position: absolute;
+    bottom: 69px;
 }
 
 .disabled {
-    color: rgba(255, 255, 255, 0.48) !important;
+    opacity: 0.4;
 }
 
 .test {
@@ -92,15 +131,11 @@
     background-position: center;
     border: 1px dashed rgba(255, 255, 255, 0.32);
     border-radius: 4px;
-    margin: 0 auto 0;
+    margin: 0 auto 40px auto;
     background-size: 100% 100%;
 }
 
-.successCard {
-    background: #fff;
-    margin-left: 12px;
-    margin-right: 12px;
-}
+.successCard {}
 
 .successIcon {
     background-image: url(images/successIcon.png);
@@ -111,58 +146,91 @@
     display: inline-block;
     background-position: center;
     margin-bottom: 24px;
-    margin-top: 64px;
+    margin-top: 48px;
 }
 
 .successTitle {
-    @include fontStyle(24px, 400, #4A90E2, 27px);
-    margin-bottom: 12px;
+    font-size: 22px;
+    color: #fff;
+    font-weight: 400;
     text-align: center;
 }
 
 .successSubtitle {
-    @include fontStyle(14px, 400, rgba(61, 71, 91, 0.64), 17px);
-    width: 80%;
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.8);
+    line-height: 20px;
+    font-weight: 400;
     margin: 0 auto;
+    padding: 0px 32px;
     text-align: center;
 }
 
 .successCta {
-    @include fontStyle(16px, 400, #3D475B, 21px);
-    border-top: 1px solid rgba(61, 71, 91, 0.13);
-    padding: 15px;
+    font-size: 14px;
+    color: #3D475B;
+    line-height: 21px;
+    font-weight: 400;
+    padding: 12px 24px;
     text-align: center;
-    margin-top: 48px;
+    margin-top: 28%;
+    text-transform: uppercase;
+    background: #fff;
+    display: inline-block;
+    border-radius: 4px;
 }
 
 .uploadIcon {
-    background-image: url(images/jfl_illustration.png);
-    background-repeat: no-repeat;
-    background-size: 220px 160px;
-    width: 100%;
-    height: 250px;
-    background-position: center;
-    padding: 60px 0;
+    background: #fff;
+    display: inline-block;
+    padding: 12px 24px;
+    text-transform: uppercase;
+    border-radius: 4px;
+    font-weight: 500;
+    font-size: 14px;
+    color: #3D475B;
+    margin-top: 19%;
 }
 
-.title {
-    @include fontStyle(20px, 400, #ffffff, 26px);
-    text-align: center;
+.sendCta {
+    text-transform: uppercase;
 }
 
 .uploadContainer {
-    background: rgba(0, 0, 0, 0.8);
-    padding: 11px 12px 13px;
-    border-radius: 20px;
+    background: rgba(0, 0, 0, 0.50);
+    padding: 10px;
+    border-radius: 4px;
 }
 
 .replaceCtaText {
     @include fontStyle(10px, 400, #ffffff, 10px);
 }
 
-.replacePhotoCta {
-    padding: 16px;
+.replacePhotoRight {
+    background: none !important;
     float: right;
+    margin: 0px 23px !important;
+}
+
+.replacePhotoCta {
+    padding: 8px;
+    float: right;
+}
+
+.uploadJflFtueContainer {
+    width: 200px;
+    height: 200px;
+    margin: 48px auto 24px auto;
+}
+
+.uploadJflFtue {
+    background-image: url(images/jfl_illustration.png);
+    background-repeat: no-repeat;
+    width: 200px;
+    height: 200px;
+    margin: 0px auto;
+    background-size: 132px 132px;
+    background-position: center;
 }
 
 .uploadIllustration {
@@ -178,14 +246,14 @@
 }
 
 .addPhotoCta {
-    border: 1px dashed rgba(255, 255, 255, 0.3);
-    padding: 22px;
-    margin: 16px 12px 0;
+    background: rgba(255, 255, 255, 0.2);
+    margin: 0px 12px;
+    border-radius: 0px 0px 4px 4px;
+    z-index: 100;
 }
 
 .addPhotoContainer {
-    margin: 0 auto;
-    text-align: center;
+    padding: 14px 0px 14px 24px;
 }
 
 .addPhotoIllustration {
@@ -196,7 +264,7 @@
     background-position: center;
     display: inline-block;
     background-size: 100% 100%;
-    margin-right: 12px;
+    margin-right: 16px;
     vertical-align: bottom;
 }
 
@@ -210,7 +278,10 @@
 }
 
 .addPhotoText {
-    @include fontStyle(16px, 400, #ffffff, 21px);
+    font-size: 12px;
+    color: #ffffff;
+    line-height: 21px;
+    font-weight: 500;
 }
 
 .overlayQuoteName {
@@ -284,4 +355,8 @@
 .ugcBackPopupContainer {
     position: absolute;
     top: 0;
+}
+
+.lowerZIndex {
+    z-index: -1;
 }

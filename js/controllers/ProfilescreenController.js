@@ -82,6 +82,8 @@
             }
 
             if (profileSrc && profileSrc == 'ugc') {
+                if(emptyBorder[0])
+                    emptyBorder[0].style.transition = 'margin';
                 bullets[2].click();
                 cacheProvider.setInCritical('profileSrc', '');
             }

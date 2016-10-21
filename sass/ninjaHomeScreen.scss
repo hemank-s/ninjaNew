@@ -33,7 +33,7 @@
 .rewardUnlockStreakValue {
     font-weight: 400;
     font-size: 48px;
-    color: #717BFF;
+    color: #23d3da;
     display: inline-block;
     vertical-align: middle;
     margin-left: 8px;
@@ -94,7 +94,7 @@
     font-size: 48px;
     color: #FFFFFF;
     line-height: 32px;
-    font-weight: 400;
+    font-weight: 300;
     display: inline-flex;
 }
 
@@ -106,12 +106,18 @@
     vertical-align: middle;
 }
 
+.ninjaDpParent {
+    background: rgba(255, 255, 255, 0.16);
+    -webkit-border-radius: 4px;
+    border-radius: 4px;
+}
+
 .ninjaDp {
-    background: url(images/ninjaDefaultDp.png);
     background-size: contain;
     background-repeat: no-repeat;
-    width: 40px;
-    height: 40px;
+    width: 22px;
+    height: 22px;
+    padding: 10px;
     -webkit-border-radius: 4px;
     border-radius: 4px;
 }
@@ -140,7 +146,7 @@ span.streakDefInfo {
     color: #fff;
     padding: 4px 8px;
     text-align: center;
-    border-radius: 100px;
+    border-radius: 4px;
     display: block;
     margin-top: 8px;
     line-height: 8px;
@@ -162,7 +168,7 @@ span.streakDefInfo {
 }
 
 .ninjaBottomContainer {
-    margin-top: 70px;
+    margin-top: 18px;
     display: block;
 }
 
@@ -240,13 +246,13 @@ span.streakDefInfo {
 
 .uRewardHeading {
     @include fontStyle(16px, 400, #FFFFFF, 18px);
-    margin-bottom: 8px;
+    margin-bottom: 4px;
 }
 
 .uRewardSubheading {
-    @include fontStyle(14px, 400, rgba(255, 255, 255, 0.80), 18px);
+    @include fontStyle(14px, 400, rgba(255, 255, 255, 0.70), 18px);
     white-space: initial;
-    word-break: break-all;
+    word-break: break-word;
 }
 
 .unlockedRewardAction {
@@ -373,7 +379,7 @@ ul.unlockedRewardList > li.unlockedRewardListItem {
     font-size: 14px;
     color: rgba(61, 71, 91, 0.48);
     white-space: initial;
-    word-break: break-all;
+    word-break: break-word;
     line-height: 18px;
 }
 
@@ -446,7 +452,7 @@ ul.unlockedRewardList > li.unlockedRewardListItem {
 }
 
 .dayHeading {
-    font-size: 24px;
+    font-size: 20px;
     color: #FFFFFF;
     font-weight: 400;
     margin-bottom: 24px;
@@ -487,7 +493,7 @@ ul.unlockedRewardList > li.unlockedRewardListItem {
 }
 
 .batteryHeading {
-    font-size: 24px;
+    font-size: 20px;
     color: #FFFFFF;
     font-weight: 400;
     margin-bottom: 24px;
@@ -658,6 +664,10 @@ ul.unlockedRewardList > li.unlockedRewardListItem {
     border-radius: 4px;
 }
 
+.unlockedRewardStreakIcon svg {
+    fill: #444;
+}
+
 .upcoming0card .unlockedRewardStreakIcon {
     display: inline-block;
 }
@@ -689,11 +699,11 @@ ul.unlockedRewardList > li.unlockedRewardListItem {
 
 .upcoming0card .uRewardSubheading {
     font-size: 14px;
-    color: rgba(68, 68, 68, 0.8);
+    color: rgba(68, 68, 68, 0.7);
     line-height: 18px;
     font-weight: 400;
     white-space: initial;
-    word-break: break-all;
+    word-break: break-word;
 }
 
 .mysteryBoxAvailable {
@@ -872,12 +882,12 @@ ul.unlockedRewardList > li.unlockedRewardListItem {
 }
 
 .statsWrapper {
-    padding: 34px 24px 0px 24px;
+    padding: 16px 24px 0px 24px;
 }
 
 .statTypeContainer {
     overflow: hidden;
-    margin-bottom: 32px;
+    margin-bottom: 24px;
 }
 
 .statHeading {
@@ -1007,23 +1017,30 @@ ul.unlockedRewardList > li.unlockedRewardListItem {
 }
 
 .batteryDangerHeading {
-    font-size: 32px;
+    font-size: 22px;
     font-weight: 400;
     color: #FFF;
+    margin: 24px 0px 14px 0px;
 }
 
 .batteryDangerAction {
     text-transform: uppercase;
     text-align: center;
-    margin-top: 144px;
     font-size: 16px;
     color: #FFF;
+    font-weight: 500;
+    display: inline-block;
+    padding: 12px 0px;
+    bottom: 40px;
+    position: absolute;
+    left: 0px;
+    right: 0px;
 }
 
 .batteryDangerIcon {
     text-align: center;
     bottom: 0px;
-    margin: 16px auto;
+    margin: 0px auto;
     left: 0px;
     right: 0px;
     display: block;
@@ -1056,7 +1073,7 @@ ul.unlockedRewardList > li.unlockedRewardListItem {
 .batteryDangerDescription {
     font-size: 16px;
     font-weight: 400;
-    color: #FFF;
+    color: rgba(255, 255, 255, 0.80);
 }
 
 .batteryCritical_crossIcon {
@@ -1072,7 +1089,7 @@ ul.unlockedRewardList > li.unlockedRewardListItem {
 .ninjaDpContainer {
     position: relative;
     float: right;
-    margin-top: 2px;
+    //margin-top: 2px;
 }
 
 .spinMysteryBoxBig {
@@ -1156,9 +1173,11 @@ ul.unlockedRewardList > li.unlockedRewardListItem {
 hr.infoSep {}
 
 .emptyStateLockedRewards {
-    color: rgba(0, 0, 0, 0.60);
+    color: rgba(0, 0, 0, 0.2);
+    padding: 32px 0px 18px 16px;
 }
 
 .emptyStateUnlockedRewards {
-    color: rgba(0, 0, 0, 0.60);
+    color: rgba(0, 0, 0, 0.2);
+    padding: 32px 0px 18px 16px;
 }

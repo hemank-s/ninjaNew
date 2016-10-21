@@ -48,6 +48,8 @@
 
 
                     if (platformSdk.bridgeEnabled) {
+                        //events.publish('update.loader', { show: true, text: 'Getting awesome features for you!!' });
+
                         App.NinjaService.subscribeHandler({}, function(res) {
 
                             if (res.stat === 'ok') {
@@ -113,8 +115,8 @@
 
         setTimeout(function() {
             marginTop = (window.innerHeight - elem1.offsetTop - elem1.offsetHeight - elem2.offsetHeight) / 2;
-            elem2.style.marginTop = marginTop + 'px';
-            elem2.style.opacity = "1";
+            //elem2.style.marginTop = marginTop + 'px';
+            //elem2.style.opacity = "1";
 
         }, time);
 

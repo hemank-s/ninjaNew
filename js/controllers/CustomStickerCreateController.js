@@ -31,7 +31,6 @@
         };
 
         var customFtue = cacheProvider.getFromCritical('customStickerFtue');
-        customFtue = true;
         if (customFtue)
             that.bindCreateHandlers(App, data, DOMCache);
         else {
@@ -145,7 +144,7 @@
             else
                 serverPath = appConfig.API_URL + '/rewards/' + data.rewardId + '?t=' + DOMCache.customText[0].value;
 
-            events.publish('update.loader', { show: true });
+            events.publish('update.loader', { show: true, text: 'Submitting your data!!' });
 
             if (flowType == 1) {
 
@@ -238,7 +237,6 @@
         data.textLength = Constants.CUSTOM_STICKER_TITLE_LENGTH;
         data.isFailedState = false;
 
-        customFtue = true;
         if (customFtue)
             template = that.createTemplate;
         else

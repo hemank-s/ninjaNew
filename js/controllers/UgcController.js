@@ -32,9 +32,6 @@
         else
             that.bindHandlersJfl(App, data);
 
-        that.backPressEvent = events.subscribe('ugc.backpress', function() {
-            that.backpressHandler(App, data, parentCache);
-        });
 
         parentCache.yesAction[0].addEventListener('click', function() {
             App.router.back();
@@ -46,48 +43,6 @@
 
     };
 
-
-    UgcController.prototype.backpressHandler = function(App, data, parentCache) {
-
-        var quoteName = document.querySelectorAll('.quoteName');
-        var quoteAuthor = document.querySelectorAll('.quoteAuthor');
-        var jflImage = document.querySelectorAll('.jflImage');
-        var successCard = document.querySelectorAll('.successCard');
-        var that = this;
-
-        if (!quoteName.length && !quoteAuthor.length && !jflImage.length)
-            return;
-
-        if (data.type == Constants.UGC_TYPE.QUOTE) {
-
-            if ((quoteName.length > 0 && quoteName[0].innerHTML.length > 0) || (quoteAuthor.length > 0 && quoteAuthor[0].innerHTML.length > 0)) {
-                parentCache.confirmPopup[0].classList.remove('hideClass');
-            } else {
-                App.router.back();
-                console.log(that.backPressEvent);
-                that.backPressEvent.remove();
-            }
-
-        } else if (data.type == Constants.UGC_TYPE.FACT) {
-
-            if (quoteName.length > 0 && quoteName[0].innerHTML.length > 0) {
-                parentCache.confirmPopup[0].classList.remove('hideClass');
-            } else {
-                that.backPressEvent.remove();
-                App.router.back();
-            }
-
-        } else {
-
-            if (jflImage[0].getAttribute('filePath') && successCard[0].classList.contains('hideClass'))
-                parentCache.confirmPopup[0].classList.remove('hideClass');
-            else {
-                that.backPressEvent.remove();
-                App.router.back();
-            }
-        }
-
-    };
 
     UgcController.prototype.bindHandlersQuote = function(App, data) {
 
@@ -113,15 +68,13 @@
             cardOverlay: document.getElementsByClassName('cardOverlay'),
             ugcContainer: document.getElementsByClassName('ugcContainer'),
             ugcWrapper: document.getElementsByClassName('ugcWrapper'),
+            addPhotoIllustration: document.getElementsByClassName('addPhotoIllustration')
 
         };
 
 
         var defHeight = parseInt(window.getComputedStyle(DOMcache.quoteName[0]).height);
         DOMcache.quoteName[0].style.minHeight = defHeight + 'px';
-
-
-
 
         DOMcache.quoteName[0].addEventListener('keyup', function() {
             DOMcache.userInput[0].innerHTML = this.innerHTML.length;
@@ -153,8 +106,10 @@
 
                 if (platformSdk.bridgeEnabled)
                     DOMcache.card[0].setAttribute('filePath', filePath);
-
-
+                DOMcache.card[0].style.boxShadow = '0px 2px 14px rgba(0,0,0,0.4)';
+                DOMcache.card[0].style.borderRadius = '4px';
+                DOMcache.addPhotoCta[0].classList.add('replacePhotoRight');
+                DOMcache.addPhotoIllustration[0].classList.add('hideClass');
                 DOMcache.quoteName[0].classList.add('overlayQuoteName');
                 DOMcache.quoteAuthor[0].classList.add('overlayQuoteAuthor');
                 DOMcache.addPhotoText[0].innerHTML = "REPLACE PHOTO";
@@ -193,7 +148,6 @@
         var that = this;
 
         var DOMcache = {
-
             uploadIcon: document.getElementsByClassName('uploadIcon'),
             jflImage: document.getElementsByClassName('jflImage'),
             title: document.getElementsByClassName('title'),
@@ -204,12 +158,13 @@
             successCard: document.getElementsByClassName('successCard'),
             successCta: document.getElementsByClassName('successCta'),
             jflContainer: document.getElementsByClassName('jflContainer'),
+            uploadJflFtueContainer: document.getElementsByClassName('uploadJflFtueContainer'),
         };
 
 
         DOMcache.uploadIcon[0].addEventListener('click', function() {
             utils.openGallery(DOMcache.jflImage[0], Constants.IMAGE_SIZE_UGC, function(filePath) {
-
+                DOMcache.uploadJflFtueContainer[0].classList.add('hideClass');
                 if (platformSdk.bridgeEnabled)
                     DOMcache.jflImage[0].setAttribute('filePath', filePath);
 
@@ -255,9 +210,7 @@
                 var h2 = DOMcache.jflNote[0].getBoundingClientRect().height;
                 var gap = 10;
                 var oldH;
-                var newH = oldH = window.innerHeight - (h1 + h2 + gap * 2);
-
-
+                var newH = oldH = window.innerHeight - (h1 + h2 + gap * 2) - 40;
 
                 var newW = newH / aspectRatio;
 
@@ -265,8 +218,6 @@
                     newW = window.innerWidth - gap * 2;
                     newH = newW * aspectRatio;
                 }
-
-
 
                 DOMcache.jflImage[0].style.height = newH + 'px';
                 DOMcache.jflImage[0].style.width = newW + 'px';
@@ -284,7 +235,7 @@
             var h2 = DOMcache.jflNote[0].getBoundingClientRect().height;
             var gap = 10;
             var oldH;
-            var newH = oldH = window.innerHeight - (h1 + h2 + gap * 2);
+            var newH = oldH = window.innerHeight - (h1 + h2 + gap * 2) - 40;
 
 
 
@@ -375,8 +326,6 @@
                     }
 
                     DOMcache.successCard[0].classList.remove('hideClass');
-
-
                 } else if (res.stat == 'fail') {
                     events.publish('update.notif.toast', { show: true, heading: 'Error', details: res.data.reason, notifType: 'notifError' });
                 } else if (res.stat == "exception") {
@@ -386,16 +335,29 @@
                 }
 
             } else {
-                DOMcache.card[0].classList.add('hideClass');
-                DOMcache.cardNote[0].classList.add('hideClass');
-                DOMcache.ctaContainer[0].classList.add('hideClass');
-                DOMcache.addPhotoCta[0].classList.add('hideClass');
+
+                if (data.type == Constants.UGC_TYPE.QUOTE || data.type == Constants.UGC_TYPE.FACT) {
+                    DOMcache.card[0].classList.add('hideClass');
+                    DOMcache.cardNote[0].classList.add('hideClass');
+                    DOMcache.ctaContainer[0].classList.add('hideClass');
+                    DOMcache.addPhotoCta[0].classList.add('hideClass');
+
+
+                } else {
+                    DOMcache.jflNote[0].classList.add('hideClass');
+                    DOMcache.jflImage[0].classList.add('hideClass');
+                    DOMcache.jflCtaContainer[0].classList.add('hideClass');
+                    DOMcache.jflContainer[0].classList.add('hideClass');
+                }
+
                 DOMcache.successCard[0].classList.remove('hideClass');
             }
 
             that.callInProgress = 0;
             element.classList.remove('disabled');
-
+            if (DOMcache.sendCta[0]) {
+                platformSdk.events.publish('update.threeDotLoader', { elem: DOMcache.sendCta[0], show: true, text: 'Uploading' });
+            }
 
         });
     };
@@ -487,7 +449,8 @@
                     DOMcache.ctaContainer[0].classList.remove('hideClass');
                     DOMcache.addPhotoCta[0].classList.remove('hideClass');
                     DOMcache.cta[0].classList.add('hide');
-
+                    DOMcache.card[0].style.boxShadow = 'none';
+                    DOMcache.card[0].style.borderRadius = '4px 4px 0px 0px';
                 }, 300);
 
             }
@@ -521,6 +484,10 @@
             utils.changeBotTitle('JUST FOR LAUGH');
         }
 
+        if (platformSdk.bridgeEnabled) {
+            utils.changeBarColors('#323A4B', '#3D475B');
+        }
+
         var backButtonTemplate = document.createElement('div');
         backButtonTemplate.classList.add('ugcBackPopupContainer');
         backButtonTemplate.classList.add('centerToScreenContainer');
@@ -528,7 +495,8 @@
         backButtonTemplate.innerHTML = Mustache.render(unescape(that.backButtonTemplate));
 
         ctr.appendChild(that.el);
-        ctr.appendChild(backButtonTemplate)
+        ctr.appendChild(backButtonTemplate);
+        document.getElementsByClassName('ugcContainer')[0].setAttribute('data-type', data.type);
         events.publish('update.loader', { show: false });
         that.bind(App, data);
     };

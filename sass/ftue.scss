@@ -1,7 +1,7 @@
 .ftueScreen {
     .title_subscribe {
-        padding-bottom: 20px;
-        padding-top: 40px;
+        padding-bottom: 48px;
+        padding-top: 48px;
     }
     height: 100%;
     .titleAnimFtueCls {
@@ -22,7 +22,7 @@
     .infoRow {
         list-style: none;
         margin-bottom: 30px;
-        padding-left: 20px;
+        padding-left: 28px;
         opacity: 0;
     }
     .row1 {
@@ -35,11 +35,11 @@
         @include animation(0.7s, 0.8s, inforRowAnim);
     }
     .ftueCta {
-        opacity: 0;
+        opacity: 1;
         /*@include animation(1.7s, 1s, fadeInTranslate);*/
         -webkit-transition: all 0.5s;
         transition: all 0.5s;
-        margin-top: 100px;
+        margin-top: 28px;
     }
     .giftIcon {
         background: url(images/giftIcon.png);

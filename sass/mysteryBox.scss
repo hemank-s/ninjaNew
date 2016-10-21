@@ -348,22 +348,20 @@
 }
 
 .mysteryBoxScr_subtitle {
-    @include fontStyle(16px, 400, rgba(255, 255, 255, 0.70), 20px);
+    @include fontStyle(16px, 400, rgba(255, 255, 255, 0.80), 20px);
     text-align: center;
-    padding-top: 11px;
     max-width: 80%;
     margin-left: 10%;
 }
 
 .ctaWinner {
-    @include fontStyle(16px, 400, #ffffff, 21px);
-    padding: 14px;
-    position: absolute;
-    bottom: -25%;
-    border-top: 1px solid rgba(255, 255, 255, 0.24);
-    width: 100%;
+    @include fontStyle(14px, 400, #ffffff, 21px);
+    display: inline-block;
+    padding: 12px 24px;
     text-align: center;
     z-index: 1000;
+    margin-top: 18%;
+    text-transform: uppercase;
 }
 
 .mysteryBoxIcon {
@@ -371,22 +369,20 @@
     background-size: contain;
     background-position: center;
     background-repeat: no-repeat;
-    width: 173px;
-    height: 173px;
-    margin: 42px auto 42px auto;
+    width: 200px;
+    height: 160px;
+    margin: 72px auto 104px auto;
 }
 
-.congratsSubtitle {
-    padding-bottom: 48px;
-}
+.congratsSubtitle {}
 
 .mysteryBoxCongratsIcon {
     background-image: url(images/mysteryBox_Congrats.png);
     background-size: contain;
     background-position: center;
     background-repeat: no-repeat;
-    width: 150px;
-    height: 150px;
+    width: 200px;
+    height: 200px;
     margin: 24px auto 24px auto;
     -ms-transform: scale(0);
     -webkit-transform: scale(0);
@@ -398,12 +394,13 @@
 .ctaCongrats {
     text-transform: uppercase;
     font-size: 14px;
-    color: #396BE1;
+    color: #515597;
     font-weight: 500;
     display: inline-block;
-    padding: 14px 26px;
+    padding: 14px 24px;
     border-radius: 4px;
     background: #fff;
+    margin-top: 18%;
 }
 
 .mysteryBoxRetryIcon {
@@ -411,9 +408,9 @@
     background-size: contain;
     background-position: center;
     background-repeat: no-repeat;
-    width: 153px;
-    height: 144px;
-    margin: 42px auto 42px auto;
+    width: 210px;
+    height: 180px;
+    margin: 68px auto 24px auto;
     opacity: 0;
     @include animation(0s, 0.5s, fadein);
 }
@@ -428,20 +425,26 @@
     @include animation(0.8s, 1.2s, fadein);
 }
 
+.retryCta {
+    opacity: 0;
+    @include animation(1.5s, 0.5s, fadein);
+}
+
 .winnerWrapper {
-    padding: 40px 0 0 0;
+    padding: 28px 0 0 0;
 }
 
 .previousWinnerRow {
     opacity: 0;
     border-top: 1px solid rgba(255, 255, 255, 0.24);
     position: absolute;
-    bottom: -36%;
+    bottom: -230px;
     background: #fff;
-    margin: 8px;
+    margin: 3%;
+    width: 94%;
     border-radius: 4px;
     .previousWinnerHeading {
-        @include fontStyle(12px, 400, rgba(30, 29, 58, 0.5), 21px);
+        @include fontStyle(12px, 400, rgba(30, 29, 58, 0.5), 14px);
         padding: 24px;
         text-align: center;
     }
@@ -453,12 +456,13 @@
         background: url(images/ninjaDefaultDp.png);
         background-size: cover;
         background-repeat: no-repeat;
-        width: 72px;
-        height: 72px;
+        width: 80px;
+        height: 80px;
         display: inline-block;
         -webkit-border-radius: 50%;
         border-radius: 50%;
         vertical-align: middle;
+        border: 4px solid #D5D8FF;
     }
     .streakIcon {
         float: none !important;
@@ -487,21 +491,25 @@
     @include animation(0s, 1s, congratsIconAnim);
 }
 
-.slideUpBtn_highCls {
-    @include animation(0s, 0.6s, slideUpBtn_high);
-}
-
 .slideUpCtaWinnerRowCls {
-    @include animation(0.2s, 0.5s, slideUpWinnerRow);
+    @include animation(0s, 0.5s, slideUpWinnerRow);
 }
 
-.slideUpBtn_lessCls {
-    @include animation(1.5s, 0.5s, slideUpBtn_less);
+.slideDownCtaWinnerRowCls {
+    @include animation(0s, 0.5s, slideDownWinnerRow);
+}
+
+.mOverlay {
+    position: absolute;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.5);
 }
 
 @include keyframe(slideUpWinnerRow) {
     0% {
-        bottom: -36%;
+        bottom: -230px;
         opacity: 0;
     }
     100% {
@@ -510,22 +518,14 @@
     }
 }
 
-@include keyframe(slideUpBtn_high) {
+@include keyframe(slideDownWinnerRow) {
     0% {
-        bottom: 0;
+        bottom: 0%;
+        opacity: 1;
     }
     100% {
-        bottom: 30%;
-        opacity: 0
-    }
-}
-
-@include keyframe(slideUpBtn_less) {
-    0% {
-        bottom: -25%;
-    }
-    100% {
-        bottom: 0;
+        bottom: -230px;
+        opacity: 0;
     }
 }
 
@@ -534,15 +534,15 @@
         opacity: 0;
     }
     45% {
-        -ms-transform: scale(1, 0.7);
-        -webkit-transform: scale(1, 0.7);
-        transform: scale(1, 0.7);
+        -ms-transform: scale(0.7, 0.7);
+        -webkit-transform: scale(0.7, 0.7);
+        transform: scale(0.7, 0.7);
         opacity: 1;
     }
     90% {
-        -ms-transform: scale(1, 1.1);
-        -webkit-transform: scale(1, 1.1);
-        transform: scale(1, 1.1);
+        -ms-transform: scale(1.1, 1.1);
+        -webkit-transform: scale(1.1, 1.1);
+        transform: scale(1.1, 1.1);
         opacity: 1;
     }
     100% {
