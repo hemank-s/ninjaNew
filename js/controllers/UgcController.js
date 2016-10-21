@@ -356,7 +356,7 @@
             that.callInProgress = 0;
             element.classList.remove('disabled');
             if (DOMcache.sendCta[0]) {
-                platformSdk.events.publish('update.threeDotLoader', { elem: DOMcache.sendCta[0], show: true, text: 'Uploading' });
+                platformSdk.events.publish('update.threeDotLoader', { elem: DOMcache.sendCta[0], show: true, text: 'Send' });
             }
 
         });

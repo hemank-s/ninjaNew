@@ -166,10 +166,7 @@
             DOMcache.stickerActionCancel.classList.add('hideClass');
             platformSdk.events.publish('update.threeDotLoader', { elem: DOMcache.stickerActionDownload, show: true, text: 'Downloading' });
             var cooldown = this.getAttribute('data-cooldown');
-            if (ftue) {
-                console.log("RESTARTING APP");
-                utils.restartApp(App, false);
-            }
+            utils.restartApp(App, false);
             that.downloadStickerPack(App, DOMcache, catId, rId, stickerDetails, router, cooldown);
         });
     };

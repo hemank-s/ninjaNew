@@ -45,7 +45,7 @@
         notifToast.classList.remove('slideDown');
         notifToast.toggleClass('nToast', params.show);
 
-        toastTime = setTimeout(function() { events.publish('update.notif.toast.remove', { show: false, heading: '', details: '', notifType: 'none' }); }, 2500);
+        toastTime = setTimeout(function() { events.publish('update.notif.toast.remove', { show: false, heading: '', details: '', notifType: 'none' }); }, 3000);
     });
 
     var nToastObject2 = events.subscribe('update.notif.toast.remove', function(params) {
@@ -62,7 +62,7 @@
             notifHeading.innerHTML = params.heading;
             notifDetails.innerHTML = params.details;
             notifHeading.classList.add(params.notifType); //notifSuccess //notifNeutral //notifError
-        }, 2500);
+        }, 3000);
     });
 
     // Full Screen Loader
