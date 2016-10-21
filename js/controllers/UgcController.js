@@ -85,6 +85,12 @@
             that.validateQuote(DOMcache, 'keyup', data);
         });
 
+
+        DOMcache.quoteName[0].oninput = function() {
+            DOMcache.userInput[0].innerHTML = this.innerHTML.length;
+        }
+
+
         DOMcache.quoteAuthor[0].addEventListener('keyup', function() {
             that.validateQuote(DOMcache, 'keyup', data);
         });

@@ -100,6 +100,13 @@
         var that = this;
 
         if (cooldown) {
+            DOMcache.stickerActionCancel = document.getElementsByClassName('stickerActionCancel')[0];
+            DOMcache.stickerActionDownload = document.getElementsByClassName('stickerActionDownload')[0];
+            DOMcache.stickerActionCancel.classList.remove('hideClass');
+            DOMcache.stickerActionDownload.innerHTML = "Download";
+            DOMcache.stickerActionDownload.style.opacity = 1;
+            DOMcache.stickerActionDownload.fontWeight = 500;
+
             events.publish('update.notif.toast', { show: true, heading: 'Oops!', details: 'This pack will only be available after the cooldown has ended. Check back soon', notifType: 'notifNeutral' });
             return;
         }
@@ -325,9 +332,9 @@
 
         if (!color) {
             var rewardColorMapping = cacheProvider.getFromCritical('rewardColorMapping');
-            if(rewardColorMapping && rewardColorMapping[rid]){
+            if (rewardColorMapping && rewardColorMapping[rid]) {
                 hexcolor = rewardColorMapping[rid];
-            }else{
+            } else {
                 hexcolor = '#3D475B';
             }
         } else {

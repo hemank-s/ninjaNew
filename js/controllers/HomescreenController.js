@@ -79,10 +79,12 @@
             DOMcache.unlockedReward.classList.remove('hideClass');
             DOMcache.unlockedRewardListContainer.classList.add('unlockedRewardListUl');
             DOMcache.rewardUnlockAnimation.classList.add('hideClass');
+            that.setLockedRewardsH();
         }
 
         DOMcache.streakContainer.addEventListener('click', function(event) {
             DOMcache.batteryStreakInfoContainer.classList.remove('hideClass');
+            utils.toggleBackNavigation(true);
             that.createBatteryUi(DOMcache, profileData);
         });
 
@@ -109,6 +111,7 @@
             DOMcache.rewardUnlockAnimation.classList.add('hideClass');
             DOMcache.lockedRewards.style.height = 'auto';
             that.setLockedRewardsH();
+            cacheProvider.setInCritical('showRewardAnimation', false);
 
         });
 
@@ -118,6 +121,7 @@
             DOMcache.rewardUnlockAnimation.classList.add('hideClass');
             DOMcache.lockedRewards.style.height = 'auto';
             that.setLockedRewardsH();
+            cacheProvider.setInCritical('showRewardAnimation', false);
 
         });
 
@@ -144,10 +148,20 @@
 
     HomescreenController.prototype.setLockedRewardsH = function() {
 
-        var tl = document.getElementsByClassName('dummyDiv')[0];
-        var el = document.getElementsByClassName('ninjaRewards')[0];
-        var rect = el.getBoundingClientRect();
-        tl.style.height = window.innerHeight - rect.bottom + 'px';
+
+        var showRewardAnimation = cacheProvider.getFromCritical('showRewardAnimation');
+
+        if (!showRewardAnimation) {
+            document.getElementsByClassName('lockedRewards')[0].style.height = "auto";
+
+        } else {
+            var tl = document.getElementsByClassName('dummyDiv')[0];
+            var el = document.getElementsByClassName('ninjaRewards')[0];
+            var rect = el.getBoundingClientRect();
+            tl.style.height = window.innerHeight - rect.bottom + 'px';
+        }
+
+
     };
 
 

@@ -208,13 +208,13 @@
             // Block Event From The Three Dot
             platformSdk.events.subscribe('app.menu.om.block', function(id) {
 
-                if('activeElement' in document){
+                if ('activeElement' in document) {
                     document.activeElement.blur();
                 }
 
                 cacheProvider.setInCritical('profileSrc', '');
                 if (platformSdk.bridgeEnabled) {
-                   utils.changeBarColors('#3C367C', '#494D95');
+                    utils.changeBarColors('#3C367C', '#494D95');
                 }
 
                 id = '' + platformSdk.retrieveId('app.menu.om.block');
@@ -371,22 +371,33 @@
 
         backPressTrigger: function() {
 
+
+
+
+            var loader = document.getElementById('loader');
             var ugcContainer = document.querySelectorAll('.ugcContainer');
             var customHistoryWrapper = document.querySelectorAll('.customHistoryWrapper');
+            var batteryStreakInfoContainer = document.querySelectorAll('.batteryStreakInfoContainer');
             var mysteryBoxSpinning = cacheProvider.getFromCritical('mysteryBoxSpinning');
 
-            if (ugcContainer.length > 0) {
+            if (loader.classList.contains('loading')) {
+                return;
+            } else if (ugcContainer.length > 0) {
                 this.ugcBackPressHandler();
             } else if (customHistoryWrapper.length > 0 && customHistoryWrapper[0].getAttribute('data-src') == "create") {
                 events.publish('update.loader', { show: true, text: 'Refreshing Rewards!!' });
                 utils.restartApp(this, true);
-            } else if(mysteryBoxSpinning){
+            } else if (mysteryBoxSpinning) {
                 events.publish('update.notif.toast', { show: true, heading: 'Bazinga!', details: 'Please wait for the wheel of fortune to complete the spin', notifType: 'notifSuccess' });
                 return;
-            } else{
+            } else if (batteryStreakInfoContainer.length > 0 && !batteryStreakInfoContainer[0].classList.contains('hideClass')) {
+                batteryStreakInfoContainer[0].classList.add('hideClass');
+                utils.toggleBackNavigation(true);
+                return;
+            } else {
                 this.router.back();
             }
-            
+
         },
 
         ugcBackPressHandler: function() {

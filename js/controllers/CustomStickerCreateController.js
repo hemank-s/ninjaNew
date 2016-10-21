@@ -88,6 +88,10 @@
 
         });
 
+        DOMCache.customText[0].oninput = function() {
+            DOMCache.userInput[0].innerHTML = this.value.length;
+        }
+
 
 
         DOMCache.customCta[0].addEventListener('click', function() {
@@ -218,7 +222,7 @@
         if (type == 1)
             events.publish('update.notif.toast', { show: true, heading: 'Bamm', details: text, notifType: 'notifNeutral' });
         else
-            utils.showToast('text');
+            utils.showToast(text);
 
         console.log(text);
     };

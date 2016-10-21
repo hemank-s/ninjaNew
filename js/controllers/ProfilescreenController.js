@@ -181,6 +181,7 @@
                 DOMcache.redeemedRewardRow[i].addEventListener('click', function(event) {
 
                     // Get Reward related information
+                    events.publish('update.loader', { show: true });
                     var rewardState = this.getAttribute('data-state');
                     var rewardType = this.getAttribute('data-rewardtype');
                     var rewardRouter = rewardsModel.getRewardRouter(rewardType);

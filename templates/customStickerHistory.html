@@ -6,7 +6,7 @@
         <div class="stickerHistoryRow" data-phrase="{{phrase}}" data-status="{{status}}" data-sid="{{sid}}" data-url="{{url}}" data-reason="{{reason}}">
             <div class="custHistoryIcon inlineBlock" style="background-image:url({{url}})"></div>
             <div class="contentSection inlineBlock">
-                <div class="rowTitle"> {{phrase}}</div>
+                <div class="rowTitle"> {{#phrase}} {{phrase}} {{/phrase}} {{^phrase}} No caption provided {{/phrase}}</div>
                 <div class="rowStatus">{{status}} </div>
             </div>
             <div class="statusSection inlineBlock" data-status="{{status}}"></div>
