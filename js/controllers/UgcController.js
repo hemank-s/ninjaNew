@@ -77,7 +77,7 @@
         DOMcache.quoteName[0].style.minHeight = defHeight + 'px';
 
         DOMcache.quoteName[0].addEventListener('keyup', function() {
-            DOMcache.userInput[0].innerHTML = this.innerHTML.length;
+            DOMcache.userInput[0].innerHTML = this.textContent.length;
             if (this.innerHTML.length > Constants.MAX_LENGTH_QUOTE) {
                 DOMcache.userInput[0].classList.add('inputExceeded');
             } else
@@ -87,7 +87,7 @@
 
 
         DOMcache.quoteName[0].oninput = function() {
-            DOMcache.userInput[0].innerHTML = this.innerHTML.length;
+            DOMcache.userInput[0].innerHTML = this.textContent.length;
         }
 
 
