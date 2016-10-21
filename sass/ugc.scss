@@ -1,3 +1,17 @@
+@media screen and (min-height: 400px) and (max-height: 450px) {
+    .ugcContainer .quoteCard {
+        height: 154px !important;
+        overflow: scroll !important;
+    }
+}
+
+@media screen and (min-height: 450px) and (max-height: 500px) {
+    .ugcContainer .quoteCard {
+        height: 164px !important;
+        overflow: scroll !important;
+    }
+}
+
 .quoteCardParentContainer {
     padding: 8px 12px 0px 12px;
 }

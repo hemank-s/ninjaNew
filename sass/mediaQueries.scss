@@ -344,6 +344,20 @@ $gap: 75px;
 
 @media screen and (min-width: 300px) and (max-width: 320px) {
 
+    .exclusiveFeatureTitle{
+        margin-bottom: 48px !important;
+        margin-top: 18px !important;
+    }
+
+    .exclusiveFeatureIllustration{
+        width: 254px !important;
+        height: 190px !important;
+    }
+
+    .exclusiveFeatureDescription{
+        margin: 18px 0px 26px 0px !important ;
+    }
+
     .ugcContainer .title{
         padding-top: 32px !important; 
     }
@@ -508,6 +522,9 @@ $gap: 75px;
     }
     .lrewardSubheading {
         font-size: 12px!important;
+    }
+    .mysteryRedeemedRewardRow .rewardStreakWrapper{
+        padding: 11px 6px!important; 
     }
     .rewardStreakWrapper {
         padding: 14px 6px!important;
