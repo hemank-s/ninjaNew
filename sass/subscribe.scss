@@ -21,7 +21,7 @@
         text-align: center;
     }
     .scaleZeroToOneAnim {
-        @include animation(0s, 1.5s, scaleZeroToOne);
+        @include animation(0s, 0.8s, scaleZeroToOne);
     }
     .centreIcon {
         height: 163px;
@@ -65,7 +65,7 @@
 }
 
 .slideFromBottomCls {
-    @include animation(0.4s, 0.7s, slideFromBottom);
+    @include animation(0.3s, 0.5s, slideFromBottom);
 }
 
 .centreIcon {

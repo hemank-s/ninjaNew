@@ -548,11 +548,11 @@ ul.unlockedRewardList > li.unlockedRewardListItem {
 }
 
 .newStreakAnimation {
-    @include animation(0s, 0.7s, updateNewStreakAnimation);
+    @include animation(0s, 0.4s, updateNewStreakAnimation);
 }
 
 .unlockedRewardListUl .newRewardAppearAnimation {
-    @include animation(0s, 1s, rewardBoxAnim);
+    @include animation(0s, 0.5s, rewardBoxAnim);
 }
 
 .moveLockedRewardsAnimation {
