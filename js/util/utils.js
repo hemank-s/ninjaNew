@@ -189,6 +189,16 @@
 
         },
 
+        showNinjaFeedback: function(route) {
+            console.log("Checking if to show feedback on this route or not");
+            var showFeedback = false;
+            if (showFeedback) {
+                console.log("Trigger the feedback event here");
+            } else {
+                return;
+            }
+        },
+
         microAppUpgradeRequired: function(minVersion, appVersion) {
 
             minVersion = minVersion.toString();

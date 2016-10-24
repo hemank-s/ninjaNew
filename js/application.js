@@ -33,36 +33,93 @@
 
     var defnineNinjaFeedback = function() {
         var self = this;
-        console.log("Show Emoji here and add the event listeners");
 
+        var emojiQuestions = [];
+        var textQuestions = [];
+
+        var feedbackData = {
+            "feedback": {
+                "launch_screen": "/",
+                "mdata": [{
+                    "qid": 1,
+                    "title_emoji": "https://staging.im.hike.in/sticker?catId=excusenglish&stId=007_exe_idk.png&resId=XHDPI&image=True",
+                    "title_options": [{
+                        "aid": 1,
+                        "answer_emoji": "https://staging.im.hike.in/sticker?catId=malaylove2&stId=010_kll2_vellathe.png&resId=XHDPI&image=True"
+                    }, {
+                        "aid": 2,
+                        "answer_emoji": "https://staging.im.hike.in/sticker?catId=expressions&stId=059_loveyou.png&resId=XHDPI&image=True"
+                    }],
+                    "title_question": "Did you like Hike ninja ?",
+                    "type": "emoji"
+                }, {
+                    "qid": 2,
+                    "title_emoji": "https://staging.im.hike.in/sticker?catId=excusenglish&stId=007_exe_idk.png&resId=XHDPI&image=True",
+                    "title_options": [{
+                        "aid": 3,
+                        "answer_text": "rewards"
+                    }, {
+                        "aid": 4,
+                        "answer_text": "why"
+                    }],
+                    "title_question": "What more rewards would you like ?",
+                    "type": "text"
+                }]
+            }
+        };
+
+        var feedbackDomCache = {
+            questionText: document.getElementsByClassName('questionText')[0],
+            questionEmoji: document.getElementsByClassName('questionEmoji')[0],
+            feedbackContainer: document.getElementsByClassName('feedbackContainer')[0],
+            emojiFeedback: document.getElementsByClassName('emojiFeedback')[0],
+        };
+
+        var feedbackQuestions = feedbackData.mdata;
+
+        for (var i = 0; i < feedbackQuestions.data; i++) {
+            if (feedbackQuestions[i].type == 'emoji') {
+                emojiQuestions.push(feedbackQuestions[i]);
+            } else if (feedbackQuestions[i].type == 'text') {
+                textQuestions.push(feedbackQuestions[i]);
+            }
+        }
+
+        var questionEmojiAnswer = feedbackDomCache.questionEmoji.getElementsByClassName('questionEmojiAnswer');
+
+        for (var j = 0; j < questionEmojiAnswer.length; j++) {
+            questionEmojiAnswer[j].addEventListener('click', function() {
+                feedbackDomCache.questionEmoji.classList.add('hide');
+                feedbackDomCache.questionText.classList.remove('hide');
+            }, false);
+        }
+
+        var closeFeedbackEmoji = questionEmoji.getElementsByClassName('closeFeedback')[0];
+        var closeFeedbackText = questionText.getElementsByClassName('closeFeedback')[0];
+
+        var submitNinjaFeedback = questionText.getElementsByClassName('submitNinjaFeedback')[0];
+
+        closeFeedbackEmoji.addEventListener('click', function() {
+            feedbackContainer.classList.add('hideClass');
+        }, false);
+
+        closeFeedbackEmoji.addEventListener('click', function() {
+            feedbackContainer.classList.add('hideClass');
+        }, false);
+
+        submitNinjaFeedback.addEventListener('click', function() {
+            console.log("Submitting user feedback :: Show success Screen here :: with close button and close");
+        }, false);
+
+        feedbackDomCache.emojiFeedback.addEventListener('click', function() {
+            console.log("emoji clicked");
+            var questionEmoji = document.getElementsByClassName('questionEmoji')[0];
+            emojiFeedback.classList.add('hide');
+            questionEmoji.classList.remove('hide');
+        }, false);
     };
 
-    var emojiFeedback = document.getElementsByClassName('emojiFeedback')[0];
-    var closeFeedback = document.getElementsByClassName('closeFeedback')[0];
-    var feedbackContainer = document.getElementsByClassName('feedbackContainer')[0];
-
-    var questionEmojiAnswer = document.getElementsByClassName('questionEmojiAnswer');
-
-    for (var i = 0; i < questionEmojiAnswer.length; i++) {
-        questionEmojiAnswer[i].addEventListener('click', function() {
-            var questionText = document.getElementsByClassName('questionText')[0];
-            var questionEmoji = document.getElementsByClassName('questionEmoji')[0];
-
-            questionEmoji.classList.add('hide');
-            questionText.classList.remove('hide');
-        }, false);
-    }
-
-    closeFeedback.addEventListener('click', function() {
-        feedbackContainer.classList.add('hideClass');
-    }, false);
-
-    emojiFeedback.addEventListener('click', function() {
-        console.log("emoji clicked");
-        var questionEmoji = document.getElementsByClassName('questionEmoji')[0];
-        emojiFeedback.classList.add('hide');
-        questionEmoji.classList.remove('hide');
-    }, false);
+    defnineNinjaFeedback();
 
     // var emojiFeedback = events.subscribe('get.ninjaFeedback', function() {
     //     defnineNinjaFeedback();
