@@ -1,0 +1,184 @@
+.feedbackContainer {}
+
+#emoji-feedback-widget .emoji-feedback {
+    bottom: 20px;
+    display: block !important;
+    font-family: 'Roboto', Helvetica, Arial, sans-serif;
+    font-size: .875rem;
+    position: fixed;
+    right: 20px;
+    z-index: 10;
+}
+
+#emoji-feedback-widget .emoji-feedback .icon-smile {
+    bottom: 0;
+    display: block;
+    right: 0;
+    text-decoration: none;
+}
+
+#emoji-feedback-widget .emoji-feedback .icon-smile .bullet {
+    -moz-border-radius: 6.25rem !important;
+    -webkit-border-radius: 6.25rem !important;
+    border-radius: 6.25rem !important;
+    background-color: #e62940;
+    color: #fff;
+    font-size: 10px;
+    font-weight: 700;
+    height: 19px;
+    left: 0;
+    line-height: 19px;
+    position: absolute;
+    text-align: center;
+    top: -6px;
+    width: 19px;
+}
+
+#emoji-feedback-widget .emoji-feedback .icon-smile img {
+    height: 50px;
+    width: 50px;
+}
+
+#emoji-feedback-widget .hide {
+    display: none !important;
+}
+
+#emoji-feedback-widget .emoji-feedback .emoji-box.light {
+    background-color: #ececec;
+}
+
+#emoji-feedback-widget .emoji-feedback .emoji-box {
+    -moz-border-radius: 0.625rem !important;
+    -webkit-border-radius: 0.625rem !important;
+    border-radius: 0.625rem !important;
+    -moz-box-shadow: rgba(128, 128, 128, 0.3), 1px, 1px, 2px;
+    -webkit-box-shadow: rgba(128, 128, 128, 0.3), 1px, 1px, 2px;
+    box-shadow: rgba(128, 128, 128, 0.3), 1px, 1px, 2px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    border: 2px solid #fff;
+    margin: 0;
+    padding: 25px;
+    position: relative;
+    width: 300px;
+}
+
+#emoji-feedback-widget .emoji-feedback .emoji-box .icon-close {
+    color: #cccccc;
+    font-size: 24px;
+    line-height: 1;
+    position: absolute;
+    right: .625rem;
+    top: 5px;
+}
+
+#emoji-feedback-widget a {
+    text-decoration: none;
+}
+
+#emoji-feedback-widget .emoji-feedback .emoji-box p {
+    color: #666666;
+    font-size: 18px;
+    margin: 0 auto 20px;
+    overflow: hidden;
+    text-align: center;
+}
+
+#emoji-feedback-widget .emoji-feedback .reactions-list {
+    text-align: center;
+}
+
+#emoji-feedback-widget .emoji-feedback .reactions-list a {
+    margin-right: 5px;
+}
+
+#emoji-feedback-widget .emoji-feedback .reactions-list a:nth-child(4n+0),
+#emoji-feedback-widget .emoji-feedback .reactions-list a:last-child {
+    margin-right: 5px;
+}
+
+#emoji-feedback-widget .emoji-feedback .emoji-box .emoji-link {
+    color: #4ba4f6;
+    display: block;
+    font-size: 14px;
+    margin-top: 15px;
+    text-align: center;
+}
+
+#emoji-feedback-widget .emoji-feedback .emoji-box.follow-up {
+    padding: 0;
+}
+
+#emoji-feedback-widget .emoji-feedback .emoji-box.light {
+    background-color: #ececec;
+}
+
+#emoji-feedback-widget .emoji-feedback .box-info {
+    padding: 18px 15px 0;
+}
+
+#emoji-feedback-widget .emoji-feedback .box-info .reactions {
+    margin: 0 auto 5px;
+}
+
+#emoji-feedback-widget .emoji-feedback .reactions {
+    display: none;
+    height: 50px;
+    width: 50px;
+}
+
+#emoji-feedback-widget .emoji-feedback .box-info p {
+    font-size: 16px;
+    margin-bottom: 14px;
+    text-align: center;
+}
+
+#emoji-feedback-widget .emoji-feedback .emoji-box p {
+    color: #666666;
+    font-size: 18px;
+    margin: 0 auto 20px;
+    overflow: hidden;
+    text-align: center;
+}
+
+#emoji-feedback-widget .emoji-feedback .box-info input[type=email],
+#emoji-feedback-widget .emoji-feedback .box-info textarea {
+    -moz-border-radius: 6px !important;
+    -webkit-border-radius: 6px !important;
+    border-radius: 6px !important;
+    border: 0;
+    margin-bottom: 10px;
+    padding: 12px 10px;
+    width: 100%;
+}
+
+#emoji-feedback-widget .emoji-feedback .emoji-box .emoji-icon-small {
+    width: 33px;
+    max-width: 33px;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+#emoji-feedback-widget .emoji-feedback .box-info input[type=button] {
+    -moz-border-radius: 18px !important;
+    -webkit-border-radius: 18px !important;
+    border-radius: 18px !important;
+    background-color: transparent;
+    border: 1px solid #979797;
+    color: #979797;
+    display: block;
+    font-size: 11px;
+    margin: 10px auto 15px;
+    padding: 8px 21px;
+}
+
+#emoji-feedback-widget .emoji-feedback .reactions img {
+    display: inline-block;
+    vertical-align: middle;
+    width: 100%;
+}
+
+.emoji-icon-big {
+    max-width: 3.75rem;
+}

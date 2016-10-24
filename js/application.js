@@ -1,3 +1,5 @@
+/*jshint loopfunc: true */
+
 (function(W, events) {
     'use strict';
 
@@ -28,6 +30,43 @@
 
     var toastTime = null;
     var notifToast = document.getElementById('notifToast');
+
+    var defnineNinjaFeedback = function() {
+        var self = this;
+        console.log("Show Emoji here and add the event listeners");
+
+    };
+
+    var emojiFeedback = document.getElementsByClassName('emojiFeedback')[0];
+    var closeFeedback = document.getElementsByClassName('closeFeedback')[0];
+    var feedbackContainer = document.getElementsByClassName('feedbackContainer')[0];
+
+    var questionEmojiAnswer = document.getElementsByClassName('questionEmojiAnswer');
+
+    for (var i = 0; i < questionEmojiAnswer.length; i++) {
+        questionEmojiAnswer[i].addEventListener('click', function() {
+            var questionText = document.getElementsByClassName('questionText')[0];
+            var questionEmoji = document.getElementsByClassName('questionEmoji')[0];
+
+            questionEmoji.classList.add('hide');
+            questionText.classList.remove('hide');
+        }, false);
+    }
+
+    closeFeedback.addEventListener('click', function() {
+        feedbackContainer.classList.add('hideClass');
+    }, false);
+
+    emojiFeedback.addEventListener('click', function() {
+        console.log("emoji clicked");
+        var questionEmoji = document.getElementsByClassName('questionEmoji')[0];
+        emojiFeedback.classList.add('hide');
+        questionEmoji.classList.remove('hide');
+    }, false);
+
+    // var emojiFeedback = events.subscribe('get.ninjaFeedback', function() {
+    //     defnineNinjaFeedback();
+    // });
 
     // Notifications Toast
     var nToastObject = events.subscribe('update.notif.toast', function(params) {
@@ -475,10 +514,6 @@
             }
         },
 
-        calculateBatteryChange: function() {
-
-        },
-
         start: function() {
 
             var self = this;
@@ -606,7 +641,9 @@
                     utils.hashCheck(oldHash, newHash);
                     if (platformSdk.bridgeEnabled) {
                         if (utils.upgradeRequired(res.data.hike_version, platformSdk.appData.appVersion)) {
-                            self.router.navigateTo('/upgrade');
+                            self.router.navigateTo('/upgrade', 'hike');
+                        } else if (utils.microAppUpgradeRequired(res.data.app_v, platformSdk.appData.mAppVersionCode)) {
+                            self.router.navigateTo('/upgrade', 'ninja');
                         } else if (res.data.status == 'inactive' || res.data.status == 'locked') {
                             self.router.navigateTo('/userState', res.data);
                         } else {

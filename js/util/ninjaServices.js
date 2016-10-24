@@ -40,6 +40,14 @@
             else this.ninjaService.communicate(params);
         },
 
+        getNewNinjaPacket: function(fn, x) {
+            var params = {
+                'url': URL.api_location + '/updateapp?random=' + Math.round(Math.random() * 999999999),
+                'type': 'POST'
+            };
+            if (typeof fn === "function") return this.ninjaService.communicate(params, fn, x);
+            else this.ninjaService.communicate(params);
+        },
 
         // Profile Service For Ninja 
         getNinjaProfile: function(fn, x) {

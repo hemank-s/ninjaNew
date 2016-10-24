@@ -189,6 +189,37 @@
 
         },
 
+        microAppUpgradeRequired: function(minVersion, appVersion) {
+
+            minVersion = minVersion.toString();
+            appVersion = appVersion.toString();
+
+            minVersion = minVersion.match(/\d/g);
+            appVersion = appVersion.match(/\d/g);
+
+            var minVersionLength = minVersion.length;
+            var appVersionLength = appVersion.length;
+
+            var maxLength = minVersionLength > appVersionLength ? minVersionLength : appVersionLength;
+
+            var appVer_part, minVer_part;
+
+            for (var i = 0; i < maxLength; i++) {
+
+                minVer_part = parseInt(minVersion[i], 10) || 0;
+                appVer_part = parseInt(appVersion[i], 10) || 0;
+
+                if (minVer_part == appVer_part) {
+                    continue;
+                } else if (appVer_part > minVer_part) {
+                    return false;
+                } else {
+                    return true;
+                }
+
+            }
+        },
+
         upgradeRequired: function(minVersion, appVersion) {
 
             minVersion = minVersion.match(/\d/g);
@@ -215,7 +246,6 @@
                 }
 
             }
-
 
         },
 

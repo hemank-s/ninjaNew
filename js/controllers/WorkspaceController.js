@@ -69,7 +69,9 @@
 
                                     if (platformSdk.bridgeEnabled) {
                                         if (utils.upgradeRequired(res.data.hike_version, platformSdk.appData.appVersion)) {
-                                            App.router.navigateTo('/upgrade');
+                                            App.router.navigateTo('/upgrade', 'hike');
+                                        } else if (utils.microAppUpgradeRequired(res.data.app_v, platformSdk.appData.mAppVersionCode)) {
+                                            App.router.navigateTo('/upgrade', 'ninja');
                                         } else if (res.data.status == 'inactive' || res.data.status == 'locked') {
                                             App.router.navigateTo('/userState', res.data);
                                         } else {
