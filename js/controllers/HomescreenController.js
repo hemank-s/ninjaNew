@@ -329,9 +329,9 @@
         var oldNinjaCompareRewards = cacheProvider.getFromCritical('oldNinjaCompareRewards');
 
         if (platformSdk.bridgeEnabled) {
-            if (utils.upgradeRequired(profile_data.hike_version, platformSdk.appData.appVersion)) {
+            if (utils.upgradeRequired(profile_data.hike_version, platformSdk.appData.appVersion, false)) {
                 App.router.navigateTo('/upgrade', 'hike');
-            } else if (utils.microAppUpgradeRequired(profile_data.app_v, platformSdk.appData.mAppVersionCode)) {
+            } else if (utils.upgradeRequired(profile_data.app_v, platformSdk.appData.mAppVersionCode.true)) {
                 App.router.navigateTo('/upgrade', 'ninja');
             } else if (profile_data.status == 'inactive' || profile_data.status == 'locked') {
                 App.router.navigateTo('/userState', profile_data.data);

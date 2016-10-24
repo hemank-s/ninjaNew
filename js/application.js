@@ -37,85 +37,113 @@
         var emojiQuestions = [];
         var textQuestions = [];
 
+
+
         var feedbackData = {
             "feedback": {
                 "launch_screen": "/",
+                "title_emoji": "https://staging.im.hike.in/sticker?catId=excusenglish&stId=007_exe_idk.png&resId=XHDPI&image=True",
                 "mdata": [{
                     "qid": 1,
-                    "title_emoji": "https://staging.im.hike.in/sticker?catId=excusenglish&stId=007_exe_idk.png&resId=XHDPI&image=True",
                     "title_options": [{
                         "aid": 1,
-                        "answer_emoji": "https://staging.im.hike.in/sticker?catId=malaylove2&stId=010_kll2_vellathe.png&resId=XHDPI&image=True"
+                        "answer_emoji": "https://s-media-cache-ak0.pinimg.com/564x/44/34/f5/4434f5f63b3a0994a4e8412d178a29ac.jpg"
                     }, {
                         "aid": 2,
-                        "answer_emoji": "https://staging.im.hike.in/sticker?catId=expressions&stId=059_loveyou.png&resId=XHDPI&image=True"
+                        "answer_emoji": "https://4.bp.blogspot.com/-oos28eSe-rE/Vud2j-kTc8I/AAAAAAAACLA/NGV8TBnDLHs221yMlzbn968ppf3zaftJA/s1600/uh-oh-smiley.jpg"
+                    }, {
+                        "aid": 3,
+                        "answer_emoji": "https://s-media-cache-ak0.pinimg.com/236x/0b/8b/f5/0b8bf599defde741aa9228ace6203092.jpg"
+                    }, {
+                        "aid": 4,
+                        "answer_emoji": "https://lh4.ggpht.com/9HID9PrbyXvGJbmViL8TSJJJt9iR_RovFfSlKaNC6Vdy7I710mOB1OXfl2EiSTKeMMbm=w300"
                     }],
                     "title_question": "Did you like Hike ninja ?",
                     "type": "emoji"
                 }, {
                     "qid": 2,
-                    "title_emoji": "https://staging.im.hike.in/sticker?catId=excusenglish&stId=007_exe_idk.png&resId=XHDPI&image=True",
-                    "title_options": [{
-                        "aid": 3,
-                        "answer_text": "rewards"
-                    }, {
-                        "aid": 4,
-                        "answer_text": "why"
-                    }],
                     "title_question": "What more rewards would you like ?",
                     "type": "text"
                 }]
             }
         };
 
+
+
+        var feedbackQuestions = feedbackData.feedback.mdata;
+        var html = '';
+        var emojiTemplate = require('raw!../templates/emojiQuesTemplate.html');
+        var textTemplate = require('raw!../templates/textQuesTemplate.html');
+        var quesContainer = document.getElementsByClassName('quesContainer')[0];
+
+
+        for (var i = 0; i < feedbackQuestions.length; i++) {
+
+
+            if (feedbackQuestions[i].type == 'emoji')
+                html += Mustache.render(unescape(emojiTemplate), feedbackQuestions[i]);
+            else if (feedbackQuestions[i].type == 'text')
+                html += Mustache.render(unescape(textTemplate), feedbackQuestions[i]);
+
+            // if (feedbackQuestions[i].type == 'emoji') {
+            //     emojiQuestions.push(feedbackQuestions[i]);
+            // } else if (feedbackQuestions[i].type == 'text') {
+            //     textQuestions.push(feedbackQuestions[i]);
+            // }
+        }
+
+        quesContainer.innerHTML = html;
+
         var feedbackDomCache = {
-            questionText: document.getElementsByClassName('questionText')[0],
             questionEmoji: document.getElementsByClassName('questionEmoji')[0],
+            questionText: document.getElementsByClassName('questionText')[0],
             feedbackContainer: document.getElementsByClassName('feedbackContainer')[0],
             emojiFeedback: document.getElementsByClassName('emojiFeedback')[0],
+            closeFeedbackEmoji: document.getElementsByClassName('closeFeedbackEmoji')[0],
+            closeFeedbackText: document.getElementsByClassName('closeFeedbackText')[0],
+            successScreen: document.getElementsByClassName('feedbackSuccess')[0],
+            submitNinjaFeedback: document.getElementsByClassName('submitNinjaFeedback')[0],
+            emojiContainer: document.getElementsByClassName('emoji-feedback')[0],
         };
 
-        var feedbackQuestions = feedbackData.mdata;
-
-        for (var i = 0; i < feedbackQuestions.data; i++) {
-            if (feedbackQuestions[i].type == 'emoji') {
-                emojiQuestions.push(feedbackQuestions[i]);
-            } else if (feedbackQuestions[i].type == 'text') {
-                textQuestions.push(feedbackQuestions[i]);
-            }
-        }
 
         var questionEmojiAnswer = feedbackDomCache.questionEmoji.getElementsByClassName('questionEmojiAnswer');
 
         for (var j = 0; j < questionEmojiAnswer.length; j++) {
             questionEmojiAnswer[j].addEventListener('click', function() {
+                console.log('Server Call');
                 feedbackDomCache.questionEmoji.classList.add('hide');
                 feedbackDomCache.questionText.classList.remove('hide');
+                feedbackDomCache.emojiFeedback.classList.add('hide');
             }, false);
         }
 
-        var closeFeedbackEmoji = questionEmoji.getElementsByClassName('closeFeedback')[0];
-        var closeFeedbackText = questionText.getElementsByClassName('closeFeedback')[0];
-
-        var submitNinjaFeedback = questionText.getElementsByClassName('submitNinjaFeedback')[0];
-
-        closeFeedbackEmoji.addEventListener('click', function() {
-            feedbackContainer.classList.add('hideClass');
+        /* Close of first question emoji */
+        feedbackDomCache.closeFeedbackEmoji.addEventListener('click', function() {
+            feedbackDomCache.questionEmoji.classList.add('hide');
         }, false);
 
-        closeFeedbackEmoji.addEventListener('click', function() {
-            feedbackContainer.classList.add('hideClass');
+
+        /* Close of second question text */
+        feedbackDomCache.closeFeedbackText.addEventListener('click', function() {
+            feedbackDomCache.questionText.classList.add('hide');
+            feedbackDomCache.successScreen.classList.remove('hide');
         }, false);
 
-        submitNinjaFeedback.addEventListener('click', function() {
-            console.log("Submitting user feedback :: Show success Screen here :: with close button and close");
+
+        /* Click on Submit */
+        feedbackDomCache.submitNinjaFeedback.addEventListener('click', function() {
+
+            console.log('Server Call');
+            feedbackDomCache.questionText.classList.add('hide');
+            feedbackDomCache.successScreen.classList.remove('hide');
         }, false);
 
+        /* Click on smiley*/
         feedbackDomCache.emojiFeedback.addEventListener('click', function() {
-            console.log("emoji clicked");
-            var questionEmoji = document.getElementsByClassName('questionEmoji')[0];
-            emojiFeedback.classList.add('hide');
-            questionEmoji.classList.remove('hide');
+            feedbackDomCache.emojiContainer.classList.add('right0');
+            feedbackDomCache.emojiFeedback.classList.add('hide');
+            feedbackDomCache.questionEmoji.classList.remove('hide');
         }, false);
     };
 
@@ -467,9 +495,6 @@
 
         backPressTrigger: function() {
 
-
-
-
             var loader = document.getElementById('loader');
             var ugcContainer = document.querySelectorAll('.ugcContainer');
             var customHistoryWrapper = document.querySelectorAll('.customHistoryWrapper');
@@ -697,9 +722,9 @@
                     var newHash = res.data.rewards_hash;
                     utils.hashCheck(oldHash, newHash);
                     if (platformSdk.bridgeEnabled) {
-                        if (utils.upgradeRequired(res.data.hike_version, platformSdk.appData.appVersion)) {
+                        if (utils.upgradeRequired(res.data.hike_version, platformSdk.appData.appVersion, false)) {
                             self.router.navigateTo('/upgrade', 'hike');
-                        } else if (utils.microAppUpgradeRequired(res.data.app_v, platformSdk.appData.mAppVersionCode)) {
+                        } else if (utils.upgradeRequired(res.data.app_v, platformSdk.appData.mAppVersionCode, true)) {
                             self.router.navigateTo('/upgrade', 'ninja');
                         } else if (res.data.status == 'inactive' || res.data.status == 'locked') {
                             self.router.navigateTo('/userState', res.data);

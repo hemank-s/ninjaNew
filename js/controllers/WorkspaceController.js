@@ -68,9 +68,9 @@
                                     utils.hashCheck(oldHash, newHash);
 
                                     if (platformSdk.bridgeEnabled) {
-                                        if (utils.upgradeRequired(res.data.hike_version, platformSdk.appData.appVersion)) {
+                                        if (utils.upgradeRequired(res.data.hike_version, platformSdk.appData.appVersion, false)) {
                                             App.router.navigateTo('/upgrade', 'hike');
-                                        } else if (utils.microAppUpgradeRequired(res.data.app_v, platformSdk.appData.mAppVersionCode)) {
+                                        } else if (utils.upgradeRequired(res.data.app_v, platformSdk.appData.mAppVersionCode, true)) {
                                             App.router.navigateTo('/upgrade', 'ninja');
                                         } else if (res.data.status == 'inactive' || res.data.status == 'locked') {
                                             App.router.navigateTo('/userState', res.data);

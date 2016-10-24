@@ -1,0 +1,14 @@
+<div class="emoji-box hide light reactions-box questionEmoji" data-qid="{{qid}}">
+    <div class="closeFeedbackEmoji">
+        <a class="icon-close" href="#">×</a>
+    </div>
+    <p class="questionEmojiQuestion">{{title_question}} ?</p>
+    <div class="reactions-list">
+        {{#title_options}}
+        <div class="questionEmojiAnswer" data-aid="{{aid}}">
+            <a class="feedback-icon icon-heart_eyes" data-emoji-code="heart_eyes" data-emoji-id="2" href="#"><img alt="1f60d" class="emoji-icon-small" src="{{answer_emoji}}">
+            </a>
+        </div>
+        {{/title_options}}
+    </div>
+</div>

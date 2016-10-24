@@ -210,6 +210,41 @@
 
         },
 
+        logData: function(data) {
+
+            data.k = "act_exp";
+            data.o = "gif_share";
+            data.uk = "gif_share";
+
+            if (platformSdk.bridgeEnabled) {
+                if (platformSdk.appData.helperData.api == 1)
+                    data.v = "giphy";
+                else
+                    data.v = "riffsy";
+
+            } else {
+                if (Constants.API_GIF == 1)
+                    data.v = "giphy";
+                else
+                    data.v = "riffsy";
+            }
+
+
+            data.p = (data.p == null || typeof data.p == 'undefined') ? null : data.p;
+            data.fa = (data.fa == null || typeof data.fa == 'undefined') ? null : data.fa;
+            data.g = (data.g == null || typeof data.g == 'undefined') ? null : data.g;
+            data.s = (data.s == null || typeof data.s == 'undefined') ? null : data.s;
+            data.f = (data.f == null || typeof data.f == 'undefined') ? null : data.f;
+            data.ra = (data.ra == null || typeof data.ra == 'undefined') ? null : data.o;
+
+
+            if (platformSdk.bridgeEnabled)
+                platformSdk.utils.logAnalytics("true", "click", data);
+            else
+                console.log(data);
+
+        }
+
 
 
         // Rewards Service For Ninja 
