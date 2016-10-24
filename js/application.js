@@ -32,8 +32,6 @@
     var notifToast = document.getElementById('notifToast');
 
 
-
-
     // Notifications Toast
     var nToastObject = events.subscribe('update.notif.toast', function(params) {
 
@@ -766,7 +764,7 @@
             }
 
             if (!subscriptionCompleted || !ftueCompleted) {
-                self.router.navigateTo('/');
+                self.router.navigateTo('/home');
             } else {
                 self.NinjaService.getNinjaProfile(function(res) {
                     cacheProvider.setInCritical('userProfileData', res.data);

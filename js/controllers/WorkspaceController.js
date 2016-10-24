@@ -127,7 +127,7 @@
     WorkspaceController.prototype.subscribeScreenAnimation = function(DOMcache, App, template) {
 
         DOMcache.centerIcon.classList.remove('scaleZeroToOneAnim');
-        //DOMcache.centerIcon.style.opacity = 0;
+        DOMcache.centerIcon.style.opacity = 0;
         DOMcache.centerIcon.style.height = "0px";
         DOMcache.screenCls.classList.remove('subscribeScreen');
         DOMcache.screenCls.classList.add('ftueScreen');

@@ -72,6 +72,8 @@
         that.checkMysteryBoxStatus(mysteryBoxData, DOMcache, App);
         that.checkBatteryStatus(profileData, DOMcache);
 
+        showNewRewardAnimation = true;
+
         if (showNewRewardAnimation) {
             that.newRewardUnlockAnimation(DOMcache);
         } else {
