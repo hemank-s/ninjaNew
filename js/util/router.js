@@ -1,7 +1,8 @@
 (function(W, events) {
     'use strict';
 
-    var cacheProvider = require('./cacheProvider');
+    var cacheProvider = require('./cacheProvider'),
+        utils = require('./utils.js');
 
     var Router = function() {
         this.routes = {};
@@ -43,6 +44,8 @@
 
         var historyTop = this.history[this.history.length - 1];
 
+        utils.checkFeedback(route);
+
         if (historyTop && historyTop.route === route) {
             if (data.subPath !== undefined && (data.subPath === historyTop.data.subPath)) {
                 return;
@@ -56,6 +59,7 @@
         } else {
 
             /* Don't store mystery box path in route */
+
             if (route != "/mysteryBox") {
                 this.history.push({
                     route: route,
@@ -82,6 +86,8 @@
         if (history.length !== 1) {
             history.pop();
         }
+
+        utils.checkFeedback(historyItem.route);
 
         historyItem = history[history.length - 1];
 

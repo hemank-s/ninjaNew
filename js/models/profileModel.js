@@ -94,7 +94,7 @@
                         res = JSON.parse(decodeURIComponent(res));
 
                         ninjaProfileData.name = res.name;
-                        ninjaProfileData.dp = res.fp;
+                        ninjaProfileData.dp = res.dp;
 
                         console.log("NINJA PROFILE DATA IS", ninjaProfileData);
 

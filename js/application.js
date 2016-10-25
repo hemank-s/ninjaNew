@@ -187,91 +187,35 @@
         // Three Dot Menu Overflow Events Subscriptions
         defnineNinjaFeedback: function() {
             var self = this;
-            var emojiQuestions = [];
-            var textQuestions = [];
-
-            var feedbackData = {
-                "feedback": {
-                    "launch_screen": "/",
-                    "title_emoji": "https://staging.im.hike.in/sticker?catId=excusenglish&stId=007_exe_idk.png&resId=XHDPI&image=True",
-                    "mdata": [{
-                        "qid": 1,
-                        "title_options": [{
-                            "aid": 1,
-                            "answer_emoji": "https://s-media-cache-ak0.pinimg.com/564x/44/34/f5/4434f5f63b3a0994a4e8412d178a29ac.jpg"
-                        }, {
-                            "aid": 2,
-                            "answer_emoji": "https://4.bp.blogspot.com/-oos28eSe-rE/Vud2j-kTc8I/AAAAAAAACLA/NGV8TBnDLHs221yMlzbn968ppf3zaftJA/s1600/uh-oh-smiley.jpg"
-                        }, {
-                            "aid": 3,
-                            "answer_emoji": "https://s-media-cache-ak0.pinimg.com/236x/0b/8b/f5/0b8bf599defde741aa9228ace6203092.jpg"
-                        }, {
-                            "aid": 4,
-                            "answer_emoji": "https://lh4.ggpht.com/9HID9PrbyXvGJbmViL8TSJJJt9iR_RovFfSlKaNC6Vdy7I710mOB1OXfl2EiSTKeMMbm=w300"
-                        }],
-                        "title_question": "Did you like Hike ninja ?",
-                        "type": "emoji"
-                    }, {
-                        "qid": 2,
-                        "title_question": "What more rewards would you like ?",
-                        "type": "text"
-                    }]
-                }
-            };
 
 
 
-            var feedbackQuestions = feedbackData.feedback.mdata;
-            var html = '';
-            var emojiTemplate = require('raw!../templates/emojiQuesTemplate.html');
-            var textTemplate = require('raw!../templates/textQuesTemplate.html');
-            var quesContainer = document.getElementsByClassName('quesContainer')[0];
+            document.addEventListener('click', function(e) {
+
+                var target = e.target;
+
+                if (target.classList.contains('emoji-icon-small')) {
 
 
-            for (var i = 0; i < feedbackQuestions.length; i++) {
-
-
-                if (feedbackQuestions[i].type == 'emoji')
-                    html += Mustache.render(unescape(emojiTemplate), feedbackQuestions[i]);
-                else if (feedbackQuestions[i].type == 'text')
-                    html += Mustache.render(unescape(textTemplate), feedbackQuestions[i]);
-            }
-
-            quesContainer.innerHTML = html;
-
-            var feedbackDomCache = {
-                questionEmoji: document.getElementsByClassName('questionEmoji')[0],
-                questionText: document.getElementsByClassName('questionText')[0],
-                feedbackContainer: document.getElementsByClassName('feedbackContainer')[0],
-                emojiFeedback: document.getElementsByClassName('emojiFeedback')[0],
-                closeFeedbackEmoji: document.getElementsByClassName('closeFeedbackEmoji')[0],
-                closeFeedbackText: document.getElementsByClassName('closeFeedbackText')[0],
-                successScreen: document.getElementsByClassName('feedbackSuccess')[0],
-                submitNinjaFeedback: document.getElementsByClassName('submitNinjaFeedback')[0],
-                emojiContainer: document.getElementsByClassName('emoji-feedback')[0],
-            };
-
-
-            var questionEmojiAnswer = feedbackDomCache.questionEmoji.getElementsByClassName('questionEmojiAnswer');
-
-            for (var j = 0; j < questionEmojiAnswer.length; j++) {
-                questionEmojiAnswer[j].addEventListener('click', function() {
-
-                    var url = appConfig.API_URL + '/feedback/' + this.parentNode.parentNode.getAttribute('data-qid');
+                    var url = appConfig.API_URL + '/feedback/' + target.parentNode.parentNode.parentNode.getAttribute('data-qid');
                     var data = {
                         "feedback": {
-                            aid: this.getAttribute('data-aid'),
+                            aid: target.getAttribute('data-aid'),
                             type: "emoji",
                             a_text: ""
                         }
                     }
 
+                    var questionEmoji = document.getElementsByClassName('questionEmoji')[0];
+                    var questionText = document.getElementsByClassName('questionText')[0];
+                    var emojiFeedback = document.getElementsByClassName('emojiFeedback')[0];
+
                     if (platformSdk.bridgeEnabled) {
                         self.NinjaService.submitFeedback(url, data, function(res) {
                             if (res.stat == "ok") {
-                                feedbackDomCache.questionEmoji.classList.add('hide');
-                                feedbackDomCache.questionText.classList.remove('hide');
-                                feedbackDomCache.emojiFeedback.classList.add('hide');
+                                questionEmoji.classList.add('hide');
+                                questionText.classList.remove('hide');
+                                emojiFeedback.classList.add('hide');
                                 cacheProvider.setInCritical('feedbackData', '');
                             } else if (res.stat == 'fail') {
                                 events.publish('update.notif.toast', { show: true, heading: 'Bamm', details: res.data.reason, notifType: 'notifNeutral' });
@@ -280,76 +224,89 @@
                             }
                         }, self);
                     } else {
-                        feedbackDomCache.questionEmoji.classList.add('hide');
-                        feedbackDomCache.questionText.classList.remove('hide');
-                        feedbackDomCache.emojiFeedback.classList.add('hide');
+                        questionEmoji.classList.add('hide');
+                        questionText.classList.remove('hide');
+                        emojiFeedback.classList.add('hide');
                     }
-                }, false);
-            }
 
-            /* Close of first question emoji */
-            feedbackDomCache.closeFeedbackEmoji.addEventListener('click', function() {
-                feedbackDomCache.questionEmoji.classList.add('hide');
-            }, false);
+                } else if (target.parentNode.classList.contains('closeFeedbackEmoji')) {
+                    var questionEmoji = document.getElementsByClassName('questionEmoji')[0];
+                    questionEmoji.classList.add('hide');
+                } else if (target.parentNode.classList.contains('closeFeedbackText')) {
 
+                    var questionText = document.getElementsByClassName('questionText')[0];
+                    var successScreen = document.getElementsByClassName('feedbackSuccess')[0];
+                    var emojiContainer = document.getElementsByClassName('emoji-feedback')[0];
 
-            /* Close of second question text */
-            feedbackDomCache.closeFeedbackText.addEventListener('click', function() {
-                feedbackDomCache.questionText.classList.add('hide');
-                feedbackDomCache.successScreen.classList.remove('hide');
-                feedbackDomCache.emojiContainer.classList.remove('right0');
-                window.setTimeout(function() {
-                    feedbackDomCache.successScreen.classList.add('animation_fadeout');
-                }, 1400);
-            }, false);
-
-
-            /* Click on Submit */
-            feedbackDomCache.submitNinjaFeedback.addEventListener('click', function() {
-
-                var url = appConfig.API_URL + '/feedback/' + this.parentNode.parentNode.getAttribute('data-qid');
-                var data = {
-                    "feedback": {
-                        aid: "",
-                        type: "text",
-                        a_text: document.getElementById('follow-up-response').value
-                    }
-                };
-
-                if (platformSdk.bridgeEnabled) {
-                    self.NinjaService.submitFeedback(url, data, function(res) {
-                        if (res.stat == "ok") {
-                            feedbackDomCache.questionText.classList.add('hide');
-                            feedbackDomCache.successScreen.classList.remove('hide');
-                            feedbackDomCache.emojiContainer.classList.remove('right0');
-                            cacheProvider.setInCritical('feedbackData', '');
-
-                            window.setTimeout(function() {
-                                feedbackDomCache.successScreen.classList.add('animation_fadeout');
-                            }, 1400);
-                        } else if (res.stat == 'fail') {
-                            events.publish('update.notif.toast', { show: true, heading: 'Bamm', details: res.data.reason, notifType: 'notifNeutral' });
-                        } else {
-                            events.publish('update.notif.toast', { show: true, heading: 'Bamm', details: "Something went wrong. Please try again", notifType: 'notifNeutral' });
-                        }
-                    }, self);
-                } else {
-                    feedbackDomCache.questionText.classList.add('hide');
-                    feedbackDomCache.successScreen.classList.remove('hide');
-                    feedbackDomCache.emojiContainer.classList.remove('right0');
-
+                    questionText.classList.add('hide');
+                    successScreen.classList.remove('hide');
+                    emojiContainer.classList.remove('right0');
                     window.setTimeout(function() {
-                        feedbackDomCache.successScreen.classList.add('animation_fadeout');
+                        successScreen.classList.add('animation_fadeout');
                     }, 1400);
-                }
-            }, false);
 
-            /* Click on smiley*/
-            feedbackDomCache.emojiFeedback.addEventListener('click', function() {
-                feedbackDomCache.emojiContainer.classList.add('right0');
-                feedbackDomCache.emojiFeedback.classList.add('hide');
-                feedbackDomCache.questionEmoji.classList.remove('hide');
-            }, false);
+                } else if (target.classList.contains('submitNinjaFeedback')) {
+
+                    var url = appConfig.API_URL + '/feedback/' + target.parentNode.parentNode.getAttribute('data-qid');
+                    var data = {
+                        "feedback": {
+                            aid: "",
+                            type: "text",
+                            a_text: document.getElementById('follow-up-response').value
+                        }
+                    };
+
+                    var questionText = document.getElementsByClassName('questionText')[0];
+                    var successScreen = document.getElementsByClassName('feedbackSuccess')[0];
+                    var emojiContainer = document.getElementsByClassName('emoji-feedback')[0];
+
+                    if (platformSdk.bridgeEnabled) {
+                        self.NinjaService.submitFeedback(url, data, function(res) {
+                            if (res.stat == "ok") {
+                                questionText.classList.add('hide');
+                                successScreen.classList.remove('hide');
+                                emojiContainer.classList.remove('right0');
+                                cacheProvider.setInCritical('feedbackData', '');
+
+                                window.setTimeout(function() {
+                                    successScreen.classList.add('animation_fadeout');
+                                }, 1400);
+                            } else if (res.stat == 'fail') {
+                                events.publish('update.notif.toast', { show: true, heading: 'Bamm', details: res.data.reason, notifType: 'notifNeutral' });
+                            } else {
+                                events.publish('update.notif.toast', { show: true, heading: 'Bamm', details: "Something went wrong. Please try again", notifType: 'notifNeutral' });
+                            }
+                        }, self);
+                    } else {
+                        questionText.classList.add('hide');
+                        successScreen.classList.remove('hide');
+                        emojiContainer.classList.remove('right0');
+
+                        window.setTimeout(function() {
+                            successScreen.classList.add('animation_fadeout');
+                        }, 1400);
+                    }
+                } else if (target.classList.contains('emojiFeedback') || target.classList.contains('feedbackSmiley') ||
+                    target.classList.contains('bullet')) {
+
+                    var questionEmoji = document.getElementsByClassName('questionEmoji')[0];
+                    var emojiContainer = document.getElementsByClassName('emoji-feedback')[0];
+                    var emojiFeedback = document.getElementsByClassName('emojiFeedback')[0];
+
+                    emojiContainer.classList.add('right0');
+                    emojiFeedback.classList.add('hide');
+                    questionEmoji.classList.remove('hide');
+                }
+
+            })
+
+
+
+
+
+
+
+
         },
 
         OverflowEvents: function() {
@@ -770,6 +727,10 @@
                     var oldHash = cacheProvider.getFromCritical('oldHash');
                     var newHash = res.data.rewards_hash;
                     utils.hashCheck(oldHash, newHash);
+
+                    if (res.data.feedback)
+                        cacheProvider.setInCritical('feedbackData', res.data.feedback);
+
                     if (platformSdk.bridgeEnabled) {
                         if (utils.upgradeRequired(res.data.hike_version, platformSdk.appData.appVersion, false)) {
                             self.router.navigateTo('/upgrade', 'hike');

@@ -67,6 +67,9 @@
                                     var newHash = res.data.rewards_hash;
                                     utils.hashCheck(oldHash, newHash);
 
+                                    if (res.data.feedback)
+                                        cacheProvider.setInCritical('feedbackData', res.data.feedback);
+
                                     if (platformSdk.bridgeEnabled) {
                                         if (utils.upgradeRequired(res.data.hike_version, platformSdk.appData.appVersion, false)) {
                                             App.router.navigateTo('/upgrade', 'hike');

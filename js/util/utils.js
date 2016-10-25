@@ -288,6 +288,54 @@
 
         },
 
+        checkFeedback: function(currentRouter) {
+
+
+            if (!platformSdk.bridgeEnabled)
+                return;
+
+
+
+            var feedbackData = cacheProvider.getFromCritical('feedbackData');
+
+            if (feedbackData && typeof feedbackData.feedback != "undefined") {
+
+                if (feedbackData.feedback.launch_screen === "/") {
+
+                } else {
+                    if (currentRouter != feedbackData.feedback.launch_screen)
+                        return;
+                }
+
+                var feedbackQuestions = feedbackData.feedback.mdata;
+                var html = '';
+                var emojiTemplate = require('raw!../../templates/emojiQuesTemplate.html');
+                var textTemplate = require('raw!../../templates/textQuesTemplate.html');
+                var quesContainer = document.getElementsByClassName('quesContainer')[0];
+
+                for (var i = 0; i < feedbackQuestions.length; i++) {
+
+                    if (feedbackQuestions[i].type == 'emoji')
+                        html += Mustache.render(unescape(emojiTemplate), feedbackQuestions[i]);
+                    else if (feedbackQuestions[i].type == 'text')
+                        html += Mustache.render(unescape(textTemplate), feedbackQuestions[i]);
+                }
+
+                quesContainer.innerHTML = html;
+
+                var emojiFeedback = document.getElementsByClassName('emojiFeedback');
+                emojiFeedback[0].classList.remove('hide');
+
+            } else {
+
+
+                var emojiFeedback = document.getElementsByClassName('emojiFeedback');
+                if (emojiFeedback.length > 0)
+                    emojiFeedback[0].classList.add('hide');
+            }
+
+        },
+
         debounce: function(func, wait, immediate) {
             var timeout;
             return function() {

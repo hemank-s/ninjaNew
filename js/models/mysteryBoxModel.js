@@ -128,6 +128,10 @@
                                 console.log('REUPDATING THE PROFILE', res.data);
                                 cacheProvider.setInCritical('userProfileData', res.data);
                                 var oldHash = cacheProvider.getFromCritical('oldHash');
+
+                                if (res.data.feedback)
+                                    cacheProvider.setInCritical('feedbackData', res.data.feedback);
+
                                 var newHash = res.data.rewards_hash;
                                 utils.hashCheck(oldHash, newHash);
                                 if (res.data.status != 'inactive' && res.data.status != 'locked') {
@@ -223,7 +227,7 @@
 
             var setText = function(a, c) {
                 a.addEventListener('transitionend', function() {
-                    var mysteryBoxSpinning  = false;
+                    var mysteryBoxSpinning = false;
                     cacheProvider.setInCritical('mysteryBoxSpinning', mysteryBoxSpinning);
 
                     that.defineMysteryBoxResultAnimation(App, rewardData, mysteryBoxData);
@@ -237,7 +241,7 @@
 
             spin.addEventListener('click', function() {
 
-                var mysteryBoxSpinning  = true;
+                var mysteryBoxSpinning = true;
                 cacheProvider.setInCritical('mysteryBoxSpinning', mysteryBoxSpinning);
 
                 rotations++;
