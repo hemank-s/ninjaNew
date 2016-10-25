@@ -37,11 +37,12 @@
         height: 184px;
     }
     .customStatusCta {
-        @include fontStyle(14px, 500, #ffffff, 14px);
+        @include fontStyle(16px, 500, #ffffff, 14px);
         position: absolute;
         text-align: center;
         width: 100%;
         bottom: 53px;
+        text-transform: uppercase;
     }
     .sendStickerCta {
         text-transform: uppercase;

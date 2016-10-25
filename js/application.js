@@ -666,7 +666,7 @@
             var noInternet = document.getElementById('nointernet');
             var noInternetObject = events.subscribe('app/offline', function(params) {
                 noInternet.toggleClass('no-internet-msg', params.show);
-
+                utils.toggleBackNavigation(false);
             });
 
             platformSdk.events.subscribe('onBackPressed', function() {
