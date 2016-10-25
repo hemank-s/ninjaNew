@@ -220,6 +220,7 @@
     display: block;
     width: 140px;
     height: 120px;
+    background: url(images/stateLocked.png);
     background-position: center;
     background-repeat: no-repeat;
 }
@@ -254,7 +255,7 @@
     .noInternetAction {
         font-size: 12px !important;
     }
-    .stateIcon{
-        margin: 32px auto 24px auto !important; 
+    .stateIcon {
+        margin: 32px auto 24px auto !important;
     }
 }

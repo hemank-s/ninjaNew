@@ -47,7 +47,7 @@
                             <div class="streakValueInfo">{{ninjaProfile.streak}}</div>
                         </div>
                     </div>
-                    <p class="dayInformation">This is the number of days you’ve been a Ninja for. Continue being a Ninja every day to go higher and get more awesome gifts.</p>
+                    <p class="dayInformation">You have been a Ninja for {{ninjaProfile.streak}} days. Keep using hike every day to increase your Ninja Days and get more awesome gifts.</p>
                 </div>
                 <hr class="infoSep" noshade>
                 <div class="batteryInfoWrapper">
@@ -56,7 +56,7 @@
                         <div class="batteryIconContainer">
                         </div>
                     </div>
-                    <p class="batteryInformation">You’re going to reaming a Ninja for {{ninjaProfile.battery}} more days. Keep loving and using hike with your best friends to be a Ninja for more days and get more awesome gifts.</p>
+                    <p class="batteryInformation">You’ll remain a Ninja for {{ninjaProfile.battery}} more days. Keep loving and using hike with your best friends to increase your Ninja Life. If it becomes 0, you lose your Ninja status.</p>
                 </div>
                 <div class="informationAction">Got It</div>
             </div>
@@ -292,7 +292,7 @@
                                 {{/streak}}
                             </li>
                             {{/ninjaLockedRewards}} {{^ninjaLockedRewards}}
-                            <div class="emptyStateLockedRewards align-center">New rewards are coming your way really soon!</div>
+                            <div class="emptyStateLockedRewards align-center">Good things come to those who wait.</div>
                             {{/ninjaLockedRewards}}
                         </ul>
                     </div>
@@ -312,7 +312,7 @@
         <div class="mysteryBoxToastIconSmall"></div>
     </div>
     <div class="mysteryBoxToastText">
-        Your lucky box is ready
+        Your daily surprise is ready!
     </div>
-    <div class="mysteryBoxToastAction">Spin now</div>
+    <div class="mysteryBoxToastAction">Get it</div>
 </div>

@@ -84,7 +84,7 @@
                 console.log(res);
                 if (res.stat == "ok") {
                     if (retry) {
-                        events.publish('update.notif.toast', { show: true, heading: 'Yey!', details: 'The feature has been reactivated as per your request.', notifType: 'notifSuccess' });
+                        events.publish('update.notif.toast', { show: true, heading: 'Yaay!', details: 'The feature has been reactivated for you.', notifType: 'notifSuccess' });
                     } else {
                         that.template = require('raw!../../templates/exclusiveFeatureDetails.html');
                         DOMcache.exclusiveFeatureContainer.innerHTML = Mustache.render(that.template, {
@@ -159,9 +159,9 @@
 
         if (!color) {
             var rewardColorMapping = cacheProvider.getFromCritical('rewardColorMapping');
-            if(rewardColorMapping && rewardColorMapping[rid]){
+            if (rewardColorMapping && rewardColorMapping[rid]) {
                 hexcolor = rewardColorMapping[rid];
-            }else{
+            } else {
                 hexcolor = '#3D475B';
             }
         } else {

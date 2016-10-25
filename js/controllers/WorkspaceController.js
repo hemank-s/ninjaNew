@@ -80,7 +80,7 @@
                                     }
                                 }, that);
                             } else
-                                events.publish('update.notif.toast', { show: true, heading: 'Bamm', details: 'Something went wrong while subscribing', notifType: 'notifNeutral' });
+                                events.publish('update.notif.toast', { show: true, heading: 'Oh!', details: 'Something went wrong. Please come back in some time.', notifType: 'notifNeutral' });
                         }, that);
 
                     } else {
@@ -133,7 +133,7 @@
         DOMcache.screenCls.classList.add('ftueScreen');
         DOMcache.title.classList.add('titleAnimFtueCls');
         DOMcache.title.classList.add('animation_fadeout');
-        DOMcache.title.innerHTML = "What do you get?";
+        DOMcache.title.innerHTML = "What do I get?";
         DOMcache.content.innerHTML = Mustache.render(unescape(template));
         DOMcache.bottomSection.classList.remove('slideFromBottomCls');
         //DOMcache.bottomSection.classList.add('slideFromBottomCls2');

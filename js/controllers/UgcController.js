@@ -88,7 +88,7 @@
 
         DOMcache.quoteName[0].oninput = function() {
             DOMcache.userInput[0].innerHTML = this.textContent.length;
-        }
+        };
 
 
         DOMcache.quoteAuthor[0].addEventListener('keyup', function() {
@@ -233,7 +233,7 @@
                 DOMcache.jflNote[0].innerHTML = "Don’t send any inappropriate image, or it won’t be published.";
                 DOMcache.jflImage[0].classList.remove('hideClass');
                 DOMcache.jflCtaContainer[0].classList.remove('hideClass');
-            }
+            };
         } else {
 
             var aspectRatio = 163 / 115;
@@ -300,13 +300,13 @@
                 uploadUrl: serverPath,
                 doCompress: true,
                 filePath: imageElement.getAttribute('filePath')
-            }
+            };
             imagePresent = true;
 
         } else {
             ugcData = {
                 uploadUrl: serverPath,
-            }
+            };
             imagePresent = false;
 
         }
@@ -333,7 +333,7 @@
 
                     DOMcache.successCard[0].classList.remove('hideClass');
                 } else if (res.stat == 'fail') {
-                    events.publish('update.notif.toast', { show: true, heading: 'Error', details: res.data.reason, notifType: 'notifError' });
+                    events.publish('update.notif.toast', { show: true, heading: 'Error ', details: res.data.reason, notifType: 'notifError ' });
                 } else if (res.stat == "exception") {
                     events.publish('update.notif.toast', { show: true, heading: 'Bamm', details: 'Sorry. Your image couldn’t be updated. Could you try again with another files, please?', notifType: 'notifNeutral' });
                 } else {
@@ -417,16 +417,16 @@
         if (DOMcache.quoteName[0].innerHTML.length > Constants.MAX_LENGTH_QUOTE) {
 
             if (eventType == 'click')
-                events.publish('update.notif.toast', { show: true, heading: 'Bamm', details: 'Add only ' + Constants.MAX_LENGTH_QUOTE + ' Characters', notifType: 'notifNeutral' });
+                events.publish('update.notif.toast', { show: true, heading: 'Error!', details: 'Only ' + Constants.MAX_LENGTH_QUOTE + ' characters please!', notifType: 'notifNeutral' });
         } else if (DOMcache.quoteName[0].innerHTML.length === 0 && DOMcache.quoteAuthor[0].innerHTML.length === 0) {
 
             if (eventType == 'click')
-                events.publish('update.notif.toast', { show: true, heading: 'Bamm', details: 'Add a quote & author', notifType: 'notifNeutral' });
+                events.publish('update.notif.toast', { show: true, heading: 'Error!', details: 'Add a Quote & Author both', notifType: 'notifNeutral' });
         } else if (DOMcache.quoteName[0].innerHTML.length === 0 && DOMcache.quoteAuthor[0].innerHTML.length !== 0) {
 
             if (eventType == 'click') {
                 if (data.type == Constants.UGC_TYPE.FACT)
-                    events.publish('update.notif.toast', { show: true, heading: 'Bamm', details: 'Add a Fact', notifType: 'notifNeutral' });
+                    events.publish('update.notif.toast', { show: true, heading: 'Error!', details: 'Add a Fact', notifType: 'notifNeutral' });
                 else
                     DOMcache.quoteName[0].focus();
             }

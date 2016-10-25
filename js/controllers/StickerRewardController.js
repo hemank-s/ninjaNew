@@ -107,7 +107,7 @@
             DOMcache.stickerActionDownload.style.opacity = 1;
             DOMcache.stickerActionDownload.fontWeight = 500;
 
-            events.publish('update.notif.toast', { show: true, heading: 'Oops!', details: 'This pack will only be available after the cooldown has ended. Check back soon', notifType: 'notifNeutral' });
+            events.publish('update.notif.toast', { show: true, heading: 'Take a break?', details: 'This pack will only be available after some time. See you again later.', notifType: 'notifNeutral' });
             return;
         }
 
@@ -129,7 +129,7 @@
                     dataToSend.rewardId = rId;
 
                     App.NinjaService.recallRewardDetails(dataToSend, function(res2) {
-                        events.publish('update.notif.toast', { show: true, heading: 'Awesome Choice!', details: 'You can view your sticker in the sticker palette. Start Sharing', notifType: 'notifSuccess' });
+                        events.publish('update.notif.toast', { show: true, heading: 'Awesome Choice!', details: 'Go back and start chatting. You can see this pack in the Stickers section in your chat now!', notifType: 'notifSuccess' });
                         that.template = require('raw!../../templates/stickerPackListTemplate.html');
 
                         DOMcache.stickerRewardContainer.innerHTML = Mustache.render(that.template, {
@@ -147,7 +147,7 @@
                         that.setStickerDownloadLinks(App, DOMcache, res2.data.packs, router, res2.data);
                     }, this);
                 } else {
-                    events.publish('update.notif.toast', { show: true, heading: 'Sorry buddy!', details: 'Sticker pack cannot be downloaded right now, please try again after some time!', notifType: 'notifError' });
+                    events.publish('update.notif.toast', { show: true, heading: 'Sorry!', details: 'This sticker pack cannot be downloaded right now, please try again after some time!', notifType: 'notifError' });
                 }
             }, this);
         }

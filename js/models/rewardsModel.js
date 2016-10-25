@@ -97,6 +97,7 @@
                         that.mapColorToReward(cardColor, rewardId);
 
                         if (rewardState == Constants.REWARD_STATE.LOCKED) {
+                            cardButton.innerHTML = 'Learn more';
                             DOMcache.batteryStreakInfoContainer.classList.remove('hideClass');
                             var batteryIconContainer = document.getElementsByClassName('batteryIconContainer')[0];
                             batteryIconContainer.innerHTML = "";

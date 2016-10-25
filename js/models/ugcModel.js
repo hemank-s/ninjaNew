@@ -55,7 +55,7 @@
                                     console.log(res);
                                     callback(res);
                                 } catch (err) {
-                                    events.publish('update.notif.toast', { show: true, heading: 'Error', details: 'Sorry. Your data could not be send. Try again , please ?', notifType: 'notifError' });
+                                    events.publish('update.notif.toast', { show: true, heading: 'Error!', details: 'Sorry. Your submission could not be saved. Try again?', notifType: 'notifError' });
                                 }
                             }
                         });

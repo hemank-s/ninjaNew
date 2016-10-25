@@ -15,7 +15,7 @@
         var upgradeSubtitle = document.getElementsByClassName('upgradeSubtitle')[0];
 
         if (data == 'hike') {
-            upgradeSubtitle.innerHTML = 'You hike app is out of date. Please upgrade your app to the latest verison to continue being ninja!';
+            upgradeSubtitle.innerHTML = 'You have an old version of Hike. Please update it to continue using Ninja!';
             upgradeAction.addEventListener('click', function(event) {
 
                 var jsonobj = {
@@ -27,12 +27,12 @@
             });
 
         } else if (data == 'ninja') {
-            upgradeSubtitle.innerHTML = 'Your ninja app is out of date -  we have improved the ninja app and added some cool things for your. Click to upgrade now.';
+            upgradeSubtitle.innerHTML = 'You need to update your Ninja app to continue using it.';
             upgradeAction.addEventListener('click', function(event) {
                 if (platformSdk.bridgeEnabled) {
                     App.NinjaService.getNewNinjaPacket(function(res) {
                         if (res.stat == "ok") {
-                            events.publish('update.notif.toast', { show: true, heading: 'Awesome!', details: 'You will shortly be getting the new ninja app!', notifType: 'notifSuccess' });
+                            events.publish('update.notif.toast', { show: true, heading: 'Awesome!', details: 'We are updating your Ninja app in the background. Please come back in some time.', notifType: 'notifSuccess' });
                             PlatformBridge.closeWebView();
                         }
                     }, this);

@@ -317,13 +317,13 @@
                             fileUrl = JSON.parse(fileUrl);
 
                             if (!fileUrl.filesize || fileUrl.filesize === 0) {
-                                events.publish('update.notif.toast', { show: true, heading: 'Bamm', details: 'Sorry. Your image couldn’t be updated. Could you try again with another files, please?', notifType: 'notifNeutral' });
+                                events.publish('update.notif.toast', { show: true, heading: 'Nooooooo!', details: 'There was some error uploading your image. Please try again with another pic.', notifType: 'notifError' });
                                 return;
                             }
 
                             // Check Max Upload Size :: To Be Decided
                             if (fileUrl.filesize > size) {
-                                events.publish('update.notif.toast', { show: true, heading: 'Bamm', details: 'Max file upload size is 10 Mb', notifType: 'notifNeutral' });
+                                events.publish('update.notif.toast', { show: true, heading: 'Too big!', details: 'The max file upload size is 10 MB.', notifType: 'notifNeutral' });
                                 return;
                             }
                             element.style.backgroundImage = 'url(\'file://' + fileUrl.filePath + '\')';
@@ -332,7 +332,7 @@
                     });
 
                 } catch (err) {
-                    events.publish('update.notif.toast', { show: true, heading: 'Bamm', details: 'Sorry. Your image couldn’t be updated. Could you try again with another files, please?', notifType: 'notifNeutral' });
+                    events.publish('update.notif.toast', { show: true, heading: 'Nooooooo!', details: 'There was some error uploading your image. Please try again with another pic.', notifType: 'notifError' });
                 }
 
             } else {

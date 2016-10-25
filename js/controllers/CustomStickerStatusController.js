@@ -46,12 +46,12 @@
                     App.NinjaService.sendCustomSticker(dataToSend, function(res) {
 
                         if (res.stat == "ok") {
-                            events.publish('update.notif.toast', { show: true, heading: 'Yay', details: "You will receive your sticker via the team hike bot shortly, start sharing", notifType: 'notifNeutral' });
+                            events.publish('update.notif.toast', { show: true, heading: 'Yaay', details: "We will send you your sticker shortly. Usually takes around an hour! Thanks.", notifType: 'notifNeutral' });
 
                         } else if (res.stat == 'fail') {
-                            events.publish('update.notif.toast', { show: true, heading: 'Bamm', details: res.data.reason, notifType: 'notifNeutral' });
+                            events.publish('update.notif.toast', { show: true, heading: 'Error!', details: res.data.reason, notifType: 'notifNeutral' });
                         } else {
-                            events.publish('update.notif.toast', { show: true, heading: 'Bamm', details: res.data.reason, notifType: 'notifNeutral' });
+                            events.publish('update.notif.toast', { show: true, heading: 'Error!', details: res.data.reason, notifType: 'notifNeutral' });
                         }
                     }, this);
                 }
@@ -68,13 +68,13 @@
 
         if (data.status == Constants.CUSTOM_STICKER_STATUS.PROGRESS) {
             data.title = "Creating Your Sticker";
-            data.subtitle = "Cutting the right shape to set your sticker";
+            data.subtitle = "Our artists are working overtime to get your sticker ready on time.";
             data.ctaText = "Cool";
 
         } else if (data.status == Constants.CUSTOM_STICKER_STATUS.DONE) {
 
-            data.title = "TADA";
-            data.subtitle = "Your custom sticker is ready!! It will be sent to you by hike team ";
+            data.title = "Your Sticker is ready!";
+            data.subtitle = "Your sticker is ready. Tap here to recieve it now.";
             data.ctaText = "SEND NOW";
             data.isSend = true;
         }

@@ -72,8 +72,6 @@
         that.checkMysteryBoxStatus(mysteryBoxData, DOMcache, App);
         that.checkBatteryStatus(profileData, DOMcache);
 
-        showNewRewardAnimation = true;
-
         if (showNewRewardAnimation) {
             that.newRewardUnlockAnimation(DOMcache);
         } else {
@@ -137,7 +135,7 @@
         if (DOMcache.lockedRewardListItem.length) {
             for (var j = 0; j < DOMcache.lockedRewardListItem.length; j++) {
                 DOMcache.lockedRewardListItem[j].addEventListener('click', function(event) {
-                    events.publish('update.notif.toast', { show: true, heading: 'Bamm', details: 'The reward is currently in locked state', notifType: 'notifNeutral' });
+                    events.publish('update.notif.toast', { show: true, heading: 'Getting greedy?', details: 'The reward is currently locked. Please unlock it by being a Ninja for more days.', notifType: 'notifNeutral' });
                 });
             }
         } else {
@@ -230,8 +228,8 @@
                     DOMcache.batteryDangerIcon.classList.add('batteryAnimationActive');
                 }, 500);
 
-                DOMcache.batteryCriticalAnimation.getElementsByClassName('batteryDangerHeading')[0].innerHTML = batteryLost + ' ' + 'Life Lost';
-                DOMcache.batteryCriticalAnimation.getElementsByClassName('batteryDangerDescription')[0].innerHTML = 'You have just lost' + ' ' + batteryLost + ' days as ninja';
+                DOMcache.batteryCriticalAnimation.getElementsByClassName('batteryDangerHeading')[0].innerHTML = 'Ninja Lives Lost: ' + batteryLost;
+                DOMcache.batteryCriticalAnimation.getElementsByClassName('batteryDangerDescription')[0].innerHTML = 'You have just lost your Ninja Life as you did not use Hike enough in the last' + batteryLost + 'days';
 
                 DOMcache.batteryCritical_crossIcon = document.getElementsByClassName('batteryCritical_crossIcon')[0];
 
@@ -249,7 +247,7 @@
 
         if (pdata.battery < pdata.maxBattery / 2) {
             console.log("Show indication always");
-            DOMcache.streakStatus.innerHTML = 'Critical Life - ' + ' ' + pdata.battery;
+            DOMcache.streakStatus.innerHTML = pdata.battery + ' ' + 'days left';
             DOMcache.streakStatus.classList.add('streakDanger');
         } else {
             console.log("Show status as healthy");

@@ -16,7 +16,7 @@
                 "replace": true,
                 "cardObj": {
                     "ld": {},
-                    "hm": "Exclusive ninja stuff only for you",
+                    "hm": "You're a Hike Ninja now. Cool gifts await you.",
                     "layoutId": "app.html",
                     "appName": "hikeninja",
                     "appVersion": "11",

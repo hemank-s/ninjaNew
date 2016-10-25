@@ -314,8 +314,7 @@
                         type: "text",
                         a_text: document.getElementById('follow-up-response').value
                     }
-                }
-
+                };
 
                 if (platformSdk.bridgeEnabled) {
                     self.NinjaService.submitFeedback(url, data, function(res) {
@@ -379,9 +378,9 @@
             // Block Event From The Three Dot
             platformSdk.events.subscribe('app.menu.om.block', function(id) {
 
-                if ('activeElement' in document) {
-                    document.activeElement.blur();
-                }
+                // if ('activeElement' in document) {
+                //     document.activeElement.blur();
+                // }
 
                 cacheProvider.setInCritical('profileSrc', '');
                 if (platformSdk.bridgeEnabled) {
@@ -764,7 +763,7 @@
             }
 
             if (!subscriptionCompleted || !ftueCompleted) {
-                self.router.navigateTo('/home');
+                self.router.navigateTo('/');
             } else {
                 self.NinjaService.getNinjaProfile(function(res) {
                     cacheProvider.setInCritical('userProfileData', res.data);

@@ -1,12 +1,12 @@
 <div>
     <div class="customHistoryTitle textCls"> My Sticker list </div>
-    <div class="customHistorySubtitle textCls"> We are reviewing your photo and phrase if they are suitable for creating your sticker </div>
+    <div class="customHistorySubtitle textCls"> These are your stickers. Share them with your friends and spread the joy. </div>
     <div class="customHistoryList">
         {{#rewardDetails.custom_stickers}}
         <div class="stickerHistoryRow" data-phrase="{{phrase}}" data-status="{{status}}" data-sid="{{sid}}" data-url="{{url}}" data-reason="{{reason}}">
             <div class="custHistoryIcon inlineBlock" style="background-image:url({{url}})"></div>
             <div class="contentSection inlineBlock">
-                <div class="rowTitle"> {{#phrase}} {{phrase}} {{/phrase}} {{^phrase}} No caption provided {{/phrase}}</div>
+                <div class="rowTitle"> {{#phrase}} {{phrase}} {{/phrase}} {{^phrase}} Your sticker {{/phrase}}</div>
                 <div class="rowStatus">{{status}} </div>
             </div>
             <div class="statusSection inlineBlock" data-status="{{status}}"></div>
