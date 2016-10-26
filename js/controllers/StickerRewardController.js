@@ -134,8 +134,8 @@
 
                         DOMcache.stickerRewardContainer.innerHTML = Mustache.render(that.template, {
                             stickerPacks: res2.data.packs,
-                            rewardTitle: 'Select One',
-                            sub: 'You can only unlock your next sticker pack after the cooldown.',
+                            rewardTitle: 'Pick One',
+                            sub: 'You can only get one at a time. Choose wisely!',
                             rewardId: rId,
                             cooldown: res2.data.cooldown
                         });
@@ -237,8 +237,8 @@
 
                         DOMcache.stickerRewardContainer.innerHTML = Mustache.render(that.template, {
                             stickerPacks: res2.data.packs,
-                            rewardTitle: 'Select One',
-                            sub: 'You can only redeem one sticker pack at a time so choose wisely',
+                            rewardTitle: 'Pick One',
+                            sub: 'You can only get one at a time. Choose wisely!',
                             rewardId: rId,
                             cooldown: res2.data.cooldown
                         });
@@ -297,8 +297,8 @@
         that.template = require('raw!../../templates/stickerPackListTemplate.html');
         DOMcache.stickerRewardContainer.innerHTML = Mustache.render(that.template, {
             stickerPacks: data.packs,
-            rewardTitle: 'Select One',
-            sub: 'You can only redeem one sticker pack at a time so choose wisely',
+            rewardTitle: 'Pick One',
+            sub: 'You can only get one at a time. Choose wisely!',
             rewardId: rId,
             cooldown: data.cooldown
         });

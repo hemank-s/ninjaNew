@@ -250,7 +250,7 @@
                 }, 500);
 
                 DOMcache.batteryCriticalAnimation.getElementsByClassName('batteryDangerHeading')[0].innerHTML = 'Ninja Lives Lost: ' + batteryLost;
-                DOMcache.batteryCriticalAnimation.getElementsByClassName('batteryDangerDescription')[0].innerHTML = 'You have just lost your Ninja Life as you did not use Hike enough in the last' + batteryLost + 'days';
+                DOMcache.batteryCriticalAnimation.getElementsByClassName('batteryDangerDescription')[0].innerHTML = 'You have just lost your Ninja Life as you did not use Hike enough in the last ' + batteryLost + 'days';
 
                 DOMcache.batteryCritical_crossIcon = document.getElementsByClassName('batteryCritical_crossIcon')[0];
 

@@ -239,7 +239,6 @@
 
             var setText = function(a, c) {
                 a.addEventListener('transitionend', function() {
-
                     that.defineMysteryBoxResultAnimation(App, rewardData, mysteryBoxData);
                     that.removeMysteryBoxToast();
                     a.removeEventListener('transitionend', setText);
