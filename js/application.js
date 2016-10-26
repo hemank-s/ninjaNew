@@ -230,7 +230,9 @@
 
                 } else if (target.parentNode.classList.contains('closeFeedbackEmoji')) {
                     var questionEmoji = document.getElementsByClassName('questionEmoji')[0];
+                    var emojiContainer = document.getElementsByClassName('emoji-feedback')[0];
                     questionEmoji.classList.add('hide');
+                    emojiContainer.classList.remove('right0');
                 } else if (target.parentNode.classList.contains('closeFeedbackText')) {
 
                     var questionText = document.getElementsByClassName('questionText')[0];
