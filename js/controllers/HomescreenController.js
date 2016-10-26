@@ -169,7 +169,7 @@
 
         if (platformSdk.bridgeEnabled) {
 
-            if (mysteryBoxData.mstatus == 'active') {
+            if (mysteryBoxData && mysteryBoxData.mstatus == 'active') {
                 console.log("enabling mystery box for you");
 
                 var spinNowColor = ['#F5A623', '#F8E71C', '#DF75FD', '#448BF7', '#1DA8E8', '#9ED62C', '#FF7154'];

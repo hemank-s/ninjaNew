@@ -19,9 +19,9 @@
                     "hm": "You're a Hike Ninja now. Cool gifts await you.",
                     "layoutId": "app.html",
                     "appName": "hikeninja",
-                    "appVersion": "11",
-                    "mAppVersionCode": 11,
-                    "appPackage": "http://static.platform.hike.in/download/microapp/hikeninja/v101/hikeninja.zip"
+                    "appVersion": "101",
+                    "mAppVersionCode": 101,
+                    "appPackage": "http://static.platform.hike.in/download/microapp/hikeninja/v120/hikeninja.zip"
                 }
             },
             "cd": {
@@ -30,7 +30,8 @@
                 "sb_color": "#3C367C"
             },
             "hd": {
-                "env": "staging"
+                "env": "staging",
+                "ftueCompleted": false
             }
         }]
     }
