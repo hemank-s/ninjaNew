@@ -45,6 +45,7 @@
         var historyTop = this.history[this.history.length - 1];
 
         utils.checkFeedback(route);
+        utils.changeThreeDot(route);
 
         if (historyTop && historyTop.route === route) {
             if (data.subPath !== undefined && (data.subPath === historyTop.data.subPath)) {
@@ -87,9 +88,10 @@
             history.pop();
         }
 
-        utils.checkFeedback(historyItem.route);
-
         historyItem = history[history.length - 1];
+
+        utils.checkFeedback(historyItem.route);
+        utils.changeThreeDot(historyItem.route);
 
         if (historyItem.route == '/' && !historyItem.data) {
             historyItem.data = {

@@ -288,7 +288,50 @@
 
         },
 
+        changeThreeDot: function(currentRouter) {
+
+            if (!currentRouter || currentRouter.length === 0) {
+                return;
+            }
+
+            if (currentRouter == '/ugc') {
+                var omList = [{
+                    'title': 'Help',
+                    'en': 'true',
+                    'eventName': 'app.menu.om.help'
+
+                }];
+            } else {
+                var omList = [{
+                        'title': 'Notifications',
+                        'en': 'true',
+                        'eventName': 'app.menu.om.mute',
+                        'is_checked': platformSdk.appData.mute === 'true' ? 'false' : 'true'
+                    },
+
+                    {
+                        'title': platformSdk.appData.block === 'true' ? 'Unblock' : 'Block',
+                        'en': 'true',
+                        'eventName': 'app.menu.om.block'
+                    },
+
+                    {
+                        'title': 'Help',
+                        'en': 'true',
+                        'eventName': 'app.menu.om.help'
+
+                    }
+                ];
+
+            }
+            platformSdk.setOverflowMenu(omList);
+        },
+
         checkFeedback: function(currentRouter) {
+
+            if (!currentRouter || currentRouter.length === 0) {
+                return;
+            }
 
             var feedbackData;
             if (!platformSdk.bridgeEnabled) {

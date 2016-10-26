@@ -148,6 +148,8 @@
             'title': 'Block'
         });
 
+        utils.toggleBackNavigation(true);
+
         //utils.toggleBackNavigation( false );
         events.publish('update.loader', {
             show: false
@@ -299,14 +301,7 @@
                     questionEmoji.classList.remove('hide');
                 }
 
-            })
-
-
-
-
-
-
-
+            });
 
         },
 
@@ -341,9 +336,6 @@
                 // }
 
                 cacheProvider.setInCritical('profileSrc', '');
-                if (platformSdk.bridgeEnabled) {
-                    utils.changeBarColors('#3C367C', '#494D95');
-                }
 
                 id = '' + platformSdk.retrieveId('app.menu.om.block');
                 if (platformSdk.appData.block === 'true') {
@@ -357,6 +349,7 @@
                         'title': 'Unblock'
                     });
                     utils.toggleBackNavigation(false);
+
                     events.publish('app/block', {
                         show: true
                     });

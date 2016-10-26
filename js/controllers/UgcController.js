@@ -283,11 +283,11 @@
 
         var serverPath;
         if (data.type == Constants.UGC_TYPE.QUOTE) {
-            serverPath = appConfig.API_URL + '/ugc/type/quotes?message=' + DOMcache.quoteName[0].innerHTML + '&author=' + DOMcache.quoteAuthor[0].innerHTML;
+            serverPath = appConfig.API_URL + '/ugc/user/type/quotes?message=' + DOMcache.quoteName[0].innerHTML + '&author=' + DOMcache.quoteAuthor[0].innerHTML;
         } else if (data.type == Constants.UGC_TYPE.FACT) {
-            serverPath = appConfig.API_URL + '/ugc/type/facts?message=' + DOMcache.quoteName[0].innerHTML;
+            serverPath = appConfig.API_URL + '/ugc/user/type/facts?message=' + DOMcache.quoteName[0].innerHTML;
         } else {
-            serverPath = appConfig.API_URL + '/ugc/type/jfl';
+            serverPath = appConfig.API_URL + '/ugc/user/type/jfl';
         }
 
 
