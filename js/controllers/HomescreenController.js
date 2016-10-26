@@ -125,6 +125,11 @@
             that.setLockedRewardsH();
             cacheProvider.setInCritical('showRewardAnimation', false);
 
+
+            // var tl = document.getElementsByClassName('dummyDiv')[0];
+            //             tl.style.height = window.innerHeight - tl.getBoundingClientRect().bottom;
+
+
         });
 
         DOMcache.lockedRewards.addEventListener('animationend', function() {
@@ -165,6 +170,10 @@
 
         if (!showRewardAnimation) {
             document.getElementsByClassName('lockedRewards')[0].style.height = "auto";
+            var tl = document.getElementsByClassName('dummyDiv')[0];
+            var el = document.getElementsByClassName('ninjaRewards')[0];
+            var rect = el.getBoundingClientRect();
+            tl.style.height = window.innerHeight - rect.bottom + 'px';
 
         } else {
             var tl = document.getElementsByClassName('dummyDiv')[0];

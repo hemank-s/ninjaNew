@@ -42,6 +42,10 @@
 
     Router.prototype.navigateTo = function(route, data) {
 
+
+        if (typeof data === "undefined")
+            data = {};
+
         var historyTop = this.history[this.history.length - 1];
 
         utils.checkFeedback(route);

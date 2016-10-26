@@ -222,13 +222,23 @@
             var spin = document.getElementById('spin');
             var wheel = document.getElementById('wheel');
 
+            wheel.addEventListener('transitionend', function() {
+                var mysteryBoxSpinning = false;
+                cacheProvider.setInCritical('mysteryBoxSpinning', mysteryBoxSpinning);
+
+            });
+
+            wheel.addEventListener('webkitTransitionend', function() {
+                var mysteryBoxSpinning = false;
+                cacheProvider.setInCritical('mysteryBoxSpinning', mysteryBoxSpinning);
+
+            });
+
             var rewardData = null;
             var cooldownTime = null;
 
             var setText = function(a, c) {
                 a.addEventListener('transitionend', function() {
-                    var mysteryBoxSpinning = false;
-                    cacheProvider.setInCritical('mysteryBoxSpinning', mysteryBoxSpinning);
 
                     that.defineMysteryBoxResultAnimation(App, rewardData, mysteryBoxData);
                     that.removeMysteryBoxToast();
@@ -243,10 +253,12 @@
 
                 var mysteryBoxSpinning = true;
                 cacheProvider.setInCritical('mysteryBoxSpinning', mysteryBoxSpinning);
+                utils.toggleBackNavigation(true);
 
                 rotations++;
                 if (platformSdk.bridgeEnabled) {
                     App.NinjaService.getMysteryBoxResult(function(res) {
+                        utils.toggleBackNavigation(true);
                         console.log(res.data);
                         mysteryBoxData.spin_result = res.data.spin_result;
 
@@ -261,6 +273,7 @@
                         var rotationFix = 360 / 16 + 360 / 8 + rotations * 720;
                         deg = 360 / 8 * stop + rotationFix;
                         var rot = 'rotate3d(0,0,1,' + deg + 'deg)';
+
                         wheel.style.transform = rot;
                         wheel.style.webkitTransform = rot;
                         setText(wheel, rewardData);
