@@ -68,17 +68,19 @@
             cardOverlay: document.getElementsByClassName('cardOverlay'),
             ugcContainer: document.getElementsByClassName('ugcContainer'),
             ugcWrapper: document.getElementsByClassName('ugcWrapper'),
-            addPhotoIllustration: document.getElementsByClassName('addPhotoIllustration')
+            addPhotoIllustration: document.getElementsByClassName('addPhotoIllustration'),
+            quoteCard: document.getElementsByClassName('quoteCard')
+
 
         };
 
 
-        var defHeight = parseInt(window.getComputedStyle(DOMcache.quoteName[0]).height);
-        DOMcache.quoteName[0].style.minHeight = defHeight + 'px';
+
 
         DOMcache.quoteName[0].addEventListener('keyup', function() {
+            DOMcache.ugcContainer[0].scrollTop = DOMcache.ugcContainer[0].scrollHeight;
             DOMcache.userInput[0].innerHTML = this.textContent.length;
-            if (this.innerHTML.length > Constants.MAX_LENGTH_QUOTE) {
+            if (this.textContent.length > Constants.MAX_LENGTH_QUOTE) {
                 DOMcache.userInput[0].classList.add('inputExceeded');
             } else
                 DOMcache.userInput[0].classList.remove('inputExceeded');
@@ -87,7 +89,13 @@
 
 
         DOMcache.quoteName[0].oninput = function() {
+            DOMcache.ugcContainer[0].scrollTop = DOMcache.ugcContainer[0].scrollHeight;
             DOMcache.userInput[0].innerHTML = this.textContent.length;
+            if (this.textContent.length > Constants.MAX_LENGTH_QUOTE) {
+                DOMcache.userInput[0].classList.add('inputExceeded');
+            } else
+                DOMcache.userInput[0].classList.remove('inputExceeded');
+            that.validateQuote(DOMcache, 'keyup', data);
         };
 
 
@@ -137,12 +145,16 @@
                     DOMcache.cardNote[0].classList.add('animation_fadeout');
                     DOMcache.ugcContainer[0].classList.add('overscroll');
                     DOMcache.ugcWrapper[0].classList.add('marB_30');
+                    DOMcache.card[0].classList.add('marginBot60');
+                    DOMcache.quoteName[0].classList.remove('scrollClsCard');
 
                 } else {
                     DOMcache.cardNote[0].classList.remove('animation_fadeout');
                     DOMcache.cardNote[0].classList.add('animation_fadein');
                     DOMcache.ugcContainer[0].classList.remove('overscroll');
                     DOMcache.ugcWrapper[0].classList.remove('marB_30');
+                    DOMcache.card[0].classList.remove('marginBot60');
+                    DOMcache.quoteName[0].classList.add('scrollClsCard');
 
                 }
             }
@@ -415,7 +427,7 @@
 
         DOMcache.cta[0].classList.add('disabled');
 
-        if (DOMcache.quoteName[0].innerHTML.length > Constants.MAX_LENGTH_QUOTE) {
+        if (DOMcache.quoteName[0].textContent.length > Constants.MAX_LENGTH_QUOTE) {
 
             if (eventType == 'click')
                 events.publish('update.notif.toast', { show: true, heading: 'Error!', details: 'Only ' + Constants.MAX_LENGTH_QUOTE + ' characters please!', notifType: 'notifNeutral' });
