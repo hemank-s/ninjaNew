@@ -227,9 +227,6 @@
 
             var setText = function(a, c) {
                 a.addEventListener('transitionend', function() {
-                    var mysteryBoxSpinning = false;
-                    cacheProvider.setInCritical('mysteryBoxSpinning', mysteryBoxSpinning);
-
                     that.defineMysteryBoxResultAnimation(App, rewardData, mysteryBoxData);
                     that.removeMysteryBoxToast();
                     a.removeEventListener('transitionend', setText);
@@ -263,6 +260,10 @@
                         var rot = 'rotate3d(0,0,1,' + deg + 'deg)';
                         wheel.style.transform = rot;
                         wheel.style.webkitTransform = rot;
+
+                        var mysteryBoxSpinning = false;
+                        cacheProvider.setInCritical('mysteryBoxSpinning', mysteryBoxSpinning);
+
                         setText(wheel, rewardData);
                     }, that);
                 } else {

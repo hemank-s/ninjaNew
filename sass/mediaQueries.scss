@@ -117,7 +117,6 @@ $gap: 75px;
         margin-top: 4px!important;
         font-size: 9px!important;
     }
-    
     .ninjaBottomContainer {
         margin-top: 50px!important;
     }
@@ -291,6 +290,7 @@ $gap: 75px;
     }
     .redeemedRewardDetails {
         margin-left: 10px !important;
+        width: 55% !important;
     }
     .rewardHeading {
         font-size: 12px !important;
@@ -343,29 +343,25 @@ $gap: 75px;
 }
 
 @media screen and (min-width: 300px) and (max-width: 320px) {
-
-    .exclusiveFeatureTitle{
+    .exclusiveFeatureTitle {
         margin-bottom: 48px !important;
         margin-top: 18px !important;
     }
-
-    .exclusiveFeatureIllustration{
+    .exclusiveFeatureIllustration {
         width: 254px !important;
         height: 190px !important;
     }
-
-    .exclusiveFeatureDescription{
-        margin: 18px 0px 26px 0px !important ;
+    .exclusiveFeatureDescription {
+        margin: 18px 0px 26px 0px !important;
     }
-
-    .ugcContainer .title{
-        padding-top: 32px !important; 
+    .ugcContainer .title {
+        padding-top: 32px !important;
     }
-    .uploadJflFtueContainer{
-        margin: 24px auto 24px auto !important; 
+    .uploadJflFtueContainer {
+        margin: 24px auto 24px auto !important;
     }
-    .jflContainer .uploadIcon{
-        margin-top: 10% !important ;
+    .jflContainer .uploadIcon {
+        margin-top: 10% !important;
     }
     /************Customer Sticker*************/
     .customHistoryContainer {
@@ -523,8 +519,8 @@ $gap: 75px;
     .lrewardSubheading {
         font-size: 12px!important;
     }
-    .mysteryRedeemedRewardRow .rewardStreakWrapper{
-        padding: 11px 6px!important; 
+    .mysteryRedeemedRewardRow .rewardStreakWrapper {
+        padding: 11px 6px!important;
     }
     .rewardStreakWrapper {
         padding: 14px 6px!important;
@@ -547,7 +543,7 @@ $gap: 75px;
         }
         .subscribeCta {
             font-size: 12px !important;
-            margin-top: 14px !important; 
+            margin-top: 14px !important;
         }
     }
     /******************/
@@ -648,6 +644,7 @@ $gap: 75px;
     }
     .redeemedRewardDetails {
         margin-left: 10px !important;
+        width: 55% !important;
     }
     .rewardHeading {
         font-size: 12px !important;
@@ -714,7 +711,6 @@ $gap: 75px;
         margin-top: 5px!important;
         font-size: 10px!important;
     }
-    
     .ninjaBottomContainer {
         margin-top: 52px!important;
     }
@@ -878,6 +874,7 @@ $gap: 75px;
     }
     .redeemedRewardDetails {
         margin-left: 10px !important;
+        width: 60% !important;
     }
     .rewardHeading {
         font-size: 12px !important;

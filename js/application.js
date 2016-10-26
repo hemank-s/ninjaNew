@@ -190,8 +190,6 @@
         defnineNinjaFeedback: function() {
             var self = this;
 
-
-
             document.addEventListener('click', function(e) {
 
                 var target = e.target;
