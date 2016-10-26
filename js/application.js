@@ -196,19 +196,18 @@
 
                 if (target.classList.contains('emoji-icon-small')) {
 
+                    var questionEmoji = document.getElementsByClassName('questionEmoji')[0];
+                    var questionText = document.getElementsByClassName('questionText')[0];
+                    var emojiFeedback = document.getElementsByClassName('emojiFeedback')[0];
 
-                    var url = appConfig.API_URL + '/feedback/' + target.parentNode.parentNode.parentNode.getAttribute('data-qid');
+                    var url = appConfig.API_URL + '/feedback/' + questionEmoji.getAttribute('data-qid');
                     var data = {
                         "feedback": {
-                            aid: target.getAttribute('data-aid'),
+                            aid: target.parentNode.parentNode.getAttribute('data-aid'),
                             type: "emoji",
                             a_text: ""
                         }
                     }
-
-                    var questionEmoji = document.getElementsByClassName('questionEmoji')[0];
-                    var questionText = document.getElementsByClassName('questionText')[0];
-                    var emojiFeedback = document.getElementsByClassName('emojiFeedback')[0];
 
                     if (platformSdk.bridgeEnabled) {
                         self.NinjaService.submitFeedback(url, data, function(res) {
@@ -247,7 +246,11 @@
 
                 } else if (target.classList.contains('submitNinjaFeedback')) {
 
-                    var url = appConfig.API_URL + '/feedback/' + target.parentNode.parentNode.getAttribute('data-qid');
+                    var questionText = document.getElementsByClassName('questionText')[0];
+                    var successScreen = document.getElementsByClassName('feedbackSuccess')[0];
+                    var emojiContainer = document.getElementsByClassName('emoji-feedback')[0];
+
+                    var url = appConfig.API_URL + '/feedback/' + questionText.getAttribute('data-qid');
                     var data = {
                         "feedback": {
                             aid: "",
@@ -256,9 +259,7 @@
                         }
                     };
 
-                    var questionText = document.getElementsByClassName('questionText')[0];
-                    var successScreen = document.getElementsByClassName('feedbackSuccess')[0];
-                    var emojiContainer = document.getElementsByClassName('emoji-feedback')[0];
+
 
                     if (platformSdk.bridgeEnabled) {
                         self.NinjaService.submitFeedback(url, data, function(res) {

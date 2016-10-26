@@ -290,20 +290,48 @@
 
         checkFeedback: function(currentRouter) {
 
+            var feedbackData;
+            if (!platformSdk.bridgeEnabled) {
+                feedbackData = {
+                    "feedback": {
+                        "launch_screen": "/",
+                        "title_emoji": "https://staging.im.hike.in/sticker?catId=excusenglish&stId=007_exe_idk.png&resId=XHDPI&image=True",
+                        "mdata": [{
+                            "qid": 1,
+                            "title_options": [{
+                                "aid": 1,
+                                "answer_emoji": "https://s-media-cache-ak0.pinimg.com/564x/44/34/f5/4434f5f63b3a0994a4e8412d178a29ac.jpg"
+                            }, {
+                                "aid": 2,
+                                "answer_emoji": "https://4.bp.blogspot.com/-oos28eSe-rE/Vud2j-kTc8I/AAAAAAAACLA/NGV8TBnDLHs221yMlzbn968ppf3zaftJA/s1600/uh-oh-smiley.jpg"
+                            }, {
+                                "aid": 3,
+                                "answer_emoji": "https://s-media-cache-ak0.pinimg.com/236x/0b/8b/f5/0b8bf599defde741aa9228ace6203092.jpg"
+                            }, {
+                                "aid": 4,
+                                "answer_emoji": "https://lh4.ggpht.com/9HID9PrbyXvGJbmViL8TSJJJt9iR_RovFfSlKaNC6Vdy7I710mOB1OXfl2EiSTKeMMbm=w300"
+                            }],
+                            "title_question": "Did you like Hike ninja ?",
+                            "type": "emoji"
+                        }, {
+                            "qid": 2,
+                            "title_question": "What more rewards would you like ?",
+                            "type": "text"
+                        }]
+                    }
+                };
 
-            if (!platformSdk.bridgeEnabled)
-                return;
+            } else {
+                feedbackData = cacheProvider.getFromCritical('feedbackData');
+            }
 
-
-
-            var feedbackData = cacheProvider.getFromCritical('feedbackData');
 
             if (feedbackData && typeof feedbackData.feedback != "undefined") {
 
-                if (feedbackData.feedback.launch_screen === "/") {
+                if (feedbackData.feedback.launch_screen === "/" && currentRouter != "/") {
 
                 } else {
-                    if (currentRouter != feedbackData.feedback.launch_screen)
+                    if (currentRouter != feedbackData.feedback.launch_screen || currentRouter === "/")
                         return;
                 }
 
