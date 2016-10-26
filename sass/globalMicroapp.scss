@@ -597,33 +597,41 @@ $booShadow: darken($booBg,
 $booFaceSize: round($jaggedDistance / 1.3333);
 $booFaceColor: #9b9b9b;
 // ===========
-@keyframes floating {
+@include keyframe(floating) {
     0% {
         transform: translate3d(0, 0, 0);
+        -webkit-transform: translate3d(0, 0, 0);
     }
     45% {
         transform: translate3d(0, -10%, 0);
+        -webkit-transform: translate3d(0, -10%, 0);
     }
     55% {
         transform: translate3d(0, -10%, 0);
+        -webkit-transform: translate3d(0, -10%, 0);
     }
     100% {
         transform: translate3d(0, 0, 0);
+        -webkit-transform: translate3d(0, 0, 0);
     }
 }
 
-@keyframes floatingShadow {
+@include keyframe(floatingShadow) {
     0% {
         transform: scale(1);
+        -webkit-transform: scale(1);
     }
     45% {
         transform: scale(.85);
+        -webkit-transform: scale(.85);
     }
     55% {
         transform: scale(.85);
+        -webkit-transform: scale(.85);
     }
     100% {
         transform: scale(1);
+        -webkit-transform: scale(1);
     }
 }
 
@@ -670,6 +678,7 @@ body {
     overflow: hidden;
     @include border-bottom-jagged($jaggedDistance,
     $bgColor);
+    -webkit-animation: floating 2s ease-in-out infinite;
     animation: floating 2s ease-in-out infinite;
     background: url(images/ninjaLoader.png);
     display: inline-block;
