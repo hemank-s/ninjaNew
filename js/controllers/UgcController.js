@@ -345,7 +345,7 @@
 
                     DOMcache.successCard[0].classList.remove('hideClass');
                 } else if (res.stat == 'fail') {
-                    events.publish('update.notif.toast', { show: true, heading: 'Error ', details: res.data.reason, notifType: 'notifError ' });
+                    events.publish('update.notif.toast', { show: true, heading: 'Error ', details: res.data.reason, notifType: 'notifError' });
                 } else if (res.stat == "exception") {
                     events.publish('update.notif.toast', { show: true, heading: 'Bamm', details: 'Sorry. Your image couldn’t be updated. Could you try again with another files, please?', notifType: 'notifNeutral' });
                 } else {
@@ -375,6 +375,7 @@
             element.classList.remove('disabled');
             if (DOMcache.sendCta[0]) {
                 DOMcache.sendCta[0].innerHTML = 'Send';
+                DOMcache.sendCta[0].style.opacity = 1;
                 //platformSdk.events.publish('update.threeDotLoader', { elem: DOMcache.sendCta[0], show: true, text: 'Send' });
             }
 

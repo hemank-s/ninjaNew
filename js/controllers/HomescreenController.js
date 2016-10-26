@@ -66,6 +66,7 @@
             mysteryBoxAvailable: document.getElementsByClassName('mysteryBoxAvailable')[0],
             streakStatus: document.getElementsByClassName('streakStatus')[0],
             batteryCriticalAnimation: document.getElementsByClassName('batteryCriticalAnimation')[0],
+            feedBackContainer: document.getElementsByClassName('emojiFeedback'),
         };
 
         // Show Hide Mystery Box Based on data
@@ -86,6 +87,11 @@
             DOMcache.batteryStreakInfoContainer.classList.remove('hideClass');
             utils.toggleBackNavigation(true);
             that.createBatteryUi(DOMcache, profileData);
+
+            if (DOMcache.feedBackContainer.length > 0 && !DOMcache.feedBackContainer[0].classList.contains('hide')) {
+                DOMcache.feedBackContainer[0].classList.add('hide');
+                DOMcache.feedBackContainer[0].setAttribute('exist', true);
+            }
         });
 
         DOMcache.ninjaDp.addEventListener('click', function(event) {
@@ -94,6 +100,12 @@
 
         DOMcache.informationAction.addEventListener('click', function(event) {
             DOMcache.batteryStreakInfoContainer.classList.add('hideClass');
+
+            if (DOMcache.feedBackContainer.length > 0 && DOMcache.feedBackContainer[0].getAttribute('exist') === 'true') {
+                DOMcache.feedBackContainer[0].setAttribute('exist', false);
+                DOMcache.feedBackContainer[0].classList.remove('hide');
+            }
+
         });
 
         DOMcache.streakValueContainer.addEventListener('click', function(event) {

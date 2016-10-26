@@ -512,6 +512,10 @@
                 batteryStreakInfoContainer[0].classList.add('hideClass');
                 utils.toggleBackNavigation(true);
                 return;
+            } else if (batteryStreakInfoContainer.length > 0 && !batteryStreakInfoContainer[0].classList.contains('hideClass')) {
+                batteryStreakInfoContainer[0].classList.add('hideClass');
+                utils.toggleBackNavigation(true);
+                return;
             } else {
                 this.router.back();
             }

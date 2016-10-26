@@ -59,7 +59,7 @@
                             console.log(res);
                             if (res.stat == 'fail') {
 
-                                if (params.url.indexOf('/ugc/type') != -1) {
+                                if (params.url.indexOf('/ugc/user/type') != -1) {
                                     fn.call(x, res);
 
                                 } else {
