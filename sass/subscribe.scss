@@ -25,9 +25,11 @@
     }
     .centreIcon {
         height: 163px;
-        background-image: url(images/ninjaSubscribe.png);
+        //background-image: url(images/ninjaSubscribe.svg);
         background-size: contain;
         background-position: center;
+        margin: 0px auto;
+        text-align: center;
     }
     .info {
         @include fontStyle(14px, 400, rgba(61, 71, 91, 0.64), 18px);
@@ -38,7 +40,7 @@
     .workspaceCta {
         @include fontStyle(16px, 500, #46478D, 20px);
         text-align: center;
-        margin-top: 48px;
+        margin-top: 8%;
         opacity: 1;
         padding: 12px 24px;
         -webkit-transition: all 0.5s;

@@ -45,6 +45,13 @@
                     // Reward Details API :: Send Reward Id As well
                     App.NinjaService.sendCustomSticker(dataToSend, function(res) {
 
+                        var logDataToSend = {
+                            'c': 'cust_sticker_send_now',
+                            'o': 'sent'
+                        };
+                        App.NinjaService.logData(logDataToSend);
+
+
                         if (res.stat == "ok") {
                             events.publish('update.notif.toast', { show: true, heading: 'Yaay', details: "We will send you your sticker shortly. Usually takes around an hour! Thanks.", notifType: 'notifNeutral' });
 

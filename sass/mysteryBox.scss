@@ -13,7 +13,7 @@
 }
 
 .wheel-wrapper .needle {
-    background: url(images/needle.png);
+    //background: url(images/needle.png);
     position: absolute;
     height: 50px;
     width: 27px;
@@ -365,7 +365,7 @@
 }
 
 .mysteryBoxIcon {
-    background-image: url(images/mysteryBox_Gift.png);
+    background-image: url(images/mysteryBox_Gift.svg);
     background-size: contain;
     background-position: center;
     background-repeat: no-repeat;
@@ -404,13 +404,14 @@
 }
 
 .mysteryBoxRetryIcon {
-    background-image: url(images/mysteryBox_Retry.png);
+    background-image: url(images/mysteryBox_Retry.svg);
     background-size: contain;
     background-position: center;
     background-repeat: no-repeat;
     width: 210px;
     height: 180px;
     margin: 68px auto 24px auto;
+    text-align: center;
     opacity: 0;
     @include animation(0s, 0.5s, fadein);
 }

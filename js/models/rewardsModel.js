@@ -89,6 +89,16 @@
                         var rewardId = this.getAttribute('data-rewardId');
                         var isRewardAdhoc = this.getAttribute('data-adhoc');
 
+                        var logDataToSend = {
+                            'c': 'reward_click',
+                            'o': 'unlocked',
+                            'fa': rewardType,
+                            'g': rewardId
+                        };
+
+                        App.NinjaService.logData(logDataToSend);
+
+
                         if (isRewardAdhoc) {
                             cacheProvider.setInCritical('adhocRewardForUser', null);
                         }
@@ -99,6 +109,7 @@
                         if (rewardState == Constants.REWARD_STATE.LOCKED) {
                             cardButton.innerHTML = 'Learn more';
                             DOMcache.batteryStreakInfoContainer.classList.remove('hideClass');
+                            utils.toggleBackNavigation(true);
                             var batteryIconContainer = document.getElementsByClassName('batteryIconContainer')[0];
                             batteryIconContainer.innerHTML = "";
 
@@ -235,6 +246,8 @@
 
             if (existingUser) {
                 App.router.navigateTo('/home');
+            } else {
+                utils.toggleBackNavigation(true);
             }
         }
 

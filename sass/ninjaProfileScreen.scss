@@ -149,7 +149,7 @@
 }
 
 .ugcHistoryIcon {
-    background: url(images/ugcHistory.png);
+    //background: url(images/ugcHistory.svg);
     background-size: contain;
     background-repeat: no-repeat;
     width: 36px;
@@ -160,8 +160,9 @@
 }
 
 .ugcTypeIcon {
-    background: url(images/ugcHistory.png);
-    background-size: contain;
+    //background: url(images/ugcHistory.svg);
+    background-size: inherit;
+    background-position: center;
     background-repeat: no-repeat;
     width: 36px;
     height: 36px;
@@ -218,7 +219,7 @@
 }
 
 .redeemedRewardIcon {
-    background: url(images/defaultRewardIcon.png);
+    //background: url(images/defaultRewardIcon.png);
     background-size: contain;
     background-repeat: no-repeat;
     width: 30px;
@@ -274,7 +275,7 @@
 .ugcListContainer {}
 
 .mysteryBoxHistoryIcon {
-    background: url(images/giftIcon.png);
+    background: url(images/giftIcon.svg);
     background-size: contain;
     background-repeat: no-repeat;
     width: 20px;

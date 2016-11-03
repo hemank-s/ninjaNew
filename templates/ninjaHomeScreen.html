@@ -128,7 +128,7 @@
                     <div class="ninjaDpParent">
                         <div class="ninjaDp">
                             <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-                            <svg width="22px" height="23px" viewBox="0 0 22 23" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                            <svg width="22px" height="22px" viewBox="0 0 22 22" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                                 <defs>
                                     <linearGradient x1="-9.9247045%" y1="-13.0623229%" x2="16.0944836%" y2="84.8408029%" id="linearGradient-1">
                                         <stop stop-color="#37AAFF" offset="0%"></stop>
@@ -136,16 +136,17 @@
                                         <stop stop-color="#FFFFFF" offset="100%"></stop>
                                     </linearGradient>
                                 </defs>
-                                <g id="Homescreen" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round">
-                                    <g id="Home-Screen" transform="translate(-313.000000, -121.000000)" stroke="#FFFFFF" stroke-width="1.2">
+                                <g id="Homescreen" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                    <g id="Home-Screen" transform="translate(-313.000000, -118.000000)">
                                         <g id="profile-pic-&amp;-name" transform="translate(16.000000, 108.000000)">
-                                            <g id="Avatar" transform="translate(288.000000, 5.000000)">
-                                                <g id="Page-1" transform="translate(10.000000, 9.000000)">
-                                                    <path d="M4.84007692,10.9129429 C2.33853846,10.6615143 0.384692308,8.50708571 0.384692308,5.88594286 L0.384692308,3.80851429 L3.88776923,3.80851429" id="Stroke-1"></path>
-                                                    <path d="M15.3647692,10.9129429 C17.8663077,10.6615143 19.8201538,8.50708571 19.8201538,5.88594286 L19.8201538,3.80851429 L16.3170769,3.80851429" id="Stroke-3"></path>
-                                                    <path d="M10.106,13.8822357 L10.106,13.8822357 C6.67138462,13.8822357 3.88753846,11.0387357 3.88753846,7.53052143 L3.88753846,0.393092857 L16.3244615,0.393092857 L16.3244615,7.53052143 C16.3244615,11.0387357 13.5406154,13.8822357 10.106,13.8822357 L10.106,13.8822357 Z" id="Stroke-5" fill-opacity="0.1" fill="#000000"></path>
-                                                    <path d="M10,13.8822357 L10,20.2763786" id="Stroke-7"></path>
-                                                    <path d="M5.79830769,20.6 L14.2921538,20.6" id="Stroke-9"></path>
+                                            <g id="Avatar" transform="translate(288.000000, 1.000000)">
+                                                <g id="Page-1" transform="translate(10.000000, 10.000000)">
+                                                    <path d="M4.84007692,10.684 C2.33853846,10.4378462 0.384692308,8.32861538 0.384692308,5.76246154 L0.384692308,3.72861538 L3.88776923,3.72861538" id="Stroke-1" stroke="#FFFFFF" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"></path>
+                                                    <path d="M15.3647692,10.684 C17.8663077,10.4378462 19.8201538,8.32861538 19.8201538,5.76246154 L19.8201538,3.72861538 L16.3170769,3.72861538" id="Stroke-3" stroke="#FFFFFF" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"></path>
+                                                    <path d="M6.25984615,20 L13.8306154,20" id="Stroke-7" stroke="#FFFFFF" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"></path>
+                                                    <path d="M10,13.591 L10,19.851" id="Stroke-5" stroke="#FFFFFF" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"></path>
+                                                    <path d="M3.88753846,7.37253846 L3.88753846,0.384846154 L16.3244615,0.384846154 L16.3244615,7.37253846 C16.3244615,10.8071538 13.5406154,13.591 10.106,13.591 C6.67138462,13.591 3.88753846,10.8071538 3.88753846,7.37253846 Z" id="Fill-10" fill="#FFC200"></path>
+                                                    <path d="M10.106,13.591 L10.106,13.591 C6.67138462,13.591 3.88753846,10.8071538 3.88753846,7.37253846 L3.88753846,0.384846154 L16.3244615,0.384846154 L16.3244615,7.37253846 C16.3244615,10.8071538 13.5406154,13.591 10.106,13.591 L10.106,13.591 Z" id="Stroke-12" stroke="#FFFFFF" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"></path>
                                                 </g>
                                             </g>
                                         </g>
@@ -161,7 +162,7 @@
             <div class="ninjaWave"></div>
             <div class="ninjaRewards">
                 <div class="unlockedReward hideClass">
-                    <p class="unlockedRewardHeading">Unlocked Gifts</p>
+                    <p class="unlockedRewardHeading">{{topHeading}}</p>
                     <div class="unlockedRewardListContainer">
                         <ul class="unlockedRewardList">
                             {{#ninjaUnlockedRewards}}
@@ -173,7 +174,7 @@
                                     <div class="uStreakIconContainer">
                                         <div class="unlockedRewardStreakIcon">
                                             {{#state}}
-                                            <svg width="11px" height="12px" viewBox="0 0 11 12" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                            <svg width="10px" height="10px" viewBox="0 0 11 12" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                                                 <defs>
                                                     <linearGradient x1="-34.1993117%" y1="-48.0595006%" x2="45.1866212%" y2="82.3566234%" id="linearGradient-1">
                                                         <stop stop-color="#FF0C0C" offset="0%"></stop>
@@ -199,7 +200,7 @@
                                                 </g>
                                             </svg>
                                             {{/state}} {{^state}}
-                                            <svg width="11px" height="12px" viewBox="0 0 11 12" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                            <svg width="11px" height="14px" viewBox="0 0 11 12" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                                                 <defs>
                                                     <linearGradient x1="-34.1993117%" y1="-48.0595006%" x2="45.1866212%" y2="82.3566234%" id="linearGradient-1">
                                                         <stop stop-color="#FF0C0C" offset="0%"></stop>
@@ -239,9 +240,10 @@
                                 <div class="unlockedRewardAction">Learn More</div>
                                 {{/state}}
                             </li>
-                            {{/ninjaUnlockedRewards}} {{^ninjaUnlockedRewards}}
-                            <div class="emptyStateLockedRewards align-center">It's been a while you unlocked more rewards!</div>
                             {{/ninjaUnlockedRewards}}
+                            <!-- {{^ninjaUnlockedRewards}}
+                            <div class="emptyStateLockedRewards align-center">It's been a while you unlocked more rewards!</div>
+                            {{/ninjaUnlockedRewards}} -->
                         </ul>
                     </div>
                 </div>

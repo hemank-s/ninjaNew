@@ -21,6 +21,7 @@
             exclusiveFeatureAction: document.getElementsByClassName('exclusiveFeatureAction')[0],
             exclusiveFeatureRetry: document.getElementsByClassName('exclusiveFeatureRetry')[0],
             exclusiveFeatureContainer: document.getElementsByClassName('exclusiveFeatureContainer')[0],
+            exclusiveFeatureImage: document.getElementsByClassName('exclusiveFeatureImage')[0]
         };
 
         var rewardFtueMapping = cacheProvider.getFromCritical('rewardFtueMapping');
@@ -41,6 +42,12 @@
                     that.enableExclusiveFeature(App, DOMcache, res, true, false);
                 });
             }
+            that.setExclusiveFeatureHeader(res.rewardDetails, DOMcache);
+            that.setExclusiveFeatureImage(res.rewardDetails, DOMcache);
+        } else {
+            that.setExclusiveFeatureImage(res.rewardDetails, DOMcache);
+            that.setExclusiveFeatureHeader(res.rewardDetails, DOMcache);
+
         }
 
         // FTUE ACTION
@@ -72,7 +79,7 @@
 
         var that = this;
 
-        console.log("Enabling GIF feature for you");
+        console.log("Enabling exclusive feature for you");
 
         var dataToSend = {};
         dataToSend.rid = res2.rewardId;
@@ -99,6 +106,7 @@
                             DOMcache.exclusiveFeatureRetry.classList.add('hideClass');
                         }
 
+                        events.publish('update.notif.toast', { show: true, heading: 'Yaay!', details: 'The feature has been activated for you.', notifType: 'notifSuccess' });
                         DOMcache.exclusiveFeatureDetailSubtitle = document.getElementsByClassName('exclusiveFeatureDetailSubtitle')[0];
 
                         DOMcache.exclusiveFeatureDetailSubtitle.classList.remove('hideClass');
@@ -146,11 +154,14 @@
         DOMcache.exclusiveFeatureImage = document.getElementsByClassName('exclusiveFeatureImage')[0];
 
         // Add header icon for rewards
-        if (data.fimage) {
-            DOMcache.exclusiveFeatureImage.style.backgroundImage = "url('" + data.fimage + "')";
-        } else {
-            console.log("Add a default header");
+        if (DOMcache.exclusiveFeatureImage) {
+            if (data.fimage) {
+                DOMcache.exclusiveFeatureImage.style.backgroundImage = "url('" + data.fimage + "')";
+            } else {
+                console.log("Add a default header");
+            }
         }
+
     };
 
     ExclusiveFeatureController.prototype.setPageStyle = function(color, rid) {

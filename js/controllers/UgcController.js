@@ -202,6 +202,7 @@
         });
 
         DOMcache.sendJflCta[0].addEventListener('click', function() {
+            platformSdk.events.publish('update.threeDotLoader', { elem: DOMcache.sendJflCta[0], show: true, text: 'Uploading' });
             that.sendUgcContent(DOMcache, data, DOMcache.sendJflCta[0]);
         });
 
@@ -292,7 +293,6 @@
         this.callInProgress = 1;
         element.classList.add('disabled');
 
-
         var serverPath;
         if (data.type == Constants.UGC_TYPE.QUOTE) {
             serverPath = appConfig.API_URL + '/ugc/user/type/quotes?message=' + DOMcache.quoteName[0].innerHTML + '&author=' + DOMcache.quoteAuthor[0].innerHTML;
@@ -334,13 +334,20 @@
                         DOMcache.cardNote[0].classList.add('hideClass');
                         DOMcache.ctaContainer[0].classList.add('hideClass');
                         DOMcache.addPhotoCta[0].classList.add('hideClass');
-
+                        if (DOMcache.sendCta && DOMcache.sendCta[0]) {
+                            DOMcache.sendCta[0].innerHTML = 'Send';
+                            DOMcache.sendCta[0].style.opacity = 1;
+                        }
 
                     } else {
                         DOMcache.jflNote[0].classList.add('hideClass');
                         DOMcache.jflImage[0].classList.add('hideClass');
                         DOMcache.jflCtaContainer[0].classList.add('hideClass');
                         DOMcache.jflContainer[0].classList.add('hideClass');
+                        if (DOMcache.sendJflCta && DOMcache.sendJflCta[0]) {
+                            DOMcache.sendJflCta[0].innerHTML = 'Send';
+                            DOMcache.sendJflCta[0].style.opacity = 1;
+                        }
                     }
 
                     DOMcache.successCard[0].classList.remove('hideClass');
@@ -373,12 +380,6 @@
 
             that.callInProgress = 0;
             element.classList.remove('disabled');
-            if (DOMcache.sendCta[0]) {
-                DOMcache.sendCta[0].innerHTML = 'Send';
-                DOMcache.sendCta[0].style.opacity = 1;
-                //platformSdk.events.publish('update.threeDotLoader', { elem: DOMcache.sendCta[0], show: true, text: 'Send' });
-            }
-
         });
     };
 

@@ -106,7 +106,6 @@
             DOMcache.stickerActionDownload.innerHTML = "Download";
             DOMcache.stickerActionDownload.style.opacity = 1;
             DOMcache.stickerActionDownload.fontWeight = 500;
-
             events.publish('update.notif.toast', { show: true, heading: 'Take a break?', details: 'This pack will only be available after some time. See you again later.', notifType: 'notifNeutral' });
             return;
         }

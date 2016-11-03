@@ -29,6 +29,13 @@
         for (var i = 0; i < DOMCache.stickerHistoryRow.length; i++)
             DOMCache.stickerHistoryRow[i].addEventListener('click', that.bindHandlerStickerRow(App, data));
 
+        var logDataToSend = {
+            'c': 'cust_sticker_history',
+            'o': data.rewardDetails.custom_stickers
+        };
+        App.NinjaService.logData(logDataToSend);
+
+
     };
 
 
@@ -44,6 +51,12 @@
                 phraseLength: this.getAttribute('data-phrase').length,
                 rewardId: data.rewardId
             };
+
+            var logDataToSend = {
+                'c': 'cust_sticker_click',
+                'o': dataToSend.status
+            };
+            App.NinjaService.logData(logDataToSend);
 
             if (dataToSend.status === Constants.CUSTOM_STICKER_STATUS.FAILED)
                 App.router.navigateTo('/customCreate', dataToSend);

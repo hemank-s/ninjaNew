@@ -20,25 +20,38 @@
 
     ActivityModel.prototype = {
 
-        getNumberAbrr: function(value) {
-            var newValue = value;
-            if (value >= 1000) {
-                var suffixes = ['', 'K', 'M', 'B', 'T'];
-                var suffixNum = Math.floor(('' + value).length / 3);
-                var shortValue = '';
-                var shortNum;
-                for (var precision = 2; precision >= 1; precision--) {
-                    shortValue = parseFloat((suffixNum !== 0 ? (value / Math.pow(1000, suffixNum)) : value).toPrecision(precision));
-                    var dotLessShortValue = (shortValue + '').replace(/[^a-zA-Z 0-9]+/g, '');
-                    if (dotLessShortValue.length <= 2) {
-                        break;
-                    }
-                }
-                if (shortValue % 1 !== 0) shortNum = shortValue.toFixed(1);
-                newValue = shortValue + suffixes[suffixNum];
+        int2String: function(num) {
+            var suffix = ['', 'K', 'M', 'B', 'T', 'Q'];
+            var ans = num;
+            var ind = 0;
+            while (ans > 1000) {
+                ans = ans / 1000;
+                ind += 1;
             }
-            return newValue;
+            ans = Math.floor(ans * 10) / 10;
+            ans = ans + suffix[ind];
+            return ans;
         },
+
+        // getNumberAbrr: function(value) {
+        //     var newValue = value;
+        //     if (value >= 1000) {
+        //         var suffixes = ['', 'K', 'M', 'B', 'T'];
+        //         var suffixNum = Math.floor(('' + value).length / 3);
+        //         var shortValue = '';
+        //         var shortNum;
+        //         for (var precision = 2; precision >= 1; precision--) {
+        //             shortValue = parseFloat((suffixNum !== 0 ? (value / Math.pow(1000, suffixNum)) : value).toPrecision(precision));
+        //             var dotLessShortValue = (shortValue + '').replace(/[^a-zA-Z 0-9]+/g, '');
+        //             if (dotLessShortValue.length <= 2) {
+        //                 break;
+        //             }
+        //         }
+        //         if (shortValue % 1 !== 0) shortNum = shortValue.toFixed(1);
+        //         newValue = shortValue + suffixes[suffixNum];
+        //     }
+        //     return newValue;
+        // },
 
         formatActivityData: function(activityData) {
 
@@ -46,13 +59,13 @@
             for (var key in activityData) {
 
                 if (typeof activityData[key].sent != 'undefined')
-                    activityData[key].sent = that.getNumberAbrr(activityData[key].sent);
+                    activityData[key].sent = that.int2String(activityData[key].sent);
 
                 if (typeof activityData[key].rec != 'undefined')
-                    activityData[key].rec = that.getNumberAbrr(activityData[key].rec);
+                    activityData[key].rec = that.int2String(activityData[key].rec);
 
                 if (typeof activityData[key].count != 'undefined')
-                    activityData[key].count = that.getNumberAbrr(activityData[key].count);
+                    activityData[key].count = that.int2String(activityData[key].count);
 
             }
         },

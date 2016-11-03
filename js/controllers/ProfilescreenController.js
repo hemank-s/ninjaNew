@@ -13,7 +13,7 @@
         };
 
 
-    ProfilescreenController.prototype.bind = function(App, data, mBoxHistory) {
+    ProfilescreenController.prototype.bind = function(App, data, mBoxHistory, ninjaStats, ninjaUgc) {
 
         var that = this;
 
@@ -54,6 +54,13 @@
                         while (i--) {
                             bullets[i].className = ' comp__tab';
                         }
+                        var logDataToSend = {
+                            'c': 'tab_'+bullets[pos].getAttribute('data-id'),
+                            'o': data.rewardsData.redeemedRewards,
+                            'fa': ninjaStats,
+                            'g': ninjaUgc
+                        };
+                        App.NinjaService.logData(logDataToSend);
                         bullets[pos].className = 'comp__tab selected';
                         emptyBorder[0].style.marginLeft = 33.33 * pos + 13.5 + "%";
                         document.getElementById("sliderTabs").style.height = containers[pos].offsetHeight + "px";
@@ -100,6 +107,8 @@
         this.setPageScroll();
         this.updateIcons(DOMcache, data, mBoxHistory)
         this.updateLinks(DOMcache, data, App);
+
+
     };
 
 
@@ -170,6 +179,13 @@
 
                     // Get Reward related information
                     var ugcType = this.getAttribute('data-type');
+
+                    var logDataToSend = {
+                            'c': 'ninja_contribute_click',
+                            'o': ugcType
+                        };
+                    App.NinjaService.logData(logDataToSend);
+
                     cacheProvider.setInCritical('profileSrc', 'ugc');
                     App.router.navigateTo('/ugc', { type: ugcType });
                 });
@@ -189,6 +205,14 @@
 
                     var data = {};
                     data.rewardId = rewardId;
+
+                    var logDataToSend = {
+                            'c': 'reward_click',
+                            'o': 'redeemed',
+                            'fa': rewardType,
+                            'g': rewardId
+                        };
+                    App.NinjaService.logData(logDataToSend);
 
                     if (platformSdk.bridgeEnabled) {
                         App.NinjaService.getRewardDetails(data, function(res) {
@@ -244,7 +268,7 @@
         that.parentContainer.appendChild(that.el);
         ctr.appendChild(that.parentContainer);
         events.publish('update.loader', { show: false });
-        that.bind(App, data, boxHistory);
+        that.bind(App, data, boxHistory, ninjaStats, ninjaUgc);
     };
 
     ProfilescreenController.prototype.destroy = function() {

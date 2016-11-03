@@ -18,7 +18,7 @@
     font-size: 22px;
     font-weight: 400;
     text-align: center;
-    margin-bottom: 8px;
+    margin-bottom: 16px;
     margin-top: 32px;
 }
 
@@ -26,9 +26,10 @@
     color: rgba(255, 255, 255, 0.72);
     font-size: 14px;
     font-weight: 400;
-    line-height: 16px;
+    line-height: 18px;
     text-align: center;
-    margin-bottom: 32px;
+    padding: 0px 24px;
+    margin-bottom: 16%;
 }
 
 .exclusiveFeatureSubtitle {
@@ -45,6 +46,7 @@
     background: url(images/gif_header_icon.png);
     background-size: contain;
     background-repeat: no-repeat;
+    background-position: center;
     width: 274px;
     height: 206px;
     margin: 0px auto;
@@ -84,7 +86,7 @@ span.retryButton {
 }
 
 .exclusiveFeatureImage {
-    background: url(images/gifFeature.png);
+    //background: url(images/gifFeature.png);
     background-size: contain;
     background-repeat: no-repeat;
     width: 240px;

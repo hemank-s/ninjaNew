@@ -75,8 +75,11 @@
 
         if (showNewRewardAnimation) {
             that.newRewardUnlockAnimation(DOMcache);
+            var logDataToSend = {
+                'c': 'rtue'
+            };
+            App.NinjaService.logData(logDataToSend);
         } else {
-            DOMcache.unlockedRewardHeading.innerHTML = 'Next Gift';
             DOMcache.unlockedReward.classList.remove('hideClass');
             DOMcache.unlockedRewardListContainer.classList.add('unlockedRewardListUl');
             DOMcache.rewardUnlockAnimation.classList.add('hideClass');
@@ -84,6 +87,15 @@
         }
 
         DOMcache.streakContainer.addEventListener('click', function(event) {
+
+            var logDataToSend = {
+                'c': 'life_header',
+                'fa': profileData.battery,
+                'g': profileData.streak,
+                's': document.getElementsByClassName('streakStatus')[0].innerHTML
+            };
+            App.NinjaService.logData(logDataToSend);
+
             DOMcache.batteryStreakInfoContainer.classList.remove('hideClass');
             utils.toggleBackNavigation(true);
             that.createBatteryUi(DOMcache, profileData);
@@ -100,7 +112,7 @@
 
         DOMcache.informationAction.addEventListener('click', function(event) {
             DOMcache.batteryStreakInfoContainer.classList.add('hideClass');
-
+            utils.toggleBackNavigation(false);
             if (DOMcache.feedBackContainer.length > 0 && DOMcache.feedBackContainer[0].getAttribute('exist') === 'true') {
                 DOMcache.feedBackContainer[0].setAttribute('exist', false);
                 DOMcache.feedBackContainer[0].classList.remove('hide');
@@ -115,6 +127,13 @@
             DOMcache.lockedRewards.classList.add('moveLockedRewardsAnimation');
             that.setLockedRewardsH();
             DOMcache.unlockedRewardListContainer.classList.add('unlockedRewardListUl');
+
+            var logDataToSend = {
+                'c': 'rtue_click',
+                'o': 'new_reward_unlock'
+            };
+
+            App.NinjaService.logData(logDataToSend);
         });
 
         DOMcache.lockedRewards.addEventListener('webkitAnimationEnd', function() {
@@ -152,6 +171,19 @@
         if (DOMcache.lockedRewardListItem.length) {
             for (var j = 0; j < DOMcache.lockedRewardListItem.length; j++) {
                 DOMcache.lockedRewardListItem[j].addEventListener('click', function(event) {
+
+                    var rewardType = this.getAttribute('data-rewardtype');
+                    var rewardId = this.getAttribute('data-rewardId');
+
+                    var logDataToSend = {
+                        'c': 'reward_click',
+                        'o': 'locked',
+                        'fa': rewardType,
+                        'g': rewardId
+                    };
+
+                    App.NinjaService.logData(logDataToSend);
+
                     events.publish('update.notif.toast', { show: true, heading: 'Getting greedy?', details: 'The reward is currently locked. Please unlock it by being a Ninja for more days.', notifType: 'notifNeutral' });
                 });
             }
@@ -193,6 +225,13 @@
             if (mysteryBoxData && mysteryBoxData.mstatus == 'active') {
                 console.log("enabling mystery box for you");
 
+                var logDataToSend = {
+                    'c': 'luckybox_tip_click'
+                };
+
+                App.NinjaService.logData(logDataToSend);
+
+
                 var spinNowColor = ['#F5A623', '#F8E71C', '#DF75FD', '#448BF7', '#1DA8E8', '#9ED62C', '#FF7154'];
                 var spinNowText = document.getElementsByClassName('mysteryBoxToastAction')[0];
 
@@ -211,7 +250,13 @@
                 DOMcache.mysteryBoxAvailable.getElementsByClassName('mysteryBoxToastIconSmall')[0].classList.add('spinMysteryBoxSmall');
 
                 DOMcache.mysteryBoxAvailable.addEventListener('click', function(event) {
+                    var logDataToSend = {
+                        'c': 'luckybox_ready'
+                    };
+
+                    App.NinjaService.logData(logDataToSend);
                     App.router.navigateTo('/mysteryBox', mysteryBoxData);
+
                 });
             } else {
                 DOMcache.mysteryBoxAvailable.classList.add('hideClass');
@@ -321,7 +366,7 @@
         // UGC ICONS
         for (var i = 0; i < data.unlockedRewards.length; i++) {
             if (data.unlockedRewards[i].icon) {
-                DOMcache.unlockedRewardListItem[i].getElementsByClassName('unlockedRewardIcon')[0].style.backgroundImage = "url('" + data.unlockedRewards[i].icon + "')";
+                DOMcache.unlockedRewardListItem[i].getElementsByClassName('unlockedRewardIcon')[0].style.backgroundImage = "url('" + data.unlockedRewards[i].cicon + "')";
             } else {
                 console.log("Set a default icon for ugc");
             }
@@ -343,6 +388,7 @@
         var that = this;
         var rewardsData = {};
         var showNewRewardAnimation = cacheProvider.getFromCritical('showRewardAnimation');
+        var topHeading = null;
 
         // Get Data From Cache Always :: Cache updated in all cases before rendering data
         var profile_data = cacheProvider.getFromCritical('userProfileData');
@@ -370,9 +416,20 @@
 
 
         // For No Unlocked Rewards :: Show First locked reward
-        if (rewardsData.unlockedRewards.length === 0) {
-            rewardsData.unlockedRewards.push(rewardsData.lockedRewards[0]);
-            rewardsData.lockedRewards.shift();
+
+        if (rewardsData.unlockedRewards.length === 0 && rewardsData.lockedRewards.length === 0) {
+            console.log("No rewards present");
+            topHeading = '';
+            rewardsData.unlockedRewards = [];
+            rewardsData.lockedRewards = [];
+        } else {
+            if (rewardsData.unlockedRewards.length === 0) {
+                topHeading = 'Next Gift';
+                rewardsData.unlockedRewards.push(rewardsData.lockedRewards[0]);
+                rewardsData.lockedRewards.shift();
+            } else {
+                topHeading = 'Your Gifts';
+            }
         }
 
         utils.changeBotTitle('Hike Ninja');
@@ -381,12 +438,22 @@
         }
         console.log("rewards before rendering are", rewardsData);
 
+        var logDataToSend = {
+            'c': 'home_scrn',
+            'o': profile_data.battery,
+            'fa': profile_data.streak,
+            'g': rewardsData.unlockedRewards,
+            's': rewardsData.lockedRewards
+        };
+
+        App.NinjaService.logData(logDataToSend);
+
         that.el = document.createElement('div');
         that.el.className = 'homeScreenParentContainer animation_fadein noselect';
-        that.el.innerHTML = Mustache.render(unescape(that.template), { ninjaProfile: profile_data, ninjaUnlockedRewards: rewardsData.unlockedRewards, ninjaLockedRewards: rewardsData.lockedRewards });
+        that.el.innerHTML = Mustache.render(unescape(that.template), { ninjaProfile: profile_data, ninjaUnlockedRewards: rewardsData.unlockedRewards, ninjaLockedRewards: rewardsData.lockedRewards, topHeading: topHeading });
         ctr.appendChild(that.el);
         events.publish('update.loader', { show: false });
-        that.bind(App, rewardsData, showNewRewardAnimation);
+        that.bind(App, rewardsData, showNewRewardAnimation, topHeading);
     };
 
     HomescreenController.prototype.destroy = function() {

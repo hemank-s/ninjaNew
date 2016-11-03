@@ -41,12 +41,7 @@
 
             var target = evt.target;
 
-
             if (target.classList.contains('workspaceCta')) {
-
-
-                var logDataToSend = {};
-                App.NinjaService.logData(logDataToSend);
 
                 if (target.getAttribute('data-screen') == "subscribe") {
 
@@ -101,6 +96,13 @@
 
             }
         });
+
+        var logDataToSend = {
+            'c': 'launch',
+            'source': 'chat_screen'
+        };
+        App.NinjaService.logData(logDataToSend);
+
     };
 
 

@@ -39,19 +39,19 @@
         /*@include animation(1.7s, 1s, fadeInTranslate);*/
         -webkit-transition: all 0.5s;
         transition: all 0.5s;
-        margin-top: 28px;
+        margin-top: 4%;
     }
     .giftIcon {
-        background: url(images/giftIcon.png);
+        //background: url(images/giftIcon.svg);
     }
     .statIcon {
-        background: url(images/statIcon.png);
+        //background: url(images/statIcon.svg);
     }
     .surpriseGiftIcon {
-        background: url(images/surpriseGiftIcon.png);
+        //background: url(images/surpriseGiftIcon.svg);
     }
     .moreIcon {
-        background: url(images/badgeIcon.png);
+        //background: url(images/badgeIcon.png);
     }
     .infoIcon {
         background-size: contain;
@@ -68,7 +68,7 @@
         vertical-align: middle;
     }
     .infoHeading {
-        @include fontStyle(16px, 400, #3D475B, 21px);
+        @include fontStyle(16px, 500, #3D475B, 21px);
         padding-bottom: 3px;
     }
     .infoSubHeading {

@@ -103,6 +103,12 @@
                     var congratsBtn = document.getElementsByClassName('congratsBtn')[0];
                     congratsBtn.addEventListener('click', function() {
 
+                        var logDataToSend = {
+                            'c': 'luckybox_gift_yes'
+                        };
+
+                        App.NinjaService.logData(logDataToSend);
+
                         if (rewardData.value == 'HIGH') {
 
                             var tid = this.getAttribute('data-tid');
@@ -150,14 +156,24 @@
                     previousWinner: mysteryBoxData.yesterday_winner
                 });
 
-
                 var ctaWinner = document.getElementsByClassName('ctaWinner')[0];
                 var previousWinnerRow = document.getElementsByClassName('previousWinnerRow')[0];
                 var mysteryBoxScr_title = document.getElementsByClassName('mysteryBoxScr_title')[0];
                 var mysteryBoxScr_subtitle = document.getElementsByClassName('mysteryBoxScr_subtitle')[0];
                 var mOverlay = document.getElementsByClassName('mOverlay')[0];
 
+                var winnerIcon = document.getElementsByClassName('winnerIcon')[0];
+                winnerIcon.style.backgroundImage = 'url(\'data:image/png;base64,' + mysteryBoxData.yesterday_winner.dp + '\')';
+
                 ctaWinner.addEventListener('click', function() {
+
+                    var logDataToSend = {
+                        'c': 'luckybox_winner',
+                        'o': 'success',
+                        'fa': mysteryBoxData.yesterday_winner
+                    };
+
+                    App.NinjaService.logData(logDataToSend);
 
                     mOverlay.classList.remove('hideClass');
                     previousWinnerRow.classList.remove('slideDownCtaWinnerRowCls');
@@ -257,6 +273,15 @@
                 rotations++;
                 if (platformSdk.bridgeEnabled) {
                     App.NinjaService.getMysteryBoxResult(function(res) {
+
+                        var logDataToSend = {
+                            'c': 'luckybox_spin_wheel',
+                            'o': 'gift_received',
+                            'fa': res.data.spin_result
+                        };
+
+                        App.NinjaService.logData(logDataToSend);
+
                         utils.toggleBackNavigation(true);
                         console.log(res.data);
                         mysteryBoxData.spin_result = res.data.spin_result;
@@ -269,8 +294,9 @@
                         // Define Wheel
                         var stop = spinResult;
                         console.log('stop is', stop);
-                        var rotationFix = 360 / 16 + 360 / 8 + rotations * 720;
-                        deg = 360 / 8 * stop + rotationFix;
+                        //var rotationFix = 360 / 16 + 360 / 8 + rotations * 720;
+                        var rotationFix = 360 * 6;
+                        deg = 360 / 8 * stop + rotationFix + 360 / 16;
                         var rot = 'rotate3d(0,0,1,' + deg + 'deg)';
 
                         wheel.style.transform = rot;
@@ -284,8 +310,9 @@
                     rewardData.title = 'My Sticker';
                     rewardData.stitle = 'Subtitle blah blah Subtitle blah blah Subtitle blah blah Subtitle blah blah Subtitle blah blah';
                     console.log('stop is', stop);
-                    var rotationFix = 360 / 16 + 360 / 8 + rotations * 720;
-                    deg = 360 / 8 * stop + rotationFix;
+                    var rotationFix = 360 * 8;
+
+                    deg = 360 / 8 * stop + rotationFix + 360 / 16;
                     var rot = 'rotate3d(0,0,1,' + deg + 'deg)';
                     wheel.style.transform = rot;
                     wheel.style.webkitTransform = rot;

@@ -27,14 +27,25 @@
             allowedInput: document.getElementsByClassName('allowedInput'),
             screenH: window.innerHeight,
             scrollContent: document.getElementsByClassName('scrollContent'),
-            cameraIcon: document.getElementsByClassName('cameraIcon')
+            cameraIcon: document.getElementsByClassName('cameraIcon'),
+            centerImage: document.getElementsByClassName('centerImage')
         };
+
+        if (DOMCache.centerImage && DOMCache.centerImage[0]) {
+            DOMCache.centerImage[0].style.backgroundImage = 'url(\'' + data.rewardDetails.hicon + '\')';
+        }
 
         var customFtue = cacheProvider.getFromCritical('customStickerFtue');
         if (customFtue)
             that.bindCreateHandlers(App, data, DOMCache);
         else {
             DOMCache.createSticker[0].addEventListener('click', function() {
+
+                var logDataToSend = {
+                    'c': 'cust_sticker_create'
+                };
+                App.NinjaService.logData(logDataToSend);
+
                 cacheProvider.setInCritical('customStickerFtue', true);
                 DOMCache.createContainer[0].innerHTML = Mustache.render(unescape(that.createTemplate), { textLength: Constants.CUSTOM_STICKER_TITLE_LENGTH });
                 that.bindCreateHandlers(App, data, DOMCache);
@@ -48,6 +59,15 @@
         var that = this;
 
         DOMCache.customImage[0].addEventListener('click', function() {
+
+            var logDataToSend = {
+                'c': 'cust_sticker_cam',
+                'o': 'image_source_gallery'
+            };
+            App.NinjaService.logData(logDataToSend);
+
+
+
             utils.openGallery(DOMCache.customImage[0], Constants.IMAGE_SIZE_UGC, function(filePath) {
                 if (platformSdk.bridgeEnabled)
                     DOMCache.customImage[0].setAttribute('filePath', filePath);
@@ -90,7 +110,7 @@
 
         DOMCache.customText[0].oninput = function() {
             DOMCache.userInput[0].innerHTML = this.value.length;
-        }
+        };
 
 
 
@@ -139,6 +159,12 @@
     CustomStickerCreateController.prototype.postCustomSticker = function(App, data, DOMCache, flowType, toastType) {
 
         var that = this;
+
+        var logDataToSend = {
+            'c': 'cust_sticker_done',
+            'o': DOMCache.customText[0].value
+        };
+        App.NinjaService.logData(logDataToSend);
 
         if (platformSdk.bridgeEnabled) {
             var serverPath;

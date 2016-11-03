@@ -207,7 +207,14 @@
                             type: "emoji",
                             a_text: ""
                         }
-                    }
+                    };
+
+                    var logDataToSend = {
+                        'c': 'ninja_feedback_submit',
+                        'o': target.parentNode.parentNode.getAttribute('data-aid')
+                    };
+                    self.NinjaService.logData(logDataToSend);
+
 
                     if (platformSdk.bridgeEnabled) {
                         self.NinjaService.submitFeedback(url, data, function(res) {
@@ -233,6 +240,14 @@
                     var emojiContainer = document.getElementsByClassName('emoji-feedback')[0];
                     questionEmoji.classList.add('hide');
                     emojiContainer.classList.remove('right0');
+
+                    var logDataToSend = {
+                        'c': 'ninja_feedback_submit',
+                        'o': target.parentNode.parentNode.getAttribute('data-aid')
+                    };
+                    self.NinjaService.logData(logDataToSend);
+
+
                 } else if (target.parentNode.classList.contains('closeFeedbackText')) {
 
                     var questionText = document.getElementsByClassName('questionText')[0];
@@ -245,6 +260,13 @@
                     window.setTimeout(function() {
                         successScreen.classList.add('animation_fadeout');
                     }, 1400);
+
+                    var logDataToSend = {
+                        'c': 'ninja_feedback_submit',
+                        'o': target.parentNode.parentNode.getAttribute('data-aid')
+                    };
+                    self.NinjaService.logData(logDataToSend);
+
 
                 } else if (target.classList.contains('submitNinjaFeedback')) {
 
@@ -261,6 +283,11 @@
                         }
                     };
 
+                    var logDataToSend = {
+                        'c': 'ninja_feedback_submit',
+                        'o': target.parentNode.parentNode.getAttribute('data-aid')
+                    };
+                    self.NinjaService.logData(logDataToSend);
 
 
                     if (platformSdk.bridgeEnabled) {
@@ -433,6 +460,30 @@
             });
         },
 
+        checkEnabledBot: function() {
+
+            var that = this;
+
+            if (platformSdk.bridgeEnabled) {
+                PlatformBridge.enableBot(platformSdk.appData.msisdn, 'true');
+                PlatformBridge.resetUnreadCounter(platformSdk.appData.msisdn);
+            }
+
+            // platformSdk.nativeReq({
+            //     fn: 'isBotEnabled',
+            //     ctx: that,
+            //     data: platformSdk.appData.msisdn,
+            //     success: function(res) {
+            //         console.log(res);
+            //         if (res == 'false') {
+            //             PlatformBridge.enableBot(platformSdk.appData.msisdn, 'true');
+            //             PlatformBridge.resetUnreadCounter(platformSdk.appData.msisdn);
+            //         } else {
+            //             console.log('Ninja enabled already');
+            //         }
+            //     }
+            // });
+        },
 
 
         openExistingBot: function(botname) {
@@ -510,11 +561,7 @@
                 return;
             } else if (batteryStreakInfoContainer.length > 0 && !batteryStreakInfoContainer[0].classList.contains('hideClass')) {
                 batteryStreakInfoContainer[0].classList.add('hideClass');
-                utils.toggleBackNavigation(true);
-                return;
-            } else if (batteryStreakInfoContainer.length > 0 && !batteryStreakInfoContainer[0].classList.contains('hideClass')) {
-                batteryStreakInfoContainer[0].classList.add('hideClass');
-                utils.toggleBackNavigation(true);
+                utils.toggleBackNavigation(false);
                 return;
             } else {
                 this.router.back();
@@ -603,6 +650,7 @@
             self.$el = $(this.container);
 
             self.initOverflowMenu();
+            self.checkEnabledBot();
 
 
             self.defnineNinjaFeedback();

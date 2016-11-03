@@ -406,6 +406,7 @@ a:visited {
     transform-origin: center;
     -webkit-animation: dash 1.4s ease-in-out infinite, colors 5.6s ease-in-out infinite;
     animation: dash 1.4s ease-in-out infinite, colors 5.6s ease-in-out infinite;
+    -webkit-transform: translate3d(0, 0, 0);
 }
 
 @-webkit-keyframes colors {
@@ -488,6 +489,7 @@ a:visited {
     -moz-animation-fill-mode: forwards;
     -o-animation-fill-mode: forwards;
     animation-fill-mode: forwards;
+    -webkit-transform: translate3d(0, 0, 0);
 }
 
 @keyframes slideUp {
@@ -520,6 +522,7 @@ a:visited {
     -moz-animation-fill-mode: forwards;
     -o-animation-fill-mode: forwards;
     animation-fill-mode: forwards;
+    -webkit-transform: translate3d(0, 0, 0);
 }
 
 @keyframes slideDown {
@@ -671,7 +674,6 @@ body {
 
 .boo {
     width: 72px;
-    height: 89px;
     margin-left: auto;
     margin-right: auto;
     border-bottom: 0;
@@ -680,7 +682,8 @@ body {
     $bgColor);
     -webkit-animation: floating 2s ease-in-out infinite;
     animation: floating 2s ease-in-out infinite;
-    background: url(images/ninjaLoader.png);
+    -webkit-transform: translate3d(0, 0, 0);
+    //background: url(images/ninjaLoader.svg);
     display: inline-block;
     -webkit-background-size: contain;
     -o-background-size: contain;
@@ -691,7 +694,7 @@ body {
 .shadow {
     width: $booSize - $jaggedDistance;
     height: $jaggedDistance / 2;
-    background-color: rgba($booShadow, .25);
+    background-color: rgba($booShadow, .15);
     margin-top: $jaggedDistance * 0.5;
     margin-right: auto;
     margin-left: auto;

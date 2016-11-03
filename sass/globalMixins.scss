@@ -92,6 +92,7 @@ background: black;
     animation-duration: $duration;
     animation-name: $animation;
     animation-fill-mode: forwards;
+    -webkit-transform: translate3d(0, 0, 0);
     /* this prevents the animation from restarting! */
 }
 

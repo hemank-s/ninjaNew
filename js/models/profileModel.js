@@ -52,11 +52,11 @@
                     console.log("stub needed");
                 }
             } else {
+                console.log("The rewards hash matches perfectly :: No need to update the rewards new model");
                 if (existingUser) {
                     cacheProvider.setInCritical('showRewardAnimation', false);
                     App.router.navigateTo('/home');
                 }
-                console.log("The rewards hash matches perfectly :: No need to update the rewards new model");
             }
         },
 
